@@ -1,0 +1,240 @@
+<mat-grid-list [cols]="dashboardGridCols" gutterSize="20px" rowHeight="100px" class="dashboard-grid-list">
+  <mat-grid-tile fxLayout="row" class="dashboard-tile dashboard-tile-50 colorful-tile" fxLayoutAlign="start stretch"
+    matRipple matTooltip="Total PO all time">
+    <div fxFlex="1 1 25%" fxLayout="column" fxLayoutAlign="center center" class="h-100">
+      <mat-icon>mark_email_unread</mat-icon>
+    </div>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">RM PO Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCount | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QCSupervisor'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">RM PO Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCount | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">RM PO Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCount | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'WarehouseChecker'">
+
+      <div [routerLink]=" [ '/admin', 'whstoreorder' ] " fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column"
+        fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Store Orders</div>
+        <div class="dashboard-tile-sub-heading">{{ totalStoreOrderRowCount | number}}</div>
+      </div>
+
+    </ng-container>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile fxLayout="row" class="dashboard-tile dashboard-tile-50 colorful-tile" fxLayoutAlign="start stretch"
+    matRipple matTooltip="Receiving available now">
+    <div fxFlex="1 1 25%" fxLayout="column" fxLayoutAlign="center center" class="h-100">
+      <mat-icon>shopping_cart</mat-icon>
+    </div>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Warehouse Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialReceiving | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Warehouse Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialReceiving | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QCSupervisor'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Warehouse Receiving</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialReceiving | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'WarehouseChecker'">
+      <div [routerLink]=" [ '/admin', 'wh-prepared-store-order' ] " fxFlex="1 1 75%" class="h-100 text-right"
+        fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Prepared Orders</div>
+        <div class="dashboard-tile-sub-heading">{{totalStoreOrderPreparedDistinctRowCount | number}}</div>
+      </div>
+    </ng-container>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile fxLayout="row" class="dashboard-tile dashboard-tile-50 colorful-tile" fxLayoutAlign="start stretch"
+    matRipple matTooltip="Rejected raw materials based on quality">
+    <div fxFlex="1 1 25%" fxLayout="column" fxLayoutAlign="center center" class="h-100">
+      <mat-icon>thumb_down_off_alt</mat-icon>
+    </div>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Raw Material Rejected</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialRejectatWH | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QCSupervisor'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Raw Material Rejected</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialRejectatWH | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Raw Material Rejected</div>
+        <div class="dashboard-tile-sub-heading">{{totalPoPartialRejectatWH | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'WarehouseChecker'">
+      <div [routerLink]=" [ '/admin', 'store-order-dispatching' ] " fxFlex="1 1 75%" class="h-100 text-right"
+        fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Dispatching Records</div>
+        <div class="dashboard-tile-sub-heading">{{totalStoreDispatching | number}}</div>
+      </div>
+    </ng-container>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile fxLayout="row" class="dashboard-tile dashboard-tile-50 colorful-tile" fxLayoutAlign="start stretch"
+    matRipple matTooltip="Total cancelled Po all time">
+    <div fxFlex=" 1 1 25%" fxLayout="column" fxLayoutAlign="center center" class="h-100">
+      <mat-icon>cancel_schedule_send</mat-icon>
+    </div>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Cancelled PO</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCountCancelled | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Cancelled PO</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCountCancelled | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QCSupervisor'">
+      <div fxFlex="1 1 75%" class="h-100 text-right" fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Cancelled PO</div>
+        <div class="dashboard-tile-sub-heading">{{ totalPoRowCountCancelled | number}}</div>
+      </div>
+    </ng-container>
+
+    <ng-container
+      *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'WarehouseChecker'">
+      <div [routerLink]=" [ '/admin', 'wh-cancelledprepared-store-order' ] " fxFlex="1 1 75%" class="h-100 text-right"
+        fxLayout="column" fxLayoutAlign="center start">
+        <div class="dashboard-tile-heading">Cancelled Transactions</div>
+        <div class="dashboard-tile-sub-heading">{{ totalCancelledTransactions | number}}</div>
+      </div>
+    </ng-container>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="cardColspan" rowspan="4" class="dashboard-tile dashboard-tile-5 scroll">
+    <div fxFlex="1 1 100%" fxLayout="column">
+
+
+      <div fxFlex="1 1 100%" fxLayout="row" fxLayoutAlign="start stretch">
+        <div fxFlex="1 1 50%" class="p-10 font-weight-bold system-name text-large">Return Item :
+          {{totalPoPartialRejectatWH}}</div>
+        <div fxFlex="1 1 50%" class="text-right p-10">
+          <mat-icon matRipple class="hand-icon">more_vert</mat-icon>
+        </div>
+      </div>
+
+
+      <mat-progress-bar value="60" mode="indeterminate" *ngIf="bookingsLoadingStarted"></mat-progress-bar>
+      <div fxFlex="1 1 100%" class="p-5">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let WhReject of WhRejects">
+            <mat-expansion-panel-header matRipple>
+              <div class="w-100" fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column">
+                <mat-panel-title fxFlex="1 1 60%" fxFlex="1 1 100%" fxLayout="row" fxLayoutAlign="start center"
+                  class="text-large">
+                  <mat-icon>playlist_remove</mat-icon>
+                  <div class="text-black ml">{{WhReject.item_code}}</div>
+                </mat-panel-title>
+
+                <mat-panel-description fxFlex="1 1 40%" fxFlex="1 1 100%">
+                  <div class="text-right w-100">Return Date: {{WhReject.is_wh_received_date}}</div>
+                </mat-panel-description>
+              </div>
+            </mat-expansion-panel-header>
+
+
+            <table class="w-100">
+              <tr>
+                <td class="w-25">PO Number:</td>
+                <td class="font-weight-bold p">{{WhReject.po_number}}</td>
+              </tr>
+              <tr>
+                <td class="w-25">Item Description:</td>
+                <td class="font-weight-bold p">{{WhReject.item_description}}</td>
+              </tr>
+              <tr>
+                <td class="w-25">Qty. Order:</td>
+                <td class="font-weight-bold p">{{WhReject.qty_order}}</td>
+              </tr>
+              <tr>
+                <td class="w-25">Qty. Actual Delivery:</td>
+                <td class="font-weight-bold p">{{WhReject.actual_delivery}}</td>
+              </tr>
+              <tr>
+                <td class="w-25">Unit Of Measure:</td>
+                <td class="font-weight-bold p">
+                  <span>{{WhReject.qty_uom}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-25">Qty. Reject:</td>
+                <td class="font-weight-bold p">{{WhReject.is_wh_reject}}</td>
+              </tr>
+              <tr>
+                <td class="w-25">Qty. Received:</td>
+                <td class="font-weight-bold p">{{WhReject.actual_delivery - WhReject.is_wh_reject }} </td>
+              </tr>
+              <tr>
+                <td class="w-25">Received By:</td>
+                <td class="font-weight-bold p">{{WhReject.is_wh_received_by}}</td>
+              </tr>
+            </table>
+
+            <mat-action-row fxLayoutAlign="space-between start">
+              <button [routerLink]=" [ '/admin', 'projectspartialpo' ]" mat-button color="primary" class="mr">
+                <mat-icon>pageview</mat-icon>&nbsp;Browse
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile class="dashboard-tile dashboard-tile-6" [colspan]="cardColspan" rowspan="4">
+    <div [chart]="columnChart" class="w-100 display-visibility"></div>
+  </mat-grid-tile>
+  
+</mat-grid-list>

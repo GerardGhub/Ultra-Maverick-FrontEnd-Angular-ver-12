@@ -1,0 +1,11 @@
+<div *ngIf="datas.length > 0">
+  <div *ngFor="let parent of datas">
+    {{parent.parent_chck_details}}
+    <div *ngFor="let child of parent.childCheckLists[0]">
+      <!-- <div *ngFor="let childArr of child">
+
+      </div> -->
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</div>

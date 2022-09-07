@@ -1,0 +1,533 @@
+<h5>
+  <!-- Reject Status -->
+  <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px" *ngIf="showLoading"></i>
+</h5>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="d-flex">
+
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
+          </div>
+          <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)">
+            <option value="">All</option>
+            <option value="Active">Active</option>
+            <option value="InActive">InActive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+          </div>
+          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" name="SearchText"
+            [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+        </div>
+      </div>
+
+      <div class="ml-auto p-2">
+        <button class="addbtnStyle" data-toggle="modal" data-target="#addNewUserModal" (click)="resetForm()"
+          data-backdrop="false" data-keyboard="false"><span class="fa fa-plus"> </span> Add User</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-12">
+    <div class="row">
+      <div class="col-xl-12 col-lg-9 mx-auto scrollableTable">
+        <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
+          <tr class="text-light header-bg-color-um system-name">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Sub Unit</th>
+            <th>Location</th>
+            <th>User Name</th>
+            <th>System Role</th>
+            <th>Requestor</th>
+            <th>Approver</th>
+            <!-- <th>Active</th> -->
+            <th class="text-center" style="width:200px">Actions</th>
+          </tr>
+          <tr
+            *ngFor="let item of AspNetUsers | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.department_Name}}</td>
+            <td>{{item.departmentUnit_Name}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.username}}</td>
+            <td>{{item.userRole}}</td>
+            <td>{{item.approver}}</td>
+            <td>{{item.requestor}}</td>
+            <!-- <td>{{item.is_active}}</td> -->
+            <td class="text-center">
+              <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, item)"
+                data-backdrop="false" data-keyboard="false" data-toggle="modal" data-target="#editUserModal"><span
+                  class="fa fa-pencil"></span> Edit</button>&nbsp;
+
+              <button mat-stroked-button color="basic" [hidden]="item.is_active === true" class="editbtnStyle"
+                (click)="onClickActivate(item)" data-backdrop="false" data-keyboard="false" data-toggle="modal"
+                data-target="#activateChecklistModal"><span class="fa fa-toggle-on"></span> Activate</button>
+
+              <button mat-stroked-button color="basic" [hidden]="item.is_active === false" class="editbtnStyle"
+                (click)="onClickDeActivate(item)" data-backdrop="false" data-keyboard="false" data-toggle="modal"
+                data-target="#deactivateChecklistModal"><span class="fa fa-toggle-on"></span> Deactivate</button>
+
+              <!-- <button class="btn btn-warning" (click)="onDeleteClick($event, clientLocation)" data-toggle="modal" data-target="#deleteModal">Delete</button> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <ul class="pagination justify-content-center mt-1">
+      <li class="page-item" (click)="onPageIndexClicked(currentPageIndex - 1)">
+        <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#" onclick="return false">Prev</a>
+      </li>
+
+      <ng-container *ngIf="pages.length <= 10">
+        <li class="page-item" *ngFor="let page of pages"
+          [ngClass]="{ 'link-active-paging': page.pageIndex == currentPageIndex}"
+          (click)="onPageIndexClicked(page.pageIndex)">
+          <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="pages.length > 10">
+        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == 0}"
+          (click)="onPageIndexClicked(0)">
+          <a class="page-link" href="#" onclick="return false">1</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == 1}"
+          (click)="onPageIndexClicked(1)">
+          <a class="page-link" href="#" onclick="return false">2</a>
+        </li>
+
+        <li *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">&nbsp;...&nbsp;</li>
+
+        <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClicked(currentPageIndex)"
+          *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">
+          <a class="page-link" href="#" onclick="return false">{{currentPageIndex + 1}}</a>
+        </li>
+
+        <li>&nbsp;...&nbsp;</li>
+
+        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == pages.length - 2}"
+          (click)="onPageIndexClicked(pages.length - 2)">
+          <a class="page-link" href="#" onclick="return false">{{pages.length - 1}}</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == pages.length - 1}"
+          (click)="onPageIndexClicked(pages.length - 1)">
+          <a class="page-link" href="#" onclick="return false">{{pages.length}}</a>
+        </li>
+      </ng-container>
+
+      <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
+        <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#" onclick="return false">Next</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- add user -->
+<div class="modal" role="dialog" id="addNewUserModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-all text-white">
+        <div class="modal-title">User Registration Form</div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-body-color">
+
+        <form [formGroup]="registerUser">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Search Employee ID:</label>
+              <div class="input-group searchBtnStyle" placeholder="">
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee_id"
+                  [ngModelOptions]="{standalone: true}" />
+                <div class="input-group-append">
+                  <button class="btn-search" (click)="searchEmployee()" type="button"><span class="fa fa-search"></span>
+                    search</button>
+                </div>
+              </div>
+              <span class="text-red" *ngIf="noDataFound">{{ noDataFound }}</span>
+            </div>
+          </div>
+
+          <h5 style="float:left; font-weight:bold">User Information:</h5>
+          <hr>
+          <br>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>First Name:</mat-label>
+                <input matInput readonly formControlName="firstName">
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Last Name:</mat-label>
+                <input matInput readonly formControlName="lastName">
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control text-green" [hidden]="true" readonly
+                formControlName="department_id">
+
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Department:</mat-label>
+                <input matInput readonly formControlName="department">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control text-green" [hidden]="true" readonly formControlName="unit_id">
+
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Sub Unit:</mat-label>
+                <input matInput readonly formControlName="sub_unit">
+              </mat-form-field>
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Location: *</mat-label>
+                <mat-select formControlName="location" class="example-full-width">
+                  <mat-option value="Depot">Depot</mat-option>
+                  <mat-option value="Main Office">Main Office</mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerUser.hasError('required')">
+                  Location is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>System Role: *</mat-label>
+                <mat-select formControlName="userrole">
+                  <mat-option *ngFor="let item of positionList" [value]="item.name">{{ item.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>User Name: *</mat-label>
+                <input matInput formControlName="username">
+              </mat-form-field>
+            </div>
+
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Password: *</mat-label>
+                <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <input type="text" formControlName="employee_number" [hidden]="true">
+          <input type="text" formControlName="gender" [hidden]="true">
+          <br>
+
+
+          <!-- role -->
+          <h5 style="float:left; font-weight:bold">System Preveledge: </h5>
+
+          <hr>
+          <div class="form-row">
+            <section class="example-section">
+              <mat-checkbox class="example-margin" (click)="checkboxState()" formControlName="approver"
+                [(ngModel)]="approver">Approver
+              </mat-checkbox>
+              <mat-checkbox class="example-margin" (click)="checkboxState()" formControlName="requestor"
+                [(ngModel)]="requestor">Requestor
+              </mat-checkbox>
+            </section>
+            <!-- <div class="form-group col-md-4" *ngFor="let checkbox of checkboxes">
+              <input type="checkbox" [formControlName]="checkbox.value" [(ngModel)]="checkbox.checked"
+                [value]="checkbox.checked" [ngModelOptions]="{standalone: true}"
+                (change)="checkboxState($event.target.value)">
+              <div>
+                <span>{{ checkbox.value }}</span>
+              </div>
+            </div> -->
+
+          </div>
+          <!-- <button type="button" mat-stroked-button color="primary" (click)="CheckAllOptions()">Check All</button> -->
+          <br>
+
+          <!-- approvers -->
+          <div *ngIf="checkedState === 'show'">
+            <h5 style="float:left; font-weight:bold">Tagging of Approvers:</h5>
+            <hr>
+            <br>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Approver 1:</mat-label>
+                  <mat-select formControlName="first_approver_id" class="example-full-width"
+                    (change)="getNewFirstApproverId($event.target.value)">
+                    <mat-option value="">Not Applicable</mat-option>
+                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                      +
+                      item.lastName | uppercase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Approver 2:</mat-label>
+                  <mat-select formControlName="second_approver_id" class="example-full-width"
+                    (change)="getNewSecondApproverId($event.target.value)">
+                    <mat-option value="">Not Applicable</mat-option>
+                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                      +
+                      item.lastName | uppercase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Approver 3:</mat-label>
+                  <mat-select formControlName="third_approver_id" class="example-full-width"
+                    (change)="getNewThirdApproverId($event.target.value)">
+                    <mat-option value="">Not Applicable</mat-option>
+                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                      +
+                      item.lastName | uppercase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group col-md-3">
+                <!-- <label>Approver 4:</label>
+                <select class="form-control text-required-color" formControlName="fourth_approver_id"
+                  (change)="getNewFourthApproverId($event.target.value)">
+                  <option value="">Not Applicable</option>
+                  <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                    item.lastName | uppercase}}</option>
+                </select> -->
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Approver 3:</mat-label>
+                  <mat-select formControlName="fourth_approver_id" class="example-full-width"
+                    (change)="getNewFourthApproverId($event.target.value)">
+                    <mat-option value="">Not Applicable</mat-option>
+                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                      +
+                      item.lastName | uppercase}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <input type="text" [hidden]="true" formControlName="first_approver_name">
+              <input type="text" [hidden]="true" formControlName="second_approver_name">
+              <input type="text" [hidden]="true" formControlName="third_approver_name">
+              <input type="text" [hidden]="true" formControlName="fourth_approver_name">
+            </div>
+          </div>
+
+        </form>
+
+        {{registerUser.value | json}}
+
+        <div class="modal-footer">
+          <button mat-stroked-button [hidden]="true" color="accent" class="mr-1" id="closeRegistrationModal"
+            data-dismiss="modal" type="button">
+            Cancel
+          </button>
+          <button mat-stroked-button class="" color="primary" [disabled]="!registerUser.valid"
+            (click)="onSubmitRegistration()">Submit</button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit user -->
+<div class="modal" role="dialog" id="editUserModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-all text-white">
+        <div class="modal-title">Edit User Form</div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal-body-color">
+
+        <form [formGroup]="editUser">
+
+          <h5 style="float:left; font-weight:bold">User Information:</h5>
+          <hr>
+          <br>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Last Name:</label>
+              <input type="text" class="form-control text-green" readonly formControlName="firstName">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">First Name:</label>
+              <input type="text" class="form-control text-green" readonly formControlName="lastName">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Department:</label>
+              <input type="text" class="form-control text-green" readonly formControlName="department_Name">
+              <input type="text" class="form-control text-green" [hidden]="true" readonly
+                formControlName="department_id">
+
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Sub-Unit:</label>
+              <input type="text" class="form-control text-green" [disabled]="true" readonly
+                formControlName="departmentUnit_Name">
+              <input type="text" class="form-control text-green" [hidden]="true" readonly formControlName="unit_id">
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Location:</label>
+              <select type="text" class="form-control text-required-color" formControlName="location">
+                <option value="Depot">Depot</option>
+                <option value="Main Office">Main Office</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="formGroupExampleInput">Position:</label>
+              <select class="form-control text-required-color" formControlName="userRole">
+                <option *ngFor="let item of positionList" [value]="item.name">{{ item.name }}</option>
+              </select>
+
+            </div>
+          </div>
+
+          <input type="text" formControlName="employee_number" [hidden]="true">
+          <input type="text" formControlName="gender" [hidden]="true">
+          <br>
+
+          <h5 style="float:left; font-weight:bold">Role:</h5>
+          <hr>
+          <div class="form-row">
+            <div class="form-group col-sm-3">
+              <input type="checkbox" formControlName="Approver">
+              <div>
+                <span>Approver</span>
+              </div>
+            </div>
+            <div class="form-group col-sm-3">
+              <input type="checkbox" formControlName="Requestor">
+              <div>
+                <span>Requestor</span>
+              </div>
+            </div>
+          </div>
+          <button type="button" mat-stroked-button color="primary" (click)="CheckAllOptions()">Check All</button>
+          <br>
+
+          <h5 style="float:left; font-weight:bold">Tagging of Approvers:</h5>
+          <hr>
+          <br>
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="formGroupExampleInput">Approver 1:</label>
+              <select class="form-control text-required-color" formControlName="first_approver_id"
+                (change)="getFirstApproverId($event.target.value)">
+                <option value="">Not Applicable</option>
+                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                  item.lastName | uppercase}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="formGroupExampleInput">Approver 2:</label>
+              <select type="text" class="form-control text-required-color" formControlName="second_approver_id"
+                (change)="getSecondApproverId($event.target.value)">
+                <option value="">Not Applicable</option>
+                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                  item.lastName | uppercase}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="formGroupExampleInput">Approver 3:</label>
+              <select class="form-control text-required-color" formControlName="third_approver_id"
+                (change)="getThirdApproverId($event.target.value)">
+                <option value="">Not Applicable</option>
+                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                  item.lastName | uppercase}}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label>Approver 4:</label>
+              <select class="form-control text-required-color" formControlName="fourth_approver_id"
+                (change)="getFourthApproverId($event.target.value)">
+                <option value="">Not Applicable</option>
+                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                  item.lastName | uppercase}}</option>
+              </select>
+            </div>
+
+            <input type="text" [hidden]="true" formControlName="first_approver_name">
+            <input type="text" [hidden]="true" formControlName="second_approver_name">
+            <input type="text" [hidden]="true" formControlName="third_approver_name">
+            <input type="text" [hidden]="true" formControlName="fourth_approver_name">
+            <input type="text" [hidden]="true" formControlName="id">
+
+
+          </div>
+        </form>
+
+        {{editUser.value | json}}
+
+        <div class="modal-footer">
+          <button mat-stroked-button [hidden]="true" color="accent" class="mr-1" id="closeUpdateModal"
+            data-dismiss="modal" type="button">
+            Cancel
+          </button>
+          <button mat-stroked-button class="" color="primary" [disabled]="!editUser.valid"
+            (click)="onSubmitEditUser()">Submit</button>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

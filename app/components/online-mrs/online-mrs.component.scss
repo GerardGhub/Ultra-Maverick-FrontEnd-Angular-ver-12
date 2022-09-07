@@ -1,0 +1,64 @@
+.span-size {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+.text-search-btn {
+  background-color: #319b95;
+  color: white;
+  border: none !important;
+  min-height: 1em !important;
+  :hover {
+    background-color: #cfd9f0;
+  }
+}
+
+th{
+  font-weight: bold !important;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: blue
+}
+input:focus {
+  border-color: green
+}
+
+select {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: blue
+}
+select:focus {
+  border-color: green
+}
+
+.text-required-color {
+  background-color: #FFF8DC !important;
+}
+
+.italic-text {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.required-text {
+  background-color: cornsilk;
+}
+
+.disable-text{
+  background-color: rgb(255, 255, 255);
+}
+
+.space-div{
+  padding-right: 10px;
+}
+
+.btn-search{
+  background-color: #4d616a ;
+  color: white;
+  border: none;
+}

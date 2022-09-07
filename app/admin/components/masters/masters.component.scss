@@ -1,0 +1,26 @@
+.masterlistContainer {
+  background-color:#edf0f8;
+  padding: 2em 2em 2em 1em;
+  // text-align: center;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #36474f;
+    border-color: #36474f;
+}
+
+#modal-header-color {
+  background-color: #36474f !important;
+  color: black;
+}
+
+.mat-card {
+  color: #36474f;
+}
+
+// .scrollable{
+//   max-height: 500px;
+//   overflow-y: scroll;
+// }

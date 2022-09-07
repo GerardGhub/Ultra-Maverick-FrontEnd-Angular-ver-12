@@ -1,0 +1,176 @@
+.label.col-sm-2.col-form-label.lbltext {
+  margin: auto !important;
+  text-align: center !important;
+}
+
+#print-section {
+  display: none;
+}
+
+label {
+  // font: 14px Roboto 'san-serif' !important;
+  border-bottom: 1px;
+}
+
+.header-style {
+  margin: auto;
+  text-align: center;
+  margin-top: 1px;
+}
+
+.title-header {
+  margin: auto;
+  text-align: center;
+  font: 14px Roboto 'san-serif' !important;
+}
+
+.color-red {
+  color: rgb(148, 52, 52);
+}
+
+.color-green {
+  color: rgb(12, 76, 12);
+}
+
+.printing-logo {
+  width: auto;
+}
+
+img {
+  max-width:200px;
+  height:100px;
+}
+
+.title-header {
+  margin-top: 1px;
+  display: inline;
+}
+
+body {
+  -webkit-print-color-adjust: exact;
+}
+
+.input-border {
+  border: none !important;
+  font: 11px Roboto 'san-serif' !important;
+}
+
+.details {
+  margin-left: auto;
+  text-align: left;
+  padding-top: 2em;
+}
+.element-details {
+  margin-left: 6em;
+}
+
+.element-details-modal {
+  font-size: 12px;
+}
+
+.items-div {
+  border: 1px solid rgb(22, 29, 22);
+  margin-left: 6.5em;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 1em;
+}
+
+.description {
+  margin-left: 6.5em;
+  text-align: left;
+}
+
+.table-style {
+  border: none;
+}
+
+.div-footer {
+  // background-color: aquamarine;
+  margin-top: 5em;
+  width: 100%;
+
+}
+
+.txt-align {
+  margin-left: 1px;
+}
+
+.modal-txt-size {
+  font-size: 12px !important;
+}
+
+
+// form for generate access code
+.bold-text {
+  font-weight: 500;
+}
+
+.lab-access-code-text{
+  width: 250px;
+  height: 30px;
+  border: none;
+  background-color: cornsilk;
+}
+
+.form-container {
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  line-height: initial;
+  font-size: 13px;
+}
+
+.form-title {
+  display: grid;
+  justify-self: left;
+  font-weight: bold;
+
+}
+
+.data-headers {
+  display: grid;
+  margin-top: 25px;
+  grid-template-columns: auto auto;
+
+}
+
+.div1 {
+  display: grid;
+  text-align: left;
+}
+
+.label-line-spacing {
+  float: right;
+  margin-right: 200px;
+}
+
+.data-lines {
+  margin-top: 30px;
+  border-color: black;
+}
+
+.data-lines{
+  border-color: black;
+}
+
+.form-footer{
+  display: grid;
+  font-weight: 500;
+  margin-top: 200px;
+  height: 100px;
+  grid-template-columns: auto auto auto;
+  border: solid 0.1px;
+  border-color: rgb(98, 93, 73);
+  text-align: center;
+}
+
+.div2 {
+  border: solid 0.1px;
+  border-color:  rgb(98, 93, 73);
+}
+
+.signatory{
+  display: grid;
+  margin-top: 20px;
+}

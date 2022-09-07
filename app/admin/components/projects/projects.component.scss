@@ -1,0 +1,164 @@
+.projectcard {
+  height: 450px;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}
+
+// ::ng-deep .mat-form-field-empty.mat-form-field-underline {
+//     color: yellow;
+// }
+
+::ng-deep .mat-form-field-empty.mat-form-field-label {
+  color: rgb(255, 0, 0);
+}
+
+.rejectIsnotMactchSpanTagclass {
+  display: noness;
+}
+.removal-remarks {
+  margin-right: 20px;
+}
+
+.input {
+  flex-wrap: wrap;
+}
+.text-area-main {
+  height: 80px;
+}
+.text-area-main2 {
+  height: 130px;
+}
+.text-area-main3 {
+  height: 100px;
+}
+.text-area-main4 {
+  height: 100px;
+}
+.text-area-main5 {
+  height: 100px;
+}
+
+b {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hideObject {
+  display: none;
+}
+.haddata {
+  display: none;
+}
+.unsetdata {
+  display: unset;
+}
+.mat-drawer-shown {
+  visibility: hidden !important;
+}
+
+.zerobadge0 {
+  display: none;
+}
+
+.bg-color-yellow-textarea{
+  border: 1px solid #909082 !important;
+  // background: cornsilk !important;
+  width: 10em;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgb(22, 92, 125) !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgb(22, 92, 125) !important;
+  z-index: 3;
+}
+
+.mat-radio-button .mat-radio-outer-circle {
+  border-color: rgb(22, 92, 125) !important; // Override material
+  z-index: 3;
+}
+
+::ng-deep.mat-radio-outer-circle {
+  outline: none !important;
+  // box-shadow: 0 0 10px #719ece;
+  border-color: black !important; /*outer ring color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: black !important; /*outer ring color change*/
+}
+
+.font-color-black{
+  color: black;
+}
+
+.text-green{
+  color: #36474f;
+}
+
+.chx-alignement{
+  margin: 0 auto;
+}
+
+div#headingOne {
+  padding: 1px;
+  background-color: #36474f;
+}
+
+.checklist-text-color{
+  color: white;
+  font-size: 10px;
+}
+
+.margin-content{
+  margin: 0 auto;
+}
+
+.th-color{
+  background-color: #f0f0f0;
+}
+
+.txt-required{
+  background-color: cornsilk;
+}
+
+.chx-main{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(30px, auto);
+  grid-gap: 10px;
+  .chk-element{
+    justify-self: left;
+    align-self: start;
+    text-align: left;
+  }
+
+}
+
+.manual-text{
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+
+.rejection-buttons{
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+.btn-add{
+  background-color: rgb(221, 51, 51);
+  color: #f0f0f0;
+  border: 1px solid;
+}
+
+.tbl-text{
+  font: 12px Roboto, "Helvetica Neue", sans-serif ;
+}
+
+.text-red{
+  color: red;
+}

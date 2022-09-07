@@ -1,0 +1,271 @@
+<h5>
+  <!-- Reject Status -->
+  <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px" *ngIf="showLoading"></i>
+</h5>
+
+<div class="row">
+  <!-- <div class="col-xl-12">
+    <div class="form-group row">
+      <label for="drpSearchBy" class="col-form-label col-md-6 col-lg-2 offset-xl-1 col-xl-2 text-right">Search by:</label>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
+          <option value="lab_description">Description Name</option>
+          <option value="created_by">Created By</option>
+        </select>
+      </div>
+
+      <label for="textSearchText" class="col-form-label col-md-6 col-lg-2 col-xl-1 text-right">Search:</label>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="input-group">
+          <input type="text" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12 col-xl-2">
+        <button mat-stroked-button color="primary" data-toggle="modal" data-target="#newLabProceduresModal" data-backdrop="false" data-keyboard="false" (click)="onNewClick($event)"><mat-icon>add_circle_outline</mat-icon>Add</button>
+      </div>
+    </div>
+  </div> -->
+  <div class="col-sm-12">
+    <div class="d-flex">
+
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
+          </div>
+            <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)" >
+              <option value="">All</option>
+              <option value="Active">Active</option>
+              <option value="InActive">InActive</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+          </div>
+          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+        </div>
+      </div>
+      <div class="ml-auto p-2">
+        <button  class="addbtnStyle" data-toggle="modal" data-target="#newLabProceduresModal" data-backdrop="false" data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add Procedure</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-12">
+    <div class="d-flex">
+      <div class="col-xl-12 col-lg-9 mx-auto scrollableTable">
+        <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
+          <tr class="text-light header-bg-color-um system-name">
+            <!-- <th>
+              No.
+              <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'id' " (click)="sortBy = 'id'; sortOrder = 'ASC' "></i>
+              <i class="fa fa-sort-up hand-icon text-primary" *ngIf="sortBy == 'id' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+              <i class="fa fa-sort-down hand-icon text-primary" *ngIf="sortBy == 'id' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+            </th> -->
+            <th style="width:60%">
+              Description
+              <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'lab_description' " (click)="sortBy = 'lab_description'; sortOrder = 'ASC' "></i>
+              <i class="fa fa-sort-up hand-icon text-primary" *ngIf="sortBy == 'lab_description' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+              <i class="fa fa-sort-down hand-icon text-primary" *ngIf="sortBy == 'lab_description' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+            </th>
+            <th style="width: 20%;">Status</th>
+            <!-- <th>Created Date</th>
+            <th>Created By</th> -->
+            <th class="text-center" style="width:20%">Actions</th>
+          </tr>
+          <tr *ngFor="let labTestProc of labTestProcedures | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
+            <!-- <td>{{labTestProc.id}}</td> -->
+            <td>{{labTestProc.lab_description}}</td>
+            <td>{{labTestProc.is_active_status}}</td>
+            <!-- <td>{{labTestProc.created_at}}</td>
+            <td>{{labTestProc.created_by}}</td> -->
+            <td class="text-center">
+              <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, labTestProc)" data-toggle="modal" data-target="#editLabProcedureModal" data-backdrop="false" data-keyboard="false"><mat-icon> update</mat-icon></button>&nbsp;
+              <!-- <button mat-stroked-button color="warn" (click)="onDeleteClick($event, labTestProc)" data-toggle="modal" data-target="#deleteModal" data-backdrop="false" data-keyboard="false">Delete</button> -->
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <ul class="pagination justify-content-center mt-1">
+      <li class="page-item" (click)="onPageIndexClicked(currentPageIndex - 1)">
+        <a mat-stroked-button color="primary" class="mr-1" href="#" onclick="return false">Prev</a>
+      </li>
+
+      <ng-container *ngIf="pages.length <= 10">
+        <li class="page-item" *ngFor="let page of pages" [ngClass]="{ 'active': page.pageIndex == currentPageIndex}" (click)="onPageIndexClicked(page.pageIndex)">
+          <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="pages.length > 10">
+        <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 0}" (click)="onPageIndexClicked(0)">
+          <a class="page-link" href="#" onclick="return false">1</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 1}" (click)="onPageIndexClicked(1)">
+          <a class="page-link" href="#" onclick="return false">2</a>
+        </li>
+
+        <li *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">&nbsp;...&nbsp;</li>
+
+        <li class="page-item" [ngClass]=" 'active' " (click)="onPageIndexClicked(currentPageIndex)" *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">
+          <a class="page-link" href="#" onclick="return false">{{currentPageIndex + 1}}</a>
+        </li>
+
+        <li>&nbsp;...&nbsp;</li>
+
+        <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 2}" (click)="onPageIndexClicked(pages.length - 2)">
+          <a class="page-link" href="#" onclick="return false">{{pages.length - 1}}</a>
+        </li>
+
+        <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 1}" (click)="onPageIndexClicked(pages.length - 1)">
+          <a class="page-link" href="#" onclick="return false">{{pages.length}}</a>
+        </li>
+      </ng-container>
+
+      <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
+        <a mat-stroked-button color="primary" class="ml-1" href="#" onclick="return false">Next</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Add Lab Test Procedure -->
+<form novalidate="novalidate" [formGroup]="newForm">
+  <div class="modal" role="dialog" id="newLabProceduresModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">Append Laboratory Procedure</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group row">
+            <label for="txtNewClientLocationName" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" autocomplete="off" id="lab_description" class="form-control" placeholder="Description" name="lab_description"  formControlName="lab_description" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('lab_description').invalid && (newForm.get('lab_description').dirty || newForm.get('lab_description').touched || newForm.valid), 'is-valid': newForm.get('lab_description').valid && (newForm.get('lab_description').dirty || newForm.get('lab_description').touched || newForm.valid) }" #LabTestProcedureDesc>
+              <span class="text-danger" *ngIf="newForm.get('lab_description').invalid && (newForm.get('lab_description').dirty || newForm.get('lab_description').touched || newForm.valid) && newForm.get('lab_description').errors?.required">Description can't be blank!</span>
+            </div>
+          </div>
+
+          <!-- <div class="form-group row">
+            <label for="txtNewClientLocationName" class="col-sm-4 col-form-label">Created Date</label>
+            <div class="col-sm-8">
+              <input type="date"  id="created_at" class="form-control" placeholder="" name="created_at"  formControlName="created_at" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('created_at').invalid && (newForm.get('created_at').dirty || newForm.get('created_at').touched || newForm.valid), 'is-valid': newForm.get('created_at').valid && (newForm.get('lab_description').dirty || newForm.get('created_at').touched || newForm.valid) }" #LabTestProcedureDesc>
+              <span class="text-danger" *ngIf="newForm.get('created_at').invalid && (newForm.get('created_at').dirty || newForm.get('created_at').touched || newForm.valid) && newForm.get('created_at').errors?.required">Date can't be blank</span>
+            </div>
+          </div> -->
+
+          <!-- <div class="form-group row">
+            <label for="txtNewClientLocationName" class="col-sm-4 col-form-label">Created By</label>
+            <div class="col-sm-8">
+              <input type="text" autocomplete="off" id="created_by" class="form-control"  name="created_by"  formControlName="created_by" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('created_by').invalid && (newForm.get('created_by').dirty || newForm.get('created_by').touched || newForm.valid), 'is-valid': newForm.get('created_by').valid && (newForm.get('created_by').dirty || newForm.get('created_by').touched || newForm.valid) }" #LabTestProcedureDesc>
+              {{loginUserName}}
+            </div>
+          </div> -->
+
+          <div class="form-group row">
+            <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
+            <div class="col-sm-8">
+              <input type="text" readonly class="form-control" [(ngModel)] = "activeVal"  formControlName="is_active_status">
+              <!-- <select id="txtNewis_active" class="form-control" name="is_active_status" formControlName="is_active_status" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('is_active_status').invalid && (newForm.get('is_active_status').dirty || newForm.get('is_active_status').touched || newForm.valid), 'is-valid': newForm.get('is_active_status').valid && (newForm.get('is_active_status').dirty || newForm.get('is_active_status').touched || newForm.valid) }">
+                <option *ngFor="let SystemCapabilityStatus of samples | async" [value]="SystemCapabilityStatus.current_system_status">
+                  {{SystemCapabilityStatus.current_system_status}}
+                </option>
+              </select> -->
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" class="mr-1" data-dismiss="modal" id="newLabTestProcedureCancelModal" type="button">Cancel</button>
+          <button mat-stroked-button color="primary" [disabled]="!newForm.valid"  (click)="onSaveClick()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Edit Lab Test Procedure -->
+<form novalidate="novalidate" [formGroup]="editForm">
+  <div class="modal" role="dialog" id="editLabProcedureModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">Edit Laboratory Procedure</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="txtEditClientLocationName" class="col-sm-4 col-form-label">Description</label>
+            <div class="col-sm-8">
+              <input type="text" autocomplete="off" id="txtlab_description" class="form-control" placeholder="lab_description" name="lab_description" formControlName="lab_description" maxlength="30" #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('lab_description').invalid && (editForm.get('lab_description').dirty || editForm.get('lab_description').touched || editForm.valid), 'is-valid': editForm.get('lab_description').valid && (editForm.get('lab_description').dirty || editForm.get('lab_description').touched || editForm.valid) }">
+              <span class="text-danger" *ngIf="editForm.get('lab_description').invalid && (editForm.get('lab_description').dirty || editForm.get('lab_description').touched || editForm.valid) && editForm.get('lab_description').errors?.required">Status can't be blank</span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
+            <div class="col-sm-8">
+              <select id="txtis_active_status_status" class="form-control" name="is_active_status" formControlName="is_active_status" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': editForm.get('is_active_status').invalid && (editForm.get('is_active_status').dirty || editForm.get('is_active_status').touched || editForm.valid), 'is-valid': editForm.get('is_active_status').valid && (editForm.get('is_active_status').dirty || editForm.get('is_active_status').touched || editForm.valid) }" #UpdateLabTestProcedureDesc>
+                <option value="null">Please Select</option>
+                <option *ngFor="let SystemCapabilityStatus of samples | async" [value]="SystemCapabilityStatus.current_system_status">
+                  {{SystemCapabilityStatus.current_system_status}}
+                </option>
+              </select>
+              <span class="text-danger" *ngIf="editForm.get('is_active_status').invalid && (editForm.get('is_active_status').dirty || editForm.get('is_active_status').touched || editForm.valid) && editForm.get('is_active_status').errors?.required">Status can't be blank</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" class="mr-1" id="editLabTestProcedureCancelModal" data-dismiss="modal" type="button">Cancel</button>
+          <button mat-stroked-button color="primary" [disabled]="!editForm.valid" (click)="onUpdateClick()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Delete Lab Test Procedure -->
+<form>
+  <div class="modal" role="dialog" id="deleteModal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <div class="modal-title">Delete Status</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="form-group row">
+
+            <mat-form-field class="w-100" floatLabel="auto" appearance="standard" color="primary">
+              <input type="text" matInput id="txtStatusName" placeholder="Status" name="status_name" [(ngModel)]="deleteRejectStatus.lab_description" disabled="disabled" #DeleteLabTestProcedureDesc>
+              <mat-label>Description</mat-label>
+              <!-- <mat-hint align="end">The subject of the transaction</mat-hint> -->
+              <mat-icon matPrefix>info<span class="material-icons-outlined">
+              </span>
+              </mat-icon>
+          </mat-form-field>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <!-- <button class="btn btn-warning" data-dismiss="modal" type="button">Cancel</button> -->
+          <button mat-stroked-button color="warn" data-dismiss="modal" (click)="onDeleteConfirmClick()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

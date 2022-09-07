@@ -1,0 +1,95 @@
+.font-color-black {
+  color: black;
+}
+
+label {
+  float: left;
+}
+
+.text-required-color {
+  background-color: #FFF8DC !important;
+}
+
+.text-search-btn {
+  background-color: #319b95;
+  color: white;
+  border: none !important;
+  min-height: 2em !important;
+  :hover {
+    background-color: #4eaeaa;
+  }
+}
+
+// input {
+//   outline: 0;
+//   border-width: 0 0 2px;
+//   border-color: blue
+// }
+input:focus {
+  border-color: green
+}
+
+// select {
+//   outline: 0;
+//   border-width: 0 0 2px;
+//   border-color: blue
+// }
+select:focus {
+  border-color: green
+}
+
+.text-green {
+  color: green;
+}
+
+.text-red {
+  color: red;
+  transition-duration: 500ms;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e0e0e0 !important;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.chx-main{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(30px, auto);
+  grid-gap: 10px;
+  .chk-element{
+    justify-self: left;
+    align-self: start;
+    text-align: left;
+  }
+
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.btn-search{
+  background-color: #4d616a ;
+  color: white;
+  border: none;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}

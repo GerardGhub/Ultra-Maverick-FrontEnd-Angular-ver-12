@@ -15,9 +15,9 @@
           [(ngModel)]="searchBy"
           (selectionChange)="HideSearchBtn($event)"
         >
-          <option value="item_code">Item Code</option>
-          <option value="item_description">Item Description</option>
-          <option value="po_number">PO Number</option>
+          <option value="item_code">ITEM CODE</option>
+          <option value="item_description">ITEM DESCRIPTION</option>
+          <option value="po_number">PO NUMBER</option>
           <!-- <option value="po_date">PO Date</option> -->
         </select>
       </div>
@@ -31,11 +31,12 @@
           ></span>
         </div>
         <input
-          type="text"
+          type="search"
           class="form-control"
           placeholder="Find here...."
           id="txtSearchText"
           name="SearchText"
+          autocomplete="off"
           [(ngModel)]="searchText"
           (keyup)="onSearchTextKeyup($event)"
         />

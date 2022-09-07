@@ -31,9 +31,9 @@
                 </div>
                 <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy"
                   (selectionChange)="HideSearchBtn($event)">
-                  <option value="po_number">PO Number</option>
-                  <option value="item_code">Item Code</option>
-                  <option value="item_description">Item Description</option>
+                  <option value="po_number">PO NUMBER</option>
+                  <option value="item_code">ITEM CODE</option>
+                  <option value="item_description">ITEM DESCRIPTION</option>
                 </select>
               </div>
             </div>
@@ -43,8 +43,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
-                  [(ngModel)]="searchText" (keyup)="onSearchTextKeyup($event)" />
+                <input type="search" 
+                class="form-control" 
+                placeholder="Find here...." 
+                id="txtSearchText" 
+                name="SearchText"
+                autocomplete="off"
+                [(ngModel)]="searchText" 
+                (keyup)="onSearchTextKeyup($event)" />
               </div>
             </div>
           </div>

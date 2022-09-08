@@ -69,13 +69,13 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   successMessage: string = '';
 
   ngOnInit(): void {
-    this.getCancelledOrderList();
+    this.getDistinctCancelledOrderList();
     this.reactiveForms();
     this.getReasonList();
   }
 
-  getCancelledOrderList() {
-    this.cancelledOrderService.getCancelledOrderList().subscribe((response) => {
+  getDistinctCancelledOrderList() {
+    this.cancelledOrderService.getDistinctCancelledOrderList().subscribe((response) =>{
       if (response) {
         this.cancelledOrderList = response;
         this.totalCancelledCount = response.length;
@@ -141,7 +141,7 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
     this.getStoreOrdersCount();
     this.getPreparedCount();
     this.getDispatchingCount();
-    this.getCancelledOrderList();
+    this.getDistinctCancelledOrderList();
   }
 
   // Row Counts
@@ -208,7 +208,7 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   // POPULATE VALUE *****************************************************************************************************
   onViewClick(item: any) {
     this.cancelledOrderService
-      .searchItems(item.fK_dry_wh_orders_parent_id)
+      .searchItems(item.id)
       .subscribe((response) => {
         this.cancelledOrderItemList = response;
       });

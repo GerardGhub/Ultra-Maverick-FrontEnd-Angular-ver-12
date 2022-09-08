@@ -57,7 +57,7 @@
             <div class="d-flex">
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain">
                 <!-- table table-striped table-bordered nowrap table-responsive-sm -->
-                <table class="" style="width:100%">
+                <table class="table-responsive-xl" style="width:100%">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
                       <th>
@@ -83,7 +83,10 @@
                   </thead>
                 <tbody>
                   <tr
-                    *ngFor="let item of storeOrders | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
+                    *ngFor="let item of storeOrders | filter: searchBy : searchText | sort : sortBy : sortOrder | 
+                    paging : currentPageIndex : pageSize; let i = index"
+                    >
+                    
                     <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
                     <td>{{item.category}}</td>
                     <td>{{item.store_name}}</td>

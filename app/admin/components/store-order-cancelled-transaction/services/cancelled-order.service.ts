@@ -14,6 +14,12 @@ export class CancelledOrderService {
     });
   }
 
+  getDistinctCancelledOrderList(): Observable<any> {
+    return this.httpClient.get('/api/dry_wh_orders_checklist_distinct_partial_cancel', {
+      responseType: 'json',
+    });
+  }
+
   searchItems(id: any): Observable<any> {
     return this.httpClient.get(
       '/api/store_orders_partial_cancel/search/' + id,

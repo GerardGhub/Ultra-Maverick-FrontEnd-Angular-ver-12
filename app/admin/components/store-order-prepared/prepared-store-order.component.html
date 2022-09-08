@@ -6,11 +6,11 @@
           <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
         </div>
         <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
-          <option value="is_approved_prepa_date">Preparation Date</option>
-          <option value="category">Category</option>
-          <option value="store_name">Store</option>
-          <option value="route">Route</option>
-          <option value="area">Area</option>
+          <option value="is_approved_prepa_date">PREPARATION DATE</option>
+          <option value="category">CATEGORY</option>
+          <option value="store_name">STORE</option>
+          <option value="route">ROUTE</option>
+          <option value="area">AREA</option>
         </select>
       </div>
     </div>
@@ -20,7 +20,12 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
         </div>
-        <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
+        <input type="search" 
+        class="form-control" 
+        placeholder="Find here...." 
+        id="txtSearchText" 
+        name="SearchText"
+        autocomplete="off"
           [(ngModel)]="searchText" (keyup)="onSearchTextKeyup($event)" />
       </div>
     </div>

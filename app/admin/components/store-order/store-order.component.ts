@@ -164,7 +164,7 @@ export class StoreOrderComponent implements OnInit {
   }
 
   getCancelledTransactionCount() {
-    this.cancelledOrderService.getCancelledOrderList().subscribe((response) => {
+    this.cancelledOrderService.getDistinctCancelledOrderList().subscribe((response) => {
       if (response) {
         this.cancelledOrders = response;
         this.showLoading = false;

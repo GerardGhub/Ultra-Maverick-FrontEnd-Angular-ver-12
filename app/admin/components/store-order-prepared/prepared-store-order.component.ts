@@ -307,7 +307,7 @@ export class PreparedStoreOrderComponent implements OnInit {
 
   onCancelItemClick(item: any) {
     this.cancelOrderItemForm.patchValue({
-      item_code: item.primary_id,
+      item_code: item.item_code,
       item_desc: item.description,
 
       FK_dry_wh_orders_parent_id: item.fK_dry_wh_orders_parent_id,

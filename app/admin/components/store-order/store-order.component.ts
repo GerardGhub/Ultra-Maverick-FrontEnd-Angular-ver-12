@@ -1,14 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { RejectedStatus } from 'src/app/models/rejected-status';
 import { SystemCapabilityStatus } from 'src/app/models/system-capability-status';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
 import { SystemCapabilityStatusService } from 'src/app/services/system-capability-status.service';
-import Swal from 'sweetalert2';
-import * as $ from 'jquery';
-import { DryWhStoreOrders } from 'src/app/models/dry-wh-store-orders';
 import { WhCheckerDashboardService } from 'src/app/services/wh-checker-dashboard.service';
 import { CancelledOrderService } from '../store-order-cancelled-transaction/services/cancelled-order.service';
 import { PreparedOrdersService } from '../store-order-prepared/services/prepared-order.service';

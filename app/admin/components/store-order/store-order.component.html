@@ -33,11 +33,11 @@
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
                 </div>
                 <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
-                  <option value="is_approved_prepa_date">Preparation Date</option>
-                  <option value="category">Category</option>
-                  <option value="store_name">Store</option>
-                  <option value="route">Route</option>
-                  <option value="area">Area</option>
+                  <option value="is_approved_prepa_date">PREPARATION DATE</option>
+                  <option value="category">CATEGORY</option>
+                  <option value="store_name">STORE</option>
+                  <option value="route">ROUTE</option>
+                  <option value="area">AREA</option>
                 </select>
               </div>
             </div>
@@ -47,8 +47,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
-                  [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)" />
+                <input type="search" class="form-control" placeholder="Find here...." autocomplete="off"
+                  id="txtSearchText" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)" />
               </div>
             </div>
           </div>
@@ -58,27 +58,30 @@
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain">
                 <!-- table table-striped table-bordered nowrap table-responsive-sm -->
                 <table class="" style="width:100%">
-                  <tr class="text-light header-bg-color-um system-name">
-                    <th>
-                      Preparation Date
-                      <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'reject_status_name' "
-                        (click)="sortBy = 'reject_status_name'; sortOrder = 'ASC' "></i>
+                  <thead>
+                    <tr class="text-light header-bg-color-um system-name">
+                      <th>
+                        Preparation Date
+                        <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'reject_status_name' "
+                          (click)="sortBy = 'reject_status_name'; sortOrder = 'ASC' "></i>
 
-                      <i class="fa fa-sort-up hand-icon text-primary"
-                        *ngIf="sortBy == 'reject_status_name' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                        <i class="fa fa-sort-up hand-icon text-primary"
+                          *ngIf="sortBy == 'reject_status_name' && sortOrder == 'ASC' "
+                          (click)="sortOrder = 'DESC' "></i>
 
-                      <i class="fa fa-sort-down hand-icon text-primary"
-                        *ngIf="sortBy == 'reject_status_name' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
-                    </th>
-                    <th>Category</th>
-                    <th>Store</th>
-                    <th>Route</th>
-                    <th>Area</th>
-                    <th>Total Item/s</th>
-                    <th>Prepared Item/s</th>
-                    <!-- <th class="text-center" style="width:200px">Actions</th> -->
-                  </tr>
-
+                        <i class="fa fa-sort-down hand-icon text-primary"
+                          *ngIf="sortBy == 'reject_status_name' && sortOrder == 'DESC' "
+                          (click)="sortOrder = 'ASC' "></i>
+                      </th>
+                      <th>Category</th>
+                      <th>Store</th>
+                      <th>Route</th>
+                      <th>Area</th>
+                      <th>Total Item/s</th>
+                      <th>Prepared Item/s</th>
+                    </tr>
+                  </thead>
+                <tbody>
                   <tr
                     *ngFor="let item of storeOrders | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
                     <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
@@ -89,6 +92,7 @@
                     <td>{{item.totalItems}}</td>
                     <td>{{item.totalPreparedItems}}</td>
                   </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -140,7 +144,7 @@
 
               <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
                 <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
-                  onclick="return false">Nexts</a>
+                  onclick="return false">Next</a>
               </li>
             </ul>
           </div>

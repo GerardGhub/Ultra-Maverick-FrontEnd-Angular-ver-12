@@ -65,6 +65,14 @@
               </td>
               <td class="text-center">
                 <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
+                data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="success"
+                mat-stroked-button>
+                <span class="fa fa-eye"></span> View
+              </button>
+
+
+
+                <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
                   data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="primary"
                   mat-stroked-button>
                   <span class="fa fa-check-circle"></span> Approve

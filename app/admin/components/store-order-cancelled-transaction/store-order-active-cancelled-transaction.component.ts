@@ -255,6 +255,7 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
             .subscribe(
               (response) => {
                 // this.getCancelledOrderList();
+    
                 this.tabRefresh();
 
                 this.successMessage = 'Returned Successfully!';
@@ -263,6 +264,7 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
                 $('#_returnOrderCloseModal').trigger('click');
                 $('#returnOrderCloseModal').trigger('click');
                 this.successToaster();
+                
               },
               (error) => {
                 this.errorMessage = error.error.message;

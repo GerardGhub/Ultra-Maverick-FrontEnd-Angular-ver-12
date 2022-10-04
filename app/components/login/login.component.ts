@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.maxLength(30),
       ]),
-      // ,
+      // ,/
       // customerName: new FormControl(null, [Validators.required, Validators.maxLength(30), Validators.pattern('^[A-Za-z. ]*$')]),
       // country: new FormControl(null, [Validators.required])
     });

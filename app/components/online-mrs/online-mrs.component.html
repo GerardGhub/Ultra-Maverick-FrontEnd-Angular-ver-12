@@ -638,7 +638,7 @@
               <th>Order</th>
               <th>UOM</th>
               <th>Serve</th>
-              <th>Remarks</th>
+              <th class="display-none">Remarks</th>
               <th>Action</th>
             </thead>
             <tbody *ngFor="let parent of viewAddedItemList">
@@ -648,7 +648,7 @@
                 <td>{{item.mrs_order_qty}}</td>
                 <td>{{item.mrs_uom}}</td>
                 <td>{{item.mrs_served_qty}}</td>
-                <td>
+                <td class="display-none">
                   <button mat-stroked-button class="editbtnStyle" data-toggle="modal"
                     data-target="#viewItemRemarksFromList" data-backdrop="false" data-keyboard="false"
                     (click)="viewRemarksItemFromList(item)"><span class="fa fa-eye"></span> View </button>

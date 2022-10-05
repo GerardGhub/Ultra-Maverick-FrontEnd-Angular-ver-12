@@ -13,7 +13,7 @@
           Approval
         </li>
         <li class="breadcrumb-item dashboardActive" aria-current="page">
-          WH Rejected
+          WH Rejected xx
         </li>
       </ol>
     </nav>
@@ -41,9 +41,9 @@
               [(ngModel)]="searchBy"
               (selectionChange)="HideSearchBtn($event)"
             >
-              <option value="po_number">PO Number</option>
-              <option value="item_code">Item Code</option>
-              <option value="item_description">Item Description</option>
+              <option value="po_number">PO NUMBER</option>
+              <option value="item_code">ITEM CODE</option>
+              <option value="item_description">ITEM DESCRIPTION</option>
             </select>
           </div>
         </div>
@@ -61,6 +61,7 @@
               placeholder="Find here...."
               id="txtSearchText"
               name="SearchText"
+              autocomplete="off"
               [(ngModel)]="searchText"
               (keyup)="onSearchTextKeyup($event)"
             />
@@ -80,7 +81,7 @@
               <thead>
                 <tr class="text-light header-bg-color-um system-name">
                   <th>
-                    PO&nbsp;No.
+                    PO&nbsp;No4.
                   </th>
                   <th>Item&nbsp;Code</th>
                   <th>Description</th>
@@ -4488,7 +4489,7 @@
     <div class="modal-dialog">
       <div class="modal-content" style="width: auto">
         <div class="modal-header bg-all">
-          <div class="modal-title white-color">Item Approvals</div>
+          <div class="modal-title white-color">Item Approval</div>
           <button type="button" class="close" data-dismiss="modal">
             <span>&times;</span>
           </button>
@@ -4511,9 +4512,7 @@
             />
             <mat-label>Po Number</mat-label>
             <mat-hint align="end">Purchased Order</mat-hint>
-            <!-- <mat-icon matPrefix>inventory<span class="material-icons-outlined"> -->
-            <!-- </span>
-            </mat-icon> -->
+     
           </mat-form-field>
 
           <mat-form-field
@@ -4597,6 +4596,7 @@
           >
             Approve
           </button>
+          <!-- {{editForm.value | json}} -->
         </div>
       </div>
     </div>

@@ -808,20 +808,12 @@ export class WhRejectionApprovalComponent implements OnInit {
           p.is_wh_reject_approval_by =  response.is_wh_reject_approval_by;
         
   
-          //Section 1
-
-
-
-       
-          // this.received_by.nativeElement.value = this.loginService.currentUserName;
           this.projects[this.editIndex] = p;
           this.UpdateMasterTransactionsActualReceivingofCancel();
-          // this.InsertANewPartialReceiving();
+
     
           //Add
-          this.editProject.cancelled_date = null;
-          this.editProject.canceled_by = null;
-          this.editProject.cancelled_reason = null;
+
           this.showApprovedSuccess();
           this.ngOnInit();
           $('#editFormCancel').trigger('click');
@@ -834,7 +826,7 @@ export class WhRejectionApprovalComponent implements OnInit {
   }
 
   ApprovedClickDetails() {
-    if (this.editForm.valid) {
+    // if (this.editForm.valid) {
       this.editProject.is_activated = this.Activator;
       this.editProject.is_wh_reject_approval = this.Activator;
       this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
@@ -922,118 +914,7 @@ export class WhRejectionApprovalComponent implements OnInit {
           this.editProject.count_of_reject_three = null;
           this.editProject.total_of_reject_mat = null;
           //Section A
-          //A
-          this.editProject.a_delivery_van_desc = null;
-          this.editProject.a_compliance = null;
-          this.editProject.a_remarks = null;
-          //B
-          this.editProject.b_cooling_system_desc = null;
-          this.editProject.b_compliance = null;
-          this.editProject.b_remarks = null;
-          //C
-          this.editProject.c_inner_walls_desc = null;
-          this.editProject.c_compliance = null;
-          this.editProject.c_remarks = null;
-          //D
-          this.editProject.d_plastic_curtains_desc = null;
-          this.editProject.d_compliance = null;
-          this.editProject.d_remarks = null;
-          //E
-          this.editProject.e_thereno_pest_desc = null;
-          this.editProject.e_compliance = null;
-          this.editProject.e_remarks = null;
-          //Section 2
-          //A
-          this.editProject.a_clean_company_dos = null;
-          this.editProject.a_compliance_dos = null;
-          this.editProject.a_remarks_dos = null;
-          //B
-          this.editProject.b_delivery_staff_symptoms_dos = null;
-          this.editProject.b_compliance_dos = null;
-          this.editProject.b_remarks_dos = null;
-          //C
-          this.editProject.c_inner_walls_clean_dos = null;
-          this.editProject.c_compliance_dos = null;
-          this.editProject.c_remarks_dos = null;
-          //D
-          this.editProject.d_plastic_curtains_dos = null;
-          this.editProject.d_compliance_dos = null;
-          this.editProject.d_remarks_dos = null;
-          //E
-          this.editProject.e_no_accessories_dos = null;
-          this.editProject.e_compliance_dos = null;
-          this.editProject.e_remarks_dos = null;
-          //F
-          this.editProject.f_compliance_dos = null;
-          this.editProject.f_no_pests_sightings_dos = null;
-          this.editProject.f_remarks_dos = null;
-          //Section 3
-          //A
-          this.editProject.a_pallet_crates_tres = null;
-          this.editProject.a_compliance_tres = null;
-          this.editProject.a_remarks_tres = null;
-          //B
-          this.editProject.b_product_contamination_tres = null;
-          this.editProject.b_compliance_tres = null;
-          this.editProject.b_remarks_tres = null;
-          //C
-          this.editProject.c_uncessary_items_tres = null;
-          this.editProject.c_compliance_tres = null;
-          this.editProject.c_remarks_tres = null;
-          //D
-          this.editProject.d_products_cover_tres = null;
-          this.editProject.d_compliance_tres = null;
-          this.editProject.d_remarks_tres = null;
-          //Section 4
-          //A
-          this.editProject.a_certificate_coa_kwatro_desc = null;
-          this.editProject.a_compliance_kwatro = null;
-          this.editProject.a_remarks_kwatro = null;
-          //B
-          this.editProject.b_po_kwatro_desc = null;
-          this.editProject.b_compliance_kwatro = null;
-          this.editProject.b_remarks_kwatro = null;
-          //C
-          this.editProject.c_msds_kwatro_desc = null;
-          this.editProject.c_compliance_kwatro = null;
-          this.editProject.c_remarks_kwatro = null;
-          //D
-          this.editProject.d_food_grade_desc = null;
-          this.editProject.d_compliance_kwatro = null;
-          this.editProject.d_remarks_kwatro = null;
-          //Section 5
-          //A
-          this.editProject.a_qty_received_singko_singko = null;
-          this.editProject.a_compliance_singko = null;
-          this.editProject.a_remarks_singko = null;
-          //B
-          this.editProject.b_mfg_date_desc_singko = null;
-          this.editProject.b_compliance_singko = null;
-          this.editProject.b_remarks_singko = null;
-          //C
-          this.editProject.c_expirydate_desc_singko = null;
-          this.editProject.c_compliance_singko = null;
-          this.editProject.c_remarks_singko = null;
-          //D
-          this.editProject.d_packaging_desc_singko = null;
-          this.editProject.d_compliance_singko = null;
-          this.editProject.d_remarks_singko = null;
-          //E
-          this.editProject.e_no_contaminants_desc_singko = null;
-          this.editProject.e_compliance_singko = null;
-          this.editProject.e_remarks_singko = null;
-          //F
-          this.editProject.f_qtyrejected_desc_singko = null;
-          this.editProject.f_compliance_singko = null;
-          this.editProject.f_remarks_singko = null;
-          //G
-          this.editProject.g_rejected_reason_desc_singko = null;
-          this.editProject.g_compliance_singko = null;
-          this.editProject.g_remarks_singko = null;
-          //H
-          this.editProject.h_lab_sample_desc_singko = null;
-          this.editProject.h_compliance_singko = null;
-          this.editProject.h_remarks_singko = null;
+
           //Add
           this.editProject.cancelled_date = null;
           this.editProject.canceled_by = null;
@@ -1051,7 +932,7 @@ export class WhRejectionApprovalComponent implements OnInit {
           console.log(error);
         }
       );
-    }
+    // }
   }
 
   //Insert as Partial
@@ -1423,7 +1304,7 @@ export class WhRejectionApprovalComponent implements OnInit {
   CancelledPoDetails() {
     var Item = this.ItemDesc.nativeElement.value;
     Swal.fire({
-      title: 'Are you sure you want to approve the Transaction KISK?',
+      title: 'Are you sure you want to approve the Transaction?',
       text: Item,
       icon: 'info',
       showCancelButton: true,

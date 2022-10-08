@@ -72,7 +72,7 @@ insertProject2(newProject: Project): Observable<Project>
 
 updateProject(existingProject: Project): Observable<Project>
 {
-  return this.httpClient.put<Project>("/api/ProjectsPartialPo/WhReject", existingProject, { responseType: "json" }); 
+  return this.httpClient.put<Project>("/api/ProjectsPartialPo/WhReject/Approval", existingProject, { responseType: "json" }); 
 }
 
 

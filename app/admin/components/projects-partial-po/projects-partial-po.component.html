@@ -10,7 +10,7 @@
           </a>
         </li>
         <li class="breadcrumb-item dashboardActive" aria-current="page">
-          WH Receiving
+          WH Receiving 
         </li>
       </ol>
     </nav>
@@ -91,14 +91,20 @@
                       matBadge="{{ item.total_of_reject_mat | number }}" matBadgeColor="warn">
                     </mat-icon>
                   </td>
-                  <!-- <td>{{project.received_by_QA}}</td>
-                    <td>{{project.qcReceivingDate  | date:'dd-MMM-yyyy hh:mm a'}}</td> -->
+
                   <td class="text-center">
 
-                    <button mat-stroked-button class="editbtnStyle" color="black" (click)="onClickView(item, i)"
-                      data-toggle="modal" data-target="#viewModal" data-backdrop="false" data-keyboard="false"
-                      title="View">
-                      <span class="fa fa-eye"></span> View
+                    <button 
+                    mat-stroked-button 
+                    class="editbtnStyle" 
+                    color="black" 
+                    (click)="onClickView(item, i)"
+                    data-toggle="modal" 
+                    data-target="#viewModal" 
+                    data-backdrop="false" 
+                    data-keyboard="false"
+                    title="View">
+                    <span class="fa fa-eye"></span> View
                     </button>
 
                     <ng-container *ngIf="

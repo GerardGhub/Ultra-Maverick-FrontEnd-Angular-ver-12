@@ -183,7 +183,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   reactiveForms(){
     this.viewForm = this.formBuilder.group({
       trans_ID: this.formBuilder.control(null, [Validators.required]),
-      item_code: this.formBuilder.control(null, [Validators.required]),
+      item_code: this.formBuilder.control(null, [Validators.required]).disable(),
       recieving_date: this.formBuilder.control(null, [Validators.required]),
 
       item_desc: this.formBuilder.control(null, [Validators.required]),

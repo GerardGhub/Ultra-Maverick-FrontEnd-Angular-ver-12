@@ -43,6 +43,7 @@ import { ParametersComponent } from './components/qc-masterlist/paramenters/para
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { InternalOrderComponent } from './components/internal-preparation/internal-order.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ProjectComponent } from './admin/components/project/project.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       multi: true,
     },
     [DashboardService],
+    [ProjectComponent],
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtUnAuthorizedInterceptorService,

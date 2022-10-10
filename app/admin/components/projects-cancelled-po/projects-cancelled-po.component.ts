@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import { OnChanges, ViewChild, Input, OnInit,ElementRef, Component, Output, EventEmitter} from '@angular/core';
 import { ProjectsService } from "../../../services/projects.service";
 import { ClientLocation } from '../../../models/client-location';
 import { ClientLocationsService } from '../../../services/client-locations.service';
-import { FormArray, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import * as $ from "jquery";
-import { ProjectIDUniqueValidatorDirective } from 'src/app/directives/project-idunique-validator.directive';
-import { ProjectComponent } from '../project/project.component';
 import { FilterPipe } from 'src/app/pipes/filter.pipe';
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/models/project';
 import Swal from 'sweetalert2';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { LoginService } from 'src/app/services/login.service';
 import { RejectedStatus } from 'src/app/models/rejected-status';
@@ -18,9 +16,8 @@ import { RejectedStatusService } from 'src/app/services/rejected-status.service'
 import { AllowablePercentage } from 'src/app/models/allowable-percentage';
 import { AllowablePercentageService } from 'src/app/services/allowable-percentage.service';
 import { CancelledPOTransactionStatus } from 'src/app/models/cancelled-potransaction-status';
-import { CancelledPOTransactionStatusService } from 'src/app/services/cancelled-potransaction-status.service';
 import { ReturnedPOTransactionStatusService } from 'src/app/services/returned-potransaction-status.service';
-
+import { ProjectComponent } from '../project/project.component';
 
 
 @Component({
@@ -28,7 +25,11 @@ import { ReturnedPOTransactionStatusService } from 'src/app/services/returned-po
   templateUrl: './projects-cancelled-po.component.html',
   styleUrls: ['./projects-cancelled-po.component.scss']
 })
-export class ProjectsCancelledPoComponent implements OnInit {
+export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
+  @Input() child_id;
+  @Output()
+  uploaded = new EventEmitter<string>();
+
 
   projects: Project[] = [];
   cancelledPOlist: Project[] = [];
@@ -121,14 +122,28 @@ AllowablePercentages: Observable<AllowablePercentage[]>;
 
 
   constructor(private projectsService: ProjectsService, private clientLocationsService: ClientLocationsService, private toastr: ToastrService , public loginService: LoginService,
-    private rejectedStatusService :  RejectedStatusService, private allowablePercentageService: AllowablePercentageService, private returnedPOTransactionStatusService : ReturnedPOTransactionStatusService )
+    private rejectedStatusService :  RejectedStatusService, private allowablePercentageService: AllowablePercentageService, 
+    private returnedPOTransactionStatusService : ReturnedPOTransactionStatusService,
+    private projectComponent: ProjectComponent )
   {
   }
 
-
+  ngOnChanges() {
+    // create header using child_id
+    console.log(this.child_id);
+    console.log("Child");
+    this.getPOcancelledList();
+   
+  }
+any(event: any)
+{
+  alert("Hello There");
+  this.uploaded.emit('complete');
+}
 
 
   ngOnInit(){
+
     this.getPOcancelledList();
     this.getPOrecievingList();
     this.loginService.detectIfAlreadyLoggedIn(); //detect already Login
@@ -439,7 +454,8 @@ UpdateDeactivatedTransactions()
 
     this.showReturnedSuccess();
     this.getPOrecievingList();
-
+    //
+    this.uploaded.emit('complete');
 
     // this.ngOnInit();
       $("#editFormCancel").trigger("click");
@@ -1210,3 +1226,7 @@ validateRejectedStatus(event: any) {
 
 
 }
+// function Output() {
+//   throw new Error('Function not implemented.');
+// }
+

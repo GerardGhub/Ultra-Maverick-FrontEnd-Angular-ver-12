@@ -5,6 +5,10 @@ import {
   ViewChildren,
   QueryList,
   ElementRef,
+  OnChanges,
+  Output,
+  Input,
+  EventEmitter,
 } from '@angular/core';
 import { ProjectsService } from '../../../services/projects.service';
 import { ClientLocation } from '../../../models/client-location';
@@ -43,7 +47,11 @@ import { QCService } from './services/qcmodule.service';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnChanges {
+  @Input() parent_id;
+
+
+
   constructor(
     private projectsService: ProjectsService,
     private clientLocationsService: ClientLocationsService,
@@ -56,7 +64,19 @@ export class ProjectsComponent implements OnInit {
     private tblNearlyExpiryMgmtService: TblNearlyExpiryMgmtService,
     private formBuilder: FormBuilder,
     private qcService: QCService
-  ) {}
+  ) {
+    
+  }
+
+  ngOnChanges() {
+    // create header using child_id
+    console.log(this.parent_id);
+  }
+
+someMethod(event) {
+  // console.log("Pure CASS");
+  this.ngOnInit();
+}
 
   projects: Project[] = [];
   cancelledPOlist: Project[] = [];
@@ -77,7 +97,7 @@ export class ProjectsComponent implements OnInit {
   searchText: string = '';
   ToDay: Date;
   ToDayforMaxDate: Date;
-
+samplelang: string = '';
   activeUser: string = '';
   PartialEntry: string = '';
   PartialComment: string = '';
@@ -213,12 +233,19 @@ export class ProjectsComponent implements OnInit {
   data = [];
 
   ngOnInit() {
+
     this.getPOrecievingList();
     this.important();
     this.getUserFullName();
     this.getChecklist();
     this.getPOcancelledList();
+    this.totalPoRowCount = 56000;
   }
+
+
+
+
+
 
   getPOrecievingList() {
     this.projectsService.getAllProjects().subscribe((response: Project[]) => {
@@ -299,6 +326,15 @@ export class ProjectsComponent implements OnInit {
   poRecievingTabforRefresh(val) {
     this.getPOrecievingList();
     this.getPOcancelledList();
+
+   this.samplelang = "4000";
+   this.totalPoRowCount = 23232;
+  }
+
+
+
+  myFunctionOne(){
+    console.log('Call Function One from Component One');
   }
 
   jqueryClearanceTextBox() {
@@ -996,6 +1032,7 @@ export class ProjectsComponent implements OnInit {
               // dito ang new trapping sa checklist bago e save need muna e fill out ang checklist form
               this.qcService.saveNewCheckList(this.checklistDataList).subscribe(
                 (response) => {
+               
                   this.getPOrecievingList();
 
                   $('#editFormCancel').trigger('click');
@@ -1034,6 +1071,7 @@ export class ProjectsComponent implements OnInit {
                   .saveNewCheckList(this.checklistDataList)
                   .subscribe(
                     (response) => {
+  ;
                       this.getPOrecievingList();
 
                       $('#editFormCancel').trigger('click');
@@ -1070,6 +1108,7 @@ export class ProjectsComponent implements OnInit {
                     .saveNewCheckList(this.checklistDataList)
                     .subscribe(
                       (response) => {
+                 
                         this.getPOrecievingList();
 
                         $('#editFormCancel').trigger('click');
@@ -1104,7 +1143,8 @@ export class ProjectsComponent implements OnInit {
                     .subscribe(
                       (response) => {
                         this.getPOrecievingList();
-
+                
+             );
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
                       },
@@ -1231,7 +1271,7 @@ export class ProjectsComponent implements OnInit {
           this.editProject.total_of_reject_mat = null;
 
           this.showReceivedSuccess();
-          this.getPOrecievingList();
+          // this.getPOrecievingList();
 
           $('#editFormCancel').trigger('click');
           this.ngOnInit();
@@ -1595,9 +1635,10 @@ export class ProjectsComponent implements OnInit {
     this.resetValueS();
     //first
 
+
     if ($('#txtSearchText').is(':visible')) {
       this.projectsService
-        .SearchProjects('Po_number', this.searchText)
+        .SearchProjects('Po_Number', this.searchText)
         .subscribe((response: Project[]) => {
           this.projects = response;
           this.showLoading = false;
@@ -1926,10 +1967,10 @@ export class ProjectsComponent implements OnInit {
 
       setTimeout(() => {
         if ($('#ActivePartialReceiving').is(':visible')) {
-          // alert("A1");
+        
           this.PartialComment = 'haddata';
         } else {
-          // alert("B1");
+         
           this.PartialComment = 'unsetdata';
           $('#CancelPO').show();
         }
@@ -2010,6 +2051,7 @@ export class ProjectsComponent implements OnInit {
         this.getPOcancelledList();
 
         this.ngOnInit();
+      
         $('#editFormCancel').trigger('click');
       },
       (error) => {
@@ -2175,16 +2217,15 @@ export class ProjectsComponent implements OnInit {
 
   onAddAdditionalRejectRow(event: any) {
     if ($('#rejectionrow1').is(':visible')) {
-      // alert("The paragraph  is visible.");
+\;
 
       if ($('#rejectionrow2').is(':visible')) {
-        // alert("The paragraph  is visible.");
+ \
         if ($('#rejectionrow3').is(':visible')) {
-          // alert("The paragraph  is visible.");
-          // alert("Limit  is exceed!");
+\
           this.showLimitonAddingRejection();
         } else {
-          // alert("The paragraph  is hidden.");
+      
           $('#rejectionrow3').show();
           $('#rejectionrow32').show();
           $('#total-reject').show();
@@ -2192,14 +2233,14 @@ export class ProjectsComponent implements OnInit {
           $('#AddRejectBtn').hide();
         }
       } else {
-        // alert("The paragraph  is hidden.");
+\
         $('#rejectionrow2').show();
         $('#rejectionrow22').show();
         $('#total-reject').show();
         $('#total-confirm-reject').show();
       }
     } else {
-      // alert("The paragraph  is hidden.");
+    
       $('#rejectionrow1').show();
       $('#rejectionrow12').show();
       $('#remove-remarks-button').show();
@@ -2207,38 +2248,33 @@ export class ProjectsComponent implements OnInit {
       $('#total-confirm-reject').show();
     }
 
-    // $("#rejectionrow2").show();
-    // $("#rejectionrow22").show();
 
-    // $("#rejectionrow3").show();
-    // $("#rejectionrow32").show();
-    // alert("sds");
   }
 
   onRemoveAdditionalRejectRow(event: any) {
     if ($('#rejectionrow3').is(':visible')) {
-      // alert("The paragraph  is visible.");
+    
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
-      // alert("The paragraph  is hidden.");
+   
 
       if ($('#rejectionrow2').is(':visible')) {
-        // alert("The paragraph  is visible.");
+   
         $('#rejectionrow2').hide();
         $('#rejectionrow22').hide();
         $('#remove-remarks-button').show();
       } else {
-        // alert("The paragraph  is hidden.");
+    
         if ($('#rejectionrow1').is(':visible')) {
-          // alert("The paragraph  is visible.");
+         
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-          // alert("The paragraph  is hidden.");
+         
         }
       }
     }
@@ -2366,7 +2402,7 @@ export class ProjectsComponent implements OnInit {
     this.totalofReject.nativeElement.value = summary;
 
     if (ActualDelivered >= summary) {
-      // alert("A");
+  
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -2425,17 +2461,16 @@ export class ProjectsComponent implements OnInit {
     if (aplenght > adlength) {
       //Do Something programmble
       if (Number(TotalAllowablePercentage) >= Number(ActualDelivered)) {
-        // alert($('#Allowable_Percentage_id').val());
+       
       } else {
         this.AllowablePercentageExceed();
         $('#actual_delivery_output').val('');
       }
     } else {
       if (Number(TotalAllowablePercentage) >= Number(ActualDelivered)) {
-        // alert($('#Allowable_Percentage_id').val());
-        // alert("hahaha");
+     
       } else {
-        // alert("Error 2");
+ 
         this.AllowablePercentageExceed();
         $('#actual_delivery_output').val('');
       }

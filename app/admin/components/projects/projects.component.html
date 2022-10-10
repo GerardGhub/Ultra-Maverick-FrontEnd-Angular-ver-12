@@ -7,6 +7,8 @@
           </a></li>
         <li class="breadcrumb-item dashboardActive" aria-current="page"> QC Receiving </li>
       </ol>
+
+
     </nav>
 
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="poRecievingTabforRefresh($event)">
@@ -31,6 +33,10 @@
                 </select>
               </div>
             </div>
+
+            <div>
+  
+          </div>
 
             <div class="p-2">
               <div class="input-group searchBtnStyle">
@@ -73,7 +79,7 @@
                     <td>{{ project.po_number }}</td>
                     <td>{{ project.item_code }}</td>
                     <td class="td-text-left">{{ project.item_description }}</td>
-                    <td class="td-text-left">{{ project.supplier }}</td>
+                    <td class="td-text-left">{{ project.supplier | uppercase }}</td>
                     <td>{{ project.qty_order | number: "1.0":"en-US" }}</td>
                     <td>{{ project.actual_remaining_receiving | number: "1.0":"en-US" }}
                     </td>
@@ -176,7 +182,8 @@
           &nbsp; <span class="badge badge-danger zerobadge{{ totalCancelledPoRowCount | number}}">{{
             totalCancelledPoRowCount }}</span>
         </ng-template>
-        <app-projects-cancelled-po></app-projects-cancelled-po>
+        <!-- <app-projects-cancelled-po></app-projects-cancelled-po> -->
+        <app-projects-cancelled-po [child_id]=samplelang (uploaded)="someMethod($event)"></app-projects-cancelled-po>
       </mat-tab>
     </mat-tab-group>
   </div>
@@ -1252,7 +1259,7 @@
         <div class="modal-footer">
           <button mat-stroked-button [disabled]="!editForm.valid" color="primary" class="mr-2"
             (click)="onRecieveButtonClick(editProject.projectID)">
-            Receive
+            Receive XXX
           </button>
           <button [hidden]="true" mat-stroked-button color="warn" data-dismiss="modal" id="editFormCancel">
             Cancel

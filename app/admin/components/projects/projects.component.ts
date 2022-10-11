@@ -239,7 +239,7 @@ samplelang: string = '';
     this.getUserFullName();
     this.getChecklist();
     this.getPOcancelledList();
-    this.totalPoRowCount = 56000;
+
   }
 
 
@@ -1032,7 +1032,7 @@ samplelang: string = '';
               // dito ang new trapping sa checklist bago e save need muna e fill out ang checklist form
               this.qcService.saveNewCheckList(this.checklistDataList).subscribe(
                 (response) => {
-               
+      
                   this.getPOrecievingList();
 
                   $('#editFormCancel').trigger('click');
@@ -1071,7 +1071,7 @@ samplelang: string = '';
                   .saveNewCheckList(this.checklistDataList)
                   .subscribe(
                     (response) => {
-  ;
+               
                       this.getPOrecievingList();
 
                       $('#editFormCancel').trigger('click');
@@ -1108,7 +1108,7 @@ samplelang: string = '';
                     .saveNewCheckList(this.checklistDataList)
                     .subscribe(
                       (response) => {
-                 
+               
                         this.getPOrecievingList();
 
                         $('#editFormCancel').trigger('click');
@@ -1144,7 +1144,7 @@ samplelang: string = '';
                       (response) => {
                         this.getPOrecievingList();
                 
-             );
+                    
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
                       },
@@ -1967,10 +1967,10 @@ samplelang: string = '';
 
       setTimeout(() => {
         if ($('#ActivePartialReceiving').is(':visible')) {
-        
+  
           this.PartialComment = 'haddata';
         } else {
-         
+          
           this.PartialComment = 'unsetdata';
           $('#CancelPO').show();
         }
@@ -2217,15 +2217,15 @@ samplelang: string = '';
 
   onAddAdditionalRejectRow(event: any) {
     if ($('#rejectionrow1').is(':visible')) {
-\;
+
 
       if ($('#rejectionrow2').is(':visible')) {
- \
+ 
         if ($('#rejectionrow3').is(':visible')) {
-\
+
           this.showLimitonAddingRejection();
         } else {
-      
+         
           $('#rejectionrow3').show();
           $('#rejectionrow32').show();
           $('#total-reject').show();
@@ -2233,14 +2233,14 @@ samplelang: string = '';
           $('#AddRejectBtn').hide();
         }
       } else {
-\
+  
         $('#rejectionrow2').show();
         $('#rejectionrow22').show();
         $('#total-reject').show();
         $('#total-confirm-reject').show();
       }
     } else {
-    
+
       $('#rejectionrow1').show();
       $('#rejectionrow12').show();
       $('#remove-remarks-button').show();
@@ -2253,28 +2253,28 @@ samplelang: string = '';
 
   onRemoveAdditionalRejectRow(event: any) {
     if ($('#rejectionrow3').is(':visible')) {
-    
+
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
-   
+      
 
       if ($('#rejectionrow2').is(':visible')) {
-   
+
         $('#rejectionrow2').hide();
         $('#rejectionrow22').hide();
         $('#remove-remarks-button').show();
       } else {
-    
+
         if ($('#rejectionrow1').is(':visible')) {
-         
+      
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-         
+    
         }
       }
     }
@@ -2402,7 +2402,7 @@ samplelang: string = '';
     this.totalofReject.nativeElement.value = summary;
 
     if (ActualDelivered >= summary) {
-  
+     
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -2461,16 +2461,16 @@ samplelang: string = '';
     if (aplenght > adlength) {
       //Do Something programmble
       if (Number(TotalAllowablePercentage) >= Number(ActualDelivered)) {
-       
+
       } else {
         this.AllowablePercentageExceed();
         $('#actual_delivery_output').val('');
       }
     } else {
       if (Number(TotalAllowablePercentage) >= Number(ActualDelivered)) {
-     
+
       } else {
- 
+  
         this.AllowablePercentageExceed();
         $('#actual_delivery_output').val('');
       }

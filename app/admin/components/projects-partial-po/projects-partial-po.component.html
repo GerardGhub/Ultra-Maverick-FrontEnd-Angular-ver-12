@@ -10,7 +10,7 @@
           </a>
         </li>
         <li class="breadcrumb-item dashboardActive" aria-current="page">
-          WH Receiving 
+          WH Receiving
         </li>
       </ol>
     </nav>
@@ -115,7 +115,7 @@
                       <button mat-stroked-button class="editbtnStyle" color="warn" (click)="onCancelClick($event, i)"
                         data-toggle="modal" data-target="#CancelledTransactionModal" data-backdrop="false"
                         data-keyboard="false">
-                        <span class="fa fa-ban"></span> Cancel
+                        <span class="fa fa-ban"></span> Cancel x
                       </button>&nbsp;
                     </ng-container>
                   </td>
@@ -404,44 +404,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="drpNewClientLocation" class="col-sm-4 col-form-label">Client Location</label>
-            <div class="col-sm-8">
-              <select id="drpNewClientLocation" class="form-control" name="ClientLocation"
-                [(ngModel)]="newProject.clientLocationID" required="required" #newClientLocationID="ngModel" [ngClass]="{
-                  'is-invalid':
-                    newClientLocationID.invalid &&
-                    (newClientLocationID.dirty ||
-                      newClientLocationID.touched ||
-                      newForm.submitted),
-                  'is-valid':
-                    newClientLocationID.valid &&
-                    (newClientLocationID.dirty ||
-                      newClientLocationID.touched ||
-                      newForm.submitted)
-                }">
-                <option value="null">Please Select</option>
-                <option *ngFor="let clientLocation of clientLocations | async"
-                  [value]="clientLocation.clientLocationID">
-                  {{ clientLocation.clientLocationName }}
-                </option>
-              </select>
 
-              <span class="text-danger" *ngIf="
-                  newClientLocationID.invalid &&
-                  (newClientLocationID.dirty ||
-                    newClientLocationID.touched ||
-                    newForm.submitted) &&
-                  newClientLocationID.errors?.required
-                ">Please client location</span>
-
-              <span class="text-danger" *ngIf="
-                  newForm.invalid &&
-                  (newForm.dirty || newForm.touched || newForm.submitted) &&
-                  newForm.errors?.clientLocationStatus
-                ">Support projects are not allowed at Tokyo</span>
-            </div>
-          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-warning" data-dismiss="modal" id="newFormCancel">
@@ -1072,47 +1035,7 @@
                 </div>
               </div>
 
-              <div class="form-group row hideObject">
-                <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Client Location</label>
-                <div class="col-sm-8">
-                  <select id="drpEditClientLocation" class="form-control" name="ClientLocation"
-                    [(ngModel)]="editProject.clientLocationID" required="required" #editClientLocationID="ngModel"
-                    [ngClass]="{
-                      'is-invalid':
-                        editClientLocationID.invalid &&
-                        (editClientLocationID.dirty ||
-                          editClientLocationID.touched ||
-                          editForm.submitted),
-                      'is-valid':
-                        editClientLocationID.valid &&
-                        (editClientLocationID.dirty ||
-                          editClientLocationID.touched ||
-                          editForm.submitted)
-                    }">
-                    <option value="null">Please Select</option>
-                    <option *ngFor="let clientLocation of clientLocations | async"
-                      [value]="clientLocation.clientLocationID">
-                      {{ clientLocation.clientLocationName }}
-                    </option>
-                  </select>
-
-                  <span class="text-danger" *ngIf="
-                      editClientLocationID.invalid &&
-                      (editClientLocationID.dirty ||
-                        editClientLocationID.touched ||
-                        editForm.submitted) &&
-                      editClientLocationID.errors?.required
-                    ">Please client location</span>
-
-                  <span class="text-danger" *ngIf="
-                      editForm.invalid &&
-                      (editForm.dirty ||
-                        editForm.touched ||
-                        editForm.submitted) &&
-                      editForm.errors?.clientLocationStatus
-                    ">Support projects are not allowed at Tokyo</span>
-                </div>
-              </div>
+      
             </div>
 
           </div>
@@ -1473,6 +1396,7 @@
           </mat-form-field>
         </div>
         <div class="modal-footer">
+          {{editForm.value | json}}
           <!-- <button mat-stroked-button color="accent" data-dismiss="modal" class="mr-2">Cancel<mat-icon>free_cancellation</mat-icon></button> -->
           <button mat-stroked-button color="warn" data-dismiss="modal" [disabled]="!editProject.cancelled_reason"
             (click)="CancelledPoDetails()">

@@ -72,7 +72,11 @@ export class ProjectsPartialPoService {
   updateProject(existingProject: Project): Observable<Project>
   {
     return this.httpClient.put<Project>("/api/ProjectsPartialPo", existingProject, { responseType: "json" });
+  }
 
+  cancelProject(existingProject: Project): Observable<Project>
+  {
+    return this.httpClient.put<Project>("/api/ProjectsPartialPoCancel", existingProject, { responseType: "json" });
   }
 
   SearchProjects(searchBy: string, searchText: string): Observable<Project[]>

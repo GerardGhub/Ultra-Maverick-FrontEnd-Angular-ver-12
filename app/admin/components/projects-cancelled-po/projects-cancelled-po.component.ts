@@ -263,6 +263,7 @@ any(event: any)
   {
     this.currentPageIndex = pageIndex;
   }
+  
   validateNumber(e: any) {
     let input = String.fromCharCode(e.charCode);
     const reg = /^\d*(?:[.,]\d{1,2})?$/;

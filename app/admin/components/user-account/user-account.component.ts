@@ -19,6 +19,7 @@ import { AspNetRoles } from 'src/app/models/asp-net-roles';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -107,7 +108,7 @@ export class UserAccountComponent implements OnInit {
     private systemCapabilityStatusService: SystemCapabilityStatusService,
     private aspNetRolesService: AspNetRolesService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getLists();
@@ -429,24 +430,31 @@ export class UserAccountComponent implements OnInit {
 
   // add user approver method
   getNewFirstApproverId(id) {
-    alert("Gogo beb 1e");
-    alert(this.approverId1);
+
+    if (typeof (id) == "string") {
+      this.first_approver_name = "";
+    }
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == 2
+      (approver) => approver.employee_number == id
     );
     this.search_approver = result;
 
     result.forEach((approver) => {
       this.first_approver_name = approver.firstName + ' ' + approver.lastName;
-      alert(this.first_approver_name);
+
     });
- 
+
     this.registerUser.patchValue({
       first_approver_name: this.first_approver_name,
     });
   }
 
   getNewSecondApproverId(id) {
+
+    if (typeof (id) == "string") {
+      this.second_approver_name = "";
+    }
+
     const result = this.approverList.filter(
       (approver) => approver.employee_number == id
     );
@@ -462,6 +470,11 @@ export class UserAccountComponent implements OnInit {
   }
 
   getNewThirdApproverId(id) {
+ 
+    if (typeof (id) == "string") {
+      this.third_approver_name = "";
+    }
+
     const result = this.approverList.filter(
       (approver) => approver.employee_number == id
     );
@@ -477,6 +490,11 @@ export class UserAccountComponent implements OnInit {
   }
 
   getNewFourthApproverId(id) {
+
+    if (typeof (id) == "string") {
+      this.fourth_approver_name = "";
+    }
+
     const result = this.approverList.filter(
       (approver) => approver.employee_number == id
     );
@@ -613,13 +631,13 @@ export class UserAccountComponent implements OnInit {
               (error) => {
                 this.errorMessageFromResponse = error.error.message;
                 console.log(this.errorMessageFromResponse);
-            alert("A");
+                alert("A");
                 console.warn(JSON.stringify(error.error.message));
                 const string = JSON.stringify(error.error);
                 const t = JSON.parse(string);
                 console.info(t["First_approver_name"]);
                 // this.errorToaster();
-                this.toastr.error(this.errorMessageFromResponse,  'Message');
+                this.toastr.error(this.errorMessageFromResponse, 'Message');
               }
             );
         }

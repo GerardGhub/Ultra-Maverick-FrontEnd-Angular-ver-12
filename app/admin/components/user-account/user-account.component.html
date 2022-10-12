@@ -25,7 +25,12 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" name="SearchText"
+          <input type="text" 
+          class="form-control "
+          placeholder="Find here...." 
+          id="txtSearchText" 
+          name="SearchText"
+          autocomplete="off"
             [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
         </div>
       </div>
@@ -294,12 +299,15 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Approver 1:</mat-label>
                   <mat-select formControlName="first_approver_id" class="example-full-width"
-                    (change)="getNewFirstApproverId($event.target.value)">
+                    (change)="getNewFirstApproverId($event.target.value)" 
+          
+                    >
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList"  [value]="item.employee_number">{{ item.firstName + " "
                       +
-                      item.lastName | uppercase}}</mat-option>
+                      item.lastName | uppercase}} </mat-option>
                   </mat-select>
+              
                 </mat-form-field>
               </div>
 
@@ -339,7 +347,7 @@
                 </select> -->
 
                 <mat-form-field appearance="outline" class="example-full-width">
-                  <mat-label>Approver 3:</mat-label>
+                  <mat-label>Approver 4:</mat-label>
                   <mat-select formControlName="fourth_approver_id" class="example-full-width"
                     (change)="getNewFourthApproverId($event.target.value)">
                     <mat-option value="">Not Applicable</mat-option>
@@ -350,10 +358,10 @@
                 </mat-form-field>
               </div>
 
-              <input type="text" [hidden]="true" formControlName="first_approver_name">
-              <input type="text" [hidden]="true" formControlName="second_approver_name">
-              <input type="text" [hidden]="true" formControlName="third_approver_name">
-              <input type="text" [hidden]="true" formControlName="fourth_approver_name">
+              <input type="text" [hidden]="false" formControlName="first_approver_name">
+              <input type="text" [hidden]="false" formControlName="second_approver_name">
+              <input type="text" [hidden]="false" formControlName="third_approver_name">
+              <input type="text" [hidden]="false" formControlName="fourth_approver_name">
             </div>
           </div>
 

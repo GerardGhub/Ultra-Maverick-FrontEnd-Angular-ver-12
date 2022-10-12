@@ -206,6 +206,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     });
   }
 
+
   // POPULATE FIELDS ***********************************************************************************************************
   onViewClick(item: any, index: number){
 
@@ -542,7 +543,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
       if (this.Selector == 2) {
         //Approval
-        alert(this.editProject.projectID = this.projects[index].projectID);
+        // alert(this.editProject.projectID = this.projects[index].projectID); october 11 2022
         this.editProject.is_approved_date = this.ToDay;
         this.editProject.is_approved_by = this.activeUser;
         this.editProject.is_approved_XP = this.Activator;
@@ -607,14 +608,10 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     // To calculate the no. of days between two dates
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
-    //To display the final no. of days (result)
-    // document.write("Total number of days between dates  <br>"
-    //                + date1 + "<br> and <br>"
-    //                + date2 + " is: <br> "
-    //                + Difference_In_Days);
+
 
     if (Difference_In_Days < 30) {
-      // alert(Difference_In_Days +"ss");
+
 
       Swal.fire({
         position: 'top-end',
@@ -625,7 +622,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       });
       // return;
     } else {
-      // alert(Difference_In_Days);
+
     }
 
     //Laarnie
@@ -673,13 +670,14 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   UpdateClickDetails() {
-    if (this.editForm.valid) {
+    // if (this.editForm.valid) {
       //Additional Parse Data Master
       // this.ActualRemaining = 450;
       // this.ComputeRemainingQty();
       // this.editProject.actual_remaining_receiving = this.ActualRemaining;
+      // .updateProject(this.editProject)
       this.projetPONearlyExpiryApprovalService
-        .updateProject(this.editProject)
+        .rejectProject(this.editProject)
         .subscribe(
           (response: Project) => {
             var p: Project = new Project();
@@ -761,14 +759,15 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
             this.editProject.canceled_by = null;
             this.editProject.cancelled_reason = null;
             this.showUpdatingSuccess();
-            this.ngOnInit();
+            this.getList();
+            // this.ngOnInit();
             $('#editFormCancel').trigger('click');
           },
           (error) => {
             console.log(error);
           }
         );
-    }
+    // } sample Gerard
   }
 
   ApprovedClickDetails() {
@@ -958,7 +957,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-        // alert(this.editProject.projectID);
+    
         this.ApprovedClickDetails();
       }
     });
@@ -1298,16 +1297,15 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   onAddAdditionalRejectRow(event: any) {
     if ($('#rejectionrow1').is(':visible')) {
-      // alert("The paragraph  is visible.");
+  
 
       if ($('#rejectionrow2').is(':visible')) {
-        // alert("The paragraph  is visible.");
+
         if ($('#rejectionrow3').is(':visible')) {
-          // alert("The paragraph  is visible.");
-          // alert("Limit  is exceed!");
+        
           this.showLimitonAddingRejection();
         } else {
-          // alert("The paragraph  is hidden.");
+  
           $('#rejectionrow3').show();
           $('#rejectionrow32').show();
           $('#total-reject').show();
@@ -1315,14 +1313,14 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           $('#AddRejectBtn').hide();
         }
       } else {
-        // alert("The paragraph  is hidden.");
+  
         $('#rejectionrow2').show();
         $('#rejectionrow22').show();
         $('#total-reject').show();
         $('#total-confirm-reject').show();
       }
     } else {
-      // alert("The paragraph  is hidden.");
+     
       $('#rejectionrow1').show();
       $('#rejectionrow12').show();
       $('#remove-remarks-button').show();
@@ -1330,38 +1328,33 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       $('#total-confirm-reject').show();
     }
 
-    // $("#rejectionrow2").show();
-    // $("#rejectionrow22").show();
 
-    // $("#rejectionrow3").show();
-    // $("#rejectionrow32").show();
-    // alert("sds");
   }
 
   onRemoveAdditionalRejectRow(event: any) {
     if ($('#rejectionrow3').is(':visible')) {
-      // alert("The paragraph  is visible.");
+    
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
-      // alert("The paragraph  is hidden.");
+ 
 
       if ($('#rejectionrow2').is(':visible')) {
-        // alert("The paragraph  is visible.");
+
         $('#rejectionrow2').hide();
         $('#rejectionrow22').hide();
         $('#remove-remarks-button').show();
       } else {
-        // alert("The paragraph  is hidden.");
+     
         if ($('#rejectionrow1').is(':visible')) {
-          // alert("The paragraph  is visible.");
+         
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-          // alert("The paragraph  is hidden.");
+         
         }
       }
     }
@@ -1389,11 +1382,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     // console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 1");
+  
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1415,11 +1408,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 2");
+  
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+    
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1483,11 +1476,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 3");
+    
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+   
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1531,19 +1524,13 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       this.TotalAllowablePercentage.nativeElement.value;
     const ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
     const QtyOrder = this.QtyOrdered.nativeElement.value;
-    // const TotalAllowablePercentage = this.TotalAllowablePercentage.nativeElement.value;
 
-    // const summary = ExpectedDelivery * ActivatedAllowablePercentage;
-    // console.log(summary);
-
-    // const summary = ExpectedDelivery * 1.10;
-    // this.TotalAllowablePercentage.nativeElement.value = summary;
     this.ActualRemaining = QtyOrder - ActualDelivered;
 
     if (ActualDelivered > TotalAllowablePercentage) {
       this.AllowablePercentageExceed();
     } else {
-      // alert("FEMALE");
+;
     }
   }
 
@@ -1576,7 +1563,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   ConfirmNoofReject(event: any) {
-    // alert("You Press a key in the Keyboard");
+
 
     if (this.confirmReject.nativeElement.value == '') {
       this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
@@ -1585,9 +1572,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         this.totalofReject.nativeElement.value ==
         this.confirmReject.nativeElement.value
       ) {
-        // this.rejectNo3.nativeElement.value="0";
-        // console.warn("Empty Quantity in the textInput! ")
-        // this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = "Pexa Marian";
+       
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
       } else {
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML =

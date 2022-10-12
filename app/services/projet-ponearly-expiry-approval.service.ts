@@ -83,7 +83,11 @@ export class ProjetPONearlyExpiryApprovalService {
     return this.httpClient.put<Project>("/api/ProjectsPartialPo", existingProject, { responseType: "json" });
     
   }
-
+  rejectProject(existingProject: Project): Observable<Project>
+  {
+    return this.httpClient.put<Project>("/api/ProjectsPartialPoCancel", existingProject, { responseType: "json" });
+    
+  }
 
 
 }

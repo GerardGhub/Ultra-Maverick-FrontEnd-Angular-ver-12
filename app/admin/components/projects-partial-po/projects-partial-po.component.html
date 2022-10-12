@@ -115,7 +115,7 @@
                       <button mat-stroked-button class="editbtnStyle" color="warn" (click)="onCancelClick($event, i)"
                         data-toggle="modal" data-target="#CancelledTransactionModal" data-backdrop="false"
                         data-keyboard="false">
-                        <span class="fa fa-ban"></span> Cancel x
+                        <span class="fa fa-ban"></span> Cancel
                       </button>&nbsp;
                     </ng-container>
                   </td>
@@ -1396,7 +1396,7 @@
           </mat-form-field>
         </div>
         <div class="modal-footer">
-          {{editForm.value | json}}
+          <!-- {{editForm.value | json}} -->
           <!-- <button mat-stroked-button color="accent" data-dismiss="modal" class="mr-2">Cancel<mat-icon>free_cancellation</mat-icon></button> -->
           <button mat-stroked-button color="warn" data-dismiss="modal" [disabled]="!editProject.cancelled_reason"
             (click)="CancelledPoDetails()">

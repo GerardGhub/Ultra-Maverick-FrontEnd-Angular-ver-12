@@ -85,6 +85,8 @@ export class UserAccountComponent implements OnInit {
   approver = false;
   requestor = false;
 
+  approverId1: number;
+
   checkboxes: any[] = [
     { name: 'cbApprover', value: 'APPROVER', checked: false },
     { name: 'cbRequestor', value: 'REQUESTOR', checked: false },
@@ -135,6 +137,7 @@ export class UserAccountComponent implements OnInit {
         this.showLoading = false;
         this.calculateNoOfPages();
         console.log(response);
+        console.warn(response);
       });
   }
 
@@ -419,17 +422,25 @@ export class UserAccountComponent implements OnInit {
     // alert('Activated');
   }
 
+  validateRejectedStatus(event: any) {
+    alert(event);
+  }
+
+
   // add user approver method
   getNewFirstApproverId(id) {
+    alert("Gogo beb 1e");
+    alert(this.approverId1);
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.employee_number == 2
     );
     this.search_approver = result;
 
     result.forEach((approver) => {
       this.first_approver_name = approver.firstName + ' ' + approver.lastName;
+      alert(this.first_approver_name);
     });
-
+ 
     this.registerUser.patchValue({
       first_approver_name: this.first_approver_name,
     });
@@ -593,7 +604,7 @@ export class UserAccountComponent implements OnInit {
                 this.AspNetUsers[this.editIndex] = response;
                 this.successMessage = 'Registered Successfully!';
                 this.registerUser.reset();
-
+                alert("As");
                 console.log(response);
 
                 $('#closeRegistrationModal').trigger('click');
@@ -601,8 +612,14 @@ export class UserAccountComponent implements OnInit {
               },
               (error) => {
                 this.errorMessageFromResponse = error.error.message;
-                console.log(error.error.message);
-                this.errorToaster();
+                console.log(this.errorMessageFromResponse);
+            alert("A");
+                console.warn(JSON.stringify(error.error.message));
+                const string = JSON.stringify(error.error);
+                const t = JSON.parse(string);
+                console.info(t["First_approver_name"]);
+                // this.errorToaster();
+                this.toastr.error(this.errorMessageFromResponse,  'Message');
               }
             );
         }

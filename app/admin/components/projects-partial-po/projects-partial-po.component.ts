@@ -801,22 +801,21 @@ export class ProjectsPartialPoComponent implements OnInit {
   }
 
   UpdateClickDetails() {
-    alert('dalawa?')
+   
     // if (this.editForm.valid) {
 
-      alert('hello  Gerard SIngian cancel?')
+ 
       // console.log(this.editProject.projectID);
-alert(this.editProject.projectID);
-alert(this.editProject.cancelled_reason);
+
       this.ComputeRemainingQty();
       this.editProject.actual_remaining_receiving = this.ActualRemaining;
       this.editProject.is_activated = this.Deactivator;
-      alert("Hello");
+   this.editProject.canceled_by = this.activeUser;
       this.projectsPartialPoService.cancelProject(this.editProject).subscribe(
         (response: Project) => {
           var p: Project = new Project();
           p.projectID = response.projectID;
-alert(response.projectID);
+
      
           p.projectName = response.projectName;
           p.dateOfStart = response.dateOfStart;
@@ -857,7 +856,7 @@ alert(response.projectID);
 
           // this.received_by.nativeElement.value = this.loginService.currentUserName;
           this.projects[this.editIndex] = p;
-          // this.UpdateMasterTransactionsActualReceivingofCancel();
+          this.UpdateMasterTransactionsActualReceivingofCancel();
           // this.InsertANewPartialReceiving();
           this.editProject.projectID = null;
           this.editProject.projectName = null;
@@ -1283,7 +1282,7 @@ alert(response.projectID);
       confirmButtonText: 'Yes!',
     }).then((result) => {
       if (result.isConfirmed) {
-        alert('una no!')
+        // alert('una no!')
         this.UpdateClickDetails();
         this.getList();
       }
@@ -1468,7 +1467,7 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
       //Calling The Projects for Qty Binding Servo IT Solutions
       this.PoNumberBinding = this.projects[index].po_number;
       // this.PoNumberChild.nativeElement.value;
-alert(this.PoNumberBinding);
+// alert(this.PoNumberBinding);
       
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
         'Po_number',

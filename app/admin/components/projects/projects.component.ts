@@ -242,7 +242,25 @@ samplelang: string = '';
 
   }
 
+  any(event: any)
+  {
+    this.getPOrecievingList();
 
+  }
+  any2(event: any)
+  {
+    this.important();
+  }
+  any3(event: any)
+  {
+    this.getChecklist();
+
+  }
+  any4(event: any)
+  {
+    this.getPOcancelledList();
+
+  }
 
 
 
@@ -1037,6 +1055,7 @@ samplelang: string = '';
 
                   $('#editFormCancel').trigger('click');
                   this.UpdateClickDetails();
+                  
                 },
                 (error) => {
                   this.errorMessage = error.error.message;
@@ -1076,6 +1095,7 @@ samplelang: string = '';
 
                       $('#editFormCancel').trigger('click');
                       this.UpdateClickDetails();
+                    
                     },
                     (error) => {
                       this.errorMessage = error.error.message;
@@ -1113,6 +1133,7 @@ samplelang: string = '';
 
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
+                   
                       },
                       (error) => {
                         this.errorMessage = error.error.message;
@@ -1147,6 +1168,7 @@ samplelang: string = '';
                     
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
+                   
                       },
                       (error) => {
                         this.errorMessage = error.error.message;
@@ -1166,6 +1188,9 @@ samplelang: string = '';
     }
   }
 
+
+
+
   //Computaion
   ComputeRemainingQty() {
     const ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
@@ -1176,14 +1201,11 @@ samplelang: string = '';
     const totalRejection = this.confirmReject.nativeElement.value;
 
     if (QtyOrder == ActualRemainingReceiving) {
-      // this.ActualRemaining = QtyOrder - ActualDelivered;
-      // this.ActualRemaining = ActualRemainingReceiving - totalRejection;
+
 
       this.ActualRemaining = ActualDelivered - totalRejection;
       this.ActualRemaining = ActualRemainingReceiving - this.ActualRemaining;
     } else {
-      // this.ActualRemaining = ActualRemainingReceiving - ActualDelivered;
-      // this.ActualRemaining = ActualRemainingReceiving - totalRejection;
 
       this.ActualRemaining = ActualDelivered - totalRejection;
       this.ActualRemaining = ActualRemainingReceiving - this.ActualRemaining;
@@ -1269,18 +1291,21 @@ samplelang: string = '';
           this.editProject.count_of_reject_two = null;
           this.editProject.count_of_reject_three = null;
           this.editProject.total_of_reject_mat = null;
-
+          this.getPOrecievingList();
           this.showReceivedSuccess();
-          // this.getPOrecievingList();
+         console.log("Received Item");
+    
 
           $('#editFormCancel').trigger('click');
-          this.ngOnInit();
+          
         },
         (error) => {
           console.log(error);
         }
       );
     }
+    console.log("Received Item 2 ");
+   
   }
 
   InsertPartialDatainMasterTable() {
@@ -1315,6 +1340,7 @@ samplelang: string = '';
         p.received_by_QA = response.received_by_QA;
 
         this.projects.push(p);
+        // alert("Gerard 1");
       },
       (error) => {
         console.log(error);

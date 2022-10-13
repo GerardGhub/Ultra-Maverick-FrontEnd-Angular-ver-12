@@ -122,6 +122,8 @@ export class UserAccountComponent implements OnInit {
       this.systemCapabilityStatusService.getSystemCapabilityStatus();
   }
 
+
+
   successToaster() {
     this.toastr.success(this.successMessage, 'Message');
   }
@@ -154,6 +156,8 @@ export class UserAccountComponent implements OnInit {
       this.approverList = data;
     });
   }
+  //Item Description
+  @ViewChild('ItemDesc') ItemDesc: ElementRef;
 
   // Reactive Forms *********************************************************************
   reactiveForms() {
@@ -416,7 +420,27 @@ export class UserAccountComponent implements OnInit {
 
   // Active or InActive *******************************************************************
   onClickDeActivate(item: any) {
-    // alert('Deactivated');
+  
+  
+      var Item = this.ItemDesc.nativeElement.value;
+      Swal.fire({
+        title: 'Are you sure you want to reject the Transaction?',
+        text: Item,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // this.ApprovedClickDetails();
+        }
+      });
+  
+    
+    
+  
+  
   }
 
   onClickActivate(item: any) {
@@ -622,7 +646,7 @@ export class UserAccountComponent implements OnInit {
                 this.AspNetUsers[this.editIndex] = response;
                 this.successMessage = 'Registered Successfully!';
                 this.registerUser.reset();
-                alert("As");
+             
                 console.log(response);
 
                 $('#closeRegistrationModal').trigger('click');
@@ -631,7 +655,7 @@ export class UserAccountComponent implements OnInit {
               (error) => {
                 this.errorMessageFromResponse = error.error.message;
                 console.log(this.errorMessageFromResponse);
-                alert("A");
+            
                 console.warn(JSON.stringify(error.error.message));
                 const string = JSON.stringify(error.error);
                 const t = JSON.parse(string);

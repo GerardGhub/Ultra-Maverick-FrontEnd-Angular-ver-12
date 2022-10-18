@@ -1277,7 +1277,12 @@ export class ProjectsComponent implements OnInit, OnChanges {
       );
     }
     console.log("Received Item 2 ");
+ 
 
+    setTimeout(() => {
+    
+      this.getPOrecievingList();
+    }, 1000);
   }
 
   InsertPartialDatainMasterTable() {

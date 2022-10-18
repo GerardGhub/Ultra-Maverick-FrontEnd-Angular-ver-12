@@ -73,7 +73,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     console.log(this.parent_id);
   }
 
-  someMethod(event) {
+  ChildMethod(event) {
     // console.log("Pure CASS");
 
     this.ngOnInit();
@@ -2314,7 +2314,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
       console.warn('Empty Quantity in the textInput! ');
     }
 
-    // console.log(event.target.value);
+
 
     var a = this.rejectNo1.nativeElement.value;
     var b = this.rejectNo2.nativeElement.value;
@@ -2322,7 +2322,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     var ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
     var TotalReject = this.totalofReject.nativeElement.value;
     var summary = +a + +b + +c;
-    // console.log(summary);
+
     this.totalofReject.nativeElement.value = summary;
 
     if (ActualDelivered >= summary) {
@@ -2392,7 +2392,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   onChangeEventReject3(event: any) {
     if (this.rejectNo3.nativeElement.value == '') {
       this.rejectNo3.nativeElement.value = '0';
-      // console.warn("Empty Quantity in the textInput! ")
+
     }
 
     var a = this.rejectNo1.nativeElement.value;
@@ -2401,7 +2401,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     var ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
     var TotalReject = this.totalofReject.nativeElement.value;
     var summary = +a + +b + +c;
-    // console.log(summary);
+
     this.totalofReject.nativeElement.value = summary;
 
     if (ActualDelivered >= summary) {

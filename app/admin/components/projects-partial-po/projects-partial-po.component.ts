@@ -903,6 +903,10 @@ export class ProjectsPartialPoComponent implements OnInit {
         }
       );
     // }
+
+    setTimeout(() => {
+      this.getList();
+    }, 1000);
   }
 
   //Insert as Partials
@@ -1284,7 +1288,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       if (result.isConfirmed) {
         // alert('una no!')
         this.UpdateClickDetails();
-        this.getList();
+   
       }
     });
   }

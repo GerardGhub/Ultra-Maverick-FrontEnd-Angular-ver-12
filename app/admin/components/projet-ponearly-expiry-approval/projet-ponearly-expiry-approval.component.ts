@@ -46,10 +46,10 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     private allowablePercentageService: AllowablePercentageService,
     private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService,
     private projetPONearlyExpiryApprovalService: ProjetPONearlyExpiryApprovalService,
-    private partialPOService : PartialPoService,
-    private nearlyExpiryService : NearlyExpiryService,
+    private partialPOService: PartialPoService,
+    private nearlyExpiryService: NearlyExpiryService,
     private formBuilder: FormBuilder,
-  ) {}
+  ) { }
 
 
   projects: any = [];
@@ -180,7 +180,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   // REACTIVE FORMS ************************************************************************************************************
-  reactiveForms(){
+  reactiveForms() {
     this.viewForm = this.formBuilder.group({
       trans_ID: this.formBuilder.control(null, [Validators.required]),
       item_code: this.formBuilder.control(null, [Validators.required]).disable(),
@@ -208,7 +208,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
 
   // POPULATE FIELDS ***********************************************************************************************************
-  onViewClick(item: any, index: number){
+  onViewClick(item: any, index: number) {
 
     this.totalRejectMaterial = item.total_of_reject_mat;
 
@@ -226,11 +226,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
       expected_delivery: item.expected_delivery,
       remaining_needed: item.actual_remaining_receiving,
-      po_date:  moment(new Date(item.po_date)).format('MM/DD/YYYY'),
-      pr_date: moment(new Date(item.pr_date )).format('MM/DD/YYYY'),
+      po_date: moment(new Date(item.po_date)).format('MM/DD/YYYY'),
+      pr_date: moment(new Date(item.pr_date)).format('MM/DD/YYYY'),
 
       uom: item.qty_uom,
-      expiry_date: moment(new Date(item.expiration_date )).format('MM/DD/YYYY'),
+      expiry_date: moment(new Date(item.expiration_date)).format('MM/DD/YYYY'),
       actual_delivered: item.actual_delivery,
       total_reject: item.total_of_reject_mat
     })
@@ -243,10 +243,10 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   // CRUD **********************************************************************************************************************
-  getList(){
+  getList() {
     this.nearlyExpiryService.getList()
       .subscribe((response) => {
-        if(response){
+        if (response) {
           this.projects = response;
           this.showLoading = false;
           this.calculateNoOfPages();
@@ -582,11 +582,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     //To display the final no. of days (result)
     document.write(
       'Total number of days between dates  <br>' +
-        date1 +
-        '<br> and <br>' +
-        date2 +
-        ' is: <br> ' +
-        Difference_In_Days
+      date1 +
+      '<br> and <br>' +
+      date2 +
+      ' is: <br> ' +
+      Difference_In_Days
     );
 
     return;
@@ -671,103 +671,107 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   UpdateClickDetails() {
     // if (this.editForm.valid) {
-      //Additional Parse Data Master
-      // this.ActualRemaining = 450;
-      // this.ComputeRemainingQty();
-      // this.editProject.actual_remaining_receiving = this.ActualRemaining;
-      // .updateProject(this.editProject)
-      this.projetPONearlyExpiryApprovalService
-        .rejectProject(this.editProject)
-        .subscribe(
-          (response: Project) => {
-            var p: Project = new Project();
-            p.projectID = response.projectID;
-            p.projectName = response.projectName;
-            p.dateOfStart = response.dateOfStart;
-            p.teamSize = response.teamSize;
-            p.clientLocation = response.clientLocation;
-            p.active = response.active;
-            p.is_activated = response.is_activated;
-            p.clientLocationID = response.clientLocationID;
-            p.status = response.status;
-            p.supplier = response.supplier;
-            p.item_code = response.item_code;
-            p.item_description = response.item_description;
-            p.po_number = response.po_number;
-            p.po_date = response.po_date;
-            p.pr_number = response.pr_number;
-            p.pr_date = response.pr_date;
-            p.qty_order = response.qty_order;
-            p.qty_uom = response.qty_uom;
-            p.mfg_date = response.mfg_date;
-            p.expiration_date = response.expiration_date;
-            p.expected_delivery = response.expected_delivery;
-            p.actual_delivery = response.actual_delivery;
-            p.expected_delivery = response.expected_delivery;
-            // this.ActualRemaining = response.actual_remaining_receiving;
-            // p.received_by_QA = response.received_by_QA;
-            // // this.activeUser = response.received_by_QA;
-            p.status_of_reject_one = response.status_of_reject_one;
-            p.status_of_reject_two = response.status_of_reject_two;
-            p.status_of_reject_three = response.status_of_reject_three;
-            p.count_of_reject_one = response.count_of_reject_one;
-            p.count_of_reject_two = response.count_of_reject_two;
-            p.count_of_reject_three = response.count_of_reject_three;
-            p.total_of_reject_mat = response.total_of_reject_mat;
-            //Section 1
-            //A
+    //Additional Parse Data Master
+    // this.ActualRemaining = 450;
+    // this.ComputeRemainingQty();
+    // this.editProject.actual_remaining_receiving = this.ActualRemaining;
+    // .updateProject(this.editProject)
+    this.projetPONearlyExpiryApprovalService
+      .rejectProject(this.editProject)
+      .subscribe(
+        (response: Project) => {
+          var p: Project = new Project();
+          p.projectID = response.projectID;
+          p.projectName = response.projectName;
+          p.dateOfStart = response.dateOfStart;
+          p.teamSize = response.teamSize;
+          p.clientLocation = response.clientLocation;
+          p.active = response.active;
+          p.is_activated = response.is_activated;
+          p.clientLocationID = response.clientLocationID;
+          p.status = response.status;
+          p.supplier = response.supplier;
+          p.item_code = response.item_code;
+          p.item_description = response.item_description;
+          p.po_number = response.po_number;
+          p.po_date = response.po_date;
+          p.pr_number = response.pr_number;
+          p.pr_date = response.pr_date;
+          p.qty_order = response.qty_order;
+          p.qty_uom = response.qty_uom;
+          p.mfg_date = response.mfg_date;
+          p.expiration_date = response.expiration_date;
+          p.expected_delivery = response.expected_delivery;
+          p.actual_delivery = response.actual_delivery;
+          p.expected_delivery = response.expected_delivery;
+          // this.ActualRemaining = response.actual_remaining_receiving;
+          // p.received_by_QA = response.received_by_QA;
+          // // this.activeUser = response.received_by_QA;
+          p.status_of_reject_one = response.status_of_reject_one;
+          p.status_of_reject_two = response.status_of_reject_two;
+          p.status_of_reject_three = response.status_of_reject_three;
+          p.count_of_reject_one = response.count_of_reject_one;
+          p.count_of_reject_two = response.count_of_reject_two;
+          p.count_of_reject_three = response.count_of_reject_three;
+          p.total_of_reject_mat = response.total_of_reject_mat;
+          //Section 1
+          //A
 
 
-            // this.received_by.nativeElement.value = this.loginService.currentUserName;
-            this.projects[this.editIndex] = p;
-            this.UpdateMasterTransactionsActualReceivingofCancel();
-            // this.InsertANewPartialReceiving();
-            this.editProject.projectID = null;
-            this.editProject.projectName = null;
-            this.editProject.dateOfStart = null;
-            this.editProject.teamSize = null;
-            this.editProject.supplier = null;
-            this.editProject.active = false;
-            this.editProject.clientLocationID = null;
-            this.editProject.status = null;
-            this.editProject.item_code = null;
-            this.editProject.item_description = null;
-            this.editProject.po_number = null;
-            this.editProject.po_date = null;
-            this.editProject.pr_number = null;
-            this.editProject.pr_date = null;
-            this.editProject.qty_order = null;
-            this.editProject.qty_uom = null;
-            this.editProject.mfg_date = null;
-            this.editProject.expiration_date = null;
-            this.editProject.expected_delivery = null;
-            this.editProject.actual_delivery = null;
-            this.editProject.actual_remaining_receiving = null;
-            this.editProject.received_by_QA = null;
-            this.editProject.status_of_reject_one = null;
-            this.editProject.status_of_reject_two = null;
-            this.editProject.status_of_reject_three = null;
-            this.editProject.count_of_reject_one = null;
-            this.editProject.count_of_reject_two = null;
-            this.editProject.count_of_reject_three = null;
-            this.editProject.total_of_reject_mat = null;
-            //Section A
-            //A
+          // this.received_by.nativeElement.value = this.loginService.currentUserName;
+          this.projects[this.editIndex] = p;
+          this.UpdateMasterTransactionsActualReceivingofCancel();
+          // this.InsertANewPartialReceiving();
+          this.editProject.projectID = null;
+          this.editProject.projectName = null;
+          this.editProject.dateOfStart = null;
+          this.editProject.teamSize = null;
+          this.editProject.supplier = null;
+          this.editProject.active = false;
+          this.editProject.clientLocationID = null;
+          this.editProject.status = null;
+          this.editProject.item_code = null;
+          this.editProject.item_description = null;
+          this.editProject.po_number = null;
+          this.editProject.po_date = null;
+          this.editProject.pr_number = null;
+          this.editProject.pr_date = null;
+          this.editProject.qty_order = null;
+          this.editProject.qty_uom = null;
+          this.editProject.mfg_date = null;
+          this.editProject.expiration_date = null;
+          this.editProject.expected_delivery = null;
+          this.editProject.actual_delivery = null;
+          this.editProject.actual_remaining_receiving = null;
+          this.editProject.received_by_QA = null;
+          this.editProject.status_of_reject_one = null;
+          this.editProject.status_of_reject_two = null;
+          this.editProject.status_of_reject_three = null;
+          this.editProject.count_of_reject_one = null;
+          this.editProject.count_of_reject_two = null;
+          this.editProject.count_of_reject_three = null;
+          this.editProject.total_of_reject_mat = null;
+          //Section A
+          //A
 
-            //Add
-            this.editProject.cancelled_date = null;
-            this.editProject.canceled_by = null;
-            this.editProject.cancelled_reason = null;
-            this.showUpdatingSuccess();
-            this.getList();
-            // this.ngOnInit();
-            $('#editFormCancel').trigger('click');
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+          //Add
+          this.editProject.cancelled_date = null;
+          this.editProject.canceled_by = null;
+          this.editProject.cancelled_reason = null;
+          this.showUpdatingSuccess();
+
+          // this.ngOnInit();
+          $('#editFormCancel').trigger('click');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     // } sample Gerard
+
+    setTimeout(() => {
+      this.getList();
+    }, 1000);
   }
 
   ApprovedClickDetails() {
@@ -780,22 +784,15 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         .subscribe(
           (response: Project) => {
             var p: Project = new Project();
-        
-            p.projectID = this.editProject.projectID    
+
+            p.projectID = this.editProject.projectID
             //Approval
             p.is_approved_XP = response.is_approved_XP;
             p.is_approved_by = response.is_approved_by;
             p.is_approved_date = response.is_approved_date;
-
-
             this.projects[this.editIndex] = p;
-     
+
             this.editProject.projectID = null;
-
-            //Section A
-
-
-
             //Approval
             this.editProject.is_approved_XP = null;
             this.editProject.is_approved_by = null;
@@ -809,6 +806,9 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           }
         );
     }
+    setTimeout(() => {
+      this.getList();
+    }, 900);
   }
 
   //Insert as Partial
@@ -957,7 +957,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-    
+
         this.ApprovedClickDetails();
       }
     });
@@ -1031,10 +1031,10 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       this.editProject.total_of_reject_mat =
         this.projects[index].total_of_reject_mat;
       //Section 1
-  
+
       //Calling The Projects for Qty Binding Servo IT Solutions
       this.PoNumberBinding = this.projects[index].po_number;
-  
+
       // this.editProject.daysBeforeExpired = this.projects[index].daysBeforeExpired;
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
         'Po_number',
@@ -1047,87 +1047,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   UpdateDeactivatedTransactions() {
     this.UpdateClickDetails();
-    // this.projetPONearlyExpiryApprovalService.updateProject(this.editProject).subscribe((response: Project) =>
-    // {
 
-    //   var p: Project = new Project();
-    //   p.projectID = response.projectID;
-    //   p.projectName = response.projectName;
-    //   p.dateOfStart = response.dateOfStart;
-    //   p.teamSize = response.teamSize;
-    //   p.clientLocation = response.clientLocation;
-    //   p.active = response.active;
-    //   // p.is_activated = response.is_activated;
-    //   p.clientLocationID = response.clientLocationID;
-    //   p.status = response.status;
-    //   p.supplier = response.supplier;
-    //   p.item_code = response.item_code;
-    //   p.item_description = response.item_description;
-    //   p.po_number = response.po_number;
-    //   p.po_date = response.po_date;
-    //   p.pr_number = response.pr_number;
-    //   p.pr_date = response.pr_date;
-    //   p.qty_order = response.qty_order;
-    //   p.qty_uom = response.qty_uom;
-    //   p.mfg_date = response.mfg_date;
-    //   p.expiration_date = response.expiration_date;
-    //   p.expected_delivery = response.expected_delivery;
-    //   p.actual_delivery = response.actual_delivery;
-    //   p.expected_delivery = response.expected_delivery;
-    //   // p.actual_remaining_receiving = response.actual_remaining_receiving; 9/30/2021
-    //   // p.received_by_QA = response.received_by_QA;
-    //   // // this.activeUser = response.received_by_QA;
-    //   p.status_of_reject_one = response.status_of_reject_one;
-    //   p.status_of_reject_two = response.status_of_reject_two;
-    //   p.status_of_reject_three = response.status_of_reject_three;
-    //   p.count_of_reject_one = response.count_of_reject_one;
-    //   p.count_of_reject_two = response.count_of_reject_two;
-    //   p.count_of_reject_three = response.count_of_reject_three;
-    //   p.total_of_reject_mat = response.total_of_reject_mat;
-    //   //Section 1
-
-    //   // this.received_by.nativeElement.value = this.loginService.currentUserName;
-    //   this.projects[this.editIndex] = p;
-    //   this.UpdateMasterTransactionsActualReceivingofCancel();
-    //   this.editProject.projectID = null;
-    //   this.editProject.projectName = null;
-    //   this.editProject.dateOfStart = null;
-    //   this.editProject.teamSize = null;
-    //   this.editProject.supplier = null;
-    //   this.editProject.active = false;
-    //   this.editProject.clientLocationID = null;
-    //   this.editProject.status = null;
-    //   this.editProject.item_code = null;
-    //   this.editProject.item_description = null;
-    //   this.editProject.po_number = null;
-    //   this.editProject.po_date = null;
-    //   this.editProject.pr_number = null;
-    //   this.editProject.pr_date = null;
-    //   this.editProject.qty_order = null;
-    //   this.editProject.qty_uom = null;
-    //   this.editProject.mfg_date = null;
-    //   this.editProject.expiration_date = null;
-    //   this.editProject.expected_delivery = null;
-    //   this.editProject.actual_delivery = null;
-    //   this.editProject.actual_remaining_receiving = null;
-    //   this.editProject.received_by_QA = null;
-    //   this.editProject.is_activated = null;
-    //   this.editProject.status_of_reject_one = null;
-    //   this.editProject.status_of_reject_two = null;
-    //   this.editProject.status_of_reject_three = null;
-    //   this.editProject.count_of_reject_one = null;
-    //   this.editProject.count_of_reject_two = null;
-    //   this.editProject.count_of_reject_three = null;
-    //   this.editProject.total_of_reject_mat = null;
-
-    //  this.showDeactivatedSuccess();
-    //  this.ngOnInit();
-    //   // $("#editFormCancel").trigger("click");
-    // },
-    //   (error) =>
-    //   {
-    //     console.log(error);
-    //   });
   }
 
   UpdateMasterTransactionsActualReceivingofCancel() {
@@ -1261,7 +1181,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         this.deleteProject.e_remarks = null;
         //Section 2
         //A
- 
+
 
         this.calculateNoOfPages();
       },
@@ -1297,15 +1217,15 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   onAddAdditionalRejectRow(event: any) {
     if ($('#rejectionrow1').is(':visible')) {
-  
+
 
       if ($('#rejectionrow2').is(':visible')) {
 
         if ($('#rejectionrow3').is(':visible')) {
-        
+
           this.showLimitonAddingRejection();
         } else {
-  
+
           $('#rejectionrow3').show();
           $('#rejectionrow32').show();
           $('#total-reject').show();
@@ -1313,14 +1233,14 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           $('#AddRejectBtn').hide();
         }
       } else {
-  
+
         $('#rejectionrow2').show();
         $('#rejectionrow22').show();
         $('#total-reject').show();
         $('#total-confirm-reject').show();
       }
     } else {
-     
+
       $('#rejectionrow1').show();
       $('#rejectionrow12').show();
       $('#remove-remarks-button').show();
@@ -1333,11 +1253,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   onRemoveAdditionalRejectRow(event: any) {
     if ($('#rejectionrow3').is(':visible')) {
-    
+
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
- 
+
 
       if ($('#rejectionrow2').is(':visible')) {
 
@@ -1345,16 +1265,16 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         $('#rejectionrow22').hide();
         $('#remove-remarks-button').show();
       } else {
-     
+
         if ($('#rejectionrow1').is(':visible')) {
-         
+
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-         
+
         }
       }
     }
@@ -1382,7 +1302,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     // console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-  
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
@@ -1399,7 +1319,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     }
 
     console.log(event.target.value);
-   // this.totalofReject.nativeElement.value = this.rejectNo2.nativeElement.value + this.totalofReject.nativeElement.value;
+    // this.totalofReject.nativeElement.value = this.rejectNo2.nativeElement.value + this.totalofReject.nativeElement.value;
     const a = this.rejectNo1.nativeElement.value;
     const b = this.rejectNo2.nativeElement.value;
     const c = this.rejectNo3.nativeElement.value;
@@ -1408,11 +1328,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-  
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-    
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1454,7 +1374,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         if (result.isConfirmed) {
           this.ExpiryDateChild.nativeElement.value = '';
           this.ExpiryDateChild.nativeElement.focus();
-    
+
         }
       });
     } else {
@@ -1476,11 +1396,11 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-   
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1530,7 +1450,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     if (ActualDelivered > TotalAllowablePercentage) {
       this.AllowablePercentageExceed();
     } else {
-;
+      ;
     }
   }
 
@@ -1572,7 +1492,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         this.totalofReject.nativeElement.value ==
         this.confirmReject.nativeElement.value
       ) {
-       
+
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
       } else {
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML =

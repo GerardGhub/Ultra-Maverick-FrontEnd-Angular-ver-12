@@ -118,7 +118,7 @@ export class WhRejectionApprovalComponent implements OnInit {
     private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService,
     private whRejectionApprovalService: WhRejectionApprovalService,
     private tblDryPartialReceivingRejectionService: TblDryPartialReceivingRejectionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getList();
@@ -142,7 +142,7 @@ export class WhRejectionApprovalComponent implements OnInit {
   }
 
 
-  getList(){
+  getList() {
     this.whRejectionApprovalService.getAllProjectsRejectforApproval()
       .subscribe((response: Project[]) => {
         this.projects = response;
@@ -150,7 +150,7 @@ export class WhRejectionApprovalComponent implements OnInit {
         this.showLoading = false;
         this.calculateNoOfPages();
         this.totalPoRowCount = response.length;
-    });
+      });
   }
 
   jqueryClearanceTextBox() {
@@ -705,11 +705,11 @@ export class WhRejectionApprovalComponent implements OnInit {
     //To display the final no. of days (result)
     document.write(
       'Total number of days between dates  <br>' +
-        date1 +
-        '<br> and <br>' +
-        date2 +
-        ' is: <br> ' +
-        Difference_In_Days
+      date1 +
+      '<br> and <br>' +
+      date2 +
+      ' is: <br> ' +
+      Difference_In_Days
     );
 
     return;
@@ -799,140 +799,141 @@ export class WhRejectionApprovalComponent implements OnInit {
   UpdateClickDetails() {
 
     // if (this.editForm.valid) {
-   
-      this.editProject.is_wh_reject_approval_by = this.activeUser;
-      this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
-        (response: Project) => {
-          var p: Project = new Project();
-          p.projectID = response.projectID;
-          p.is_wh_reject_approval_by =  response.is_wh_reject_approval_by;
-        
-  
-          this.projects[this.editIndex] = p;
-          this.UpdateMasterTransactionsActualReceivingofCancel();
 
-    
-          //Add
-
-          this.showApprovedSuccess();
-          this.ngOnInit();
-          $('#editFormCancel').trigger('click');
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.editProject.is_wh_reject_approval_by = this.activeUser;
+    this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
+      (response: Project) => {
+        var p: Project = new Project();
+        p.projectID = response.projectID;
+        p.is_wh_reject_approval_by = response.is_wh_reject_approval_by;
+        this.projects[this.editIndex] = p;
+        this.UpdateMasterTransactionsActualReceivingofCancel();
+        this.showApprovedSuccess();
+        // this.ngOnInit();
+        $('#editFormCancel').trigger('click');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // }
+    setTimeout(() => {
+      this.getList();
+    }, 1000);
   }
 
   ApprovedClickDetails() {
     // if (this.editForm.valid) {
-      this.editProject.is_activated = this.Activator;
-      this.editProject.is_wh_reject_approval = this.Activator;
-      this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
-        (response: Project) => {
-          var p: Project = new Project();
-          p.projectID = response.projectID;
-          p.projectName = response.projectName;
-          p.dateOfStart = response.dateOfStart;
-          p.teamSize = response.teamSize;
-          p.clientLocation = response.clientLocation;
-          p.active = response.active;
-          p.is_activated = response.is_activated;
-          p.clientLocationID = response.clientLocationID;
-          p.status = response.status;
-          p.supplier = response.supplier;
-          p.item_code = response.item_code;
-          p.item_description = response.item_description;
-          p.po_number = response.po_number;
-          p.po_date = response.po_date;
-          p.pr_number = response.pr_number;
-          p.pr_date = response.pr_date;
-          p.qty_order = response.qty_order;
-          p.qty_uom = response.qty_uom;
-          p.mfg_date = response.mfg_date;
-          p.expiration_date = response.expiration_date;
-          p.expected_delivery = response.expected_delivery;
-          p.actual_delivery = response.actual_delivery;
-          p.expected_delivery = response.expected_delivery;
-          // this.ActualRemaining = response.actual_remaining_receiving;
-          // p.received_by_QA = response.received_by_QA;
-          // // this.activeUser = response.received_by_QA;
-          p.status_of_reject_one = response.status_of_reject_one;
-          p.status_of_reject_two = response.status_of_reject_two;
-          p.status_of_reject_three = response.status_of_reject_three;
-          p.count_of_reject_one = response.count_of_reject_one;
-          p.count_of_reject_two = response.count_of_reject_two;
-          p.count_of_reject_three = response.count_of_reject_three;
-          p.total_of_reject_mat = response.total_of_reject_mat;
-          //Section 1
+    this.editProject.is_activated = this.Activator;
+    this.editProject.is_wh_reject_approval = this.Activator;
+    this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
+      (response: Project) => {
+        var p: Project = new Project();
+        p.projectID = response.projectID;
+        p.projectName = response.projectName;
+        p.dateOfStart = response.dateOfStart;
+        p.teamSize = response.teamSize;
+        p.clientLocation = response.clientLocation;
+        p.active = response.active;
+        p.is_activated = response.is_activated;
+        p.clientLocationID = response.clientLocationID;
+        p.status = response.status;
+        p.supplier = response.supplier;
+        p.item_code = response.item_code;
+        p.item_description = response.item_description;
+        p.po_number = response.po_number;
+        p.po_date = response.po_date;
+        p.pr_number = response.pr_number;
+        p.pr_date = response.pr_date;
+        p.qty_order = response.qty_order;
+        p.qty_uom = response.qty_uom;
+        p.mfg_date = response.mfg_date;
+        p.expiration_date = response.expiration_date;
+        p.expected_delivery = response.expected_delivery;
+        p.actual_delivery = response.actual_delivery;
+        p.expected_delivery = response.expected_delivery;
+        // this.ActualRemaining = response.actual_remaining_receiving;
+        // p.received_by_QA = response.received_by_QA;
+        // // this.activeUser = response.received_by_QA;
+        p.status_of_reject_one = response.status_of_reject_one;
+        p.status_of_reject_two = response.status_of_reject_two;
+        p.status_of_reject_three = response.status_of_reject_three;
+        p.count_of_reject_one = response.count_of_reject_one;
+        p.count_of_reject_two = response.count_of_reject_two;
+        p.count_of_reject_three = response.count_of_reject_three;
+        p.total_of_reject_mat = response.total_of_reject_mat;
+        //Section 1
 
-          p.cancelled_date = response.cancelled_date;
-          p.canceled_by = response.canceled_by;
-          p.cancelled_reason = response.cancelled_reason;
-          //Approval Gerard
-          p.is_approved_XP = response.is_approved_XP;
-          p.is_approved_by = response.is_approved_by;
-          p.is_approved_date = response.is_approved_date;
+        p.cancelled_date = response.cancelled_date;
+        p.canceled_by = response.canceled_by;
+        p.cancelled_reason = response.cancelled_reason;
+        //Approval Gerard
+        p.is_approved_XP = response.is_approved_XP;
+        p.is_approved_by = response.is_approved_by;
+        p.is_approved_date = response.is_approved_date;
 
-          //Rejection Approval
-          p.is_wh_reject_approval = response.is_wh_reject_approval;
-          p.is_wh_reject_approval_by = response.is_wh_reject_approval_by;
-          p.is_wh_reject_approval_date = response.is_wh_reject_approval_date;
+        //Rejection Approval
+        p.is_wh_reject_approval = response.is_wh_reject_approval;
+        p.is_wh_reject_approval_by = response.is_wh_reject_approval_by;
+        p.is_wh_reject_approval_date = response.is_wh_reject_approval_date;
 
-          // this.received_by.nativeElement.value = this.loginService.currentUserName;
-          this.projects[this.editIndex] = p;
-          // this.UpdateMasterTransactionsActualReceivingofCancel();
-          // this.InsertANewPartialReceiving();
-          this.editProject.projectID = null;
-          this.editProject.projectName = null;
-          this.editProject.dateOfStart = null;
-          this.editProject.teamSize = null;
-          this.editProject.supplier = null;
-          this.editProject.active = false;
-          this.editProject.clientLocationID = null;
-          this.editProject.status = null;
-          this.editProject.item_code = null;
-          this.editProject.item_description = null;
-          this.editProject.po_number = null;
-          this.editProject.po_date = null;
-          this.editProject.pr_number = null;
-          this.editProject.pr_date = null;
-          this.editProject.qty_order = null;
-          this.editProject.qty_uom = null;
-          this.editProject.mfg_date = null;
-          this.editProject.expiration_date = null;
-          this.editProject.expected_delivery = null;
-          this.editProject.actual_delivery = null;
-          this.editProject.actual_remaining_receiving = null;
-          this.editProject.received_by_QA = null;
-          this.editProject.status_of_reject_one = null;
-          this.editProject.status_of_reject_two = null;
-          this.editProject.status_of_reject_three = null;
-          this.editProject.count_of_reject_one = null;
-          this.editProject.count_of_reject_two = null;
-          this.editProject.count_of_reject_three = null;
-          this.editProject.total_of_reject_mat = null;
-          //Section A
+        // this.received_by.nativeElement.value = this.loginService.currentUserName;
+        this.projects[this.editIndex] = p;
+        // this.UpdateMasterTransactionsActualReceivingofCancel();
+        // this.InsertANewPartialReceiving();
+        this.editProject.projectID = null;
+        this.editProject.projectName = null;
+        this.editProject.dateOfStart = null;
+        this.editProject.teamSize = null;
+        this.editProject.supplier = null;
+        this.editProject.active = false;
+        this.editProject.clientLocationID = null;
+        this.editProject.status = null;
+        this.editProject.item_code = null;
+        this.editProject.item_description = null;
+        this.editProject.po_number = null;
+        this.editProject.po_date = null;
+        this.editProject.pr_number = null;
+        this.editProject.pr_date = null;
+        this.editProject.qty_order = null;
+        this.editProject.qty_uom = null;
+        this.editProject.mfg_date = null;
+        this.editProject.expiration_date = null;
+        this.editProject.expected_delivery = null;
+        this.editProject.actual_delivery = null;
+        this.editProject.actual_remaining_receiving = null;
+        this.editProject.received_by_QA = null;
+        this.editProject.status_of_reject_one = null;
+        this.editProject.status_of_reject_two = null;
+        this.editProject.status_of_reject_three = null;
+        this.editProject.count_of_reject_one = null;
+        this.editProject.count_of_reject_two = null;
+        this.editProject.count_of_reject_three = null;
+        this.editProject.total_of_reject_mat = null;
+        //Section A
 
-          //Add
-          this.editProject.cancelled_date = null;
-          this.editProject.canceled_by = null;
-          this.editProject.cancelled_reason = null;
+        //Add
+        this.editProject.cancelled_date = null;
+        this.editProject.canceled_by = null;
+        this.editProject.cancelled_reason = null;
 
-          //Approval
-          this.editProject.is_approved_XP = null;
-          this.editProject.is_approved_by = null;
-          this.editProject.is_approved_date = null;
-          this.showRejectedSuccess();
-          this.ngOnInit();
-          $('#editFormCancel').trigger('click');
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        //Approval
+        this.editProject.is_approved_XP = null;
+        this.editProject.is_approved_by = null;
+        this.editProject.is_approved_date = null;
+        this.showRejectedSuccess();
+        // this.ngOnInit();
+        $('#editFormCancel').trigger('click');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // }
+
+    setTimeout(() {
+      this.getList();
+    }, 1000);
   }
 
   //Insert as Partial
@@ -1581,7 +1582,7 @@ export class WhRejectionApprovalComponent implements OnInit {
 
   UpdateDeactivatedTransactions() {
     this.UpdateClickDetails();
-    this.getList();
+ 
   }
 
   UpdateMasterTransactionsActualReceivingofCancel() {
@@ -2038,7 +2039,7 @@ export class WhRejectionApprovalComponent implements OnInit {
     $('#SearchBtnDetailed').show();
   }
 
-  validateRejectedStatus(event: any) {}
+  validateRejectedStatus(event: any) { }
 
   ActualDeliveryComputation(event: any) {
     // Allowable Percentage Computation

@@ -42,8 +42,6 @@
     </div>
   </div>
 
-
-
   <div class="col-xl-12">
     <div class="row">
       <div class="col-xl-12 col-lg-9 mx-auto scrollableTable">
@@ -83,8 +81,7 @@
                 data-target="#activateChecklistModal"><span class="fa fa-toggle-on"></span> Activate</button>
 
               <button mat-stroked-button color="basic" [hidden]="item.is_active === false" class="editbtnStyle"
-              (click)="onEditClick($event, item)"
-                data-backdrop="false" data-keyboard="false" data-toggle="modal"
+                (click)="onClickDeActivate(item)" data-backdrop="false" data-keyboard="false" data-toggle="modal"
                 data-target="#deactivateChecklistModal"><span class="fa fa-toggle-on"></span> Deactivate</button>
 
               <!-- <button class="btn btn-warning" (click)="onDeleteClick($event, clientLocation)" data-toggle="modal" data-target="#deleteModal">Delete</button> -->
@@ -441,170 +438,8 @@
 
             <div class="form-group col-md-4">
               <label for="formGroupExampleInput">Location:</label>
-    
-              <select type="text" class="form-control text-required-color" formControlName="location" sdsds>
 
-                <option value="Depot">Depot</option>
-                <option value="Main Office">Main Office</option>
-              </select>
-            </div>
-
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">Position:</label>
-              <select class="form-control text-required-color" formControlName="userRole">
-                <option *ngFor="let item of positionList" [value]="item.name">{{ item.name }}</option>
-              </select>
-
-            </div>
-          </div>
-
-          <input type="text" formControlName="employee_number" [hidden]="true">
-          <input type="text" formControlName="gender" [hidden]="true">
-          <br>
-
-          <h5 style="float:left; font-weight:bold">Role:</h5>
-          <hr>
-          <div class="form-row">
-            <div class="form-group col-sm-3">
-              <input type="checkbox" formControlName="Approver">
-              <div>
-                <span>Approver</span>
-              </div>
-            </div>
-            <div class="form-group col-sm-3">
-              <input type="checkbox" formControlName="Requestor">
-              <div>
-                <span>Requestor</span>
-              </div>
-            </div>
-          </div>
-          <button type="button" mat-stroked-button color="primary" (click)="CheckAllOptions()">Check All</button>
-          <br>
-
-          <h5 style="float:left; font-weight:bold">Tagging of Approvers:</h5>
-          <hr>
-          <br>
-          <div class="form-row">
-            <div class="form-group col-md-3">
-              <label for="formGroupExampleInput">Approver 1:</label>
-              <select class="form-control text-required-color" formControlName="first_approver_id"
-                (change)="getFirstApproverId($event.target.value)">
-                <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
-                  item.lastName | uppercase}}</option>
-              </select>
-            </div>
-
-            <div class="form-group col-md-3">
-              <label for="formGroupExampleInput">Approver 2:</label>
-              <select type="text" class="form-control text-required-color" formControlName="second_approver_id"
-                (change)="getSecondApproverId($event.target.value)">
-                <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
-                  item.lastName | uppercase}}</option>
-              </select>
-            </div>
-
-            <div class="form-group col-md-3">
-              <label for="formGroupExampleInput">Approver 3:</label>
-              <select class="form-control text-required-color" formControlName="third_approver_id"
-                (change)="getThirdApproverId($event.target.value)">
-                <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
-                  item.lastName | uppercase}}</option>
-              </select>
-            </div>
-
-            <div class="form-group col-md-3">
-              <label>Approver 4:</label>
-              <select class="form-control text-required-color" formControlName="fourth_approver_id"
-                (change)="getFourthApproverId($event.target.value)">
-                <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
-                  item.lastName | uppercase}}</option>
-              </select>
-            </div>
-
-            <input type="text" [hidden]="true" formControlName="first_approver_name">
-            <input type="text" [hidden]="true" formControlName="second_approver_name">
-            <input type="text" [hidden]="true" formControlName="third_approver_name">
-            <input type="text" [hidden]="true" formControlName="fourth_approver_name">
-            <input type="text" [hidden]="true" formControlName="id">
-
-
-          </div>
-        </form>
-
-        {{editUser.value | json}}
-
-        <div class="modal-footer">
-          <button mat-stroked-button [hidden]="true" color="accent" class="mr-1" id="closeUpdateModal"
-            data-dismiss="modal" type="button">
-            Cancel
-          </button>
-          <button mat-stroked-button class="" color="primary" [disabled]="!editUser.valid"
-            (click)="onSubmitEditUser()">Submit</button>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<!-- Deactivate user -->
-<div class="modal" role="dialog" id="deactivateChecklistModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-all text-white">
-        <div class="modal-title">Deactivate User Form</div>
-        <button type="button" class="close" data-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body modal-body-color">
-
-        <form [formGroup]="editUser">
-
-          <h5 style="float:left; font-weight:bold">User Information:</h5>
-          <hr>
-          <br>
-
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">Last Name:</label>
-              <input type="text" class="form-control text-green" readonly formControlName="firstName">
-            </div>
-
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">First Name:</label>
-              <input type="text" class="form-control text-green" readonly formControlName="lastName">
-            </div>
-
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">Department:</label>
-              <input type="text" class="form-control text-green" readonly formControlName="department_Name">
-              <input type="text" class="form-control text-green" [hidden]="true" readonly
-                formControlName="department_id">
-
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">Sub-Unit:</label>
-              <input type="text" class="form-control text-green" [disabled]="true" readonly
-                formControlName="departmentUnit_Name">
-              <input type="text" class="form-control text-green" [hidden]="true" readonly formControlName="unit_id">
-
-            </div>
-
-            <div class="form-group col-md-4">
-              <label for="formGroupExampleInput">Location:</label>
-              <select type="text" class="form-control text-required-color" formControlName="location" sdsds>
-
+              <select type="text" class="form-control text-required-color" formControlName="location">
                 <option value="Depot">Depot</option>
                 <option value="Main Office">Main Office</option>
               </select>

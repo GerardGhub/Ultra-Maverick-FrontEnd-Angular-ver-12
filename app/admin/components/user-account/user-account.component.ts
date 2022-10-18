@@ -122,8 +122,6 @@ export class UserAccountComponent implements OnInit {
       this.systemCapabilityStatusService.getSystemCapabilityStatus();
   }
 
-
-
   successToaster() {
     this.toastr.success(this.successMessage, 'Message');
   }
@@ -156,8 +154,6 @@ export class UserAccountComponent implements OnInit {
       this.approverList = data;
     });
   }
-  //Item Description
-  @ViewChild('ItemDesc') ItemDesc: ElementRef;
 
   // Reactive Forms *********************************************************************
   reactiveForms() {
@@ -421,21 +417,22 @@ export class UserAccountComponent implements OnInit {
   // Active or InActive *******************************************************************
   onClickDeActivate(item: any) {
   
+
   
-      var Item = this.ItemDesc.nativeElement.value;
-      Swal.fire({
-        title: 'Are you sure you want to reject the Transaction?',
-        text: Item,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // this.ApprovedClickDetails();
-        }
-      });
+      // var Item = this.ItemDesc.nativeElement.value;
+      // Swal.fire({
+      //   title: 'Are you sure you want to reject the Transaction?',
+      //   text: Item,
+      //   icon: 'warning',
+      //   showCancelButton: true,
+      //   confirmButtonColor: '#3085d6',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: 'Yes',
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     this.ApprovedClickDetails();
+      //   }
+      // });
   
     
     

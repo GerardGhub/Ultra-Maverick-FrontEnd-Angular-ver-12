@@ -132,6 +132,7 @@ AllowablePercentages: Observable<AllowablePercentage[]>;
     // create header using child_id
     console.log(this.child_id);
     console.log("Child");
+  
     this.getPOcancelledList();
    
   }

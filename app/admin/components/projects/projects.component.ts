@@ -65,7 +65,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private qcService: QCService
   ) {
-    
+
   }
 
   ngOnChanges() {
@@ -73,10 +73,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
     console.log(this.parent_id);
   }
 
-someMethod(event) {
-  // console.log("Pure CASS");
-  this.ngOnInit();
-}
+  someMethod(event) {
+    // console.log("Pure CASS");
+
+    this.ngOnInit();
+  }
 
   projects: Project[] = [];
   cancelledPOlist: Project[] = [];
@@ -97,13 +98,14 @@ someMethod(event) {
   searchText: string = '';
   ToDay: Date;
   ToDayforMaxDate: Date;
-samplelang: string = '';
+  ChildForm: string = '';
   activeUser: string = '';
   PartialEntry: string = '';
   PartialComment: string = '';
   currentPageIndex: number = 0;
   pages: any[] = [];
   pageSize: number = 10;
+  dualbindingchanges = 0;
 
   totalPoRowCount: number = null;
   totalPartial: number = null;
@@ -242,22 +244,20 @@ samplelang: string = '';
 
   }
 
-  any(event: any)
-  {
-    this.getPOrecievingList();
+  any(event: any) {
+    this.ChildForm = "22434";
+    alert("BUje");
+    // this.getPOrecievingList();
 
   }
-  any2(event: any)
-  {
+  any2(event: any) {
     this.important();
   }
-  any3(event: any)
-  {
+  any3(event: any) {
     this.getChecklist();
 
   }
-  any4(event: any)
-  {
+  any4(event: any) {
     this.getPOcancelledList();
 
   }
@@ -345,13 +345,16 @@ samplelang: string = '';
     this.getPOrecievingList();
     this.getPOcancelledList();
 
-   this.samplelang = "4000";
-   this.totalPoRowCount = 23232;
+    this.ChildForm = "4000";
+    this.dualbindingchanges ++;
+
+    this.ChildForm = this.dualbindingchanges.toString();
+    // alert(this.samplelang);
   }
 
 
 
-  myFunctionOne(){
+  myFunctionOne() {
     console.log('Call Function One from Component One');
   }
 
@@ -916,11 +919,11 @@ samplelang: string = '';
     //To display the final no. of days (result)
     document.write(
       'Total number of days between dates  <br>' +
-        date1 +
-        '<br> and <br>' +
-        date2 +
-        ' is: <br> ' +
-        Difference_In_Days
+      date1 +
+      '<br> and <br>' +
+      date2 +
+      ' is: <br> ' +
+      Difference_In_Days
     );
 
     return;
@@ -1050,12 +1053,12 @@ samplelang: string = '';
               // dito ang new trapping sa checklist bago e save need muna e fill out ang checklist form
               this.qcService.saveNewCheckList(this.checklistDataList).subscribe(
                 (response) => {
-      
+
                   this.getPOrecievingList();
 
                   $('#editFormCancel').trigger('click');
                   this.UpdateClickDetails();
-                  
+
                 },
                 (error) => {
                   this.errorMessage = error.error.message;
@@ -1090,12 +1093,12 @@ samplelang: string = '';
                   .saveNewCheckList(this.checklistDataList)
                   .subscribe(
                     (response) => {
-               
+
                       this.getPOrecievingList();
 
                       $('#editFormCancel').trigger('click');
                       this.UpdateClickDetails();
-                    
+
                     },
                     (error) => {
                       this.errorMessage = error.error.message;
@@ -1128,12 +1131,12 @@ samplelang: string = '';
                     .saveNewCheckList(this.checklistDataList)
                     .subscribe(
                       (response) => {
-               
+
                         this.getPOrecievingList();
 
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
-                   
+
                       },
                       (error) => {
                         this.errorMessage = error.error.message;
@@ -1164,11 +1167,11 @@ samplelang: string = '';
                     .subscribe(
                       (response) => {
                         this.getPOrecievingList();
-                
-                    
+
+
                         $('#editFormCancel').trigger('click');
                         this.UpdateClickDetails();
-                   
+
                       },
                       (error) => {
                         this.errorMessage = error.error.message;
@@ -1293,11 +1296,11 @@ samplelang: string = '';
           this.editProject.total_of_reject_mat = null;
           this.getPOrecievingList();
           this.showReceivedSuccess();
-         console.log("Received Item");
-    
+          console.log("Received Item");
+
 
           $('#editFormCancel').trigger('click');
-          
+
         },
         (error) => {
           console.log(error);
@@ -1305,7 +1308,7 @@ samplelang: string = '';
       );
     }
     console.log("Received Item 2 ");
-   
+
   }
 
   InsertPartialDatainMasterTable() {
@@ -1993,10 +1996,10 @@ samplelang: string = '';
 
       setTimeout(() => {
         if ($('#ActivePartialReceiving').is(':visible')) {
-  
+
           this.PartialComment = 'haddata';
         } else {
-          
+
           this.PartialComment = 'unsetdata';
           $('#CancelPO').show();
         }
@@ -2077,7 +2080,7 @@ samplelang: string = '';
         this.getPOcancelledList();
 
         this.ngOnInit();
-      
+
         $('#editFormCancel').trigger('click');
       },
       (error) => {
@@ -2246,12 +2249,12 @@ samplelang: string = '';
 
 
       if ($('#rejectionrow2').is(':visible')) {
- 
+
         if ($('#rejectionrow3').is(':visible')) {
 
           this.showLimitonAddingRejection();
         } else {
-         
+
           $('#rejectionrow3').show();
           $('#rejectionrow32').show();
           $('#total-reject').show();
@@ -2259,7 +2262,7 @@ samplelang: string = '';
           $('#AddRejectBtn').hide();
         }
       } else {
-  
+
         $('#rejectionrow2').show();
         $('#rejectionrow22').show();
         $('#total-reject').show();
@@ -2283,7 +2286,7 @@ samplelang: string = '';
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
-      
+
 
       if ($('#rejectionrow2').is(':visible')) {
 
@@ -2293,14 +2296,14 @@ samplelang: string = '';
       } else {
 
         if ($('#rejectionrow1').is(':visible')) {
-      
+
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-    
+
         }
       }
     }
@@ -2428,7 +2431,7 @@ samplelang: string = '';
     this.totalofReject.nativeElement.value = summary;
 
     if (ActualDelivered >= summary) {
-     
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -2496,7 +2499,7 @@ samplelang: string = '';
       if (Number(TotalAllowablePercentage) >= Number(ActualDelivered)) {
 
       } else {
-  
+
         this.AllowablePercentageExceed();
         $('#actual_delivery_output').val('');
       }

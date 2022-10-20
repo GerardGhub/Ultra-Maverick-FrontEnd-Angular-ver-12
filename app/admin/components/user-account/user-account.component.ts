@@ -137,7 +137,7 @@ export class UserAccountComponent implements OnInit {
         this.AspNetUsers = response;
         this.showLoading = false;
         this.calculateNoOfPages();
-        console.log(response);
+        // console.log(response);
         console.warn(response);
       });
   }
@@ -322,42 +322,48 @@ export class UserAccountComponent implements OnInit {
   }
 
   onEditClick(event, userInfo: UserAccount) {
-
-
     this.editUser.reset();
-
-
     this.editUser.patchValue(userInfo);
-
-    // console.warn(this.editUser.Approver);
-    // this.editUser.patchValue({
-
-    // //  if(second_approver_name == this.second_approver_name="Pwetaa")
-    // //   second_approver_name: this.second_approver_name="Pwetaa"
-    // //   // second_approver_name: this.first_approver_name ="Pwet"
-    // // });
     this.userinfo = userInfo;
-
-
-
   }
 
 
 
   onSearchTextChange(event) {
+
     this.calculateNoOfPages();
   }
 
   onFilterStatus(val) {
+
     if (!val) {
       this.getLists();
+
     } else {
-      // const status = this.AspNetUsers.filter(status => status.is_active === val);
-      // this.AspNetUsers = status;
-      // this.showLoading = false;
+
+
+      if (val === "") {
+
+      }
+      else if (val === "true") {
+        val = true;
+      }
+      else if (val === "false") {
+
+        val = false;
+      }
+
+      const status = this.AspNetUsers.filter(status => status.is_active === val);
+      this.AspNetUsers = status;
+      console.log(this.AspNetUsers);
+      this.showLoading = false;
       this.calculateNoOfPages();
     }
+
+
   }
+
+
 
   searchEmployee() {
     const result = this.employees.filter(
@@ -399,6 +405,8 @@ export class UserAccountComponent implements OnInit {
   }
 
   CheckAllOptions() {
+
+
     if (this.checkboxes.every((val) => val.checked == true)) {
       this.checkboxes.forEach((val) => {
         val.checked = false;
@@ -511,7 +519,7 @@ export class UserAccountComponent implements OnInit {
     this.editUser.patchValue(userInfo);
 
     this.userinfo = userInfo;
-    this.onSubmitActivateUser(); 
+    this.onSubmitActivateUser();
 
   }
 
@@ -692,11 +700,12 @@ export class UserAccountComponent implements OnInit {
       });
     }
   }
+
   //Activate A User
   onSubmitActivateUser() {
     if (this.editUser.valid) {
       Swal.fire({
-        title: 'Are you sure that you want to Update?',
+        title: 'Are you sure that you want to Activate?',
         text: '',
         icon: 'question',
         showCancelButton: true,

@@ -31,7 +31,7 @@ export class UserAccount {
   fourth_approver_name:string;
   fourth_approver_id:string;
   // is_active:string;
-
+   is_active: boolean;
   constructor()
   {
     this.id = null,
@@ -61,7 +61,7 @@ export class UserAccount {
     this.fourth_approver_name = null;
     this.fourth_approver_id = null;
 
-    // this.is_active = null;
+    this.is_active = null;
   }
 }
 

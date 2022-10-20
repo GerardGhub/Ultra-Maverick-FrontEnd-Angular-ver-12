@@ -14,8 +14,8 @@
           </div>
           <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)">
             <option value="">All</option>
-            <option value="Active">Active</option>
-            <option value="InActive">InActive</option>
+            <option value="true">Active</option>
+            <option value="false">InActive</option>
           </select>
         </div>
       </div>
@@ -473,7 +473,7 @@
               </div>
             </div>
           </div>
-          <button type="button" mat-stroked-button color="primary" (click)="CheckAllOptions()">Check All</button>
+          <!-- <button type="button" mat-stroked-button color="primary" (click)="CheckAllOptions()">Check All</button> -->
           <br>
 
           <h5 style="float:left; font-weight:bold">Tagging of Approvers:</h5>

@@ -432,7 +432,7 @@ export class UserAccountComponent implements OnInit {
 
   // Active or InActive *******************************************************************
   onClickDeActivate(userInfo: UserAccount) {
-    alert('Deactivated');
+    // alert('Deactivated');
 
     this.editUser.reset();
 
@@ -498,7 +498,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   onClickActivate(userInfo: UserAccount) {
-    alert('Activated 1');
+    // alert('Activated 1');
     // onClickActivate(item: any)
 
     this.editUser.reset();

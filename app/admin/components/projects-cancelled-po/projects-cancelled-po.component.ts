@@ -879,16 +879,6 @@ onAddAdditionalRejectRow(event: any)
 }
 
 
-
-
-
-
-  // $("#rejectionrow2").show();
-  // $("#rejectionrow22").show();
-
-  // $("#rejectionrow3").show();
-  // $("#rejectionrow32").show();
-// alert("sds");
 }
 
 

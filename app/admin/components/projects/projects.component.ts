@@ -1282,7 +1282,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     setTimeout(() => {
     
       this.getPOrecievingList();
-    }, 1000);
+    }, 100);
   }
 
   InsertPartialDatainMasterTable() {

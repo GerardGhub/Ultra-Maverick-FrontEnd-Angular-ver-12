@@ -906,7 +906,7 @@ export class ProjectsPartialPoComponent implements OnInit {
 
     setTimeout(() => {
       this.getList();
-    }, 1000);
+    }, 100);
   }
 
   //Insert as Partials

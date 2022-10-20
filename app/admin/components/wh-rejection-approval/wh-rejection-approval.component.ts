@@ -931,7 +931,7 @@ export class WhRejectionApprovalComponent implements OnInit {
     );
     // }
 
-    setTimeout(() {
+    setTimeout(() => {
       this.getList();
     }, 1000);
   }

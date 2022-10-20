@@ -322,11 +322,27 @@ export class UserAccountComponent implements OnInit {
   }
 
   onEditClick(event, userInfo: UserAccount) {
+
+
     this.editUser.reset();
+
+
     this.editUser.patchValue(userInfo);
+
+    // console.warn(this.editUser.Approver);
+    // this.editUser.patchValue({
+
+    // //  if(second_approver_name == this.second_approver_name="Pwetaa")
+    // //   second_approver_name: this.second_approver_name="Pwetaa"
+    // //   // second_approver_name: this.first_approver_name ="Pwet"
+    // // });
     this.userinfo = userInfo;
-    console.log(this.userinfo);
+
+
+
   }
+
+
 
   onSearchTextChange(event) {
     this.calculateNoOfPages();
@@ -415,33 +431,88 @@ export class UserAccountComponent implements OnInit {
   }
 
   // Active or InActive *******************************************************************
-  onClickDeActivate(item: any) {
-  
+  onClickDeActivate(userInfo: UserAccount) {
+    alert('Deactivated');
 
-  
-      // var Item = this.ItemDesc.nativeElement.value;
-      // Swal.fire({
-      //   title: 'Are you sure you want to reject the Transaction?',
-      //   text: Item,
-      //   icon: 'warning',
-      //   showCancelButton: true,
-      //   confirmButtonColor: '#3085d6',
-      //   cancelButtonColor: '#d33',
-      //   confirmButtonText: 'Yes',
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     this.ApprovedClickDetails();
-      //   }
-      // });
-  
-    
-    
-  
-  
+    this.editUser.reset();
+
+    this.editUser.patchValue({
+      Approver: this.approver = false,
+      Requestor: this.requestor = false
+    });
+
+    this.editUser.patchValue(userInfo);
+
+    this.userinfo = userInfo;
+
+
+    if (this.editUser.valid) {
+      Swal.fire({
+        title: 'Are you sure that you want to Deactivate?',
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userAccountService.deactivateUser(this.editUser.value).subscribe(
+            (response: UserAccount) => {
+              this.AspNetUsers[this.editIndex] = response;
+              this.successMessage = 'Updated Successfully!';
+
+              this.editUser.reset();
+
+              // $('#closeActivateUpdateModal').trigger('click');
+              this.successToaster();
+              this.getLists();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
+      });
+    }
+
+    // var Item = this.ItemDesc.nativeElement.value;
+    // Swal.fire({
+    //   title: 'Are you sure you want to reject the Transaction?',
+    //   text: Item,
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes',
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.ApprovedClickDetails();
+    //   }
+    // });
+
+
+
+
+
   }
 
-  onClickActivate(item: any) {
-    // alert('Activated');
+  onClickActivate(userInfo: UserAccount) {
+    alert('Activated 1');
+    // onClickActivate(item: any)
+
+    this.editUser.reset();
+
+    this.editUser.patchValue({
+      Approver: this.approver = false,
+      Requestor: this.requestor = false
+    });
+
+    this.editUser.patchValue(userInfo);
+
+    this.userinfo = userInfo;
+    this.onSubmitActivateUser(); 
+
   }
 
   validateRejectedStatus(event: any) {
@@ -491,7 +562,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   getNewThirdApproverId(id) {
- 
+
     if (typeof (id) == "string") {
       this.third_approver_name = "";
     }
@@ -608,10 +679,40 @@ export class UserAccountComponent implements OnInit {
             (response: UserAccount) => {
               this.AspNetUsers[this.editIndex] = response;
               this.successMessage = 'Updated Successfully!';
+              this.editUser.reset();
+              $('#closeUpdateModal').trigger('click');
+              this.successToaster();
+              this.getLists();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
+      });
+    }
+  }
+  //Activate A User
+  onSubmitActivateUser() {
+    if (this.editUser.valid) {
+      Swal.fire({
+        title: 'Are you sure that you want to Update?',
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.userAccountService.activateUser(this.editUser.value).subscribe(
+            (response: UserAccount) => {
+              this.AspNetUsers[this.editIndex] = response;
+              this.successMessage = 'Updated Successfully!';
 
               this.editUser.reset();
 
-              $('#closeUpdateModal').trigger('click');
+              $('#closeActivateUpdateModal').trigger('click');
               this.successToaster();
               this.getLists();
             },
@@ -643,7 +744,7 @@ export class UserAccountComponent implements OnInit {
                 this.AspNetUsers[this.editIndex] = response;
                 this.successMessage = 'Registered Successfully!';
                 this.registerUser.reset();
-             
+
                 console.log(response);
 
                 $('#closeRegistrationModal').trigger('click');
@@ -652,7 +753,7 @@ export class UserAccountComponent implements OnInit {
               (error) => {
                 this.errorMessageFromResponse = error.error.message;
                 console.log(this.errorMessageFromResponse);
-            
+
                 console.warn(JSON.stringify(error.error.message));
                 const string = JSON.stringify(error.error);
                 const t = JSON.parse(string);

@@ -37,6 +37,15 @@ export class UserAccountService {
     );
   }
 
+  
+  activateUser(deactivateDetails: UserAccount): Observable<UserAccount> {
+    return this.httpClient.put<UserAccount>(
+      '/api/umwebusers_activate',
+      deactivateDetails,
+      { responseType: 'json' }
+    );
+  }
+
   getEmployee(): Observable<any> {
     return this.httpClient.get('api/employees');
   }

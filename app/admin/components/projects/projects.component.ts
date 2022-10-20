@@ -1276,7 +1276,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
         }
       );
     }
-    // console.log("Received Item 2 ");
+    console.log("Received Item 2 ");
  
 
     setTimeout(() => {
@@ -1414,7 +1414,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
           this.projects.push(p);
         },
         (error) => {
-          // console.log(error + 'takla');
+          console.log(error + 'takla');
         }
       );
     }

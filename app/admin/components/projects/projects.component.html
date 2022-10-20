@@ -994,7 +994,7 @@
           <!-- Reject Information  -->
           <div class="partition-div">Reject Information</div>
           <div class="rejection-buttons">
-            <button class="btn-add btn btn-danger btn-sm mr-2" (click)="onAddAdditionalRejectRow($event)">
+            <button class="btn-add btn btn-danger btn-sm mr-3" (click)="onAddAdditionalRejectRow($event)">
               Add
             </button>
             <button class="btn btn-info btn-sm" id="remove-remarks-button"
@@ -1007,7 +1007,7 @@
               <!-- Start of Validation Sample using animal -->
 
               <div class="form-group row form_display--displayhide" id="rejectionrow1">
-
+                <!-- <label for="drpEditClientLocationsOne" class="col-sm-4 col-form-label">Reject Status 1</label> -->
                 <div class="col-sm-8">
                   <mat-form-field appearance="fill">
                     <mat-label>Rejected Status</mat-label>
@@ -1146,6 +1146,8 @@
                       #confirmReject (keyup)="ConfirmNoofReject($event)" (keypress)="validateNumber($event)" />
                     <mat-label>Confirm No. of Reject</mat-label>
                     <mat-hint align="end">Confirmation</mat-hint>
+                    <!-- <mat-icon matPrefix>list<span class="material-icons-outlined">
+                </span></mat-icon> -->
                     <span class="text-danger rejectIsnotMactchSpanTagclass" #rejectIsnotMactchSpanTag></span>
                   </mat-form-field>
                 </div>

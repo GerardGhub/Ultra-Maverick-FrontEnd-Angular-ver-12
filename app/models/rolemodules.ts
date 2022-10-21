@@ -5,7 +5,7 @@ export class RoleModules {
     moduleid:number;
     isactive: boolean;
     submenuname:string;
-    modulename: string;
+    moduleName: string;
 
     constructor()
     {
@@ -14,6 +14,6 @@ export class RoleModules {
         this.moduleid = null;
         this.isactive = null;
         this.submenuname = null;
-        this.modulename = null;
+        this.moduleName = null;
     }
 }

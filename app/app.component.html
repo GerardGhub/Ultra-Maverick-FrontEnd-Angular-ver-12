@@ -133,57 +133,64 @@
         <!-- PO Dashboard Module -->
 
         <!-- PO Recieving Module -->
-        <a class="system-name" [routerLink]=" [ '/admin', 'qc-recieving' ] " mat-list-item
-          routerLinkActive="link-active">
-          <mat-icon>local_shipping</mat-icon>&nbsp; QC Receiving &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalPoRowCount | number}}">{{ totalPoRowCount |
-            number}}</span>
-        </a>
+        <ng-container *ngIf="QCReceiving === 1 ">
+          <a class="system-name" [routerLink]=" [ '/admin', 'qc-recieving' ] " mat-list-item
+            routerLinkActive="link-active">
+            <mat-icon>local_shipping</mat-icon>&nbsp; QC Receiving &nbsp;&nbsp;
+            <span class="badge badge-pill badge-danger zerobadge{{ totalPoRowCount | number}}">{{ totalPoRowCount |
+              number}}</span>
+          </a>
+        </ng-container>
 
         <!-- wh recieving Module -->
-        <a [routerLink]=" [ '/admin', 'wh-recieving' ] " mat-list-item routerLinkActive="link-active">
-          <mat-icon>inventory_2</mat-icon>&nbsp;WH Receiving &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceiving | number}}">{{
-            totalPoPartialReceiving | number}}</span>
-        </a>
-
+        <ng-container *ngIf="WhReceiving === 1 ">
+          <a [routerLink]=" [ '/admin', 'wh-recieving' ] " mat-list-item routerLinkActive="link-active">
+            <mat-icon>inventory_2</mat-icon>&nbsp;WH Receiving &nbsp;&nbsp;
+            <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceiving | number}}">{{
+              totalPoPartialReceiving | number}}</span>
+          </a>
+        </ng-container>
 
         <!-- Approval Module -->
-        <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
-          [matMenuTriggerFor]="menu1">
-          <mat-icon>check_box</mat-icon>
-          &nbsp;Approval &nbsp;&nbsp;
-          <span
-            class="badge badge-pill badge-danger zerobadge{{totalPoPartialRejectatWH  + totalPoPartialReceivingNearlyExpiryApproval}}">{{
-            totalPoPartialRejectatWH + totalPoPartialReceivingNearlyExpiryApproval }}</span>
-
-        </a>
-        <mat-menu #menu1="matMenu">
-          <button mat-menu-item routerLinkActive="link-active">
-            <!-- <mat-icon matBadgeColor="warn">event_busy</mat-icon> -->
-            <span [routerLink]=" [ '/admin', 'nearly-expiry' ] ">Nearly Expiry</span> &nbsp;&nbsp;
+        <ng-container *ngIf="Approval === 1 ">
+          <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
+            [matMenuTriggerFor]="menu1">
+            <mat-icon>check_box</mat-icon>
+            &nbsp;Approval &nbsp;&nbsp;
             <span
-              class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceivingNearlyExpiryApproval | number }}">{{
-              totalPoPartialReceivingNearlyExpiryApproval | number }}</span>
+              class="badge badge-pill badge-danger zerobadge{{totalPoPartialRejectatWH  + totalPoPartialReceivingNearlyExpiryApproval}}">{{
+              totalPoPartialRejectatWH + totalPoPartialReceivingNearlyExpiryApproval }}</span>
+          </a>
 
-          </button>
-          <button mat-menu-item routerLinkActive="link-active">
-            <!-- <mat-icon matBadgeColor="warn">category</mat-icon> -->
-            <span [routerLink]=" [ '/admin', 'wh-rejection'] ">WH Rejection</span> &nbsp;&nbsp;
-            <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialRejectatWH | number }}">{{
-              totalPoPartialRejectatWH | number }}</span>
-          </button>
-        </mat-menu>
 
-        <!-- Approval Module -->
+          <mat-menu #menu1="matMenu">
+            <button mat-menu-item routerLinkActive="link-active">
+              <!-- <mat-icon matBadgeColor="warn">event_busy</mat-icon> -->
+              <span [routerLink]=" [ '/admin', 'nearly-expiry' ] ">Nearly Expiry</span> &nbsp;&nbsp;
+              <span
+                class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceivingNearlyExpiryApproval | number }}">{{
+                totalPoPartialReceivingNearlyExpiryApproval | number }}</span>
 
-        <!-- Lab Test Module -->
-        <a [routerLink]=" ['/admin', 'forlabtest'] " mat-list-item routerLinkActive="link-active">
-          <mat-icon>hourglass_empty</mat-icon>&nbsp;Lab Test &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalforlabtestforapproval | number }}">{{
-            totalforlabtestforapproval | number }}</span>
-        </a>
+            </button>
+            <button mat-menu-item routerLinkActive="link-active">
+              <!-- <mat-icon matBadgeColor="warn">category</mat-icon> -->
+              <span [routerLink]=" [ '/admin', 'wh-rejection'] ">WH Rejection</span> &nbsp;&nbsp;
+              <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialRejectatWH | number }}">{{
+                totalPoPartialRejectatWH | number }}</span>
+            </button>
+          </mat-menu>
 
+          <!-- Approval Module -->
+        </ng-container>
+
+        <ng-container *ngIf="LabTest === 1 ">
+          <!-- Lab Test Module -->
+          <a [routerLink]=" ['/admin', 'forlabtest'] " mat-list-item routerLinkActive="link-active">
+            <mat-icon>hourglass_empty</mat-icon>&nbsp;Lab Test &nbsp;&nbsp;
+            <span class="badge badge-pill badge-danger zerobadge{{ totalforlabtestforapproval | number }}">{{
+              totalforlabtestforapproval | number }}</span>
+          </a>
+        </ng-container>
         <!-- Preparation Module -->
         <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu_prep">

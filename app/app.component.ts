@@ -24,6 +24,10 @@ import { PreparedOrdersService } from './admin/components/store-order-prepared/s
 import { CancelledOrderService } from './admin/components/store-order-cancelled-transaction/services/cancelled-order.service';
 import { RoleModules } from './models/rolemodules';
 import { UserAccountService } from './services/user-account.service';
+import { NgModel } from '@angular/forms';
+
+// import { stat } from 'fs';
+// // import { stat } from 'fs';
 
 @Component({
   selector: 'app-root',
@@ -36,28 +40,38 @@ export class AppComponent {
   WhRejects: Project[] = [];
   cancelledPoSummary: Project[] = [];
   roleModulesSummary: RoleModules[] = [];
+  roleModulesSummaryForEach: RoleModules[] = [];
   storeOrders: DryWhStoreOrders[] = [];
   projects: DryWhStoreOrders[] = [];
-  totalPoRowCount: number = null;
-  totalRoleModulesRowCount: number = null;
-  totalPoRowCountCancelled: number = null;
-  totalPoPartialReceiving: number = null;
+  totalPoRowCount: number = 0;
+  totalRoleModulesRowCount: number = 0;
+  totalPoRowCountCancelled: number = 0;
+  totalPoPartialReceiving: number = 0;
 
-  totalForLabtest: number = null;
-  totalForApproval: number = null;
-  activeUserRoleId: string = null;
+  totalForLabtest: number = 0;
+  totalForApproval: number = 0;
+  activeUserRoleId: string = "";
 
-  totalforlabtestforapproval: number = null;
+  totalforlabtestforapproval: number = 0;
 
   totalPoPartialReceivingNearlyExpiryApproval = null;
   //Rejection Call at back End
-  totalPoPartialRejectatWH: number = null;
+  totalPoPartialRejectatWH: number = 0;
 
-  totalPreparationBadge: number = null;
-  totalPreparedOrdersCount: number = null;
-  totalDispatchingRowCount: number = null;
-  totalCancelledCount: number = null;
-  totalStoreOrderRowCount: number;
+  totalPreparationBadge: number = 0;
+  totalPreparedOrdersCount: number = 0;
+  totalDispatchingRowCount: number = 0;
+  totalCancelledCount: number = 0;
+  totalStoreOrderRowCount: number = 0;
+
+  //Parent Menu 1 for Tagged 0 else
+  QCReceiving: number = 0;
+  WhReceiving: number = 0;
+  Approval: number = 0;
+  LabTest: number = 0;
+  Preparation: number = 0;
+  OnlineMrs: number = 0;
+  SetUp: number = 0;
 
   constructor(
     private dashboardService: DashboardService,
@@ -71,7 +85,7 @@ export class AppComponent {
     private preparedOrderService: PreparedOrdersService,
     private cancelledOrderService: CancelledOrderService,
     private userAccountService: UserAccountService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginService.detectIfAlreadyLoggedIn();
@@ -107,8 +121,14 @@ export class AppComponent {
     this.totalForLabtestForApproval();
     this.activeUserRoleId = this.loginService.currentUserRole;
     // alert(this.activeUserRoleId);
-    alert("Sample");
+    // alert("Sample");
     this.getUserRoleModules();
+    //     var val = "qc-receiving-routes";
+
+    //       const status = this.roleModulesSummary.filter(status => status.modulename === val);
+    //       this.roleModulesSummaryForEach = status;
+    // alert(this.roleModulesSummaryForEach.length.toString());
+    // console.log(this.roleModulesSummaryForEach);
   }
 
   getForLabTest() {
@@ -244,7 +264,33 @@ export class AppComponent {
       if (response) {
         this.roleModulesSummary = response;
         this.totalRoleModulesRowCount = response.length;
-        console.warn(response);
+
+
+        this.roleModulesSummary.forEach((status) => {
+          // console.log(status);
+          // alert(status.moduleName);
+          if (status.moduleName === 'qc-receiving-route') {
+            this.QCReceiving = 1;
+          }
+          else if (status.moduleName === 'wh-receiving-route') {
+            this.WhReceiving = 1;
+          }
+          else if (status.moduleName === 'approval-route') {
+            this.Approval = 1;
+          }
+          else if (status.moduleName === 'labtest-route')
+          {
+            this.LabTest = 1;
+          }
+          else if (status.moduleName === 'preparation-route')
+          {
+            this.Preparation = 1;
+          }
+
+
+        });
+
+
       }
     });
   }
@@ -254,7 +300,7 @@ export class AppComponent {
   getState(outlet) {
     return outlet.isActivated
       ? outlet.activatedRoute.snapshot.url[0].path &&
-          outlet.activatedRouteData['linkIndex']
+      outlet.activatedRouteData['linkIndex']
       : 'none';
   }
 }

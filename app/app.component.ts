@@ -22,6 +22,8 @@ import { WhCheckerDashboardService } from './services/wh-checker-dashboard.servi
 import { DryWhStoreOrders } from './models/dry-wh-store-orders';
 import { PreparedOrdersService } from './admin/components/store-order-prepared/services/prepared-order.service';
 import { CancelledOrderService } from './admin/components/store-order-cancelled-transaction/services/cancelled-order.service';
+import { RoleModules } from './models/rolemodules';
+import { UserAccountService } from './services/user-account.service';
 
 @Component({
   selector: 'app-root',
@@ -33,14 +35,17 @@ export class AppComponent {
   showStatistics: boolean = false;
   WhRejects: Project[] = [];
   cancelledPoSummary: Project[] = [];
+  roleModulesSummary: RoleModules[] = [];
   storeOrders: DryWhStoreOrders[] = [];
   projects: DryWhStoreOrders[] = [];
   totalPoRowCount: number = null;
+  totalRoleModulesRowCount: number = null;
   totalPoRowCountCancelled: number = null;
   totalPoPartialReceiving: number = null;
 
   totalForLabtest: number = null;
   totalForApproval: number = null;
+  activeUserRoleId: string = null;
 
   totalforlabtestforapproval: number = null;
 
@@ -64,7 +69,8 @@ export class AppComponent {
     private labtestForApprovalService: LabtestForApprovalService,
     private whCheckerDashboardService: WhCheckerDashboardService,
     private preparedOrderService: PreparedOrdersService,
-    private cancelledOrderService: CancelledOrderService
+    private cancelledOrderService: CancelledOrderService,
+    private userAccountService: UserAccountService
   ) {}
 
   ngOnInit() {
@@ -99,6 +105,10 @@ export class AppComponent {
     this.getForLabTest();
     this.getForApproval();
     this.totalForLabtestForApproval();
+    this.activeUserRoleId = this.loginService.currentUserRole;
+    // alert(this.activeUserRoleId);
+    alert("Sample");
+    this.getUserRoleModules();
   }
 
   getForLabTest() {
@@ -227,6 +237,19 @@ export class AppComponent {
   onSearchClick() {
     console.log(this.loginService.currentUserName);
   }
+
+
+  getUserRoleModules() {
+    this.userAccountService.getUserRoleList(this.activeUserRoleId).subscribe((response: RoleModules[]) => {
+      if (response) {
+        this.roleModulesSummary = response;
+        this.totalRoleModulesRowCount = response.length;
+        console.warn(response);
+      }
+    });
+  }
+
+
 
   getState(outlet) {
     return outlet.isActivated

@@ -819,7 +819,7 @@ export class WhRejectionApprovalComponent implements OnInit {
     // }
     setTimeout(() => {
       this.getList();
-    }, 1000);
+    }, 300);
   }
 
   ApprovedClickDetails() {
@@ -933,7 +933,7 @@ export class WhRejectionApprovalComponent implements OnInit {
 
     setTimeout(() => {
       this.getList();
-    }, 1000);
+    }, 300);
   }
 
   //Insert as Partial

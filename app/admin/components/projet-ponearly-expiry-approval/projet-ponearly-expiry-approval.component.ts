@@ -369,7 +369,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       this.received_by.nativeElement.value = this.loginService.currentUserName;
       this.IsActivated.nativeElement.value = '1';
       this.IsActivated.nativeElement.focus();
-    }, 100);
+    }, 300);
   }
 
   onSaveClick() {
@@ -771,7 +771,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
     setTimeout(() => {
       this.getList();
-    }, 1000);
+    }, 300);
   }
 
   ApprovedClickDetails() {
@@ -808,7 +808,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     }
     setTimeout(() => {
       this.getList();
-    }, 900);
+    }, 300);
   }
 
   //Insert as Partial

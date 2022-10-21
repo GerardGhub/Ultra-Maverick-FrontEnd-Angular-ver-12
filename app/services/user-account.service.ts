@@ -53,4 +53,9 @@ export class UserAccountService {
   getApprover(): Observable<any> {
     return this.httpClient.get('api/umwebusers_mrs_approver');
   }
+
+  getUserRoleList(roleid: string): Observable<any>{
+    return this.httpClient.get("/api/RoleModules/"+ roleid ,  { responseType: "json" });
+  }
+
 }

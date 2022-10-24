@@ -30,6 +30,7 @@ import { ProjectsCancelledPoComponent } from './components/projects-cancelled-po
 import { PreparedStoreOrderComponent } from './components/store-order-prepared/prepared-store-order.component';
 import { StoreOrderActiveCancelledTransactionComponent } from './components/store-order-cancelled-transaction/store-order-active-cancelled-transaction.component';
 import { SandboxComponent } from '../sandbox/sandbox.component';
+import { ParentMainModulesComponent } from './components/parent-main-modules/parent-main-modules.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SandboxComponent } from '../sandbox/sandbox.component';
     PreparedStoreOrderComponent,
     StoreOrderActiveCancelledTransactionComponent,
     SandboxComponent,
+    ParentMainModulesComponent,
   ],
   imports: [
     SharedModule,

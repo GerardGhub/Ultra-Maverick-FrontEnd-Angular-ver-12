@@ -19,6 +19,7 @@ import { LabtestRecordsComponent } from 'src/app/components/labtest-module/labte
 import { OnlineMRSComponent } from 'src/app/components/online-mrs/online-mrs.component';
 import { SandboxComponent } from 'src/app/sandbox/sandbox.component';
 import { InternalOrderComponent } from 'src/app/components/internal-preparation/internal-order.component';
+import { ParentMainModulesComponent } from '../components/parent-main-modules/parent-main-modules.component';
 
 const routes: Routes = [
   {
@@ -133,6 +134,11 @@ const routes: Routes = [
         component: InternalOrderComponent,
         data: { linkIndex: 23 },
       },
+      {
+        path: 'parent-main-modules',
+        component: ParentMainModulesComponent,
+        data : {linkIndex: 24},
+      }
     ],
   },
 ];

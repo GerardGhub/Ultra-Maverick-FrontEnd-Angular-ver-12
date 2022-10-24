@@ -4,20 +4,20 @@ export class MainMenus {
     modulename: string;
     dateadded: string;
     addedby: string;
-    isactive: boolean;
+    isactive: string;
     modifiedby: string;
     reason: string;
     menupath: string;
 
 
     constructor() {
-        this.id = 0;
-        this.modulename = "";
-        this.dateadded = "";
-        this.addedby = "";
-        this.isactive = false;
-        this.modifiedby = "";
-        this.reason = "";
-        this.menupath = "";
+        this.id = null;
+        this.modulename = null;
+        this.dateadded = null;
+        this.addedby = null;
+        this.isactive = null;
+        this.modifiedby = null;
+        this.reason = null;
+        this.menupath = null;
     }
 }

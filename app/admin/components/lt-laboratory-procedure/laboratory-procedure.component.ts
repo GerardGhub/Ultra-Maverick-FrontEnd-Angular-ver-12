@@ -2,14 +2,14 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { SystemCapabilityStatus } from 'src/app/models/system-capability-status';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { SystemCapabilityStatusService } from 'src/app/services/system-capability-status.service';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
 import Swal from 'sweetalert2';
 import * as $ from "jquery";
-import { LabTestProcedureService } from 'src/app/services/labtest-procedures-service/lab-test-procedure.service';
-import { LabaratoryProcedure } from 'src/app/models/laboratory-procedures/labaratory-procedure';
-import { LoginService } from 'src/app/services/login.service';
+import { LabTestProcedureService } from '../../../services/labtest-procedures-service/lab-test-procedure.service';
+import { LabaratoryProcedure } from '../../../models/laboratory-procedures/labaratory-procedure';
+import { LoginService } from '../../../services/login.service';
 
 
 @Component({
@@ -193,6 +193,7 @@ export class LaboratoryProcedureComponent implements OnInit {
   onEditClick(event, RejectedStatusParam: LabaratoryProcedure) {
     //Reset the editForm
     this.editForm.reset();
+    // console.log(RejectedStatusParam.lab_description)
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(RejectedStatusParam);

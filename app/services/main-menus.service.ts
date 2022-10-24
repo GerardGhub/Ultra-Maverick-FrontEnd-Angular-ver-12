@@ -20,5 +20,12 @@ export class MainMenusService {
     return this.httpClient.post<MainMenus>("/api/MainMenus", newDataStatus, { responseType: "json" });
   }
 
+  
+  updateData(existingDataStatus: MainMenus): Observable<MainMenus>
+  {
+    return this.httpClient.put<MainMenus>("/api/MainMenus", existingDataStatus, { responseType: "json" });
+  }
+
+
 
 }

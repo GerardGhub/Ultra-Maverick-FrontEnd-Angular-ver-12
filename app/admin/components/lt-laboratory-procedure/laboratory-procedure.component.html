@@ -4,7 +4,27 @@
 </h5>
 
 <div class="row">
+  <!-- <div class="col-xl-12">
+    <div class="form-group row">
+      <label for="drpSearchBy" class="col-form-label col-md-6 col-lg-2 offset-xl-1 col-xl-2 text-right">Search by:</label>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
+          <option value="lab_description">Description Name</option>
+          <option value="created_by">Created By</option>
+        </select>
+      </div>
 
+      <label for="textSearchText" class="col-form-label col-md-6 col-lg-2 col-xl-1 text-right">Search:</label>
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="input-group">
+          <input type="text" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12 col-xl-2">
+        <button mat-stroked-button color="primary" data-toggle="modal" data-target="#newLabProceduresModal" data-backdrop="false" data-keyboard="false" (click)="onNewClick($event)"><mat-icon>add_circle_outline</mat-icon>Add</button>
+      </div>
+    </div>
+  </div> -->
   <div class="col-sm-12">
     <div class="d-flex">
 

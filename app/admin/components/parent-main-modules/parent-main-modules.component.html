@@ -35,7 +35,7 @@
             <div class="ml-auto p-2">
                 <button class="addbtnStyle" data-toggle="modal" data-target="#newDataModal" data-backdrop="false"
                     data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add
-                    Procedure</button>
+                    New Data</button>
             </div>
         </div>
     </div>
@@ -207,10 +207,10 @@
                     <div class="form-group row">
                         <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
                         <div class="col-sm-8">
-                            <select id="txtis_active_status_status" class="form-control" name="isactive"
-                                formControlName="isactive" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': editForm.get('isactive').invalid 
-                && (editForm.get('isactive').dirty || editForm.get('isactive').touched || editForm.valid), 'is-valid': editForm.get('isactive').valid 
-                && (editForm.get('isactive').dirty || editForm.get('isactive').touched || editForm.valid) }"
+                            <select id="txtis_active_status_status" class="form-control" name="isactivereference"
+                                formControlName="isactivereference" maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
+                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
+                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }"
                                 #UpdateLabTestProcedureDesc>
                                 <option value="null">Please Select</option>
                                 <option *ngFor="let SystemCapabilityStatus of samples | async"
@@ -218,22 +218,21 @@
                                     {{SystemCapabilityStatus.current_system_status}}
                                 </option>
                             </select>
-                            <span class="text-danger"
-                                *ngIf="editForm.get('isactive').invalid 
-                                && (editForm.get('isactive').dirty || editForm.get('isactive').touched 
-                                || editForm.valid) && editForm.get('isactive').errors?.required">Status
+                            <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
+                                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
+                                || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
                                 can't be blank</span>
                         </div>
                     </div>
 
 
-                    <!-- <div class="form-group row visibility-false">
+                    <div class="form-group row">
                         <label for="lblactiveuser" class="col-sm-4 col-form-label">Active User</label>
                         <div class="col-sm-8">
                             <input type="text" readonly class="form-control" [(ngModel)]="activeUser"
                                 formControlName="modifiedby">
                         </div>
-                    </div> -->
+                    </div>
 
 
                 </div>

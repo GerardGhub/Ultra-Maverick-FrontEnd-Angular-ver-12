@@ -81,17 +81,17 @@ export class ParentMainModulesComponent implements OnInit {
       // lab_id: this.formBuilder.control(null),
       modulename: this.formBuilder.control(null, [Validators.required]),
       addedby: this.formBuilder.control(null, [Validators.required]),
-      // isactive: this.formBuilder.control(null, [Validators.required]),
+      isactive: this.formBuilder.control(null, [Validators.required]),
       // created_at: this.formBuilder.control(null, [Validators.required]),
       // created_by: this.formBuilder.control(null, [Validators.required])
 
     });
-
+1
     // editForm
     this.editForm = this.formBuilder.group({
       id: this.formBuilder.control(null),
       modulename: this.formBuilder.control(null, [Validators.required]),
-      isactive: this.formBuilder.control(null, [Validators.required]),
+      isactivereference: this.formBuilder.control(null, [Validators.required]),
       modifiedby: this.formBuilder.control(null, [Validators.required]),
       // created_by: this.formBuilder.control(null, [Validators.required])
     });
@@ -214,13 +214,13 @@ export class ParentMainModulesComponent implements OnInit {
   onEditClick(event, StatusParam: MainMenus) {
     // //Reset the editForm
     this.editForm.reset();
-    alert("Aa");
+
     console.log(StatusParam.modulename);
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
       this.editIndex = this.mainMenus.indexOf(StatusParam);
-      // this.activeUser = this.loginUserName;
+      this.activeUser = this.loginUserName;
 
       //Focus the ClientLocation textbox in editForm
       this.defaultTextBox_Edit.nativeElement.focus();

@@ -6,16 +6,16 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RejectedStatus } from 'src/app/models/rejected-status';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { RejectedStatus } from '../../../models/rejected-status';
+import { FilterPipe } from '../../../pipes/filter.pipe';
 import * as $ from 'jquery';
 import { Observable } from 'rxjs';
-import { SystemCapabilityStatusService } from 'src/app/services/system-capability-status.service';
-import { SystemCapabilityStatus } from 'src/app/models/system-capability-status';
-import { UserAccount } from 'src/app/models/user-account';
-import { UserAccountService } from 'src/app/services/user-account.service';
-import { AspNetRolesService } from 'src/app/services/asp-net-roles.service';
-import { AspNetRoles } from 'src/app/models/asp-net-roles';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
+import { UserAccount } from '../../../models/user-account';
+import { UserAccountService } from '../../../services/user-account.service';
+import { AspNetRolesService } from '../../../services/asp-net-roles.service';
+import { AspNetRoles } from '../../../models/asp-net-roles';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 

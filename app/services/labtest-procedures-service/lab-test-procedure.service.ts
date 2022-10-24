@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LabaratoryProcedure } from 'src/app/models/laboratory-procedures/labaratory-procedure';
+import { LabaratoryProcedure } from '../../models/laboratory-procedures/labaratory-procedure';
 
 @Injectable({
   providedIn: 'root'

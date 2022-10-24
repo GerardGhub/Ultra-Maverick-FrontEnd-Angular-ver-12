@@ -1,8 +1,8 @@
 import { Component, ComponentFactoryResolver, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { AllowablePercentageComponent } from 'src/app/allowable-percentage/allowable-percentage.component';
-import { ComponentLoaderDirective } from 'src/app/directives/component-loader.directive';
-import { ReturnedPOTransactionStatusComponent } from 'src/app/RM-Cacelled-PO-Status/returned-potransaction-status.component';
+import { AllowablePercentageComponent } from '../../../allowable-percentage/allowable-percentage.component';
+import { ComponentLoaderDirective } from '../../../directives/component-loader.directive';
+import { ReturnedPOTransactionStatusComponent } from '../../../RM-Cacelled-PO-Status/returned-potransaction-status.component';
 import { AspNetRolesComponent } from '../asp-net-roles/asp-net-roles.component';
 
 import { CancelledPOTransactionStatusComponent } from '../RM-reject-status-of-QC/cancelled-potransaction-status.component';
@@ -16,10 +16,11 @@ import { UserAccountComponent } from '../user-account/user-account.component';
 import { LaboratoryProcedureComponent } from '../lt-laboratory-procedure/laboratory-procedure.component';
 import { LabTestRemarksComponent } from '../lt-laboratory-test-remarks/lab-test-remarks.component';
 import { LabTestSubRemarksComponent } from '../lt-laboratory-test-sub-remarks/labtest-laboratory-test-sub-remarks.component';
-import { ChecklistComponent } from 'src/app/components/qc-masterlist/checklist/checklist.component';
-import { DetailsComponent } from 'src/app/components/qc-masterlist/details/details.component';
-import { DescriptionComponent } from 'src/app/components/qc-masterlist/description/description.component';
-import { ParametersComponent } from 'src/app/components/qc-masterlist/paramenters/parameters.component';
+import { ChecklistComponent } from '../../../components/qc-masterlist/checklist/checklist.component';
+import { DetailsComponent } from '../../../components/qc-masterlist/details/details.component';
+import { DescriptionComponent } from '../../../components/qc-masterlist/description/description.component';
+import { ParametersComponent } from '../../../components/qc-masterlist/paramenters/parameters.component';
+import { ParentMainModulesComponent } from '../parent-main-modules/parent-main-modules.component';
 
 @Component({
   selector: 'app-masters',
@@ -74,6 +75,16 @@ export class MastersComponent implements OnInit
     ];
     }
 
+
+    if(this.RouteNames == "/admin/masters/parent-main-modules")
+    {
+      this.masterMenuItems = [
+        { itemName: "ParentMainModules", displayName: "Main Modules", component: ParentMainModulesComponent },
+
+      ];
+    }
+
+    
     if(this.RouteNames == "/admin/masters/user")
     {
       this.masterMenuItems = [

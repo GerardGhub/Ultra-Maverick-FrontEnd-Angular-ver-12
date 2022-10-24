@@ -14,11 +14,11 @@ import { StoreOrderComponent } from '../components/store-order/store-order.compo
 import { PreparedStoreOrderComponent } from '../components/store-order-prepared/prepared-store-order.component';
 import { StoreOrderActiveCancelledTransactionComponent } from '../components/store-order-cancelled-transaction/store-order-active-cancelled-transaction.component';
 import { StoreOrderDispatchingRecordComponent } from '../components/store-order-dispatching/store-order-dispatching-record.component';
-import { ForLabtestComponent } from 'src/app/components/labtest-module/for-labtest/for-labtest.component';
-import { LabtestRecordsComponent } from 'src/app/components/labtest-module/labtest-records/labtest-records.component';
-import { OnlineMRSComponent } from 'src/app/components/online-mrs/online-mrs.component';
-import { SandboxComponent } from 'src/app/sandbox/sandbox.component';
-import { InternalOrderComponent } from 'src/app/components/internal-preparation/internal-order.component';
+import { ForLabtestComponent } from '../../components/labtest-module/for-labtest/for-labtest.component';
+import { LabtestRecordsComponent } from '../../components/labtest-module/labtest-records/labtest-records.component';
+import { OnlineMRSComponent } from '../../components/online-mrs/online-mrs.component';
+import { SandboxComponent } from '../../../app/sandbox/sandbox.component';
+import { InternalOrderComponent } from '../../components/internal-preparation/internal-order.component';
 import { ParentMainModulesComponent } from '../components/parent-main-modules/parent-main-modules.component';
 
 const routes: Routes = [
@@ -135,10 +135,10 @@ const routes: Routes = [
         data: { linkIndex: 23 },
       },
       {
-        path: 'parent-main-modules',
-        component: ParentMainModulesComponent,
+        path: 'masters/parent-main-modules',
+        component: MastersComponent,
         data : {linkIndex: 24},
-      }
+      },
     ],
   },
 ];

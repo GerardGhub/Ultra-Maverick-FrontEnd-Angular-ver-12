@@ -286,6 +286,14 @@ export class AppComponent {
           {
             this.Preparation = 1;
           }
+          else if (status.moduleName === 'onlinemrs-route')
+          {
+            this.OnlineMrs = 1;
+          }
+          else if (status.moduleName === 'setup-route')
+          {
+            this.SetUp = 1;
+          }
 
 
         });

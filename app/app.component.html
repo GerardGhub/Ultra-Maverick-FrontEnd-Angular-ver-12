@@ -191,7 +191,9 @@
               totalforlabtestforapproval | number }}</span>
           </a>
         </ng-container>
+
         <!-- Preparation Module -->
+        <ng-container *ngIf="Preparation === 1 ">
         <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu_prep">
           <mat-icon>add_shopping_cart</mat-icon>
@@ -211,16 +213,20 @@
             <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s</span>
           </button>
         </mat-menu>
+        </ng-container>
 
         <!-- Online MRS Module -->
+        <ng-container *ngIf="OnlineMrs === 1 ">
         <a class="system-name" [routerLink]="[  '/admin', 'online-mrs'  ]" mat-list-item routerLinkActive="link-active">
           <mat-icon>wallpaper</mat-icon>
           &nbsp;Online MRS &nbsp;&nbsp;
           <span class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{
             totalPreparationBadge | number }}</span>
         </a>
+        </ng-container>
 
         <!-- Set Up Module -->
+        <ng-container *ngIf="SetUp === 1 ">
         <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu">
           <mat-icon>settings_suggest</mat-icon>&nbsp;Set Up
@@ -259,6 +265,7 @@
           </button>
 
         </mat-menu>
+      </ng-container>
       </mat-nav-list>
 
     </ng-container>

@@ -60,10 +60,10 @@
                         <th class="text-center" style="width:20%">Actions</th>
                     </tr>
                     <tr
-                        *ngFor="let menu of mainMenus | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
+                        *ngFor="let menu of modules | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
 
-                        <td>{{menu.modulename}}</td>
-                        <td>{{menu.isactive}}</td>
+                        <td>{{menu.subMenuName}}</td>
+                        <td>{{menu.isActive}}</td>
 
                         <td class="text-center">
                             <button mat-stroked-button color="primary" class="editbtnStyle"

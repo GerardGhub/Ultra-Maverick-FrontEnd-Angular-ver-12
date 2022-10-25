@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../../services/login.service';
-import { LabTestProcedureService } from '../../../services/labtest-procedures-service/lab-test-procedure.service';
 import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
 import Swal from 'sweetalert2';
 import * as $ from "jquery";
 import { SystemCapabilityStatus } from '../../../models/system-capability-status';
 import { FilterPipe } from '../../../pipes/filter.pipe';
-import { MainMenusService } from '../../../services/main-menus.service';
 import { Modules } from '../../../models/modules';
+import { ModulesService } from '../../../services/modules.service';
 
 
 @Component({
@@ -61,12 +60,12 @@ export class ModulesComponent implements OnInit {
   loginUserName: string = "";
 
 
-  constructor(private fb: FormBuilder, public loginService: LoginService,
-    private labTestProceduresedureService: LabTestProcedureService,
+  constructor(private fb: FormBuilder, 
+    public loginService: LoginService,
     private formBuilder: FormBuilder,
     private systemCapabilityStatusService: SystemCapabilityStatusService,
     private toastr: ToastrService,
-    private mainMenusService: MainMenusService) { }
+    private modulesService: ModulesService) { }
 
 
   ngOnInit() {
@@ -100,10 +99,10 @@ export class ModulesComponent implements OnInit {
   @ViewChild("UpdateDesc") UpdateDesc: ElementRef;
 
   getMainModuleLists() {
-    this.mainMenusService.getMainMenus().subscribe(
-      (response: MainMenus[]) => {
-        this.mainMenus = response;
-        console.log(response);
+    this.modulesService.getModules().subscribe(
+      (response: Modules[]) => {
+        this.modules = response;
+        // console.log(response);
         this.showLoading = false;
         this.calculateNoOfPages();
       }
@@ -113,7 +112,7 @@ export class ModulesComponent implements OnInit {
   calculateNoOfPages() {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
-    var noOfPages = Math.ceil(filterPipe.transform(this.mainMenus, this.searchBy, this.searchText).length / this.pageSize);
+    var noOfPages = Math.ceil(filterPipe.transform(this.modules, this.searchBy, this.searchText).length / this.pageSize);
     this.pages = [];
 
     //Generate pages
@@ -159,12 +158,12 @@ export class ModulesComponent implements OnInit {
         if (result.isConfirmed) {
           //Invoke the REST-API call
 
-          this.mainMenusService.insertNewData(this.newForm.value).subscribe((response) => {
-            var p: MainMenus = new MainMenus();
+          this.modulesService.insertNewData(this.newForm.value).subscribe((response) => {
+            var p: Modules = new Modules();
             p.id = response.id;
-            p.modulename = response.modulename;
+            p.mainmenuid = response.mainmenuid;
             p.addedby = this.loginUserName;
-            this.mainMenus.push(p);
+            this.modules.push(p);
 
             //Reset the newForm
             this.newForm.reset();
@@ -204,7 +203,7 @@ export class ModulesComponent implements OnInit {
     this.toastr.warning('Field out the required fields!', 'Notifications');
   }
 
-  onEditClick(event, StatusParam: MainMenus) {
+  onEditClick(event, StatusParam: Modules) {
     // //Reset the editForm
     this.editForm.reset();
 
@@ -212,7 +211,7 @@ export class ModulesComponent implements OnInit {
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
-      this.editIndex = this.mainMenus.indexOf(StatusParam);
+      this.editIndex = this.modules.indexOf(StatusParam);
       this.activeUser = this.loginUserName;
 
       //Focus the ClientLocation textbox in editForm
@@ -235,9 +234,9 @@ export class ModulesComponent implements OnInit {
         if (result.isConfirmed) {
 
           //Invoke the REST-API call
-          this.mainMenusService.updateData(this.editForm.value).subscribe((response: MainMenus) => {
+          this.modulesService.updateData(this.editForm.value).subscribe((response: Modules) => {
             //Update the response in Grid
-            this.mainMenus[this.editIndex] = response;
+            this.modules[this.editIndex] = response;
 
             //Reset the editForm
             this.editForm.reset();
@@ -283,8 +282,8 @@ export class ModulesComponent implements OnInit {
         val = false;
       }
 
-      const status = this.mainMenus.filter(status => status.isactive === val);
-      this.mainMenus = status;
+      const status = this.modules.filter(status => status.isactive === val);
+      this.modules = status;
       // this.showLoading = false;
       this.calculateNoOfPages();
     }

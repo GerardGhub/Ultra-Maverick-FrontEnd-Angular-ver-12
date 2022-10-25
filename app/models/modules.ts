@@ -1,6 +1,6 @@
 export class Modules {
     id: number;
-    mainmenuId: number;
+    mainmenuid: number;
     submenuname: string;
     modulename: string;
     dateadded: string;
@@ -13,7 +13,7 @@ export class Modules {
     constructor()
     {
         this.id = 0;
-        this.mainmenuId = 0;
+        this.mainmenuid = 0;
         this.submenuname = "";
         this.modulename = "";
         this.dateadded = "";

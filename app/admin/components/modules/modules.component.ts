@@ -21,17 +21,15 @@ export class ModulesComponent implements OnInit {
 
  
   //Objects for Holding Model Data
-
   modules: Modules[] = [];
   showLoading: boolean = true;
-
   //Objects for Delete
 
   editIndex: number = 0;
   deleteIndex: number = 0;
 
   //Properties for Searching
-  searchBy: string = "modulename";
+  searchBy: string = "subMenuName";
   searchText: string = "";
 
   //Properties for Paging
@@ -40,7 +38,7 @@ export class ModulesComponent implements OnInit {
   pageSize: number = 7;
 
   //Properties for Sorting
-  sortBy: string = "modulename";
+  sortBy: string = "subMenuName";
   sortOrder: string = "ASC";
 
   //Reactive Forms
@@ -79,13 +77,14 @@ export class ModulesComponent implements OnInit {
       modulename: this.formBuilder.control(null, [Validators.required]),
       addedby: this.formBuilder.control(null, [Validators.required]),
     });
-    1
+    
     // editForm
     this.editForm = this.formBuilder.group({
       id: this.formBuilder.control(null),
-      modulename: this.formBuilder.control(null, [Validators.required]),
+      submenuname: this.formBuilder.control(null, [Validators.required]),
       isactivereference: this.formBuilder.control(null, [Validators.required]),
       modifiedby: this.formBuilder.control(null, [Validators.required]),
+      modulename: this.formBuilder.control(null, [Validators.required]),
 
     });
 

@@ -31,7 +31,7 @@ export class ParentMainModulesComponent implements OnInit {
   deleteIndex: number = 0;
 
   //Properties for Searching
-  searchBy: string = "modulename";
+  searchBy: string = "mainmodulename";
   searchText: string = "";
 
   //Properties for Paging
@@ -40,7 +40,7 @@ export class ParentMainModulesComponent implements OnInit {
   pageSize: number = 7;
 
   //Properties for Sorting
-  sortBy: string = "modulename";
+  sortBy: string = "mainmodulename";
   sortOrder: string = "ASC";
 
   //Reactive Forms
@@ -76,14 +76,14 @@ export class ParentMainModulesComponent implements OnInit {
 
     // newForm
     this.newForm = this.formBuilder.group({
-      modulename: this.formBuilder.control(null, [Validators.required]),
+      mainmodulename: this.formBuilder.control(null, [Validators.required]),
       addedby: this.formBuilder.control(null, [Validators.required]),
     });
     1
     // editForm
     this.editForm = this.formBuilder.group({
       id: this.formBuilder.control(null),
-      modulename: this.formBuilder.control(null, [Validators.required]),
+      mainmodulename: this.formBuilder.control(null, [Validators.required]),
       isactivereference: this.formBuilder.control(null, [Validators.required]),
       modifiedby: this.formBuilder.control(null, [Validators.required]),
 
@@ -161,7 +161,7 @@ export class ParentMainModulesComponent implements OnInit {
           this.mainMenusService.insertNewData(this.newForm.value).subscribe((response) => {
             var p: MainMenus = new MainMenus();
             p.id = response.id;
-            p.modulename = response.modulename;
+            p.mainmodulename = response.mainmodulename;
             p.addedby = this.loginUserName;
             this.mainMenus.push(p);
 
@@ -207,7 +207,7 @@ export class ParentMainModulesComponent implements OnInit {
     // //Reset the editForm
     this.editForm.reset();
 
-    console.log(StatusParam.modulename);
+    console.log(StatusParam.mainmodulename);
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);

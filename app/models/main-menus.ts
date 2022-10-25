@@ -1,7 +1,7 @@
 export class MainMenus {
 
     id: number;
-    modulename: string;
+    mainmodulename: string;
     dateadded: string;
     addedby: string;
     isactive: boolean;
@@ -12,7 +12,7 @@ export class MainMenus {
 
     constructor() {
         this.id = null;
-        this.modulename = null;
+        this.mainmodulename = null;
         this.dateadded = null;
         this.addedby = null;
         // this.isactive = null;

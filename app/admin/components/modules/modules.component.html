@@ -46,14 +46,33 @@
                 <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
                     <tr class="text-light header-bg-color-um system-name">
 
-                        <th style="width:60%">
-                            Description
-                            <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'modulename' "
-                                (click)="sortBy = 'modulename'; sortOrder = 'ASC' "></i>
+                        <th style="width:20%">
+                         Id
+                            <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'submenuname' "
+                                (click)="sortBy = 'submenuname'; sortOrder = 'ASC' "></i>
                             <i class="fa fa-sort-up hand-icon text-primary"
-                                *ngIf="sortBy == 'modulename' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                                *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
                             <i class="fa fa-sort-down hand-icon text-primary"
-                                *ngIf="sortBy == 'modulename' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                                *ngIf="sortBy == 'submenuname' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                        </th>
+                        <th style="width:20%">
+                            Menu
+                               <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'submenuname' "
+                                   (click)="sortBy = 'submenuname'; sortOrder = 'ASC' "></i>
+                               <i class="fa fa-sort-up hand-icon text-primary"
+                                   *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                               <i class="fa fa-sort-down hand-icon text-primary"
+                                   *ngIf="sortBy == 'submenuname' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                           </th>
+
+                        <th style="width:20%">
+                            Sub Menu
+                            <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'submenuname' "
+                                (click)="sortBy = 'submenuname'; sortOrder = 'ASC' "></i>
+                            <i class="fa fa-sort-up hand-icon text-primary"
+                                *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                            <i class="fa fa-sort-down hand-icon text-primary"
+                                *ngIf="sortBy == 'submenuname' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
                         </th>
                         <th style="width: 20%;">Status</th>
 
@@ -62,8 +81,10 @@
                     <tr
                         *ngFor="let menu of modules | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
 
-                        <td>{{menu.subMenuName}}</td>
-                        <td>{{menu.isActive}}</td>
+                        <td>{{menu.id}}</td>
+                        <td>{{menu.mainmodulename}}</td>
+                        <td>{{menu.submenuname}}</td>
+                        <td>{{menu.isactive}}</td>
 
                         <td class="text-center">
                             <button mat-stroked-button color="primary" class="editbtnStyle"
@@ -187,41 +208,97 @@
                     <div class="modal-title">Edit Information</div>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="txtEdit" class="col-sm-4 col-form-label">Description</label>
-                        <div class="col-sm-8">
-                            <input type="text" autocomplete="off" id="txtdescription" class="form-control"
-                                placeholder="Description" name="modulename" formControlName="modulename" maxlength="30"
-                                #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('modulename').invalid 
-                && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid), 'is-valid': editForm.get('modulename').valid 
-                && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid) }">
-                            <span class="text-danger" *ngIf="editForm.get('modulename').invalid 
-                && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid) 
-                && editForm.get('modulename').errors?.required">Status can't be blank</span>
-                        </div>
-                    </div>
+
+
 
                     <div class="form-group row">
-                        <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
+                        <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Main Menu </label>
                         <div class="col-sm-8">
-                            <select id="txtis_active_status_status" class="form-control" name="isactivereference"
-                                formControlName="isactivereference" maxlength="30" #defaultTextBox_New
-                                [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
-                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
-                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }" #UpdateDesc>
-                                <option value="null">Please Select</option>
-                                <option *ngFor="let SystemCapabilityStatus of samples | async"
-                                    [value]="SystemCapabilityStatus.current_system_status">
-                                    {{SystemCapabilityStatus.current_system_status}}
-                                </option>
-                            </select>
-                            <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
-                                && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
-                                || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
-                                can't be blank</span>
+                        <select id="txtis_active_status_status" class="form-control" name="isactivereference"
+                        formControlName="isactivereference" maxlength="30" #defaultTextBox_New
+                        [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
+                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
+                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }" #UpdateDesc>
+                        <option value="null">Please Select</option>
+                        <option *ngFor="let SystemCapabilityStatus of samples | async"
+                        [value]="SystemCapabilityStatus.current_system_status">
+                        {{SystemCapabilityStatus.current_system_status}}
+                        </option>
+                        </select>
+                        <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
+                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
+                        || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
+                        can't be blank</span>
                         </div>
+                        </div>
+    
+
+
+                    <div class="form-group row">
+                        <label for="txtEdit" class="col-sm-4 col-form-label">Sub Menu Name</label>
+                        <div class="col-sm-8">
+                        <input 
+                        type="text" 
+                        autocomplete="off" 
+                        id="txtdescription" 
+                        class="form-control"
+                        placeholder="Description" 
+                        name="submenuname" 
+                        formControlName="submenuname" 
+                        maxlength="30"
+                        #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('submenuname').invalid 
+                        && (editForm.get('submenuname').dirty || editForm.get('submenuname').touched || editForm.valid), 'is-valid': editForm.get('submenuname').valid 
+                        && (editForm.get('submenuname').dirty || editForm.get('submenuname').touched || editForm.valid) }">
+                        <span class="text-danger" *ngIf="editForm.get('submenuname').invalid 
+                        && (editForm.get('submenuname').dirty || editForm.get('submenuname').touched || editForm.valid) 
+                        && editForm.get('submenuname').errors?.required">Status can't be blank</span>
+                        </div>
+                        </div>
+
+                    <div class="form-group row">
+                    <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
+                    <div class="col-sm-8">
+                    <select id="txtis_active_status_status" class="form-control" name="isactivereference"
+                    formControlName="isactivereference" maxlength="30" #defaultTextBox_New
+                    [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
+                    && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
+                    && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }" #UpdateDesc>
+                    <option value="null">Please Select</option>
+                    <option *ngFor="let SystemCapabilityStatus of samples | async"
+                    [value]="SystemCapabilityStatus.current_system_status">
+                    {{SystemCapabilityStatus.current_system_status}}
+                    </option>
+                    </select>
+                    <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
+                    && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
+                    || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
+                    can't be blank</span>
                     </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="txtEdit" class="col-sm-4 col-form-label">Module Path</label>
+                        <div class="col-sm-8">
+                        <input 
+                        type="text" 
+                        autocomplete="off" 
+                        id="txtdescription" 
+                        class="form-control"
+                        placeholder="Please enter Module Name"
+                        name="modulename"
+                        formControlName="modulename" 
+                        maxlength="30"
+                        #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('modulename').invalid 
+                        && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid), 'is-valid': editForm.get('modulename').valid 
+                        && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid) }">
+                        <span class="text-danger" *ngIf="editForm.get('modulename').invalid 
+                        && (editForm.get('modulename').dirty || editForm.get('modulename').touched || editForm.valid) 
+                        && editForm.get('modulename').errors?.required">Status can't be blank</span>
+                        </div>
+                        </div>
 
 
                     <div class="form-group row visibility-false">

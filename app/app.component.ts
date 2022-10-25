@@ -271,6 +271,7 @@ export class AppComponent {
           // alert(status.moduleName);
           if (status.modulename === 'qc-receiving-route') {
             this.QCReceiving = 1;
+           
           }
           else if (status.modulename === 'wh-receiving-route') {
             this.WhReceiving = 1;

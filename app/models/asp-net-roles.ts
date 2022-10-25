@@ -5,13 +5,15 @@ export class AspNetRoles {
     normalizedname:string;
     concurrencystamp:string;
     discriminator:string;
+    isactive:string;
 
     constructor()
     {
-        this.Id = null;
-        this.name = null;
-        this.normalizedname = null;
-        this.concurrencystamp = null;
-        this.discriminator = null;
+        this.Id = "";
+        this.name = "";
+        this.normalizedname = "";
+        this.concurrencystamp = "";
+        this.discriminator = "";
+        this.isactive ="";
     }
 }

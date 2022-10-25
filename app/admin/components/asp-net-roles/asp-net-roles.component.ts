@@ -1,18 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RejectedStatus } from 'src/app/models/rejected-status';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { RejectedStatusService } from 'src/app/services/rejected-status.service';
+import { FilterPipe } from '../../../pipes/filter.pipe';
 import * as $ from "jquery";
 import { Observable } from 'rxjs';
-import { ClientLocation } from 'src/app/models/client-location';
-import { ClientLocationsService } from 'src/app/services/client-locations.service';
-import { SystemCapabilityStatusService } from 'src/app/services/system-capability-status.service';
-import { SystemCapabilityStatus } from 'src/app/models/system-capability-status';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { AspNetRolesService } from 'src/app/services/asp-net-roles.service';
-import { AspNetRoles } from 'src/app/models/asp-net-roles';
+import { AspNetRolesService } from '../../../services/asp-net-roles.service';
+import { AspNetRoles } from '../../../models/asp-net-roles';
 
 @Component({
   selector: 'app-asp-net-roles',
@@ -21,117 +17,141 @@ import { AspNetRoles } from 'src/app/models/asp-net-roles';
 })
 export class AspNetRolesComponent implements OnInit {
 
-     //Objects for Holding Model Data
-     clientLocations: AspNetRoles[] = [];
-     showLoading: boolean = true;
+  //Objects for Holding Model Data
+  UserRole: AspNetRoles[] = [];
+  showLoading: boolean = true;
 
-     //Objects for Delete
-     deleteRejectStatus: AspNetRoles = new AspNetRoles();
-     editIndex: number = null;
-     deleteIndex: number = null;
+  //Objects for Delete
+  deleteRejectStatus: AspNetRoles = new AspNetRoles();
+  editIndex: number = null;
+  deleteIndex: number = null;
 
-     //Properties for Searching
-     searchBy: string = "Name";
-     searchText: string = "";
+  //Properties for Searching
+  searchBy: string = "Name";
+  searchText: string = "";
 
-     //Properties for Paging
-     currentPageIndex: number = 0;
-     pages: any[] = [];
-     pageSize: number = 7;
+  //Properties for Paging
+  currentPageIndex: number = 0;
+  pages: any[] = [];
+  pageSize: number = 7;
 
-     //Properties for Sorting
-     sortBy: string = "Name";
-     sortOrder: string = "ASC";
+  //Properties for Sorting
+  sortBy: string = "Name";
+  sortOrder: string = "ASC";
 
-     //Reactive Forms
-     newForm: FormGroup;
-     editForm: FormGroup;
+  //Reactive Forms
+  newForm: FormGroup;
+  editForm: FormGroup;
 
-     //Autofocus TextBoxes
-     @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
-     @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
+  activeUser: string = "";
 
-     //Sample for Testing Status
-     samples: Observable<SystemCapabilityStatus[]>;
+  //Autofocus TextBoxes
+  @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
+  @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
 
-   constructor(private aspNetRolesService: AspNetRolesService, private formBuilder: FormBuilder, private systemCapabilityStatusService:  SystemCapabilityStatusService, private toastr: ToastrService)
-    {
+  //Sample for Testing Status
+  samples: Observable<SystemCapabilityStatus[]>;
 
-   }
-  ngOnInit(){
+  constructor(private aspNetRolesService: AspNetRolesService, private formBuilder: FormBuilder, private systemCapabilityStatusService: SystemCapabilityStatusService, private toastr: ToastrService) {
+
+  }
+  ngOnInit() {
     //Get data from database
+    this.getUserRole();
+
+    //Create newForm
+    this.newForm = this.formBuilder.group({
+      id: this.formBuilder.control(null),
+      reject_status_name: this.formBuilder.control(null, [Validators.required]),
+      is_active: this.formBuilder.control(null, [Validators.required])
+    });
+
+    // editForm
+    this.editForm = this.formBuilder.group({
+      id: this.formBuilder.control(null),
+      name: this.formBuilder.control(null, [Validators.required]),
+      isactive: this.formBuilder.control(null, [Validators.required]),
+      modifiedby: this.formBuilder.control(null, [Validators.required]),
+      isactivereference: this.formBuilder.control(null, [Validators.required]),
+    });
+
+    // Here
+    this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
+  }
+
+  @ViewChild("RejectStatusDescription") RejectStatusDescription: ElementRef;
+  @ViewChild("RejectStatusUpdate") RejectStatusUpdate: ElementRef;
+
+
+  getUserRole() {
     this.aspNetRolesService.getListOfRole().subscribe(
-      (response: AspNetRoles[]) =>
-      {
-        this.clientLocations = response;
+      (response: AspNetRoles[]) => {
+        this.UserRole = response;
         this.showLoading = false;
         this.calculateNoOfPages();
       }
-
-
     );
-
-     //Create newForm
-  this.newForm = this.formBuilder.group({
-    id: this.formBuilder.control(null),
-    reject_status_name: this.formBuilder.control(null, [Validators.required]),
-    is_active: this.formBuilder.control(null, [Validators.required])
-  });
-
-  //Create editForm
-  this.editForm = this.formBuilder.group({
-    Id: this.formBuilder.control(null),
-    name: this.formBuilder.control(null, [Validators.required]),
-    // is_active: this.formBuilder.control(null, [Validators.required])
-  });
-
-  // Here
-  this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
   }
-
-  @ViewChild("RejectStatusDescription") RejectStatusDescription : ElementRef;
-  @ViewChild("RejectStatusUpdate") RejectStatusUpdate : ElementRef;
-
-  calculateNoOfPages()
-  {
+  calculateNoOfPages() {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
-    var noOfPages = Math.ceil(filterPipe.transform(this.clientLocations, this.searchBy, this.searchText).length / this.pageSize);
+    var noOfPages = Math.ceil(filterPipe.transform(this.UserRole, this.searchBy, this.searchText).length / this.pageSize);
     this.pages = [];
 
     //Generate pages
-    for (let i = 0; i < noOfPages; i++)
-    {
+    for (let i = 0; i < noOfPages; i++) {
       this.pages.push({ pageIndex: i });
     }
 
     this.currentPageIndex = 0;
   }
 
-  onPageIndexClicked(ind)
-  {
+
+  onFilterStatus(val) {
+
+    if (!val) {
+      this.getUserRole();
+    } else {
+
+
+      if (val === "") {
+
+      }
+      else if (val === "true") {
+        val = true;
+      }
+      else if (val === "false") {
+
+        val = false;
+      }
+
+      const status = this.UserRole.filter(status => status.isactive === val);
+      this.UserRole = status;
+      // this.showLoading = false;
+      this.calculateNoOfPages();
+    }
+
+  }
+
+
+  onPageIndexClicked(ind) {
     //Set currentPageIndex
-    if (ind >= 0 && ind < this.pages.length)
-    {
+    if (ind >= 0 && ind < this.pages.length) {
       this.currentPageIndex = ind;
     }
   }
 
-  onNewClick(event)
-  {
+  onNewClick(event) {
     //reset the newForm
     this.newForm.reset({ id: 0 });
-    setTimeout(() =>
-    {
+    setTimeout(() => {
       //Focus the ClientLocation textbox in newForm
       this.defaultTextBox_New.nativeElement.focus();
     }, 100);
   }
 
-  onSaveClick()
-  {
-    if (this.newForm.valid)
-    {
+  onSaveClick() {
+    if (this.newForm.valid) {
       var Status = this.RejectStatusDescription.nativeElement.value;
       Swal.fire({
         title: 'Are you sure that you want to append new status?',
@@ -159,8 +179,7 @@ export class AspNetRolesComponent implements OnInit {
 
 
       //Invoke the REST-API call
-      this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) =>
-      {
+      this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) => {
         //Add Response to Grid
         var p: AspNetRoles = new AspNetRoles();
         p.Id = response.Id;
@@ -168,7 +187,7 @@ export class AspNetRolesComponent implements OnInit {
         p.normalizedname = response.normalizedname;
         p.concurrencystamp = response.concurrencystamp;
         p.discriminator = response.discriminator;
-        this.clientLocations.push(p);
+        this.UserRole.push(p);
 
         //Reset the newForm
         this.newForm.reset();
@@ -176,14 +195,12 @@ export class AspNetRolesComponent implements OnInit {
         this.calculateNoOfPages();
 
         this.calculateNoOfPages();
-      }, (error) =>
-        {
-          console.log(error);
-        });
+      }, (error) => {
+        console.log(error);
+      });
     }
-    else
-    {
-    this.FieldOutRequiredField();
+    else {
+      this.FieldOutRequiredField();
     }
   }
 
@@ -191,25 +208,22 @@ export class AspNetRolesComponent implements OnInit {
   FieldOutRequiredField() {
     this.toastr.warning('Field out the required fields!', 'Notifications');
   }
-  onEditClick(event, StatusParam: AspNetRoles)
-  {
+  onEditClick(event, StatusParam: AspNetRoles) {
+ 
     //Reset the editForm
     this.editForm.reset();
-    setTimeout(() =>
-    {
+    setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
-      this.editIndex = this.clientLocations.indexOf(StatusParam);
+      this.editIndex = this.UserRole.indexOf(StatusParam);
 
       //Focus the ClientLocation textbox in editForm
       this.defaultTextBox_Edit.nativeElement.focus();
     }, 100);
   }
 
-  onUpdateClick()
-  {
-    if (this.editForm.valid)
-    {
+  onUpdateClick() {
+    if (this.editForm.valid) {
 
       var Status = this.RejectStatusUpdate.nativeElement.value;
       Swal.fire({
@@ -224,20 +238,18 @@ export class AspNetRolesComponent implements OnInit {
         if (result.isConfirmed) {
 
 
-      //Invoke the REST-API call
-      this.aspNetRolesService.modifyRole(this.editForm.value).subscribe((response: AspNetRoles) =>
-      {
-        //Update the response in Grid
-        this.clientLocations[this.editIndex] = response;
+          //Invoke the REST-API call
+          this.aspNetRolesService.modifyRole(this.editForm.value).subscribe((response: AspNetRoles) => {
+            //Update the response in Grid
+            this.UserRole[this.editIndex] = response;
 
-        //Reset the editForm
-        this.editForm.reset();
-        $("#editClientLocationFormCancel").trigger("click");
-      },
-        (error) =>
-        {
-          console.log(error);
-        });
+            //Reset the editForm
+            this.editForm.reset();
+            $("#editClientLocationFormCancel").trigger("click");
+          },
+            (error) => {
+              console.log(error);
+            });
 
 
           Swal.fire(
@@ -254,19 +266,17 @@ export class AspNetRolesComponent implements OnInit {
     }
   }
 
-  onDeleteClick(event, RestApi: AspNetRoles)
-  {
+  onDeleteClick(event, RestApi: AspNetRoles) {
     //Set data into deleteClientLocation
     this.deleteRejectStatus.Id = RestApi.Id;
-    this.deleteRejectStatus.name= RestApi.name;
-    this.deleteRejectStatus.normalizedname= RestApi.normalizedname;
-    this.deleteRejectStatus.concurrencystamp= RestApi.concurrencystamp;
+    this.deleteRejectStatus.name = RestApi.name;
+    this.deleteRejectStatus.normalizedname = RestApi.normalizedname;
+    this.deleteRejectStatus.concurrencystamp = RestApi.concurrencystamp;
     this.deleteRejectStatus.discriminator = RestApi.discriminator;
-    this.deleteIndex = this.clientLocations.indexOf(RestApi);
+    this.deleteIndex = this.UserRole.indexOf(RestApi);
   }
 
-  onDeleteConfirmClick()
-  {
+  onDeleteConfirmClick() {
     // //Invoke the REST-API call
     // this.aspNetRolesService.deleteRejectedStatus(this.deleteRejectStatus.id).subscribe(
     //   (response) =>
@@ -288,8 +298,7 @@ export class AspNetRolesComponent implements OnInit {
     //   });
   }
 
-  onSearchTextChange(event)
-  {
+  onSearchTextChange(event) {
     this.calculateNoOfPages();
   }
 

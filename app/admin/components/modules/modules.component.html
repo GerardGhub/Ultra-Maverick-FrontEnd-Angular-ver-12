@@ -51,18 +51,18 @@
                             <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'id' "
                                 (click)="sortBy = 'id'; sortOrder = 'ASC' "></i>
                             <i class="fa fa-sort-up hand-icon text-primary"
-                                *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                                *ngIf="sortBy == 'id' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
                             <i class="fa fa-sort-down hand-icon text-primary"
-                                *ngIf="sortBy == 'submenuname' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                                *ngIf="sortBy == 'id' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
                         </th>
                         <th style="width:20%">
                             Menu
-                               <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'submenuname' "
-                                   (click)="sortBy = 'submenuname'; sortOrder = 'ASC' "></i>
+                               <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'mainmodulename' "
+                                   (click)="sortBy = 'mainmodulename'; sortOrder = 'ASC' "></i>
                                <i class="fa fa-sort-up hand-icon text-primary"
-                                   *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                                   *ngIf="sortBy == 'mainmodulename' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
                                <i class="fa fa-sort-down hand-icon text-primary"
-                                   *ngIf="sortBy == 'submenuname' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                                   *ngIf="sortBy == 'mainmodulename' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
                            </th>
 
                         <th style="width:20%">

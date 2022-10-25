@@ -79,6 +79,7 @@ export class ModulesComponent implements OnInit {
     // newForm
     this.newForm = this.formBuilder.group({
       modulename: this.formBuilder.control(null, [Validators.required]),
+      submenuname: this.formBuilder.control(null, [Validators.required]),
       addedby: this.formBuilder.control(null, [Validators.required]),
     });
     

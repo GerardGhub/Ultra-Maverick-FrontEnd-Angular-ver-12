@@ -51,9 +51,11 @@
                             <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'mainmainmodulename' "
                                 (click)="sortBy = 'mainmainmodulename'; sortOrder = 'ASC' "></i>
                             <i class="fa fa-sort-up hand-icon text-primary"
-                                *ngIf="sortBy == 'mainmainmodulename' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
+                                *ngIf="sortBy == 'mainmainmodulename' && sortOrder == 'ASC' "
+                                (click)="sortOrder = 'DESC' "></i>
                             <i class="fa fa-sort-down hand-icon text-primary"
-                                *ngIf="sortBy == 'mainmainmodulename' && sortOrder == 'DESC' " (click)="sortOrder = 'ASC' "></i>
+                                *ngIf="sortBy == 'mainmainmodulename' && sortOrder == 'DESC' "
+                                (click)="sortOrder = 'ASC' "></i>
                         </th>
                         <th style="width: 20%;">Status</th>
 
@@ -144,8 +146,8 @@
                         <label for="txtDescription" class="col-sm-4 col-form-label">Description</label>
                         <div class="col-sm-8">
                             <input type="text" autocomplete="off" id="mainmainmodulename" class="form-control"
-                                placeholder="Description" name="mainmainmodulename" formControlName="mainmodulename" maxlength="30"
-                                #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('mainmodulename').invalid 
+                                placeholder="Description" name="mainmainmodulename" formControlName="mainmodulename"
+                                maxlength="30" #defaultTextBox_New [ngClass]="{ 'is-invalid': newForm.get('mainmodulename').invalid 
                 && (newForm.get('mainmodulename').dirty || newForm.get('mainmodulename').touched || newForm.valid), 
                 'is-valid': newForm.get('mainmodulename').valid && (newForm.get('mainmodulename').dirty 
                 || newForm.get('mainmodulename').touched || newForm.valid) }" #ProcedureDesc>
@@ -192,8 +194,9 @@
                         <label for="txtEdit" class="col-sm-4 col-form-label">Description</label>
                         <div class="col-sm-8">
                             <input type="text" autocomplete="off" id="txtdescription" class="form-control"
-                                placeholder="Description" name="mainmodulename" formControlName="mainmodulename" maxlength="30"
-                                #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('mainmodulename').invalid 
+                                placeholder="Description" name="mainmodulename" formControlName="mainmodulename"
+                                maxlength="30" #defaultTextBox_Edit
+                                [ngClass]="{ 'is-invalid': editForm.get('mainmodulename').invalid 
                 && (editForm.get('mainmodulename').dirty || editForm.get('mainmodulename').touched || editForm.valid), 'is-valid': editForm.get('mainmodulename').valid 
                 && (editForm.get('mainmodulename').dirty || editForm.get('mainmodulename').touched || editForm.valid) }">
                             <span class="text-danger" *ngIf="editForm.get('mainmodulename').invalid 

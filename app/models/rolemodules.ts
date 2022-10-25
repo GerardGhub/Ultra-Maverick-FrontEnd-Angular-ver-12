@@ -5,15 +5,15 @@ export class RoleModules {
     moduleid:number;
     isactive: boolean;
     submenuname:string;
-    moduleName: string;
+    modulename: string;
 
     constructor()
     {
-        this.id = null;
-        this.roleid = null;
-        this.moduleid = null;
-        this.isactive = null;
-        this.submenuname = null;
-        this.moduleName = null;
+        this.id = 0;
+        this.roleid = "";
+        this.moduleid = 0;
+        this.isactive = false;
+        this.submenuname = "";
+        this.modulename = "";
     }
 }

@@ -242,11 +242,17 @@ export class ParentMainModulesComponent implements OnInit {
             this.editForm.reset();
             $("#editCancelModal").trigger("click");
             
-          Swal.fire(
-            'Updated!',
-            'your data on production has been modified',
-            'success'
-          )
+            Swal.fire(
+              'Updated!',
+              'your data on production has been modified',
+              'success'
+            )
+            
+            setTimeout(() => {
+              this.getMainModuleLists();
+              
+            }, 300);
+   
           },
             (error) => {
               console.log(error);

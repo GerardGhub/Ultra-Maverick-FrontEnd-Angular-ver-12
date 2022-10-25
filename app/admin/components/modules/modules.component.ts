@@ -10,6 +10,8 @@ import { SystemCapabilityStatus } from '../../../models/system-capability-status
 import { FilterPipe } from '../../../pipes/filter.pipe';
 import { Modules } from '../../../models/modules';
 import { ModulesService } from '../../../services/modules.service';
+import { MainMenus } from '../../../models/main-menus';
+import { MainMenusService } from '../../../services/main-menus.service';
 
 
 @Component({
@@ -29,7 +31,7 @@ export class ModulesComponent implements OnInit {
   deleteIndex: number = 0;
 
   //Properties for Searching
-  searchBy: string = "subMenuName";
+  searchBy: string = "submenuname";
   searchText: string = "";
 
   //Properties for Paging
@@ -38,7 +40,7 @@ export class ModulesComponent implements OnInit {
   pageSize: number = 7;
 
   //Properties for Sorting
-  sortBy: string = "subMenuName";
+  sortBy: string = "submenuname";
   sortOrder: string = "ASC";
 
   //Reactive Forms
@@ -55,6 +57,7 @@ export class ModulesComponent implements OnInit {
 
   //Sample for Testing Status
   samples: Observable<SystemCapabilityStatus[]>;
+  MainMenu: Observable<MainMenus[]>;
   loginUserName: string = "";
 
 
@@ -63,14 +66,15 @@ export class ModulesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private systemCapabilityStatusService: SystemCapabilityStatusService,
     private toastr: ToastrService,
-    private modulesService: ModulesService) { }
+    private modulesService: ModulesService,
+    private mainMenusService: MainMenusService) { }
 
 
   ngOnInit() {
     //Get data from database
     this.loginUserName = this.loginService.currentUserName;
 
-    this.getMainModuleLists();
+    this.getModuleLists();
 
     // newForm
     this.newForm = this.formBuilder.group({
@@ -85,19 +89,19 @@ export class ModulesComponent implements OnInit {
       isactivereference: this.formBuilder.control(null, [Validators.required]),
       modifiedby: this.formBuilder.control(null, [Validators.required]),
       modulename: this.formBuilder.control(null, [Validators.required]),
-
+      mainmenuid: this.formBuilder.control(null, [Validators.required]),
     });
 
 
     // Here
     this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
-
+    this.MainMenu = this.mainMenusService.getMainMenus();
   }
 
   @ViewChild("ProcedureDesc") ProcedureDesc: ElementRef;
   @ViewChild("UpdateDesc") UpdateDesc: ElementRef;
 
-  getMainModuleLists() {
+  getModuleLists() {
     this.modulesService.getModules().subscribe(
       (response: Modules[]) => {
         this.modules = response;
@@ -170,8 +174,8 @@ export class ModulesComponent implements OnInit {
             $("#newModal").trigger("click");
             setTimeout(() => {
 
-              this.getMainModuleLists();
-            }, 400);
+              this.getModuleLists();
+            }, 300);
 
             // this.calculateNoOfPages();
 
@@ -223,7 +227,7 @@ export class ModulesComponent implements OnInit {
       var Status = this.UpdateDesc.nativeElement.value;
       Swal.fire({
         title: 'Are you sure that you want to modify the status?',
-        text: Status,
+        // text: Status,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -240,12 +244,19 @@ export class ModulesComponent implements OnInit {
             //Reset the editForm
             this.editForm.reset();
             $("#editCancelModal").trigger("click");
+
+            Swal.fire(
+              'Updated!',
+              'your data on production has been modified',
+              'success'
+            )
+
+            setTimeout(() => {
+              this.getModuleLists();
+              
+            }, 300);
             
-          Swal.fire(
-            'Updated!',
-            'your data on production has been modified',
-            'success'
-          )
+
           },
             (error) => {
               console.log(error);
@@ -266,7 +277,7 @@ export class ModulesComponent implements OnInit {
   onFilterStatus(val) {
 
     if (!val) {
-      this.getMainModuleLists();
+      this.getModuleLists();
     } else {
 
 

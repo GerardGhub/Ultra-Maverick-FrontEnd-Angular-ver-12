@@ -9,7 +9,7 @@ export class Modules {
     reason: string;
     modulestatus: string;
     addedby: string;
-    
+
     constructor()
     {
         this.id = 0;
@@ -22,6 +22,7 @@ export class Modules {
         this.reason = "";
         this.modulestatus= "";
         this.addedby = "";
+
     }
     
 }

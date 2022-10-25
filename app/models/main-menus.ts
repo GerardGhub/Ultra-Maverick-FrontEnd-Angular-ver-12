@@ -11,14 +11,14 @@ export class MainMenus {
     isactivereference: string;
 
     constructor() {
-        this.id = null;
-        this.mainmodulename = null;
-        this.dateadded = null;
-        this.addedby = null;
+        this.id = 0;
+        this.mainmodulename = "";
+        this.dateadded = "";
+        this.addedby = "";
         // this.isactive = null;
-        this.isactivereference = null;
-        this.modifiedby = null;
-        this.reason = null;
-        this.menupath = null;
+        this.isactivereference = "";
+        this.modifiedby = "";
+        this.reason = "";
+        this.menupath = "";
     }
 }

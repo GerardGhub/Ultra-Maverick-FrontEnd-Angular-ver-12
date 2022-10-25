@@ -48,8 +48,8 @@
 
                         <th style="width:20%">
                          Id
-                            <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'submenuname' "
-                                (click)="sortBy = 'submenuname'; sortOrder = 'ASC' "></i>
+                            <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'id' "
+                                (click)="sortBy = 'id'; sortOrder = 'ASC' "></i>
                             <i class="fa fa-sort-up hand-icon text-primary"
                                 *ngIf="sortBy == 'submenuname' && sortOrder == 'ASC' " (click)="sortOrder = 'DESC' "></i>
                             <i class="fa fa-sort-down hand-icon text-primary"
@@ -216,20 +216,21 @@
                     <div class="form-group row">
                         <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Main Menu </label>
                         <div class="col-sm-8">
-                        <select id="txtis_active_status_status" class="form-control" name="isactivereference"
-                        formControlName="isactivereference" maxlength="30" #defaultTextBox_New
-                        [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
-                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
-                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }" #UpdateDesc>
+                        <select id="txtmainmodule" class="form-control" 
+                        name="mainmenuid"
+                        formControlName="mainmenuid" maxlength="30" #defaultTextBox_New
+                        [ngClass]="{ 'is-invalid': editForm.get('mainmenuid').invalid 
+                        && (editForm.get('mainmenuid').dirty || editForm.get('mainmenuid').touched || editForm.valid), 'is-valid': editForm.get('mainmenuid').valid 
+                        && (editForm.get('mainmenuid').dirty || editForm.get('mainmenuid').touched || editForm.valid) }" #UpdateDesc>
                         <option value="null">Please Select</option>
-                        <option *ngFor="let SystemCapabilityStatus of samples | async"
-                        [value]="SystemCapabilityStatus.current_system_status">
-                        {{SystemCapabilityStatus.current_system_status}}
+                        <option *ngFor="let menu of MainMenu | async"
+                        [value]="menu.id">
+                        {{menu.mainmodulename}}
                         </option>
                         </select>
-                        <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
-                        && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
-                        || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
+                        <span class="text-danger" *ngIf="editForm.get('mainmenuid').invalid 
+                        && (editForm.get('mainmenuid').dirty || editForm.get('mainmenuid').touched 
+                        || editForm.valid) && editForm.get('mainmenuid').errors?.required">Status
                         can't be blank</span>
                         </div>
                         </div>

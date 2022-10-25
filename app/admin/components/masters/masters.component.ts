@@ -21,6 +21,7 @@ import { DetailsComponent } from '../../../components/qc-masterlist/details/deta
 import { DescriptionComponent } from '../../../components/qc-masterlist/description/description.component';
 import { ParametersComponent } from '../../../components/qc-masterlist/paramenters/parameters.component';
 import { ParentMainModulesComponent } from '../parent-main-modules/parent-main-modules.component';
+import { ModulesComponent } from '../modules/modules.component';
 
 @Component({
   selector: 'app-masters',
@@ -80,6 +81,7 @@ export class MastersComponent implements OnInit
     {
       this.masterMenuItems = [
         { itemName: "ParentMainModules", displayName: "Main Modules", component: ParentMainModulesComponent },
+        { itemName: "Modules", displayName: "Modules", component: ModulesComponent},
 
       ];
     }

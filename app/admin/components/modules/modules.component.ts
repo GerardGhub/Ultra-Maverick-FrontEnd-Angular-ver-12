@@ -10,19 +10,20 @@ import * as $ from "jquery";
 import { SystemCapabilityStatus } from '../../../models/system-capability-status';
 import { FilterPipe } from '../../../pipes/filter.pipe';
 import { MainMenusService } from '../../../services/main-menus.service';
-import { MainMenus } from '../../../models/main-menus';
+import { Modules } from '../../../models/modules';
 
 
 @Component({
-  selector: 'app-parent-main-modules',
-  templateUrl: './parent-main-modules.component.html',
-  styleUrls: ['./parent-main-modules.component.scss']
+  selector: 'app-modules',
+  templateUrl: './modules.component.html',
+  styleUrls: ['./modules.component.scss']
 })
-export class ParentMainModulesComponent implements OnInit {
+export class ModulesComponent implements OnInit {
 
+ 
   //Objects for Holding Model Data
 
-  mainMenus: MainMenus[] = [];
+  modules: Modules[] = [];
   showLoading: boolean = true;
 
   //Objects for Delete
@@ -289,5 +290,6 @@ export class ParentMainModulesComponent implements OnInit {
     }
 
   }
+
 
 }

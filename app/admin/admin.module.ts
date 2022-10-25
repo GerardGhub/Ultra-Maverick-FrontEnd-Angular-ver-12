@@ -31,6 +31,7 @@ import { PreparedStoreOrderComponent } from './components/store-order-prepared/p
 import { StoreOrderActiveCancelledTransactionComponent } from './components/store-order-cancelled-transaction/store-order-active-cancelled-transaction.component';
 import { SandboxComponent } from '../sandbox/sandbox.component';
 import { ParentMainModulesComponent } from './components/parent-main-modules/parent-main-modules.component';
+import { ModulesComponent } from './components/modules/modules.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ParentMainModulesComponent } from './components/parent-main-modules/par
     StoreOrderActiveCancelledTransactionComponent,
     SandboxComponent,
     ParentMainModulesComponent,
+    ModulesComponent,
   ],
   imports: [
     SharedModule,

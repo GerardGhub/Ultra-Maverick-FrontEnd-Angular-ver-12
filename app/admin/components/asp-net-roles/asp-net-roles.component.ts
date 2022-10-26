@@ -12,6 +12,8 @@ import { LoginService } from '../../../services/login.service';
 import Swal from 'sweetalert2';
 import { MainMenus } from '../../../models/main-menus';
 import { MainMenusService } from '../../../services/main-menus.service';
+import { UserAccountService } from '../../../services/user-account.service';
+import { RoleModules } from '../../../models/rolemodules';
 
 @Component({
   selector: 'app-asp-net-roles',
@@ -22,6 +24,7 @@ export class AspNetRolesComponent implements OnInit {
 
   //Objects for Holding Model Data
   UserRole: AspNetRoles[] = [];
+  RoleModule: RoleModules[] = [];
   MainMenu: Observable<MainMenus[]>;
   showLoading: boolean = true;
 
@@ -36,6 +39,7 @@ export class AspNetRolesComponent implements OnInit {
 
   //Properties for Paging
   currentPageIndex: number = 0;
+  currentPageIndexModuleTagged: number = 0;
   pages: any[] = [];
   pageSize: number = 7;
 
@@ -48,6 +52,9 @@ export class AspNetRolesComponent implements OnInit {
   editForm: FormGroup;
 
   activeUser: string = "";
+  //Combo Box for User Role Binding
+  activeModuleId: string = "";
+  totalRoleModulesRowCount: number = 0;
 
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
@@ -62,7 +69,8 @@ export class AspNetRolesComponent implements OnInit {
     private systemCapabilityStatusService: SystemCapabilityStatusService,
     private toastr: ToastrService,
     public loginService: LoginService,
-    private mainMenusService: MainMenusService) {
+    private mainMenusService: MainMenusService,
+    private userAccountService: UserAccountService) {
 
   }
   ngOnInit() {
@@ -93,7 +101,7 @@ export class AspNetRolesComponent implements OnInit {
 
   @ViewChild("Description") Description: ElementRef;
   @ViewChild("DescriptionUpdate") DescriptionUpdate: ElementRef;
-
+  @ViewChild("RoleId") RoleId: ElementRef;
 
   getUserRole() {
     this.aspNetRolesService.getListOfRole().subscribe(
@@ -105,12 +113,32 @@ export class AspNetRolesComponent implements OnInit {
     );
   }
 
-  getNewFourthApproverId(id) {
+  getUserRoleModules() {
+    // alert(this.RoleId.nativeElement.value);
+    alert("AAAA xxxx");
+    alert(this.RoleId.nativeElement.value);
+    this.userAccountService.getUserRoleListById(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
+      
+      (response: RoleModules[]) => {
+        console.log(response);
+        if (response) {
+          this.RoleModule = response;
+          this.totalRoleModulesRowCount = response.length;
+        }
+      });
+  }
 
-    alert(id);
+
+  getNewFourthApproverId(roleid) {
+
+    alert(roleid);
+    // alert(this.RoleId.nativeElement.value);
+    this.activeModuleId = roleid;
+    this.getUserRoleModules();
+
     // if (typeof (id) == "string") {
     //   this.fourth_approver_name = "";
-    }
+  }
 
   calculateNoOfPages() {
     //Get no. of Pages
@@ -158,6 +186,13 @@ export class AspNetRolesComponent implements OnInit {
     //Set currentPageIndex
     if (ind >= 0 && ind < this.pages.length) {
       this.currentPageIndex = ind;
+    }
+  }
+
+  onPageIndexClickedModuleTagged(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pages.length) {
+      this.currentPageIndexModuleTagged = ind;
     }
   }
 

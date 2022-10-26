@@ -58,4 +58,8 @@ export class UserAccountService {
     return this.httpClient.get("/api/RoleModules/"+ roleid ,  { responseType: "json" });
   }
 
+  getUserRoleListById(roleid: string, moduleId: number): Observable<any>{
+    return this.httpClient.get("/api/RoleModules/RoleId/"+ roleid+"/"+moduleId,  { responseType: "json" });
+  }
+
 }

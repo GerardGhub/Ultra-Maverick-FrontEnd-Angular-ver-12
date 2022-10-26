@@ -5,11 +5,11 @@ import * as $ from "jquery";
 import { Observable } from 'rxjs';
 import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
 import { SystemCapabilityStatus } from '../../../models/system-capability-status';
-import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { AspNetRolesService } from '../../../services/asp-net-roles.service';
 import { AspNetRoles } from '../../../models/asp-net-roles';
 import { LoginService } from '../../../services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-asp-net-roles',
@@ -86,7 +86,7 @@ export class AspNetRolesComponent implements OnInit {
     this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
   }
 
-  @ViewChild("RejectStatusDescription") RejectStatusDescription: ElementRef;
+  @ViewChild("Description") Description: ElementRef;
   @ViewChild("RejectStatusUpdate") RejectStatusUpdate: ElementRef;
 
 
@@ -148,22 +148,29 @@ export class AspNetRolesComponent implements OnInit {
     }
   }
 
+  
   onNewClick(event) {
     //reset the newForm
     this.newForm.reset({ id: 0 });
     setTimeout(() => {
-      //Focus the User Role textbox in newForm
+      //Focus the User role textbox in newForm
       this.activeUser = this.loginService.currentUserName;
       this.defaultTextBox_New.nativeElement.focus();
+
+
+
     }, 100);
   }
 
   onSaveClick() {
+
     if (this.newForm.valid) {
-      var Status = this.RejectStatusDescription.nativeElement.value;
+      //Start
+  
+      var StatusofReject = this.Description.nativeElement.value;
       Swal.fire({
-        title: 'Are you sure that you want to append new status?',
-        text: Status,
+        title: 'Are you sure that you want to append new data?',
+        text: StatusofReject,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -171,23 +178,10 @@ export class AspNetRolesComponent implements OnInit {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
+          //Invoke the REST-API call
 
-
-
-
-          Swal.fire(
-            'Append!',
-            'Your data is updated on production',
-            'success'
-          )
-
-        }
-      })
-
-
-
-      //Invoke the REST-API call
-      this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) => {
+   
+           this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) => {
         //Add Response to Grid
         var p: AspNetRoles = new AspNetRoles();
         p.Id = response.Id;
@@ -197,20 +191,40 @@ export class AspNetRolesComponent implements OnInit {
         p.discriminator = response.discriminator;
         this.UserRole.push(p);
 
-        //Reset the newForm
-        this.newForm.reset();
-        $("#newClientLocationFormCancel").trigger("click");
-        this.calculateNoOfPages();
+            //Reset the newForm
+            this.newForm.reset();
 
-        this.calculateNoOfPages();
-      }, (error) => {
-        console.log(error);
-      });
+            $("#newModal1").trigger("click");
+            setTimeout(() => {
+
+              this.getUserRole();
+            }, 300);
+
+            // this.calculateNoOfPages();
+
+            Swal.fire(
+              'Append!',
+              'Your data is Saved on production',
+              'success'
+            )
+
+
+          }, (error) => {
+            console.log(error);
+          });
+
+        }
+
+      })
+
+      //End
+
     }
     else {
       this.FieldOutRequiredField();
     }
   }
+
 
 
   FieldOutRequiredField() {
@@ -230,49 +244,7 @@ export class AspNetRolesComponent implements OnInit {
     }, 100);
   }
 
-  onUpdateClick() {
-    if (this.editForm.valid) {
 
-      var Status = this.RejectStatusUpdate.nativeElement.value;
-      Swal.fire({
-        title: 'Are you sure that you want to modify the user role?',
-        text: Status,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        if (result.isConfirmed) {
-
-
-          //Invoke the REST-API call
-          this.aspNetRolesService.modifyRole(this.editForm.value).subscribe((response: AspNetRoles) => {
-            //Update the response in Grid
-            this.UserRole[this.editIndex] = response;
-
-            //Reset the editForm
-            this.editForm.reset();
-            $("#editClientLocationFormCancel").trigger("click");
-          },
-            (error) => {
-              console.log(error);
-            });
-
-
-          Swal.fire(
-            'Updated!',
-            'your data on production has been modified',
-            'success'
-          )
-
-        }
-      })
-
-
-
-    }
-  }
 
   onDeleteClick(event, RestApi: AspNetRoles) {
     //Set data into deleteClientLocation
@@ -284,27 +256,7 @@ export class AspNetRolesComponent implements OnInit {
     this.deleteIndex = this.UserRole.indexOf(RestApi);
   }
 
-  onDeleteConfirmClick() {
-    // //Invoke the REST-API call
-    // this.aspNetRolesService.deleteRejectedStatus(this.deleteRejectStatus.id).subscribe(
-    //   (response) =>
-    //   {
-    //     //Delete object in Grid
-    //     this.clientLocations.splice(this.deleteIndex, 1);
 
-    //     //Clear deleteCountry
-    //     this.deleteRejectStatus.id = null;
-    //     this.deleteRejectStatus.reject_status_name = null;
-    //     this.deleteRejectStatus.is_active = null;
-
-    //     //Recall the calculateNoOfPages
-    //     this.calculateNoOfPages();
-    //   },
-    //   (error) =>
-    //   {
-    //     console.log(error);
-    //   });
-  }
 
   onSearchTextChange(event) {
     this.calculateNoOfPages();

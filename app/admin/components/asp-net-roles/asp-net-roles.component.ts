@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { AspNetRolesService } from '../../../services/asp-net-roles.service';
 import { AspNetRoles } from '../../../models/asp-net-roles';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-asp-net-roles',
@@ -52,18 +53,24 @@ export class AspNetRolesComponent implements OnInit {
   //Sample for Testing Status
   samples: Observable<SystemCapabilityStatus[]>;
 
-  constructor(private aspNetRolesService: AspNetRolesService, private formBuilder: FormBuilder, private systemCapabilityStatusService: SystemCapabilityStatusService, private toastr: ToastrService) {
+  constructor(
+    private aspNetRolesService: AspNetRolesService,
+     private formBuilder: FormBuilder, 
+     private systemCapabilityStatusService: SystemCapabilityStatusService, 
+     private toastr: ToastrService,
+     public loginService: LoginService) {
 
   }
   ngOnInit() {
     //Get data from database
     this.getUserRole();
 
+    
     //Create newForm
     this.newForm = this.formBuilder.group({
-      id: this.formBuilder.control(null),
-      reject_status_name: this.formBuilder.control(null, [Validators.required]),
-      is_active: this.formBuilder.control(null, [Validators.required])
+      // id: this.formBuilder.control(null),
+      name: this.formBuilder.control(null, [Validators.required]),
+      addedby: this.formBuilder.control(null, [Validators.required])
     });
 
     // editForm
@@ -145,7 +152,8 @@ export class AspNetRolesComponent implements OnInit {
     //reset the newForm
     this.newForm.reset({ id: 0 });
     setTimeout(() => {
-      //Focus the ClientLocation textbox in newForm
+      //Focus the User Role textbox in newForm
+      this.activeUser = this.loginService.currentUserName;
       this.defaultTextBox_New.nativeElement.focus();
     }, 100);
   }
@@ -216,7 +224,7 @@ export class AspNetRolesComponent implements OnInit {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
       this.editIndex = this.UserRole.indexOf(StatusParam);
-
+      this.activeUser = this.loginService.currentUserName;
       //Focus the ClientLocation textbox in editForm
       this.defaultTextBox_Edit.nativeElement.focus();
     }, 100);

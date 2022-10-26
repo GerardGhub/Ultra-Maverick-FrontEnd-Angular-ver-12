@@ -4,66 +4,40 @@
 </h5>
 
 <div class="row">
-  <!-- <div class="col-xl-12">
-    <div class="form-group row">
-
-
-
-      <label for="drpSearchBy" class="col-form-label col-md-6 col-lg-2 offset-xl-1 col-xl-2 text-right">Search
-        by:</label>
-
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
-          <option value="name">Role</option>
-        </select>
-      </div>
-
-      <label for="textSearchText" class="col-form-label col-md-6 col-lg-2 col-xl-1 text-right">Search:</label>
-
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <div class="input-group">
-          <input type="text" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText"
-            (keyup)="onSearchTextChange($event)">
-        </div>
-      </div>
-    </div>
-  </div> -->
 
 
   <div class="col-sm-12">
     <div class="d-flex">
 
-        <div class="p-2">
-            <div class="input-group searchBtnStyle">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
-                </div>
-                <select class="form-control" id="drpSearchBy" name="SearchBy"
-                    (change)="onFilterStatus($event.target.value)">
-                    <option value="">All</option>
-                    <option value="true">Active</option>
-                    <option value="false">InActive</option>
-                </select>
-            </div>
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
+          </div>
+          <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)">
+            <option value="">All</option>
+            <option value="true">Active</option>
+            <option value="false">InActive</option>
+          </select>
         </div>
+      </div>
 
-        <div class="p-2">
-            <div class="input-group searchBtnStyle">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
-                </div>
-                <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText"
-                    autocomplete="off" name="SearchText" [(ngModel)]="searchText"
-                    (keyup)="onSearchTextChange($event)">
-            </div>
+      <div class="p-2">
+        <div class="input-group searchBtnStyle">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+          </div>
+          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" autocomplete="off"
+            name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
         </div>
-        <div class="ml-auto p-2">
-            <button class="addbtnStyle" data-toggle="modal" data-target="#newDataModal1" data-backdrop="false"
-                data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add
-                New Data</button>
-        </div>
+      </div>
+      <div class="ml-auto p-2">
+        <button class="addbtnStyle" data-toggle="modal" data-target="#newDataModal1" data-backdrop="false"
+          data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add
+          New Data</button>
+      </div>
     </div>
-</div>
+  </div>
 
 
 
@@ -95,17 +69,11 @@
             <td>Sa</td>
             <td>ss</td>
             <td class="text-center">
-              <button 
-              mat-stroked-button color="primary" 
-              class="editbtnStyle"
-                  (click)="onEditClick($event, role)" 
-                  data-toggle="modal" 
-                  data-target="#editModal1"
-                  data-backdrop="false" 
-                  data-keyboard="false">
-                  <mat-icon> update</mat-icon>
+              <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, role)"
+                data-toggle="modal" data-target="#editModal1" data-backdrop="false" data-keyboard="false">
+                <mat-icon> update</mat-icon>
               </button>&nbsp;
-          </td>
+            </td>
           </tr>
         </table>
       </div>
@@ -165,198 +133,62 @@
 
 </div>
 
-<form novalidate="novalidate" [formGroup]="newForm">
-  <div class="modal" role="dialog" id="newClientLocationModal">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <div class="modal-title">Append Rejected Status</div>
-          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body">
-
-          <div class="form-group row">
-            <label for="txtNewClientLocationName" class="col-sm-4 col-form-label">Rejected Status</label>
-            <div class="col-sm-8">
-              <input type="text" id="txtNewreject_status_name" class="form-control" placeholder="Reject Status"
-                name="reject_status_name" formControlName="reject_status_name" autocomplete="off" maxlength="30"
-                #defaultTextBox_New
-                [ngClass]="{ 'is-invalid': newForm.get('reject_status_name').invalid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid), 'is-valid': newForm.get('reject_status_name').valid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid) }"
-                #RejectStatusDescription>
-
-              <span class="text-danger"
-                *ngIf="newForm.get('reject_status_name').invalid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid) && newForm.get('reject_status_name').errors?.required">Status
-                of Reject can't be blank</span>
-            </div>
-          </div>
-
-
-
-          <!-- Start -->
-          <div class="form-group row">
-            <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
-            <div class="col-sm-8">
-              <select id="txtNewis_active" class="form-control" name="is_active" formControlName="is_active"
-                maxlength="30" #defaultTextBox_New
-                [ngClass]="{ 'is-invalid': newForm.get('is_active').invalid && (newForm.get('is_active').dirty || newForm.get('is_active').touched || newForm.valid), 'is-valid': newForm.get('is_active').valid && (newForm.get('is_active').dirty || newForm.get('is_active').touched || newForm.valid) }">
-                <option value="null">Please Select</option>
-                <option *ngFor="let SystemCapabilityStatus of samples | async"
-                  [value]="SystemCapabilityStatus.current_system_status">
-                  {{SystemCapabilityStatus.current_system_status}}
-                </option>
-              </select>
-
-              <!-- <span class="text-danger" *ngIf="editClientLocationID.invalid && (editClientLocationID.dirty || editClientLocationID.touched || editForm.submitted) && editClientLocationID.errors?.required">Please client location</span> -->
-
-              <!-- <span class="text-danger" *ngIf="editForm.invalid && (editForm.dirty || editForm.touched || editForm.submitted) && editForm.errors?.clientLocationStatus">Support projects are not allowed at Tokyo</span> -->
-            </div>
-          </div>
-
-          <!-- End -->
-        </div>
 
 
 
 
-
-        <div class="modal-footer">
-          <!-- <button class="btn btn-warning" data-dismiss="modal" id="newClientLocationFormCancel" type="button">Cancel</button> -->
-          <button mat-stroked-button color="primary" (click)="onSaveClick()">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-
-<!-- Edit Rejected Status Masterlist -->
-<form novalidate="novalidate" [formGroup]="editForm">
-  <div class="modal" role="dialog" id="editClientLocationModal">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <div class="modal-title">Edit Role</div>
-          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="form-group row">
-            <label for="txtEditClientLocationName" class="col-sm-4 col-form-label">Role</label>
-            <div class="col-sm-8">
-              <input type="text" id="txtEditname" class="form-control" placeholder="User Role" name="name"
-                autocomplete="off" formControlName="name" maxlength="30" #defaultTextBox_Edit
-                [ngClass]="{ 'is-invalid': editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid), 'is-valid': editForm.get('name').valid && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) }"
-                #RejectStatusUpdate>
-
-              <span class="text-danger"
-                *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) && editForm.get('name').errors?.required">User
-                Role can't be blank</span>
-            </div>
-          </div>
-
-
-
-        </div>
-        <div class="modal-footer">
-          <!-- <button class="btn btn-warning" data-dismiss="modal" id="editClientLocationFormCancel" type="button">Cancel</button> -->
-          <button mat-stroked-button color="primary">Update</button>
-          <!-- (click)="onUpdateClick()" -->
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-
-
-<!-- Delete Client Location -->
-<form>
-  <div class="modal" role="dialog" id="deleteModal">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <div class="modal-title">Delete Rejection Status</div>
-          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-        </div>
-        <div class="modal-body">
-
-
-
-          <div class="form-group row">
-
-            <label for="txtDeleteClientLocationName" class="col-sm-4 col-form-label">Client Location Name</label>
-            <div class="col-sm-8">
-              <input type="text" id="txtDeleteClientLocationName" class="form-control-plain-text" style="width:300px"
-                placeholder="Client Location Name" name="ClientLocationName" [(ngModel)]="deleteRejectStatus.name"
-                disabled="disabled">
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <!-- <button class="btn btn-warning" data-dismiss="modal" type="button">Cancel</button> -->
-          <button mat-stroked-button color="primary" data-dismiss="modal"
-            (click)="onDeleteConfirmClick()">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
 
 
 
 
 <form novalidate="novalidate" [formGroup]="editForm">
   <div class="modal" role="dialog" id="editModal1">
-      <div class="modal-dialog modal-md">
-          <div class="modal-content">
-              <div class="modal-header bg-all text-white">
-                  <div class="modal-title">Edit Information</div>
-                  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-              </div>
-              <div class="modal-body">
-                  <div class="form-group row">
-                      <label for="txtEdit" class="col-sm-4 col-form-label">Role</label>
-                      <div class="col-sm-8">
-                          <input type="text" autocomplete="off" id="txtrole" class="form-control"
-                              placeholder="Role" 
-                              name="name" 
-                              formControlName="name"
-                              maxlength="30" #defaultTextBox_Edit
-                              [ngClass]="{ 'is-invalid': editForm.get('name').invalid 
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">Edit Information</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="txtEdit" class="col-sm-4 col-form-label">Role</label>
+            <div class="col-sm-8">
+              <input type="text" autocomplete="off" id="txtrole" class="form-control" placeholder="Role" name="name"
+                formControlName="name" maxlength="30" #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('name').invalid 
               && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid), 
               'is-valid': editForm.get('name').valid 
               && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) }">
-                          <span class="text-danger" *ngIf="editForm.get('name').invalid 
+              <span class="text-danger" *ngIf="editForm.get('name').invalid 
               && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) 
               && editForm.get('name').errors?.required">Status can't be blank</span>
-                      </div>
-                  </div>
+            </div>
+          </div>
 
 
 
-                <div class="form-group row">
-                <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
-                <div class="col-sm-8">
-                <select id="txtis_active_status_status" class="form-control" name="isactivereference"
+          <div class="form-group row">
+            <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
+            <div class="col-sm-8">
+              <select id="txtis_active_status_status" class="form-control" name="isactivereference"
                 formControlName="isactivereference" maxlength="30" #defaultTextBox_New
                 [ngClass]="{ 'is-invalid': editForm.get('isactivereference').invalid 
                 && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid), 'is-valid': editForm.get('isactivereference').valid 
                 && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched || editForm.valid) }" #UpdateDesc>
                 <option value="null">Please Select</option>
                 <option *ngFor="let SystemCapabilityStatus of samples | async"
-                [value]="SystemCapabilityStatus.current_system_status">
-                {{SystemCapabilityStatus.current_system_status}}
+                  [value]="SystemCapabilityStatus.current_system_status">
+                  {{SystemCapabilityStatus.current_system_status}}
                 </option>
-                </select>
-                <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
+              </select>
+              <span class="text-danger" *ngIf="editForm.get('isactivereference').invalid 
                 && (editForm.get('isactivereference').dirty || editForm.get('isactivereference').touched 
                 || editForm.valid) && editForm.get('isactivereference').errors?.required">Status
                 can't be blank</span>
-                </div>
-                </div>
+            </div>
+          </div>
 
 
-                  <!-- <div class="form-group row visibility-false">
+          <!-- <div class="form-group row visibility-false">
                       <label for="lblactiveuser" class="col-sm-4 col-form-label">Active User</label>
                       <div class="col-sm-8">
                           <input type="text" readonly class="form-control" [(ngModel)]="activeUser"
@@ -365,14 +197,63 @@
                   </div>  -->
 
 
-              </div>
-              <div class="modal-footer">
-                  <button mat-stroked-button color="accent" class="mr-1" id="editCancelModal" data-dismiss="modal"
-                      type="button">Cancel</button>
-                  <button mat-stroked-button color="primary" [disabled]="!editForm.valid"
-                      (click)="onUpdateClick()">Update</button>
-              </div>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" class="mr-1" id="editCancelModal" data-dismiss="modal"
+            type="button">Cancel</button>
+          <button mat-stroked-button color="primary" [disabled]="!editForm.valid"
+            (click)="onUpdateClick()">Update</button>
+        </div>
       </div>
+    </div>
   </div>
-</form> 
+</form>
+
+
+
+
+<!-- Add Lab Test Procedure -->
+<form novalidate="novalidate" [formGroup]="newForm">
+  <div class="modal" role="dialog" id="newDataModal1">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">Append User Role</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group row">
+            <label for="txtEdit" class="col-sm-4 col-form-label">Role</label>
+            <div class="col-sm-8">
+              <input type="text" autocomplete="off" id="txtrole" class="form-control" placeholder="Role" name="name"
+                formControlName="name" maxlength="30" #defaultTextBox_Edit [ngClass]="{ 'is-invalid': editForm.get('name').invalid 
+    && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid), 
+    'is-valid': editForm.get('name').valid 
+    && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) }">
+              <span class="text-danger" *ngIf="editForm.get('name').invalid 
+    && (editForm.get('name').dirty || editForm.get('name').touched || editForm.valid) 
+    && editForm.get('name').errors?.required">Status can't be blank</span>
+            </div>
+          </div>
+
+
+
+          <div class="form-group row visibility-falses">
+            <label for="lblactiveuser" class="col-sm-4 col-form-label">Active User</label>
+            <div class="col-sm-8">
+              <input type="text" readonly class="form-control" [(ngModel)]="activeUser" formControlName="addedby">
+
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" class="mr-1" data-dismiss="modal" id="newModal"
+            type="button">Cancel</button>
+          <button mat-stroked-button color="primary" [disabled]="!newForm.valid" (click)="onSaveClick()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

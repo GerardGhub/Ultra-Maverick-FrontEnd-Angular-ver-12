@@ -55,17 +55,17 @@ export class AspNetRolesComponent implements OnInit {
 
   constructor(
     private aspNetRolesService: AspNetRolesService,
-     private formBuilder: FormBuilder, 
-     private systemCapabilityStatusService: SystemCapabilityStatusService, 
-     private toastr: ToastrService,
-     public loginService: LoginService) {
+    private formBuilder: FormBuilder,
+    private systemCapabilityStatusService: SystemCapabilityStatusService,
+    private toastr: ToastrService,
+    public loginService: LoginService) {
 
   }
   ngOnInit() {
     //Get data from database
     this.getUserRole();
 
-    
+
     //Create newForm
     this.newForm = this.formBuilder.group({
       // id: this.formBuilder.control(null),
@@ -87,7 +87,7 @@ export class AspNetRolesComponent implements OnInit {
   }
 
   @ViewChild("Description") Description: ElementRef;
-  @ViewChild("RejectStatusUpdate") RejectStatusUpdate: ElementRef;
+  @ViewChild("DescriptionUpdate") DescriptionUpdate: ElementRef;
 
 
   getUserRole() {
@@ -148,7 +148,7 @@ export class AspNetRolesComponent implements OnInit {
     }
   }
 
-  
+
   onNewClick(event) {
     //reset the newForm
     this.newForm.reset({ id: 0 });
@@ -166,7 +166,7 @@ export class AspNetRolesComponent implements OnInit {
 
     if (this.newForm.valid) {
       //Start
-  
+
       var StatusofReject = this.Description.nativeElement.value;
       Swal.fire({
         title: 'Are you sure that you want to append new data?',
@@ -180,16 +180,16 @@ export class AspNetRolesComponent implements OnInit {
         if (result.isConfirmed) {
           //Invoke the REST-API call
 
-   
-           this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) => {
-        //Add Response to Grid
-        var p: AspNetRoles = new AspNetRoles();
-        p.Id = response.Id;
-        p.name = response.name;
-        p.normalizedname = response.normalizedname;
-        p.concurrencystamp = response.concurrencystamp;
-        p.discriminator = response.discriminator;
-        this.UserRole.push(p);
+
+          this.aspNetRolesService.appendnewRole(this.newForm.value).subscribe((response) => {
+            //Add Response to Grid
+            var p: AspNetRoles = new AspNetRoles();
+            p.Id = response.Id;
+            p.name = response.name;
+            p.normalizedname = response.normalizedname;
+            p.concurrencystamp = response.concurrencystamp;
+            p.discriminator = response.discriminator;
+            this.UserRole.push(p);
 
             //Reset the newForm
             this.newForm.reset();
@@ -198,7 +198,7 @@ export class AspNetRolesComponent implements OnInit {
             setTimeout(() => {
 
               this.getUserRole();
-            }, 300);
+            }, 400);
 
             // this.calculateNoOfPages();
 
@@ -227,11 +227,12 @@ export class AspNetRolesComponent implements OnInit {
 
 
 
+
   FieldOutRequiredField() {
     this.toastr.warning('Field out the required fields!', 'Notifications');
   }
   onEditClick(event, StatusParam: AspNetRoles) {
- 
+
     //Reset the editForm
     this.editForm.reset();
     setTimeout(() => {
@@ -244,7 +245,50 @@ export class AspNetRolesComponent implements OnInit {
     }, 100);
   }
 
+  onUpdateClick() {
+    if (this.editForm.valid) {
 
+      var Status = this.DescriptionUpdate.nativeElement.value;
+      Swal.fire({
+        title: 'Are you sure that you want to modify the user role?',
+        text: Status,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //Invoke the REST-API call
+          this.aspNetRolesService.modifyRole(this.editForm.value).subscribe((response: AspNetRoles) => {
+            //Update the response in Grid
+            this.UserRole[this.editIndex] = response;
+            setTimeout(() => {
+              //Reset the editForm
+              this.editForm.reset();
+              $("#editCancelModal").trigger("click");
+              this.getUserRole();
+            }, 300);
+
+          },
+            (error) => {
+              console.log(error);
+            });
+
+
+          Swal.fire(
+            'Updated!',
+            'your data on production has been modified',
+            'success'
+          )
+
+        }
+      })
+
+
+
+    }
+  }
 
   onDeleteClick(event, RestApi: AspNetRoles) {
     //Set data into deleteClientLocation

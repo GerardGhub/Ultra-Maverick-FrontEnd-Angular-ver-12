@@ -10,6 +10,8 @@ import { AspNetRolesService } from '../../../services/asp-net-roles.service';
 import { AspNetRoles } from '../../../models/asp-net-roles';
 import { LoginService } from '../../../services/login.service';
 import Swal from 'sweetalert2';
+import { MainMenus } from '../../../models/main-menus';
+import { MainMenusService } from '../../../services/main-menus.service';
 
 @Component({
   selector: 'app-asp-net-roles',
@@ -20,12 +22,13 @@ export class AspNetRolesComponent implements OnInit {
 
   //Objects for Holding Model Data
   UserRole: AspNetRoles[] = [];
+  MainMenu: Observable<MainMenus[]>;
   showLoading: boolean = true;
 
   //Objects for Delete
   deleteRejectStatus: AspNetRoles = new AspNetRoles();
-  editIndex: number = null;
-  deleteIndex: number = null;
+  editIndex: number = 0;
+  deleteIndex: number = 0;
 
   //Properties for Searching
   searchBy: string = "Name";
@@ -58,7 +61,8 @@ export class AspNetRolesComponent implements OnInit {
     private formBuilder: FormBuilder,
     private systemCapabilityStatusService: SystemCapabilityStatusService,
     private toastr: ToastrService,
-    public loginService: LoginService) {
+    public loginService: LoginService,
+    private mainMenusService: MainMenusService) {
 
   }
   ngOnInit() {
@@ -84,6 +88,7 @@ export class AspNetRolesComponent implements OnInit {
 
     // Here
     this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
+    this.MainMenu = this.mainMenusService.getMainMenus();
   }
 
   @ViewChild("Description") Description: ElementRef;
@@ -99,6 +104,14 @@ export class AspNetRolesComponent implements OnInit {
       }
     );
   }
+
+  getNewFourthApproverId(id) {
+
+    alert(id);
+    // if (typeof (id) == "string") {
+    //   this.fourth_approver_name = "";
+    }
+
   calculateNoOfPages() {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
@@ -288,16 +301,6 @@ export class AspNetRolesComponent implements OnInit {
 
 
     }
-  }
-
-  onDeleteClick(event, RestApi: AspNetRoles) {
-    //Set data into deleteClientLocation
-    this.deleteRejectStatus.Id = RestApi.Id;
-    this.deleteRejectStatus.name = RestApi.name;
-    this.deleteRejectStatus.normalizedname = RestApi.normalizedname;
-    this.deleteRejectStatus.concurrencystamp = RestApi.concurrencystamp;
-    this.deleteRejectStatus.discriminator = RestApi.discriminator;
-    this.deleteIndex = this.UserRole.indexOf(RestApi);
   }
 
 

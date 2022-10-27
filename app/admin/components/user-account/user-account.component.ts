@@ -138,7 +138,7 @@ export class UserAccountComponent implements OnInit {
         this.showLoading = false;
         this.calculateNoOfPages();
         // console.log(response);
-        console.warn(response);
+        // console.warn(response);
       });
   }
 
@@ -352,7 +352,6 @@ export class UserAccountComponent implements OnInit {
 
         val = false;
       }
-
       const status = this.AspNetUsers.filter(status => status.is_active === val);
       this.AspNetUsers = status;
       console.log(this.AspNetUsers);
@@ -484,20 +483,6 @@ export class UserAccountComponent implements OnInit {
       });
     }
 
-    // var Item = this.ItemDesc.nativeElement.value;
-    // Swal.fire({
-    //   title: 'Are you sure you want to reject the Transaction?',
-    //   text: Item,
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.ApprovedClickDetails();
-    //   }
-    // });
 
 
 

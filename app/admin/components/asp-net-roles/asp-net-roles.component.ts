@@ -15,6 +15,7 @@ import { MainMenusService } from '../../../services/main-menus.service';
 import { UserAccountService } from '../../../services/user-account.service';
 import { RoleModules } from '../../../models/rolemodules';
 
+
 @Component({
   selector: 'app-asp-net-roles',
   templateUrl: './asp-net-roles.component.html',
@@ -46,7 +47,7 @@ export class AspNetRolesComponent implements OnInit {
   pagesUnTagged: any[] = [];
   pagesTagged: any[] = [];
   pageSize: number = 7;
-  
+
 
   //Properties for Sorting
   sortBy: string = "Name";
@@ -55,6 +56,7 @@ export class AspNetRolesComponent implements OnInit {
   //Reactive Forms
   newForm: FormGroup;
   editForm: FormGroup;
+  editFormTaggedModule: FormGroup;
 
   activeUser: string = "";
   //Combo Box for User Role Binding
@@ -99,6 +101,16 @@ export class AspNetRolesComponent implements OnInit {
       isactivereference: this.formBuilder.control(null, [Validators.required]),
     });
 
+    this.editFormTaggedModule = this.formBuilder.group({
+      id: this.formBuilder.control(null),
+      moduleId: this.formBuilder.control(null),
+      modifiedby: this.formBuilder.control(null),
+      // name: this.formBuilder.control(null, [Validators.required]),
+      // isactive: this.formBuilder.control(null, [Validators.required]),
+      // modifiedby: this.formBuilder.control(null, [Validators.required]),
+      // isactivereference: this.formBuilder.control(null, [Validators.required]),
+    });
+
     // Here
     this.samples = this.systemCapabilityStatusService.getSystemCapabilityStatus();
     this.MainMenu = this.mainMenusService.getMainMenus();
@@ -119,35 +131,38 @@ export class AspNetRolesComponent implements OnInit {
   }
 
   getUserRoleModules() {
-    // alert(this.RoleId.nativeElement.value);
-    // alert("AAAA xxxx");
-    // alert(this.RoleId.nativeElement.value);
+
     this.userAccountService.getUserRoleListById(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
 
       (response: RoleModules[]) => {
-        console.log(response);
+
         if (response) {
           this.RoleModule = response;
-          this.totalRoleModulesRowCount = response.length;
-          this.calculateNoOfPagesTagged();
           this.getModulesUntagged();
         }
       });
   }
 
+
+
   getModulesUntagged() {
     const untaggedData = this.RoleModule.filter(status => status.isactive === false);
     this.RoleModuleUnTagged = untaggedData;
-      this.totalRoleModulesUntaggedRowCount = untaggedData.length;
-      this.calculateNoOfPagesUntagged();
-    console.warn(this.RoleModuleUnTagged);
+    this.totalRoleModulesUntaggedRowCount = untaggedData.length;
+    this.calculateNoOfPagesUntagged();
+
+
+    const taggedData = this.RoleModule.filter(status => status.isactive === true);
+    this.RoleModule = taggedData;
+    this.totalRoleModulesRowCount = taggedData.length;
+    this.calculateNoOfPagesTagged();
+
   }
 
 
   getNewFourthApproverId(roleid) {
 
-    // alert(roleid);
-    // alert(this.RoleId.nativeElement.value);
+
     this.activeModuleId = roleid;
     this.getUserRoleModules();
 
@@ -183,7 +198,7 @@ export class AspNetRolesComponent implements OnInit {
     this.currentPageIndexModuleUntagged = 0;
   }
 
-  
+
   calculateNoOfPagesTagged() {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
@@ -241,7 +256,7 @@ export class AspNetRolesComponent implements OnInit {
     }
   }
 
-  
+
   onPageIndexClickedModuleUntagged(ind) {
     //Set currentPageIndex
     if (ind >= 0 && ind < this.pages.length) {
@@ -340,12 +355,138 @@ export class AspNetRolesComponent implements OnInit {
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
+      console.log(this.editForm.value);
       this.editIndex = this.UserRole.indexOf(StatusParam);
       this.activeUser = this.loginService.currentUserName;
       //Focus the ClientLocation textbox in editForm
       this.defaultTextBox_Edit.nativeElement.focus();
     }, 100);
   }
+
+  onUntaggedClick(event, StatusParam: RoleModules) {
+
+
+    this.editFormTaggedModule.reset();
+    setTimeout(() => {
+      this.editFormTaggedModule.patchValue({
+        moduleId: this.activeModuleId,
+        id: StatusParam.id,
+        modifiedby: this.loginService.currentUserName
+      });
+      // console.warn(this.editFormTaggedModule.value);
+
+      this.editIndex = this.RoleModule.indexOf(StatusParam);
+      this.activeUser = this.loginService.currentUserName;
+
+    }, 100);
+
+
+
+
+    var Status = this.DescriptionUpdate.nativeElement.value;
+    Swal.fire({
+      title: 'Are you sure that you want to modify?',
+      text: Status,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //Invoke the REST-API call
+
+
+        this.userAccountService.updateUserRoleListById(this.editFormTaggedModule.value).subscribe((response: RoleModules) => {
+          setTimeout(() => {
+
+            Swal.fire(
+              'Updated!',
+              'your data on production has been modified',
+              'success'
+            )
+            this.getUserRoleModules();
+
+          }, 300);
+
+        },
+          (error) => {
+            console.log(error);
+          });
+
+
+
+
+      }
+    })
+
+
+  }
+
+
+
+  onTaggedClick(event, StatusParam: RoleModules) {
+
+
+    // this.editFormTaggedModule.reset();
+    setTimeout(() => {
+      this.editFormTaggedModule.reset();
+      this.editFormTaggedModule.patchValue({
+        moduleId: this.activeModuleId,
+        id: StatusParam.id,
+        modifiedby: this.loginService.currentUserName
+      });
+      // console.warn(this.editFormTaggedModule.value);
+
+      this.editIndex = this.RoleModule.indexOf(StatusParam);
+      this.activeUser = this.loginService.currentUserName;
+
+    }, 100);
+
+
+
+
+    var Status = this.DescriptionUpdate.nativeElement.value;
+    Swal.fire({
+      title: 'Are you sure that you want to modify?',
+      text: Status,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //Invoke the REST-API call
+
+
+        this.userAccountService.updateUserRoleListByIdActivate(this.editFormTaggedModule.value).subscribe((response: RoleModules) => {
+          setTimeout(() => {
+
+            Swal.fire(
+              'Updated!',
+              'your data on production has been modified',
+              'success'
+            )
+            this.getUserRoleModules();
+
+          }, 300);
+
+        },
+          (error) => {
+            console.log(error);
+          });
+
+
+
+
+      }
+    })
+
+
+  }
+
+
 
   onUpdateClick() {
     if (this.editForm.valid) {
@@ -369,6 +510,13 @@ export class AspNetRolesComponent implements OnInit {
               //Reset the editForm
               this.editForm.reset();
               $("#editCancelModal").trigger("click");
+
+
+              Swal.fire(
+                'Updated!',
+                'your data on production has been modified',
+                'success'
+              )
               this.getUserRole();
             }, 300);
 
@@ -378,11 +526,6 @@ export class AspNetRolesComponent implements OnInit {
             });
 
 
-          Swal.fire(
-            'Updated!',
-            'your data on production has been modified',
-            'success'
-          )
 
         }
       })

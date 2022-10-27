@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserAccount } from '../models/user-account';
 import { HttpClient } from '@angular/common/http';
+import { RoleModules } from '../models/rolemodules';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +61,14 @@ export class UserAccountService {
 
   getUserRoleListById(roleid: string, moduleId: number): Observable<any>{
     return this.httpClient.get("/api/RoleModules/RoleId/"+ roleid+"/"+moduleId,  { responseType: "json" });
+  }
+
+  updateUserRoleListById(deactivateDetails: RoleModules): Observable<RoleModules>{
+    return this.httpClient.put<RoleModules>('/api/RoleModules', deactivateDetails,{ responseType: "json" });
+  }
+
+  updateUserRoleListByIdActivate(activateDetails: RoleModules): Observable<RoleModules>{
+    return this.httpClient.put<RoleModules>('/api/RoleModules/Deactivate', activateDetails,{ responseType: "json" });
   }
 
 }

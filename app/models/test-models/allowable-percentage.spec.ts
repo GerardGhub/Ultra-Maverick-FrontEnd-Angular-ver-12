@@ -1,4 +1,4 @@
-import { AllowablePercentage } from './allowable-percentage';
+import { AllowablePercentage } from '../allowable-percentage';
 
 describe('AllowablePercentage', () => {
   it('should create an instance', () => {

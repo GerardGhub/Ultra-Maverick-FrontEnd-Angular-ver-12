@@ -1,4 +1,4 @@
-import { WhRejectionApproval } from './wh-rejection-approval';
+import { WhRejectionApproval } from '../wh-rejection-approval';
 
 describe('WhRejectionApproval', () => {
   it('should create an instance', () => {

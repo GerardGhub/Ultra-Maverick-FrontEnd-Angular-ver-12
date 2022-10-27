@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WhRejectionApprovalService } from './wh-rejection-approval.service';
+import { WhRejectionApprovalService } from '../wh-rejection-approval.service';
 
 describe('WhRejectionApprovalService', () => {
   let service: WhRejectionApprovalService;

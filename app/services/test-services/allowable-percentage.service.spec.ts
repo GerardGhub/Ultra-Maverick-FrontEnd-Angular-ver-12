@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AllowablePercentageService } from './allowable-percentage.service';
+import { AllowablePercentageService } from '../allowable-percentage.service';
 
 describe('AllowablePercentageService', () => {
   let service: AllowablePercentageService;

@@ -26,6 +26,7 @@ export class AspNetRolesComponent implements OnInit {
   UserRole: AspNetRoles[] = [];
   RoleModule: RoleModules[] = [];
   MainMenu: Observable<MainMenus[]>;
+  RoleModuleUnTagged: RoleModules[] = [];
   showLoading: boolean = true;
 
   //Objects for Delete
@@ -40,8 +41,12 @@ export class AspNetRolesComponent implements OnInit {
   //Properties for Paging
   currentPageIndex: number = 0;
   currentPageIndexModuleTagged: number = 0;
+  currentPageIndexModuleUntagged: number = 0;
   pages: any[] = [];
+  pagesUnTagged: any[] = [];
+  pagesTagged: any[] = [];
   pageSize: number = 7;
+  
 
   //Properties for Sorting
   sortBy: string = "Name";
@@ -55,7 +60,7 @@ export class AspNetRolesComponent implements OnInit {
   //Combo Box for User Role Binding
   activeModuleId: string = "";
   totalRoleModulesRowCount: number = 0;
-
+  totalRoleModulesUntaggedRowCount: number = 0
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
   @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
@@ -115,23 +120,33 @@ export class AspNetRolesComponent implements OnInit {
 
   getUserRoleModules() {
     // alert(this.RoleId.nativeElement.value);
-    alert("AAAA xxxx");
-    alert(this.RoleId.nativeElement.value);
+    // alert("AAAA xxxx");
+    // alert(this.RoleId.nativeElement.value);
     this.userAccountService.getUserRoleListById(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
-      
+
       (response: RoleModules[]) => {
         console.log(response);
         if (response) {
           this.RoleModule = response;
           this.totalRoleModulesRowCount = response.length;
+          this.calculateNoOfPagesTagged();
+          this.getModulesUntagged();
         }
       });
+  }
+
+  getModulesUntagged() {
+    const untaggedData = this.RoleModule.filter(status => status.isactive === false);
+    this.RoleModuleUnTagged = untaggedData;
+      this.totalRoleModulesUntaggedRowCount = untaggedData.length;
+      this.calculateNoOfPagesUntagged();
+    console.warn(this.RoleModuleUnTagged);
   }
 
 
   getNewFourthApproverId(roleid) {
 
-    alert(roleid);
+    // alert(roleid);
     // alert(this.RoleId.nativeElement.value);
     this.activeModuleId = roleid;
     this.getUserRoleModules();
@@ -153,6 +168,36 @@ export class AspNetRolesComponent implements OnInit {
 
     this.currentPageIndex = 0;
   }
+
+  calculateNoOfPagesUntagged() {
+    //Get no. of Pages
+    let filterPipe = new FilterPipe();
+    var noOfPages = Math.ceil(filterPipe.transform(this.RoleModuleUnTagged, "submenuname", this.searchText).length / this.pageSize);
+    this.pagesUnTagged = [];
+
+    //Generate pages
+    for (let i = 0; i < noOfPages; i++) {
+      this.pagesUnTagged.push({ pageIndex: i });
+    }
+
+    this.currentPageIndexModuleUntagged = 0;
+  }
+
+  
+  calculateNoOfPagesTagged() {
+    //Get no. of Pages
+    let filterPipe = new FilterPipe();
+    var noOfPages = Math.ceil(filterPipe.transform(this.RoleModule, "submenuname", this.searchText).length / this.pageSize);
+    this.pagesTagged = [];
+
+    //Generate pages
+    for (let i = 0; i < noOfPages; i++) {
+      this.pagesTagged.push({ pageIndex: i });
+    }
+
+    this.currentPageIndexModuleTagged = 0;
+  }
+
 
 
   onFilterStatus(val) {
@@ -195,6 +240,15 @@ export class AspNetRolesComponent implements OnInit {
       this.currentPageIndexModuleTagged = ind;
     }
   }
+
+  
+  onPageIndexClickedModuleUntagged(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pages.length) {
+      this.currentPageIndexModuleUntagged = ind;
+    }
+  }
+
 
 
   onNewClick(event) {

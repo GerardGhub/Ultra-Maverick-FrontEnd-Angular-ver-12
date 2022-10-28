@@ -64,11 +64,11 @@ export class UserAccountService {
   }
 
   updateUserRoleListById(deactivateDetails: RoleModules): Observable<RoleModules>{
-    return this.httpClient.put<RoleModules>('/api/RoleModules', deactivateDetails,{ responseType: "json" });
+    return this.httpClient.put<RoleModules>('/api/RoleModules/Deactivate', deactivateDetails,{ responseType: "json" });
   }
 
   updateUserRoleListByIdActivate(activateDetails: RoleModules): Observable<RoleModules>{
-    return this.httpClient.put<RoleModules>('/api/RoleModules/Deactivate', activateDetails,{ responseType: "json" });
+    return this.httpClient.put<RoleModules>('/api/RoleModules', activateDetails,{ responseType: "json" });
   }
 
 }

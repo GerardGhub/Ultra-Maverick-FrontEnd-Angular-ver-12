@@ -105,6 +105,7 @@ export class AspNetRolesComponent implements OnInit {
       id: this.formBuilder.control(null),
       moduleId: this.formBuilder.control(null),
       modifiedby: this.formBuilder.control(null),
+      RoleId: this.formBuilder.control(null)
       // name: this.formBuilder.control(null, [Validators.required]),
       // isactive: this.formBuilder.control(null, [Validators.required]),
       // modifiedby: this.formBuilder.control(null, [Validators.required]),
@@ -138,6 +139,7 @@ export class AspNetRolesComponent implements OnInit {
 
         if (response) {
           this.RoleModule = response;
+          console.error(response);
           this.getModulesUntagged();
         }
       });
@@ -371,7 +373,8 @@ export class AspNetRolesComponent implements OnInit {
       this.editFormTaggedModule.patchValue({
         moduleId: this.activeModuleId,
         id: StatusParam.id,
-        modifiedby: this.loginService.currentUserName
+        modifiedby: this.loginService.currentUserName,
+        RoleId:this.RoleId.nativeElement.value
       });
       // console.warn(this.editFormTaggedModule.value);
 
@@ -385,7 +388,7 @@ export class AspNetRolesComponent implements OnInit {
 
     var Status = this.DescriptionUpdate.nativeElement.value;
     Swal.fire({
-      title: 'Are you sure that you want to modify?',
+      title: 'Are you sure that you want to modify 1?',
       text: Status,
       icon: 'warning',
       showCancelButton: true,
@@ -427,14 +430,14 @@ export class AspNetRolesComponent implements OnInit {
 
   onTaggedClick(event, StatusParam: RoleModules) {
 
-
     // this.editFormTaggedModule.reset();
     setTimeout(() => {
       this.editFormTaggedModule.reset();
       this.editFormTaggedModule.patchValue({
         moduleId: this.activeModuleId,
         id: StatusParam.id,
-        modifiedby: this.loginService.currentUserName
+        modifiedby: this.loginService.currentUserName,
+        RoleId:this.RoleId.nativeElement.value
       });
       // console.warn(this.editFormTaggedModule.value);
 

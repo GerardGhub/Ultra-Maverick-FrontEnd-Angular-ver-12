@@ -105,7 +105,8 @@ export class AspNetRolesComponent implements OnInit {
       id: this.formBuilder.control(null),
       moduleId: this.formBuilder.control(null),
       modifiedby: this.formBuilder.control(null),
-      RoleId: this.formBuilder.control(null)
+      RoleId: this.formBuilder.control(null),
+      mainmoduleidentity: this.formBuilder.control(null)
       // name: this.formBuilder.control(null, [Validators.required]),
       // isactive: this.formBuilder.control(null, [Validators.required]),
       // modifiedby: this.formBuilder.control(null, [Validators.required]),
@@ -374,7 +375,8 @@ export class AspNetRolesComponent implements OnInit {
         moduleId: this.activeModuleId,
         id: StatusParam.id,
         modifiedby: this.loginService.currentUserName,
-        RoleId:this.RoleId.nativeElement.value
+        RoleId:this.RoleId.nativeElement.value,
+        mainmoduleidentity: this.activeModuleId
       });
       // console.warn(this.editFormTaggedModule.value);
 
@@ -437,7 +439,8 @@ export class AspNetRolesComponent implements OnInit {
         moduleId: this.activeModuleId,
         id: StatusParam.id,
         modifiedby: this.loginService.currentUserName,
-        RoleId:this.RoleId.nativeElement.value
+        RoleId:this.RoleId.nativeElement.value,
+        mainmoduleidentity: this.activeModuleId
       });
       // console.warn(this.editFormTaggedModule.value);
 

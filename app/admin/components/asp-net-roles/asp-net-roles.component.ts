@@ -61,8 +61,8 @@ export class AspNetRolesComponent implements OnInit {
   activeUser: string = "";
   //Combo Box for User Role Binding
   activeModuleId: string = "";
-  totalRoleModulesRowCount: number = 0;
-  totalRoleModulesUntaggedRowCount: number = 0
+  totalRoleModulesUntaggedNewRowCount: number = 0;
+  totalRoleModulesTaggedRowCount: number = 0
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
   @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
@@ -151,13 +151,13 @@ export class AspNetRolesComponent implements OnInit {
   getModulesUntagged() {
     const untaggedData = this.RoleModule.filter(status => status.isactive === false);
     this.RoleModuleUnTagged = untaggedData;
-    this.totalRoleModulesUntaggedRowCount = untaggedData.length;
+    this.totalRoleModulesTaggedRowCount = untaggedData.length;
     this.calculateNoOfPagesUntagged();
 
 
     const taggedData = this.RoleModule.filter(status => status.isactive === true);
     this.RoleModule = taggedData;
-    this.totalRoleModulesRowCount = taggedData.length;
+    this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
     this.calculateNoOfPagesTagged();
 
   }
@@ -375,7 +375,7 @@ export class AspNetRolesComponent implements OnInit {
         moduleId: this.activeModuleId,
         id: StatusParam.id,
         modifiedby: this.loginService.currentUserName,
-        RoleId:this.RoleId.nativeElement.value,
+        RoleId: this.RoleId.nativeElement.value,
         mainmoduleidentity: this.activeModuleId
       });
       // console.warn(this.editFormTaggedModule.value);
@@ -390,7 +390,7 @@ export class AspNetRolesComponent implements OnInit {
 
     var Status = this.DescriptionUpdate.nativeElement.value;
     Swal.fire({
-      title: 'Are you sure that you want to modify 1?',
+      title: 'Are you sure that you want to tag?',
       text: Status,
       icon: 'warning',
       showCancelButton: true,
@@ -439,7 +439,7 @@ export class AspNetRolesComponent implements OnInit {
         moduleId: this.activeModuleId,
         id: StatusParam.id,
         modifiedby: this.loginService.currentUserName,
-        RoleId:this.RoleId.nativeElement.value,
+        RoleId: this.RoleId.nativeElement.value,
         mainmoduleidentity: this.activeModuleId
       });
       // console.warn(this.editFormTaggedModule.value);
@@ -454,7 +454,7 @@ export class AspNetRolesComponent implements OnInit {
 
     var Status = this.DescriptionUpdate.nativeElement.value;
     Swal.fire({
-      title: 'Are you sure that you want to modify?',
+      title: 'Are you sure that you want to untagged?',
       text: Status,
       icon: 'warning',
       showCancelButton: true,

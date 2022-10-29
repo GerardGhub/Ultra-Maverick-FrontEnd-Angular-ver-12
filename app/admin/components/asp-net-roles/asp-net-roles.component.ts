@@ -59,6 +59,7 @@ export class AspNetRolesComponent implements OnInit {
   editFormTaggedModule: FormGroup;
 
   activeUser: string = "";
+  errorMessageFromResponse: string = '';
   //Combo Box for User Role Binding
   activeModuleId: string = "";
   totalRoleModulesUntaggedNewRowCount: number = 0;
@@ -330,6 +331,8 @@ export class AspNetRolesComponent implements OnInit {
 
 
           }, (error) => {
+            this.errorMessageFromResponse = error.error.message;
+            this.errorToaster();
             console.log(error);
           });
 
@@ -346,6 +349,10 @@ export class AspNetRolesComponent implements OnInit {
   }
 
 
+  errorToaster() {
+    
+    this.toastr.error(this.errorMessageFromResponse, 'Message');
+  }
 
 
   FieldOutRequiredField() {
@@ -528,6 +535,8 @@ export class AspNetRolesComponent implements OnInit {
 
           },
             (error) => {
+              this.errorMessageFromResponse = error.error.message;
+              this.errorToaster();
               console.log(error);
             });
 

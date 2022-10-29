@@ -22,25 +22,26 @@ import {
   Validators,
 } from '@angular/forms';
 import * as $ from 'jquery';
-import { ProjectIDUniqueValidatorDirective } from 'src/app/directives/project-idunique-validator.directive';
+import { ProjectIDUniqueValidatorDirective } from '../../../directives/project-idunique-validator.directive';
 import { ProjectComponent } from '../project/project.component';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { FilterPipe } from '../../../pipes/filter.pipe';
 import { Observable, of } from 'rxjs';
-import { Project } from 'src/app/models/project';
+import { Project } from '../../../models/project';
 import Swal from 'sweetalert2';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { LoginService } from 'src/app/services/login.service';
-import { RejectedStatus } from 'src/app/models/rejected-status';
-import { RejectedStatusService } from 'src/app/services/rejected-status.service';
-import { AllowablePercentage } from 'src/app/models/allowable-percentage';
-import { AllowablePercentageService } from 'src/app/services/allowable-percentage.service';
-import { CancelledPOTransactionStatus } from 'src/app/models/cancelled-potransaction-status';
-import { CancelledPOTransactionStatusService } from 'src/app/services/cancelled-potransaction-status.service';
-import { ProjectsPartialPoService } from 'src/app/services/projects-partial-po.service';
-import { TblNearlyExpiryMgmt } from 'src/app/models/tbl-nearly-expiry-mgmt';
-import { TblNearlyExpiryMgmtService } from 'src/app/services/tbl-nearly-expiry-mgmt.service';
+import { LoginService } from '../../../services/login.service';
+import { RejectedStatus } from '../../../models/rejected-status';
+import { RejectedStatusService } from '../../../services/rejected-status.service';
+import { AllowablePercentage } from '../../../models/allowable-percentage';
+import { AllowablePercentageService } from '../../../services/allowable-percentage.service';
+import { CancelledPOTransactionStatus } from '../../../models/cancelled-potransaction-status';
+import { CancelledPOTransactionStatusService } from '../../../services/cancelled-potransaction-status.service';
+import { ProjectsPartialPoService } from '../../../services/projects-partial-po.service';
+import { TblNearlyExpiryMgmt } from '../../../models/tbl-nearly-expiry-mgmt';
+import { TblNearlyExpiryMgmtService } from '../../../services/tbl-nearly-expiry-mgmt.service';
 import { QCService } from './services/qcmodule.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-projects',
@@ -63,7 +64,8 @@ export class ProjectsComponent implements OnInit, OnChanges {
     private projectsPartialPoService: ProjectsPartialPoService,
     private tblNearlyExpiryMgmtService: TblNearlyExpiryMgmtService,
     private formBuilder: FormBuilder,
-    private qcService: QCService
+    private qcService: QCService,
+    public appComponent : AppComponent
   ) {
 
   }
@@ -159,6 +161,10 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   currentUserFullName: string = '';
 
+  //Child Variables
+  PoReceiving: number = 0;
+  CancelledPo: number = 0;
+
   @ViewChildren('prj') projs: QueryList<ProjectComponent>;
   @ViewChild('prjID') prjID: ElementRef;
   @ViewChild('IsActivated') IsActivated: ElementRef;
@@ -242,6 +248,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.getChecklist();
     this.getPOcancelledList();
 
+    this.PoReceiving = this.appComponent.PoReceiving;
+    this.CancelledPo = this.appComponent.CancelledPo;
+    // alert(this.PoReceiving);
   }
 
   any(event: any) {

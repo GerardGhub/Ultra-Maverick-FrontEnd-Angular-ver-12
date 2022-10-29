@@ -1,19 +1,23 @@
 <div class="row">
   <div class="col-xl-12 col-lg-9 mx-auto divForModuleTable">
     <nav aria-label="breadcrumb textStyle">
+
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="[  '/admin', 'dashboard'  ]">
             <p class="dashboardStyle"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</p>
           </a></li>
         <li class="breadcrumb-item dashboardActive" aria-current="page"> QC Receiving </li>
       </ol>
-
+      
 
     </nav>
 
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="poRecievingTabforRefresh($event)">
+
+<ng-template [ngIf]="PoReceiving === 1">
       <mat-tab>
-        <ng-template mat-tab-label>
+
+        <ng-template mat-tab-label >
           PO Receiving
           &nbsp; <span class="badge badge-danger zerobadge{{ totalPoRowCount | number}}">{{ totalPoRowCount }}</span>
         </ng-template>
@@ -172,16 +176,20 @@
           </ul>
         </div>
       </mat-tab>
+      </ng-template>
 
+      <ng-template [ngIf]="PoReceiving === 1">
       <mat-tab>
         <ng-template mat-tab-label>
-          Cancelled PO
+          Cancelled PO     
+
           &nbsp; <span class="badge badge-danger zerobadge{{ totalCancelledPoRowCount | number}}">{{
             totalCancelledPoRowCount }}</span>
         </ng-template>
         <!-- <app-projects-cancelled-po></app-projects-cancelled-po> -->
         <app-projects-cancelled-po [child_id]=ChildForm (uploaded)="ChildMethod($event)"></app-projects-cancelled-po>
       </mat-tab>
+      </ng-template>
     </mat-tab-group>
   </div>
 </div>

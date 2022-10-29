@@ -173,7 +173,7 @@ export class ModulesComponent implements OnInit {
             //Reset the newForm
             this.newForm.reset();
 
-            $("#newModal").trigger("click");
+            $("#newModals").trigger("click");
             setTimeout(() => {
 
               this.getModuleLists();

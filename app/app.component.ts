@@ -26,8 +26,7 @@ import { RoleModules } from './models/rolemodules';
 import { UserAccountService } from './services/user-account.service';
 import { NgModel } from '@angular/forms';
 
-// import { stat } from 'fs';
-// // import { stat } from 'fs';
+
 
 @Component({
   selector: 'app-root',
@@ -72,6 +71,10 @@ export class AppComponent {
   Preparation: number = 0;
   OnlineMrs: number = 0;
   SetUp: number = 0;
+
+  //Child of QC Receiving
+  PoReceiving: number = 0;
+  CancelledPo: number = 0;
 
   constructor(
     private dashboardService: DashboardService,
@@ -295,6 +298,15 @@ export class AppComponent {
           {
             this.SetUp = 1;
           }
+          else if (status.modulename === 'po-receiving-route')
+          {
+            this.PoReceiving = 1;
+          }
+          else if (status.modulename == "cancelled-po-route")
+          {
+            this.CancelledPo = 1;
+          }
+
 
 
         });

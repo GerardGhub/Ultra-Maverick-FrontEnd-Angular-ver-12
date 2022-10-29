@@ -49,7 +49,7 @@ export class ModulesComponent implements OnInit {
 
   activeUser: string = "";
 
-
+  errorMessageFromResponse: string= "";
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
   @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
@@ -81,6 +81,7 @@ export class ModulesComponent implements OnInit {
       modulename: this.formBuilder.control(null, [Validators.required]),
       submenuname: this.formBuilder.control(null, [Validators.required]),
       addedby: this.formBuilder.control(null, [Validators.required]),
+      mainmenuid: this.formBuilder.control(null, [Validators.required])
     });
     
     // editForm
@@ -178,7 +179,7 @@ export class ModulesComponent implements OnInit {
               this.getModuleLists();
             }, 300);
 
-            // this.calculateNoOfPages();
+         
 
             Swal.fire(
               'Append!',
@@ -188,6 +189,8 @@ export class ModulesComponent implements OnInit {
 
 
           }, (error) => {
+            this.errorMessageFromResponse = error.error.message;
+            this.errorToaster();
             console.log(error);
           });
 
@@ -201,6 +204,11 @@ export class ModulesComponent implements OnInit {
     else {
       this.FieldOutRequiredField();
     }
+  }
+
+  errorToaster() {
+    
+    this.toastr.error(this.errorMessageFromResponse, 'Message');
   }
 
   FieldOutRequiredField() {
@@ -260,6 +268,8 @@ export class ModulesComponent implements OnInit {
 
           },
             (error) => {
+              this.errorMessageFromResponse = error.error.message;
+              this.errorToaster();
               console.log(error);
             });
 

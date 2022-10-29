@@ -48,7 +48,7 @@ export class ParentMainModulesComponent implements OnInit {
   editForm: FormGroup;
 
   activeUser: string = "";
-
+  errorMessageFromResponse: string = '';
 
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
@@ -174,8 +174,6 @@ export class ParentMainModulesComponent implements OnInit {
               this.getMainModuleLists();
             }, 400);
 
-            // this.calculateNoOfPages();
-
             Swal.fire(
               'Append!',
               'Your data is Saved on production',
@@ -184,6 +182,8 @@ export class ParentMainModulesComponent implements OnInit {
 
 
           }, (error) => {
+            this.errorMessageFromResponse = error.error.message;
+            this.errorToaster();
             console.log(error);
           });
 
@@ -197,6 +197,10 @@ export class ParentMainModulesComponent implements OnInit {
     else {
       this.FieldOutRequiredField();
     }
+  }
+
+  errorToaster() {
+    this.toastr.error(this.errorMessageFromResponse, 'Message');
   }
 
   FieldOutRequiredField() {
@@ -240,22 +244,24 @@ export class ParentMainModulesComponent implements OnInit {
 
             //Reset the editForm
             this.editForm.reset();
-            $("#editCancelModal").trigger("click");
-            
+            $("#editCancelModals").trigger("click");
+
             Swal.fire(
               'Updated!',
               'your data on production has been modified',
               'success'
             )
-            
+
             setTimeout(() => {
               this.getMainModuleLists();
-              
+
             }, 300);
-   
+
           },
             (error) => {
               console.log(error);
+              this.errorMessageFromResponse = error.error.message;
+              this.errorToaster();
             });
 
         }

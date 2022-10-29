@@ -233,32 +233,28 @@
         </a>
         <mat-menu #menu="matMenu">
       
-          <button mat-menu-item>
-            <!-- <mat-icon>people</mat-icon> -->
+          <button mat-menu-item  *ngIf="UserModules === 1 ">
+
             <span [routerLink]=" [ '/admin','masters','parent-main-modules' ] ">User Modules</span>
           </button>
 
-          <button mat-menu-item>
-            <!-- <mat-icon>people</mat-icon> -->
+          <button mat-menu-item *ngIf="UserManagement === 1 ">      
             <span [routerLink]=" [ '/admin', 'masters','user' ] ">User Management</span>
           </button>
-          <button mat-menu-item>
-            <!-- <mat-icon>category</mat-icon> -->
+          <button mat-menu-item *ngIf="RMReceiving === 1">
             <span [routerLink]=" [ '/admin', 'masters','rmclassification' ] ">RM Receiving</span>
           </button>
 
-          <button mat-menu-item>
+          <button mat-menu-item *ngIf="RMCancelAndReturn === 1">
             <!-- <mat-icon>query_stats</mat-icon> -->
             <span [routerLink]=" [ '/admin', 'masters','rmcancelandreturn' ] ">RM Cancel & Return</span>
           </button>
 
           <button mat-menu-item>
-            <!-- <mat-icon>hourglass_empty</mat-icon> -->
             <span [routerLink]=" [ '/admin', 'masters','labtest' ] ">Laboratory Procedures and Remarks</span>
           </button>
 
           <button mat-menu-item>
-            <!-- <mat-icon>high_quality</mat-icon> -->
             <span [routerLink]=" [ '/admin', 'masters','qc-master-list' ] ">QC Check List</span>
           </button>
 

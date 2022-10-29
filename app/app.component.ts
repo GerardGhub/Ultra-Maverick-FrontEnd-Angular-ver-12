@@ -28,6 +28,7 @@ import { NgModel } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -65,12 +66,19 @@ export class AppComponent {
 
   //Parent Menu 1 for Tagged 0 else
   QCReceiving: number = 0;
+
   WhReceiving: number = 0;
   Approval: number = 0;
   LabTest: number = 0;
   Preparation: number = 0;
   OnlineMrs: number = 0;
   SetUp: number = 0;
+  // Array Setup {
+  UserModules: number = 0;
+  UserManagement: number = 0;
+  RMReceiving: number = 0;
+  RMCancelAndReturn: number = 0;
+  //End
 
   //Child of QC Receiving
   PoReceiving: number = 0;
@@ -93,20 +101,7 @@ export class AppComponent {
   ngOnInit() {
     this.loginService.detectIfAlreadyLoggedIn();
     this.totalPreparationCount();
-    // this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     let userName = this.loginService.currentUserName
-    //       ? this.loginService.currentUserName
-    //       : 'anonymous';
-    //     let logMsg =
-    //       new Date().toLocaleString() +
-    //       ': ' +
-    //       userName +
-    //       ' navigates to ' +
-    //       event.url;
-    //     this.routerLoggerService.log(logMsg).subscribe();
-    //   }
-    // });
+ 
 
     this.getPreparedOrdersCount();
     this.getCancelledTransactionCount();
@@ -297,6 +292,22 @@ export class AppComponent {
           else if (status.modulename === 'setup-route')
           {
             this.SetUp = 1;
+          }
+          else if (status.modulename === 'user-modules-route')
+          {
+            this.UserModules = 1;
+          }
+          else if (status.modulename === 'user-management-route')
+          {
+            this.UserManagement = 1;
+          }
+          else if (status.modulename === 'rm-receiving-route')
+          {
+            this.RMReceiving = 1;
+          }
+          else if (status.modulename === 'rm-cancel-return')
+          {
+            this.RMCancelAndReturn = 1;
           }
           else if (status.modulename === 'po-receiving-route')
           {

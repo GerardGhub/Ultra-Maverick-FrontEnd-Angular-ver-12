@@ -864,41 +864,41 @@ export class ProjectsPartialPoComponent implements OnInit {
           this.projects[this.editIndex] = p;
           this.UpdateMasterTransactionsActualReceivingofCancel();
           // this.InsertANewPartialReceiving();
-          this.editProject.projectID = null;
-          this.editProject.projectName = null;
-          this.editProject.dateOfStart = null;
-          this.editProject.teamSize = null;
-          this.editProject.supplier = null;
+          this.editProject.projectID = 0;
+          this.editProject.projectName = "";
+          this.editProject.dateOfStart = "";
+          this.editProject.teamSize = 0;
+          this.editProject.supplier = "";
           this.editProject.active = false;
-          this.editProject.status = null;
-          this.editProject.item_code = null;
-          this.editProject.item_description = null;
-          this.editProject.po_number = null;
-          this.editProject.po_date = null;
-          this.editProject.pr_number = null;
-          this.editProject.pr_date = null;
-          this.editProject.qty_order = null;
-          this.editProject.qty_uom = null;
-          this.editProject.mfg_date = null;
-          this.editProject.expiration_date = null;
-          this.editProject.expected_delivery = null;
-          this.editProject.actual_delivery = null;
-          this.editProject.actual_remaining_receiving = null;
-          this.editProject.received_by_QA = null;
-          this.editProject.status_of_reject_one = null;
-          this.editProject.status_of_reject_two = null;
-          this.editProject.status_of_reject_three = null;
-          this.editProject.count_of_reject_one = null;
-          this.editProject.count_of_reject_two = null;
-          this.editProject.count_of_reject_three = null;
-          this.editProject.total_of_reject_mat = null;
+          this.editProject.status = "";
+          this.editProject.item_code = "";
+          this.editProject.item_description = "";
+          this.editProject.po_number = "";
+          this.editProject.po_date = "";
+          this.editProject.pr_number = "";
+          this.editProject.pr_date = "";
+          this.editProject.qty_order = "";
+          this.editProject.qty_uom = "";
+          this.editProject.mfg_date = "";
+          this.editProject.expiration_date = "";
+          this.editProject.expected_delivery = "";
+          this.editProject.actual_delivery = "";
+          this.editProject.actual_remaining_receiving = 0;
+          this.editProject.received_by_QA = "";
+          this.editProject.status_of_reject_one = "";
+          this.editProject.status_of_reject_two = "";
+          this.editProject.status_of_reject_three = "";
+          this.editProject.count_of_reject_one = "";
+          this.editProject.count_of_reject_two = "";
+          this.editProject.count_of_reject_three = "";
+          this.editProject.total_of_reject_mat = "";
           //Section A
           //A
    
           //Add
           this.editProject.cancelled_date = null;
-          this.editProject.canceled_by = null;
-          this.editProject.cancelled_reason = null;
+          this.editProject.canceled_by = "";
+          this.editProject.cancelled_reason = "";
 
           this.showCancelledSuccess();
           this.ngOnInit();
@@ -1590,97 +1590,7 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
         this.deleteProject.e_remarks = null;
         //Section 2
         //A
-        this.deleteProject.a_clean_company_dos = null;
-        this.deleteProject.a_compliance_dos = null;
-        this.deleteProject.a_remarks_dos = null;
-        //B
-        this.deleteProject.b_delivery_staff_symptoms_dos = null;
-        this.deleteProject.b_compliance_dos = null;
-        this.deleteProject.b_remarks_dos = null;
-        //C
-        this.deleteProject.c_inner_walls_clean_dos = null;
-        this.deleteProject.c_compliance_dos = null;
-        this.deleteProject.c_remarks_dos = null;
-        //D
-        this.deleteProject.d_plastic_curtains_dos = null;
-        this.deleteProject.d_compliance_dos = null;
-        this.deleteProject.d_remarks_dos = null;
-        //E
-        this.deleteProject.e_no_accessories_dos = null;
-        this.deleteProject.e_compliance_dos = null;
-        this.deleteProject.e_remarks_dos = null;
-        //F
-        this.deleteProject.f_compliance_dos = null;
-        this.deleteProject.f_no_pests_sightings_dos = null;
-        this.deleteProject.f_remarks_dos = null;
-        //Section 3
-        //A
-        this.deleteProject.a_pallet_crates_tres = null;
-        this.deleteProject.a_compliance_tres = null;
-        this.deleteProject.a_remarks_tres = null;
-        //B
-        this.deleteProject.b_product_contamination_tres = null;
-        this.deleteProject.b_compliance_tres = null;
-        this.deleteProject.b_remarks_tres = null;
-        //C
-        this.deleteProject.c_uncessary_items_tres = null;
-        this.deleteProject.c_compliance_tres = null;
-        this.deleteProject.c_remarks_tres = null;
-        //D
-        this.deleteProject.d_products_cover_tres = null;
-        this.deleteProject.d_compliance_tres = null;
-        this.deleteProject.d_remarks_tres = null;
 
-        //Section 4
-        //A
-        this.deleteProject.a_certificate_coa_kwatro_desc = null;
-        this.deleteProject.a_compliance_kwatro = null;
-        this.deleteProject.a_remarks_kwatro = null;
-        //B
-        this.deleteProject.b_po_kwatro_desc = null;
-        this.deleteProject.b_compliance_kwatro = null;
-        this.deleteProject.b_remarks_kwatro = null;
-        //C
-        this.deleteProject.c_msds_kwatro_desc = null;
-        this.deleteProject.c_compliance_kwatro = null;
-        this.deleteProject.c_remarks_kwatro = null;
-        //D
-        this.deleteProject.d_food_grade_desc = null;
-        this.deleteProject.d_compliance_kwatro = null;
-        this.deleteProject.d_remarks_kwatro = null;
-        //Section 5
-        //A
-        this.deleteProject.a_qty_received_singko_singko = null;
-        this.deleteProject.a_compliance_singko = null;
-        this.deleteProject.a_remarks_singko = null;
-        //B
-        this.deleteProject.b_mfg_date_desc_singko = null;
-        this.deleteProject.b_compliance_singko = null;
-        this.deleteProject.b_remarks_singko = null;
-        //C
-        this.deleteProject.c_expirydate_desc_singko = null;
-        this.deleteProject.c_compliance_singko = null;
-        this.deleteProject.c_remarks_singko = null;
-        //D
-        this.deleteProject.d_packaging_desc_singko = null;
-        this.deleteProject.d_compliance_singko = null;
-        this.deleteProject.d_remarks_singko = null;
-        //E
-        this.deleteProject.e_no_contaminants_desc_singko = null;
-        this.deleteProject.e_compliance_singko = null;
-        this.deleteProject.e_remarks_singko = null;
-        //F
-        this.deleteProject.f_qtyrejected_desc_singko = null;
-        this.deleteProject.f_compliance_singko = null;
-        this.deleteProject.f_remarks_singko = null;
-        //G
-        this.deleteProject.g_rejected_reason_desc_singko = null;
-        this.deleteProject.g_compliance_singko = null;
-        this.deleteProject.g_remarks_singko = null;
-        //H
-        this.deleteProject.h_lab_sample_desc_singko = null;
-        this.deleteProject.h_compliance_singko = null;
-        this.deleteProject.h_remarks_singko = null;
 
         this.calculateNoOfPages();
       },

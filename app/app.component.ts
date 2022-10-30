@@ -76,10 +76,15 @@ export class AppComponent {
   //{ Array Approval
   NearlyExpiryApproval: number = 0;
   WHRejection: number = 0;
- // }
+  // }
   LabTest: number = 0;
   Preparation: number = 0;
   OnlineMrs: number = 0;
+  // Array of Online MRs
+  OrderList: number = 0;
+  ApprovedOrders: number = 0;
+  CancelledOrders: number = 0;
+  //End of MRS
   SetUp: number = 0;
   // Array Setup {
   UserModules: number = 0;
@@ -111,7 +116,7 @@ export class AppComponent {
   ngOnInit() {
     this.loginService.detectIfAlreadyLoggedIn();
     this.totalPreparationCount();
- 
+
 
     this.getPreparedOrdersCount();
     this.getCancelledTransactionCount();
@@ -128,7 +133,7 @@ export class AppComponent {
     this.getForApproval();
     this.totalForLabtestForApproval();
     this.activeUserRoleId = this.loginService.currentUserRoleSession;
-    
+
     this.getUserRoleModules();
 
   }
@@ -273,7 +278,7 @@ export class AppComponent {
           // alert(status.moduleName);
           if (status.modulename === 'qc-receiving-route') {
             this.QCReceiving = 1;
-           
+
           }
           else if (status.modulename === 'wh-receiving-route') {
             this.WhReceiving = 1;
@@ -286,54 +291,53 @@ export class AppComponent {
           else if (status.modulename === 'approval-route') {
             this.Approval = 1;
           }
-          else if (status.modulename === 'labtest-route')
-          {
+          else if (status.modulename === 'labtest-route') {
             this.LabTest = 1;
           }
-          else if (status.modulename === 'preparation-route')
-          {
+          else if (status.modulename === 'preparation-route') {
             this.Preparation = 1;
           }
-          else if (status.modulename === 'onlinemrs-route')
-          {
+          else if (status.modulename === 'onlinemrs-route') {
             this.OnlineMrs = 1;
           }
-          else if (status.modulename === 'setup-route')
-          {
+          else if (status.modulename === 'order-list-route') {
+            this.OrderList = 1;
+          }
+          else if (status.modulename === 'approved-orders-route') {
+            this.ApprovedOrders = 1;
+          }
+          else if (status.modulename === 'cancelled-orders-route') {
+            this.CancelledOrders = 1;
+          }
+
+
+          else if (status.modulename === 'setup-route') {
             this.SetUp = 1;
           }
-          else if (status.modulename === 'user-modules-route')
-          {
+          else if (status.modulename === 'user-modules-route') {
             this.UserModules = 1;
           }
-          else if (status.modulename === 'user-management-route')
-          {
+          else if (status.modulename === 'user-management-route') {
             this.UserManagement = 1;
           }
-          else if (status.modulename === 'rm-receiving-route')
-          {
+          else if (status.modulename === 'rm-receiving-route') {
             this.RMReceiving = 1;
           }
-          else if (status.modulename === 'rm-cancel-return')
-          {
+          else if (status.modulename === 'rm-cancel-return') {
             this.RMCancelAndReturn = 1;
           }
-          else if (status.modulename === 'lab-procedures-remarks-route')
-          {
+          else if (status.modulename === 'lab-procedures-remarks-route') {
             this.LabProcedureAndRemarks = 1;
           }
-          else if (status.modulename === 'qc-checklist-route')
-          {
+          else if (status.modulename === 'qc-checklist-route') {
             this.QcCheckList = 1;
           }
 
 
-          else if (status.modulename === 'po-receiving-route')
-          {
+          else if (status.modulename === 'po-receiving-route') {
             this.PoReceiving = 1;
           }
-          else if (status.modulename == "cancelled-po-route")
-          {
+          else if (status.modulename == "cancelled-po-route") {
             this.CancelledPo = 1;
           }
 

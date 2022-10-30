@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { LoginService } from 'src/app/services/login.service';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { OnlineMrsService } from './services/online-mrs.service';
 import * as $ from 'jquery';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-root',
@@ -75,13 +76,18 @@ export class OnlineMRSComponent implements OnInit {
   cancelOrderRequestForm: FormGroup;
   returnOrderRequestForm: FormGroup;
 
-  editIndex: number = null;
+  editIndex: number = 0;
+
+  OrderList: number = 0;
+  ApprovedOrders: number = 0;
+  CancelledOrders: number = 0;
 
   constructor(
     public loginService: LoginService,
     public onlineMrsService: OnlineMrsService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public appComponent: AppComponent
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +100,10 @@ export class OnlineMRSComponent implements OnInit {
     this.getItemList();
     this.getCancelReasonList();
     this.getReturnReasonList();
+
+    this.OrderList = this.appComponent.OrderList;
+    this.ApprovedOrders = this.appComponent.ApprovedOrders;
+    this.CancelledOrders = this.appComponent.CancelledOrders;
   }
 
   getParentList() {

@@ -157,7 +157,7 @@ export class AspNetRolesComponent implements OnInit {
     this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
     this.calculateNoOfPagesTagged();
 
-    if (this.totalRoleModulesTaggedRowCount == this.totalRoleModulesUntaggedNewRowCount) {
+    if (this.totalRoleModulesTaggedRowCount == 0 && this.totalRoleModulesUntaggedNewRowCount == 0) {
 
 
       this.userAccountService.getUserRoleByAdminId(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
@@ -380,7 +380,7 @@ export class AspNetRolesComponent implements OnInit {
     setTimeout(() => {
       //Set data into editForm
       this.editForm.patchValue(StatusParam);
-      console.log(this.editForm.value);
+      // console.log(this.editForm.value);
       this.editIndex = this.UserRole.indexOf(StatusParam);
       this.activeUser = this.loginService.currentUserName;
       //Focus the ClientLocation textbox in editForm

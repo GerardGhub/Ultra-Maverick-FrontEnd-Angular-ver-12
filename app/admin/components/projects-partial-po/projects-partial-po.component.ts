@@ -66,9 +66,9 @@ export class ProjectsPartialPoComponent implements OnInit {
 
   newProject: Project = new Project();
   editProject: Project = new Project();
-  editIndex: number = null;
+  editIndex: number = 0;
   deleteProject: Project = new Project();
-  deleteIndex: number = null;
+  deleteIndex: number = 0;
   searchBy: string = 'ProjectName';
   searchText: string = '';
   ToDay: Date;
@@ -81,7 +81,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   pages: any[] = [];
   pageSize: number = 7;
 
-  totalPoRowCount: number = null;
+  totalPoRowCount: number = 0;
 
   @ViewChild('newForm') newForm: NgForm;
   @ViewChild('editForm') editForm: NgForm;
@@ -661,34 +661,34 @@ export class ProjectsPartialPoComponent implements OnInit {
           this.newProject.teamSize = null;
           this.newProject.active = false;
           // this.newProject.clientLocationID = null;
-          this.newProject.status = null;
-          this.newProject.is_activated = null;
-          this.newProject.supplier = null;
-          this.newProject.item_code = null;
-          this.newProject.po_number = null;
-          this.newProject.po_date = null;
-          this.newProject.pr_number = null;
-          this.newProject.pr_date = null;
-          this.newProject.qty_uom = null;
-          this.newProject.qty_order = null;
-          this.newProject.mfg_date = null;
-          this.newProject.expiration_date = null;
-          this.newProject.expected_delivery = null;
-          this.newProject.actual_delivery = null;
-          this.newProject.actual_remaining_receiving = null;
-          this.newProject.received_by_QA = null;
-          this.newProject.status_of_reject_one = null;
-          this.newProject.status_of_reject_two = null;
-          this.newProject.status_of_reject_three = null;
-          this.newProject.count_of_reject_one = null;
-          this.newProject.count_of_reject_two = null;
-          this.newProject.count_of_reject_three = null;
-          this.newProject.total_of_reject_mat = null;
-          this.newProject.a_compliance = null;
-          this.newProject.a_remarks = null;
+          this.newProject.status = "";
+          this.newProject.is_activated = "";
+          this.newProject.supplier = "";
+          this.newProject.item_code = "";
+          this.newProject.po_number = "";
+          this.newProject.po_date = "";
+          this.newProject.pr_number = "";
+          this.newProject.pr_date = "";
+          this.newProject.qty_uom = "";
+          this.newProject.qty_order = "";
+          this.newProject.mfg_date = "";
+          this.newProject.expiration_date = "";
+          this.newProject.expected_delivery = "";
+          this.newProject.actual_delivery = "";
+          this.newProject.actual_remaining_receiving = 0;
+          this.newProject.received_by_QA = "";
+          this.newProject.status_of_reject_one = "";
+          this.newProject.status_of_reject_two = "";
+          this.newProject.status_of_reject_three = "";
+          this.newProject.count_of_reject_one = "";
+          this.newProject.count_of_reject_two = "";
+          this.newProject.count_of_reject_three = "";
+          this.newProject.total_of_reject_mat = "";
+          this.newProject.a_compliance = "";
+          this.newProject.a_remarks = "";
 
           $('#newFormCancel').trigger('click');
-          // this.ngOnInit();
+        
           this.calculateNoOfPages();
         },
         (error) => {
@@ -2007,7 +2007,7 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
   }
 
   ConfirmNoofReject(event: any) {
-    // alert("You Press a key in the Keyboard");
+
 
     if (this.confirmReject.nativeElement.value == '') {
       this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
@@ -2017,7 +2017,6 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
         this.confirmReject.nativeElement.value
       ) {
         // this.rejectNo3.nativeElement.value="0";
-        // console.warn("Empty Quantity in the textInput! ")
         // this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = "Pexa Marian";
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
       } else {

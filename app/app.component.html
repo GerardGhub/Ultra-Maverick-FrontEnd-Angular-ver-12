@@ -164,20 +164,23 @@
 
 
           <mat-menu #menu1="matMenu">
+            <ng-container *ngIf="NearlyExpiryApproval === 1 ">
             <button mat-menu-item routerLinkActive="link-active">
-              <!-- <mat-icon matBadgeColor="warn">event_busy</mat-icon> -->
               <span [routerLink]=" [ '/admin', 'nearly-expiry' ] ">Nearly Expiry</span> &nbsp;&nbsp;
               <span
                 class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceivingNearlyExpiryApproval | number }}">{{
                 totalPoPartialReceivingNearlyExpiryApproval | number }}</span>
 
             </button>
+            </ng-container>
+            <ng-container *ngIf="WHRejection === 1 ">
             <button mat-menu-item routerLinkActive="link-active">
               <!-- <mat-icon matBadgeColor="warn">category</mat-icon> -->
               <span [routerLink]=" [ '/admin', 'wh-rejection'] ">WH Rejection</span> &nbsp;&nbsp;
               <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialRejectatWH | number }}">{{
                 totalPoPartialRejectatWH | number }}</span>
             </button>
+            </ng-container>
           </mat-menu>
 
           <!-- Approval Module -->

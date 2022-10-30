@@ -73,6 +73,10 @@ export class AppComponent {
   WHReceivingList: number = 0;
   //}
   Approval: number = 0;
+  //{ Array Approval
+  NearlyExpiryApproval: number = 0;
+  WHRejection: number = 0;
+ // }
   LabTest: number = 0;
   Preparation: number = 0;
   OnlineMrs: number = 0;

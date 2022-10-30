@@ -127,7 +127,7 @@ export class AppComponent {
     this.getForLabTest();
     this.getForApproval();
     this.totalForLabtestForApproval();
-    this.activeUserRoleId = this.loginService.currentUserRole;
+    this.activeUserRoleId = this.loginService.currentUserRoleSession;
     
     this.getUserRoleModules();
 

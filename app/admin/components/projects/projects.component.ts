@@ -250,13 +250,12 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
     this.PoReceiving = this.appComponent.PoReceiving;
     this.CancelledPo = this.appComponent.CancelledPo;
-    // alert(this.PoReceiving);
+  
   }
 
   any(event: any) {
     this.ChildForm = "22434";
-    alert("BUje");
-    // this.getPOrecievingList();
+
 
   }
   any2(event: any) {
@@ -358,7 +357,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.dualbindingchanges ++;
 
     this.ChildForm = this.dualbindingchanges.toString();
-    // alert(this.samplelang);
+
   }
 
 
@@ -1326,7 +1325,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
         p.received_by_QA = response.received_by_QA;
 
         this.projects.push(p);
-        // alert("Gerard 1");
+     
       },
       (error) => {
         console.log(error);

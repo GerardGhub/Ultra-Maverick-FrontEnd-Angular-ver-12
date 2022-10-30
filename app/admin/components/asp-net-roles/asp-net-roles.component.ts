@@ -108,10 +108,7 @@ export class AspNetRolesComponent implements OnInit {
       modifiedby: this.formBuilder.control(null),
       RoleId: this.formBuilder.control(null),
       mainmoduleidentity: this.formBuilder.control(null)
-      // name: this.formBuilder.control(null, [Validators.required]),
-      // isactive: this.formBuilder.control(null, [Validators.required]),
-      // modifiedby: this.formBuilder.control(null, [Validators.required]),
-      // isactivereference: this.formBuilder.control(null, [Validators.required]),
+
     });
 
     // Here
@@ -134,14 +131,13 @@ export class AspNetRolesComponent implements OnInit {
   }
 
   getUserRoleModules() {
-
+    // alert(this.RoleId.nativeElement.value);
     this.userAccountService.getUserRoleListById(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
 
       (response: RoleModules[]) => {
-
         if (response) {
           this.RoleModule = response;
-          console.error(response);
+          // console.error(response);
           this.getModulesUntagged();
         }
       });
@@ -160,6 +156,25 @@ export class AspNetRolesComponent implements OnInit {
     this.RoleModule = taggedData;
     this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
     this.calculateNoOfPagesTagged();
+
+    if (this.totalRoleModulesTaggedRowCount == this.totalRoleModulesUntaggedNewRowCount) {
+
+
+      this.userAccountService.getUserRoleByAdminId(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
+
+        (response: RoleModules[]) => {
+
+          if (response) {
+            this.RoleModule = response;
+
+            const taggedData = this.RoleModule.filter(status => status.isactive === false);
+            this.RoleModule = taggedData;
+            this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
+            this.calculateNoOfPagesTagged();
+          }
+        });
+
+    }
 
   }
 
@@ -350,7 +365,7 @@ export class AspNetRolesComponent implements OnInit {
 
 
   errorToaster() {
-    
+
     this.toastr.error(this.errorMessageFromResponse, 'Message');
   }
 

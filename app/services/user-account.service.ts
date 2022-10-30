@@ -62,6 +62,10 @@ export class UserAccountService {
   getUserRoleListById(roleid: string, moduleId: number): Observable<any>{
     return this.httpClient.get("/api/RoleModules/RoleId/"+ roleid+"/"+moduleId,  { responseType: "json" });
   }
+  
+  getUserRoleByAdminId(roleid: string, moduleId: number): Observable<any>{
+    return this.httpClient.get("/api/RoleModules/RoleId/Admin/"+ roleid+"/"+moduleId,  { responseType: "json" });
+  }
 
   updateUserRoleListById(deactivateDetails: RoleModules): Observable<RoleModules>{
     return this.httpClient.put<RoleModules>('/api/RoleModules/Deactivate', deactivateDetails,{ responseType: "json" });

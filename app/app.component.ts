@@ -29,6 +29,7 @@ import { NgModel } from '@angular/forms';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -54,7 +55,7 @@ export class AppComponent {
 
   totalforlabtestforapproval: number = 0;
 
-  totalPoPartialReceivingNearlyExpiryApproval = null;
+  totalPoPartialReceivingNearlyExpiryApproval = 0;
   //Rejection Call at back End
   totalPoPartialRejectatWH: number = 0;
 
@@ -68,6 +69,9 @@ export class AppComponent {
   QCReceiving: number = 0;
 
   WhReceiving: number = 0;
+  // Array WH Receiving {
+  WHReceivingList: number = 0;
+  //}
   Approval: number = 0;
   LabTest: number = 0;
   Preparation: number = 0;
@@ -78,6 +82,8 @@ export class AppComponent {
   UserManagement: number = 0;
   RMReceiving: number = 0;
   RMCancelAndReturn: number = 0;
+  LabProcedureAndRemarks: number = 0;
+  QcCheckList: number = 0;
   //End
 
   //Child of QC Receiving
@@ -118,15 +124,9 @@ export class AppComponent {
     this.getForApproval();
     this.totalForLabtestForApproval();
     this.activeUserRoleId = this.loginService.currentUserRole;
-    // alert(this.activeUserRoleId);
-    // alert("Sample");
+    
     this.getUserRoleModules();
-    //     var val = "qc-receiving-routes";
 
-    //       const status = this.roleModulesSummary.filter(status => status.modulename === val);
-    //       this.roleModulesSummaryForEach = status;
-    // alert(this.roleModulesSummaryForEach.length.toString());
-    // console.log(this.roleModulesSummaryForEach);
   }
 
   getForLabTest() {
@@ -274,6 +274,11 @@ export class AppComponent {
           else if (status.modulename === 'wh-receiving-route') {
             this.WhReceiving = 1;
           }
+          else if (status.modulename === 'wh-receivinglist-route') {
+            this.WHReceivingList = 1;
+          }
+
+
           else if (status.modulename === 'approval-route') {
             this.Approval = 1;
           }
@@ -309,6 +314,16 @@ export class AppComponent {
           {
             this.RMCancelAndReturn = 1;
           }
+          else if (status.modulename === 'lab-procedures-remarks-route')
+          {
+            this.LabProcedureAndRemarks = 1;
+          }
+          else if (status.modulename === 'qc-checklist-route')
+          {
+            this.QcCheckList = 1;
+          }
+
+
           else if (status.modulename === 'po-receiving-route')
           {
             this.PoReceiving = 1;

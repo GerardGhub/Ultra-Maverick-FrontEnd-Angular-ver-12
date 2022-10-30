@@ -250,11 +250,11 @@
             <span [routerLink]=" [ '/admin', 'masters','rmcancelandreturn' ] ">RM Cancel & Return</span>
           </button>
 
-          <button mat-menu-item>
+          <button mat-menu-item *ngIf="LabProcedureAndRemarks === 1">
             <span [routerLink]=" [ '/admin', 'masters','labtest' ] ">Laboratory Procedures and Remarks</span>
           </button>
 
-          <button mat-menu-item>
+          <button mat-menu-item *ngIf="QcCheckList === 1">
             <span [routerLink]=" [ '/admin', 'masters','qc-master-list' ] ">QC Check List</span>
           </button>
 

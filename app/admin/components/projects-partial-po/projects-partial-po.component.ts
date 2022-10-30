@@ -34,6 +34,7 @@ import { CancelledPOTransactionStatus } from 'src/app/models/cancelled-potransac
 import { CancelledPOTransactionStatusService } from 'src/app/services/cancelled-potransaction-status.service';
 import { ProjectsPartialPoService } from 'src/app/services/projects-partial-po.service';
 import { PartialPoService } from './services/partialPOmodule.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-projects-partial-po',
@@ -52,8 +53,11 @@ export class ProjectsPartialPoComponent implements OnInit {
     private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService,
     private projectsPartialPoService: ProjectsPartialPoService,
     private formBuilder: FormBuilder,
-    private partialPOService: PartialPoService
+    private partialPOService: PartialPoService,
+    public appComponent: AppComponent
   ) {}
+
+  WHReceivingList: number = 0;
 
   projects: Project[] = [];
   clientLocations: Observable<ClientLocation[]>;
@@ -89,7 +93,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   msgrejectremarksno2: number = 0;
   msgrejectremarksno3: number = 0;
 
-  totalRejectMaterial: string = null;
+  totalRejectMaterial: string = "";
   //Calculator for Reject
 
   secondInput: number = 10;
@@ -129,6 +133,8 @@ export class ProjectsPartialPoComponent implements OnInit {
     this.RejectStatuses = this.rejectedStatusService.getListOfStatusOfReject();
     this.CancelPoSummary = this.cancelledPOTransactionStatusService.getListOfStatusOfData();
     this.AllowablePercentages = this.allowablePercentageService.getAllAlowablePercentage();
+
+    this.WHReceivingList = this.appComponent.WHReceivingList;
   }
 
   getList() {

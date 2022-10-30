@@ -16,6 +16,7 @@
     </nav>
 
     <mat-tab-group mat-align-tabs="start">
+      <ng-template [ngIf]="WHReceivingList === 1">
       <mat-tab>
         <ng-template mat-tab-label>
           WH Receiving List
@@ -191,6 +192,7 @@
           </ul>
         </div>
       </mat-tab>
+    </ng-template>
     </mat-tab-group>
   </div>
 </div>

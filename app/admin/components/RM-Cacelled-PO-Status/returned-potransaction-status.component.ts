@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { CancelledPOTransactionStatus } from '../models/cancelled-potransaction-status';
-import { SystemCapabilityStatus } from '../models/system-capability-status';
-import { FilterPipe } from '../pipes/filter.pipe';
-import { ReturnedPOTransactionStatusService } from '../services/returned-potransaction-status.service';
-import { SystemCapabilityStatusService } from '../services/system-capability-status.service';
+import { CancelledPOTransactionStatus } from '../../../models/cancelled-potransaction-status';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { ReturnedPOTransactionStatusService } from '../../../services/returned-potransaction-status.service';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
 import * as $ from "jquery";
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';

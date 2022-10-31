@@ -1,13 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { SystemCapabilityStatus } from '../models/system-capability-status';
-import { SystemCapabilityStatusService } from '../services/system-capability-status.service';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
 import * as $ from "jquery";
-import { FilterPipe } from '../pipes/filter.pipe';
-import { AllowablePercentage } from '../models/allowable-percentage';
-import { AllowablePercentageService } from '../services/allowable-percentage.service';
-import { LoginService } from '../services/login.service';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { AllowablePercentage } from '../../../models/allowable-percentage';
+import { AllowablePercentageService } from '../../../services/allowable-percentage.service';
+import { LoginService } from '../../../services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 

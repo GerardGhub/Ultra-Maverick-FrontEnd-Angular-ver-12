@@ -1,8 +1,8 @@
 import { Component, ComponentFactoryResolver, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { AllowablePercentageComponent } from '../../../allowable-percentage/allowable-percentage.component';
+import { AllowablePercentageComponent } from '../allowable-percentage/allowable-percentage.component';
 import { ComponentLoaderDirective } from '../../../directives/component-loader.directive';
-import { ReturnedPOTransactionStatusComponent } from '../../../RM-Cacelled-PO-Status/returned-potransaction-status.component';
+import { ReturnedPOTransactionStatusComponent } from '../RM-Cacelled-PO-Status/returned-potransaction-status.component';
 import { AspNetRolesComponent } from '../asp-net-roles/asp-net-roles.component';
 
 import { CancelledPOTransactionStatusComponent } from '../RM-reject-status-of-QC/cancelled-potransaction-status.component';

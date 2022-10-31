@@ -67,10 +67,6 @@
   </mat-menu>
 
   <mat-menu #user="matMenu">
-    <!-- <button mat-menu-item>Profile</button>
-    <button mat-menu-item>Change Password</button> -->
-    <!-- <a class="nav-link"[routerLink]=" [ '/signup' ] ">Sign Up</a> -->
-    <!-- <button mat-menu-item >Logout</button> -->
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
   </mat-menu>
 
@@ -270,68 +266,14 @@
     <!-- Warehouse Checker ******************************************************************************************************** -->
     <!-- <ng-container
       *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'WarehouseChecker'">
-      <mat-nav-list class="sidebar-navlist">
-        <a class="system-name" [routerLink]="[  '/admin', 'dashboard'  ]" mat-list-item routerLinkActive="link-active">
-          <mat-icon>dashboard_customize</mat-icon>
-          &nbsp;Dashboard
-        </a>
 
-        <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
-          [matMenuTriggerFor]="menu_prep">
-          <mat-icon>add_shopping_cart</mat-icon>
-          &nbsp;Preparation &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{
-            totalPreparationBadge | number }}</span>
-        </a>
-        <mat-menu #menu_prep="matMenu">
-          <button mat-menu-item>
-  
-            <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s <span
-                class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{
-                totalPreparationBadge | number }}</span></span>
-          </button>
-          <button mat-menu-item>
-
-            <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s</span>
-          </button>
-        </mat-menu>
-
-      </mat-nav-list>
     </ng-container> -->
 
 
     <!-- QC STAFF ***************************************************************************************************************** -->
-    <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
-      <mat-nav-list class="sidebar-navlist">
-        <a class="system-name" [routerLink]="[  '/admin', 'dashboard'  ]" mat-list-item routerLinkActive="link-active">
-          <mat-icon>dashboard_customize</mat-icon>&nbsp;Dashboard
+    <!-- <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'QC Staff'">
 
-        </a>
-        <a class="system-name" [routerLink]=" [ '/admin', 'qc-recieving' ] " mat-list-item
-          routerLinkActive="link-active">
-          <mat-icon>local_shipping</mat-icon>
-          &nbsp;&nbsp;QC Receiving &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalPoRowCount | number}}">{{ totalPoRowCount |
-            number}}</span>
-        </a>
-
-        <a class="system-name" [routerLink]=" [ '/admin', 'wh-recieving' ] " mat-list-item
-          routerLinkActive="link-active">
-          <mat-icon>inventory_2</mat-icon>
-          &nbsp;&nbsp;WH Receiving &nbsp;&nbsp;
-          <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceiving | number}}">{{
-            totalPoPartialReceiving | number}}</span>
-        </a>
-
-        <!-- Online MRS Module -->
-        <a class="system-name" [routerLink]="[  '/admin', 'online-mrs'  ]" mat-list-item routerLinkActive="link-active">
-          <mat-icon>wallpaper</mat-icon>
-          &nbsp;Online MRS &nbsp;&nbsp;
-          <!-- <span class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{ totalPreparationBadge | number }}</span> -->
-        </a>
-
-      </mat-nav-list>
-    </ng-container>
+    </ng-container> -->
 
 
 

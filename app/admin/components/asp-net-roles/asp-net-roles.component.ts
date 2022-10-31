@@ -156,8 +156,9 @@ export class AspNetRolesComponent implements OnInit {
     this.RoleModule = taggedData;
     this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
     this.calculateNoOfPagesTagged();
-
-    if (this.totalRoleModulesTaggedRowCount == 0 && this.totalRoleModulesUntaggedNewRowCount == 0) {
+//    if (this.totalRoleModulesTaggedRowCount == 0 && this.totalRoleModulesUntaggedNewRowCount == 0)
+    if (this.totalRoleModulesUntaggedNewRowCount == 0)
+     {
 
 
       this.userAccountService.getUserRoleByAdminId(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
@@ -168,6 +169,19 @@ export class AspNetRolesComponent implements OnInit {
             this.RoleModule = response;
 
             const taggedData = this.RoleModule.filter(status => status.isactive === false);
+
+         
+            for( var i=taggedData.length - 1; i>=0; i--){
+              for( var j=0; j<untaggedData.length; j++){
+                  if(taggedData[i] && (taggedData[i].moduleid === untaggedData[j].moduleid)){
+                      taggedData.splice(i, 1);
+                  }
+              }
+          }
+
+  console.log(taggedData);
+
+
             this.RoleModule = taggedData;
             this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
             this.calculateNoOfPagesTagged();

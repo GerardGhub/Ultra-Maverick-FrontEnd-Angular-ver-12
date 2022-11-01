@@ -168,7 +168,8 @@ export class AspNetRolesComponent implements OnInit {
           if (response) {
             this.RoleModule = response;
 
-            const taggedData = this.RoleModule.filter(status => status.isactive === false);
+            const taggedData = this.RoleModule.filter(status => status.isactive === false
+              || status.isactive === true);
 
          
             for( var i=taggedData.length - 1; i>=0; i--){

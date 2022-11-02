@@ -63,7 +63,8 @@ export class AspNetRolesComponent implements OnInit {
   //Combo Box for User Role Binding
   activeModuleId: string = "";
   totalRoleModulesUntaggedNewRowCount: number = 0;
-  totalRoleModulesTaggedRowCount: number = 0
+  totalRoleModulesTaggedRowCount: number = 0;
+  moduleTaggingFor: string = '';
   //Autofocus TextBoxes
   @ViewChild("defaultTextBox_New") defaultTextBox_New: ElementRef;
   @ViewChild("defaultTextBox_Edit") defaultTextBox_Edit: ElementRef;
@@ -389,6 +390,7 @@ export class AspNetRolesComponent implements OnInit {
   }
   onEditClick(event, StatusParam: AspNetRoles) {
 
+    this.moduleTaggingFor = StatusParam.name;
     //Reset the editForm
     this.editForm.reset();
     setTimeout(() => {
@@ -406,6 +408,8 @@ export class AspNetRolesComponent implements OnInit {
 
 
     // alert(StatusParam.moduleid);
+
+    alert(this.moduleTaggingFor);
     this.editFormTaggedModule.reset();
     if (this.totalRoleModulesUntaggedNewRowCount == 0)
     {

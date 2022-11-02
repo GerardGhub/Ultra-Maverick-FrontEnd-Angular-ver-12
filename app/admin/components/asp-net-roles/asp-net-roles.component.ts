@@ -47,7 +47,7 @@ export class AspNetRolesComponent implements OnInit {
   pagesUnTagged: any[] = [];
   pagesTagged: any[] = [];
   pageSize: number = 7;
-
+  TaggingRoleId: string = "";
 
   //Properties for Sorting
   sortBy: string = "Name";
@@ -200,8 +200,7 @@ export class AspNetRolesComponent implements OnInit {
     this.activeModuleId = roleid;
     this.getUserRoleModules();
 
-    // if (typeof (id) == "string") {
-    //   this.fourth_approver_name = "";
+   
   }
 
   calculateNoOfPages() {
@@ -406,10 +405,22 @@ export class AspNetRolesComponent implements OnInit {
   onUntaggedClick(event, StatusParam: RoleModules) {
 
 
+    // alert(StatusParam.moduleid);
     this.editFormTaggedModule.reset();
+    if (this.totalRoleModulesUntaggedNewRowCount == 0)
+    {
+      //Buje
+      this.TaggingRoleId = this.activeModuleId;
+    }
+    else
+    {
+      // this.TaggingRoleId = this.na
+    }
+
     setTimeout(() => {
       this.editFormTaggedModule.patchValue({
-        moduleId: this.activeModuleId,
+        // moduleId: this.activeModuleId,
+        moduleId: StatusParam.moduleid,
         id: StatusParam.id,
         modifiedby: this.loginService.currentUserName,
         RoleId: this.RoleId.nativeElement.value,

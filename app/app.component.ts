@@ -75,7 +75,7 @@ export class AppComponent {
   Approval: number = 0;
   //{ Array Approval
   NearlyExpiryApproval: number = 0;
-  WHRejection: number = 0;
+  WHRejectionApproval: number = 0;
   // }
   LabTest: number = 0;
   Preparation: number = 0;
@@ -291,6 +291,15 @@ export class AppComponent {
           else if (status.modulename === 'approval-route') {
             this.Approval = 1;
           }
+
+          else if (status.modulename === 'expiry-approval-route') {
+            this.NearlyExpiryApproval = 1;
+          }
+          
+          else if (status.modulename === 'wh-rejection-route') {
+            this.WHRejectionApproval = 1;
+          }
+
           else if (status.modulename === 'labtest-route') {
             this.LabTest = 1;
           }

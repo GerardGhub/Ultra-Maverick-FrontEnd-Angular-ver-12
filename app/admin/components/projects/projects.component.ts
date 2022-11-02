@@ -6,29 +6,23 @@ import {
   QueryList,
   ElementRef,
   OnChanges,
-  Output,
   Input,
-  EventEmitter,
 } from '@angular/core';
 import { ProjectsService } from '../../../services/projects.service';
 import { ClientLocation } from '../../../models/client-location';
 import { ClientLocationsService } from '../../../services/client-locations.service';
 import {
-  FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import * as $ from 'jquery';
-import { ProjectIDUniqueValidatorDirective } from '../../../directives/project-idunique-validator.directive';
 import { ProjectComponent } from '../project/project.component';
 import { FilterPipe } from '../../../pipes/filter.pipe';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Project } from '../../../models/project';
 import Swal from 'sweetalert2';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { LoginService } from '../../../services/login.service';
 import { RejectedStatus } from '../../../models/rejected-status';

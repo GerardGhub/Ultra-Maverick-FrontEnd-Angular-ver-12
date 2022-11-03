@@ -30,6 +30,7 @@ export class UserAccount {
 
   fourth_approver_name:string;
   fourth_approver_id:string;
+  user_identity: number;
   // is_active:string;
    is_active: boolean;
   constructor()

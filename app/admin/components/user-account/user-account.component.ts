@@ -325,14 +325,38 @@ export class UserAccountComponent implements OnInit {
   onEditClick(event, userInfo: UserAccount) {
     this.editUser.reset();
     this.editUser.patchValue(userInfo);
-
+ 
+    this.validateReqAndApproveIfBoolean(event, userInfo);
     this.validatetagApprovedOnEdit(event, userInfo);
     this.validateifApproverOrNot(event, userInfo);
 
     this.userinfo = userInfo;
+
+  }
+validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
+  if (typeof (userInfo.approver.valueOf) == "boolean") {
+  
+  } else {
+ 
+      this.editUser.patchValue({
+        Approver: false
+      });
   }
 
+  if (typeof (userInfo.requestor.valueOf) == "boolean") {
+  
+  } else {
+ 
+      this.editUser.patchValue({
+        Requestor: false
+      });
+  }
+}
+
+
   validateifApproverOrNot(event, userInfo: UserAccount) {
+
+
     if (userInfo.requestor == true) {
       this.editUser.patchValue({
         Requestor: true
@@ -650,7 +674,7 @@ export class UserAccountComponent implements OnInit {
       first_approver_name: this.first_approver_name,
     });
 
-    if (typeof (id) == "string") {
+    if (typeof (id.valueOf) == "string") {
       this.first_approver_name = "";
     }
   }

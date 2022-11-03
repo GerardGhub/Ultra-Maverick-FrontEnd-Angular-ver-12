@@ -152,7 +152,7 @@ export class UserAccountComponent implements OnInit {
   getApproverList() {
     this.userAccountService.getApprover().subscribe((data) => {
       this.approverList = data;
-      
+
     });
   }
 
@@ -325,7 +325,34 @@ export class UserAccountComponent implements OnInit {
   onEditClick(event, userInfo: UserAccount) {
     this.editUser.reset();
     this.editUser.patchValue(userInfo);
+  
+ this.validatetagApprovedOnEdit(event, userInfo);
+
+
     this.userinfo = userInfo;
+  }
+
+  validatetagApprovedOnEdit(event, userInfo: UserAccount) {
+    if (userInfo.first_approver_id == "0") {
+      this.editUser.patchValue({
+        first_approver_name: ""
+      });
+    }
+    if (userInfo.second_approver_id == "0") {
+      this.editUser.patchValue({
+        second_approver_name: ""
+      });
+    }
+    if (userInfo.third_approver_id == "0") {
+      this.editUser.patchValue({
+        third_approver_name: ""
+      });
+    }
+    if (userInfo.fourth_approver_id == "0") {
+      this.editUser.patchValue({
+        fourth_approver_name: ""
+      });
+    }
   }
 
 
@@ -609,6 +636,10 @@ export class UserAccountComponent implements OnInit {
     this.editUser.patchValue({
       first_approver_name: this.first_approver_name,
     });
+
+    if (typeof (id) == "string") {
+      this.first_approver_name = "";
+    }
   }
 
   getSecondApproverId(id) {
@@ -624,6 +655,10 @@ export class UserAccountComponent implements OnInit {
     this.editUser.patchValue({
       second_approver_name: this.second_approver_name,
     });
+
+    if (typeof (id) == "string") {
+      this.second_approver_name = "";
+    }
   }
 
   getThirdApproverId(id) {
@@ -632,6 +667,7 @@ export class UserAccountComponent implements OnInit {
     );
     this.search_approver = result;
 
+
     result.forEach((approver) => {
       this.third_approver_name = approver.firstName + ' ' + approver.lastName;
     });
@@ -639,6 +675,10 @@ export class UserAccountComponent implements OnInit {
     this.editUser.patchValue({
       third_approver_name: this.third_approver_name,
     });
+
+    if (typeof (id) == "string") {
+      this.third_approver_name = "";
+    }
   }
 
   getFourthApproverId(id) {
@@ -654,6 +694,10 @@ export class UserAccountComponent implements OnInit {
     this.editUser.patchValue({
       fourth_approver_name: this.fourth_approver_name,
     });
+
+    if (typeof (id) == "string") {
+      this.fourth_approver_name = "";
+    }
   }
 
   // Crud *******************************************************************************
@@ -680,6 +724,8 @@ export class UserAccountComponent implements OnInit {
             },
             (error) => {
               console.log(error);
+              this.errorMessageFromResponse = error.error.message;
+              this.toastr.error(this.errorMessageFromResponse, 'Message');
             }
           );
         }
@@ -749,10 +795,10 @@ export class UserAccountComponent implements OnInit {
                 this.errorMessageFromResponse = error.error.message;
                 console.log(this.errorMessageFromResponse);
 
-                console.warn(JSON.stringify(error.error.message));
-                const string = JSON.stringify(error.error);
-                const t = JSON.parse(string);
-                console.info(t["First_approver_name"]);
+                // console.warn(JSON.stringify(error.error.message));
+                // const string = JSON.stringify(error.error);
+                // const t = JSON.parse(string);
+                // console.info(t["First_approver_name"]);
                 // this.errorToaster();
                 this.toastr.error(this.errorMessageFromResponse, 'Message');
               }

@@ -585,7 +585,7 @@ validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
       this.first_approver_name = "";
     }
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -606,7 +606,7 @@ validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
     }
 
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -626,7 +626,7 @@ validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
     }
 
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -646,7 +646,7 @@ validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
     }
 
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 

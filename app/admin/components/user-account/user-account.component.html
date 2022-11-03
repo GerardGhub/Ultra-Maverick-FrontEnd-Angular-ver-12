@@ -302,7 +302,7 @@
                     (selectionChange)="getNewFirstApproverId($event.value)" 
                     >
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList"  [value]="item.employee_number">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList"  [value]="item.user_identity">{{ item.firstName + " "
                       +
                       item.lastName | uppercase}} </mat-option>
                   </mat-select>
@@ -318,7 +318,7 @@
                     (selectionChange)="getNewSecondApproverId($event.value)"
                     >
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
                       item.lastName | uppercase}}</mat-option>
                   </mat-select>
@@ -333,7 +333,7 @@
                     (selectionChange)="getNewThirdApproverId($event.value)"
                     >
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
                       item.lastName | uppercase}}</mat-option>
                   </mat-select>
@@ -341,13 +341,7 @@
               </div>
 
               <div class="form-group col-md-3">
-                <!-- <label>Approver 4:</label>
-                <select class="form-control text-required-color" formControlName="fourth_approver_id"
-                  (change)="getNewFourthApproverId($event.target.value)">
-                  <option value="">Not Applicable</option>
-                  <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
-                    item.lastName | uppercase}}</option>
-                </select> -->
+         
 
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Approver 4:</mat-label>
@@ -356,23 +350,23 @@
                     (selectionChange)="getNewFourthApproverId($event.value)"
                     >
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
                       item.lastName | uppercase}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
 
-              <input type="text" [hidden]="false" formControlName="first_approver_name">
-              <input type="text" [hidden]="false" formControlName="second_approver_name">
-              <input type="text" [hidden]="false" formControlName="third_approver_name">
-              <input type="text" [hidden]="false" formControlName="fourth_approver_name">
+              <input type="text" [hidden]="true" formControlName="first_approver_name">
+              <input type="text" [hidden]="true" formControlName="second_approver_name">
+              <input type="text" [hidden]="true" formControlName="third_approver_name">
+              <input type="text" [hidden]="true" formControlName="fourth_approver_name">
             </div>
           </div>
 
         </form>
 
-        {{registerUser.value | json}}
+        <!-- {{registerUser.value | json}} -->
 
         <div class="modal-footer">
           <button mat-stroked-button [hidden]="true" color="accent" class="mr-1" id="closeRegistrationModal"

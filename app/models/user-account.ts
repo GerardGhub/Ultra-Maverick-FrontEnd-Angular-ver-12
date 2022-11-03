@@ -17,8 +17,8 @@ export class UserAccount {
   username:string;
   password:string;
 
-  Approver:boolean;
-  Requestor:boolean;
+  approver:boolean;
+  requestor:boolean;
 
   first_approver_name:string;
   first_approver_id:string;
@@ -34,11 +34,11 @@ export class UserAccount {
    is_active: boolean;
   constructor()
   {
-    this.id = null,
-    this.employee_number = null;
-    this.firstName = null;
-    this.lastName = null;
-    this.gender = null;
+    this.id = "",
+    this.employee_number = 0;
+    this.firstName = "";
+    this.lastName = "";
+    this.gender = "";
 
     this.department_id = null;
     this.unit_id = null;
@@ -48,8 +48,8 @@ export class UserAccount {
     this.username = null;
     this.password = null;
 
-    this.Approver = null;
-    this.Requestor = null;
+    this.approver = null;
+    this.requestor = null;
     this.first_approver_name = null;
     this.first_approver_id = null;
 

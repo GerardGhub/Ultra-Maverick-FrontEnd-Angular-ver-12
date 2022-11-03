@@ -325,11 +325,24 @@ export class UserAccountComponent implements OnInit {
   onEditClick(event, userInfo: UserAccount) {
     this.editUser.reset();
     this.editUser.patchValue(userInfo);
-  
- this.validatetagApprovedOnEdit(event, userInfo);
 
+    this.validatetagApprovedOnEdit(event, userInfo);
+    this.validateifApproverOrNot(event, userInfo);
 
     this.userinfo = userInfo;
+  }
+
+  validateifApproverOrNot(event, userInfo: UserAccount) {
+    if (userInfo.requestor == true) {
+      this.editUser.patchValue({
+        Requestor: true
+      });
+    }
+    if (userInfo.approver == true) {
+      this.editUser.patchValue({
+        Approver: true
+      });
+    }
   }
 
   validatetagApprovedOnEdit(event, userInfo: UserAccount) {
@@ -794,12 +807,6 @@ export class UserAccountComponent implements OnInit {
               (error) => {
                 this.errorMessageFromResponse = error.error.message;
                 console.log(this.errorMessageFromResponse);
-
-                // console.warn(JSON.stringify(error.error.message));
-                // const string = JSON.stringify(error.error);
-                // const t = JSON.parse(string);
-                // console.info(t["First_approver_name"]);
-                // this.errorToaster();
                 this.toastr.error(this.errorMessageFromResponse, 'Message');
               }
             );

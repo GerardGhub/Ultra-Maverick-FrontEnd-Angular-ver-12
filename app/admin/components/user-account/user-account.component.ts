@@ -145,13 +145,14 @@ export class UserAccountComponent implements OnInit {
   getEmployeeList() {
     this.userAccountService.getEmployee().subscribe((data) => {
       this.employees = data;
-      console.log('data', data);
+      // console.log('data', data);
     });
   }
 
   getApproverList() {
     this.userAccountService.getApprover().subscribe((data) => {
       this.approverList = data;
+      
     });
   }
 
@@ -284,7 +285,7 @@ export class UserAccountComponent implements OnInit {
       .getListOfRole()
       .subscribe((response: AspNetRoles[]) => {
         this.positionList = response;
-        console.log(response);
+
       });
   }
 
@@ -354,7 +355,7 @@ export class UserAccountComponent implements OnInit {
       }
       const status = this.AspNetUsers.filter(status => status.is_active === val);
       this.AspNetUsers = status;
-      console.log(this.AspNetUsers);
+      // console.log(this.AspNetUsers);
       this.showLoading = false;
       this.calculateNoOfPages();
     }
@@ -597,7 +598,7 @@ export class UserAccountComponent implements OnInit {
   // edituser approver method
   getFirstApproverId(id) {
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -612,7 +613,7 @@ export class UserAccountComponent implements OnInit {
 
   getSecondApproverId(id) {
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -627,7 +628,7 @@ export class UserAccountComponent implements OnInit {
 
   getThirdApproverId(id) {
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 
@@ -642,7 +643,7 @@ export class UserAccountComponent implements OnInit {
 
   getFourthApproverId(id) {
     const result = this.approverList.filter(
-      (approver) => approver.employee_number == id
+      (approver) => approver.user_identity == id
     );
     this.search_approver = result;
 

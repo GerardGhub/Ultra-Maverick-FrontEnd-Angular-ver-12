@@ -485,7 +485,7 @@
               <select class="form-control text-required-color" formControlName="first_approver_id"
                 (change)="getFirstApproverId($event.target.value)">
                 <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                <option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " " +
                   item.lastName | uppercase}}</option>
               </select>
             </div>
@@ -495,7 +495,7 @@
               <select type="text" class="form-control text-required-color" formControlName="second_approver_id"
                 (change)="getSecondApproverId($event.target.value)">
                 <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                <option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " " +
                   item.lastName | uppercase}}</option>
               </select>
             </div>
@@ -505,7 +505,7 @@
               <select class="form-control text-required-color" formControlName="third_approver_id"
                 (change)="getThirdApproverId($event.target.value)">
                 <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                <option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " " +
                   item.lastName | uppercase}}</option>
               </select>
             </div>
@@ -515,7 +515,7 @@
               <select class="form-control text-required-color" formControlName="fourth_approver_id"
                 (change)="getFourthApproverId($event.target.value)">
                 <option value="">Not Applicable</option>
-                <option *ngFor="let item of approverList" [value]="item.employee_number">{{ item.firstName + " " +
+                <option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " " +
                   item.lastName | uppercase}}</option>
               </select>
             </div>

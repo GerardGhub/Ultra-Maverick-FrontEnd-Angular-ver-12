@@ -406,10 +406,6 @@ export class AspNetRolesComponent implements OnInit {
 
   onUntaggedClick(event, StatusParam: RoleModules) {
 
-
-    // alert(StatusParam.moduleid);
-
-    alert(this.moduleTaggingFor);
     this.editFormTaggedModule.reset();
     if (this.totalRoleModulesUntaggedNewRowCount == 0)
     {

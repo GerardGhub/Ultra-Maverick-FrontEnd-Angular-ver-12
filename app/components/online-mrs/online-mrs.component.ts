@@ -114,8 +114,8 @@ export class OnlineMRSComponent implements OnInit {
           this.requestOrderCount = response.length;
         }
 
-        // const userRole = this.loginService.currentUserRoleSession;
-        // this.Role = userRole;
+        const userRole = this.loginService.currentUserRoleSession;
+        this.Role = userRole;
 
         // if(userRole === "Admin"){
         //   this.parentData = response;

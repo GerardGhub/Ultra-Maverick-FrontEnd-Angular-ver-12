@@ -27,10 +27,10 @@ export class OnlineMRSComponent implements OnInit {
   cancelReasonList: any = [];
   returnReasonList: any = [];
 
-  searchBy: string = 'mrs_id';
+  searchBy: string = 'mrs_req_desc';
   searchText: string = '';
 
-  sortBy: string = 'mrs_id';
+  sortBy: string = 'mrs_req_desc';
   sortOrder: string = 'ASC';
 
   //Properties for Paging
@@ -106,7 +106,7 @@ export class OnlineMRSComponent implements OnInit {
     this.OrderList = this.appComponent.OrderList;
     this.ApprovedOrders = this.appComponent.ApprovedOrders;
     this.CancelledOrders = this.appComponent.CancelledOrders;
-    alert(this.userId);
+ 
   }
 
   getParentList() {

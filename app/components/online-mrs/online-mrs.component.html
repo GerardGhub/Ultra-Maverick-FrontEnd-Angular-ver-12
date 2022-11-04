@@ -45,8 +45,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText"
-                    name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextKeyup($event)" />
+                  <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                    autocomplete="off" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextKeyup($event)" />
                 </div>
               </div>
               <div class="ml-auto p-2">
@@ -75,7 +75,15 @@
                   <tr
                     *ngFor="let item of parentData | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
                     <td>{{item.mrs_id}}</td>
-                    <td>{{item.mrs_req_desc}}</td>
+                    <td>{{item.mrs_req_desc}}
+
+                      <ng-container *ngIf="Role === 'Admin' || approverRole === false || requestorFound === 1 ">
+                        <button mat-stroked-button class="editbtnStyle" data-toggle="modal" data-target="#editParent"
+                          data-backdrop="false" data-keyboard="false" (click)="clickUpdate(item)"><span
+                            class="fa fa-pencil"> </span></button>
+                      </ng-container>
+
+                    </td>
                     <td>{{item.mrs_requested_by}}</td>
                     <td>{{item.mrs_requested_date | date:'MM-dd-yyyy'}}</td>
                     <td>{{item.mrs_date_needed | date:'MM-dd-yyyy'}}</td>
@@ -85,12 +93,8 @@
                         data-toggle="modal" data-target="#viewOrder" data-backdrop="false" data-keyboard="false"
                         title="View Details" (click)="viewOrderClickParent(item)"> <span class="fa fa-eye"></span>
                         View</button>
-                      <!-- <button mat-stroked-button class="editbtnStyle" data-toggle="modal" data-target="#orderModal" data-backdrop="false" data-keyboard="false" (click)="addOrderClick(item)"><span class="fa fa-plus"> </span> Add Order</button> -->
-                      <ng-container *ngIf="Role === 'Admin' || approverRole === false ">
-                        <button mat-stroked-button class="editbtnStyle" data-toggle="modal" data-target="#editParent"
-                          data-backdrop="false" data-keyboard="false" (click)="clickUpdate(item)"><span
-                            class="fa fa-pencil"> </span> Edit</button>
-                      </ng-container>
+
+
 
                       <ng-container *ngIf="Role === 'Admin' || approverRole === true ">
                         <button mat-stroked-button class="editbtnStyle" data-toggle="modal" data-target="#approveModal"
@@ -643,7 +647,7 @@
               <th>Serve</th>
               <th class="display-none">Remarks</th>
               <ng-template [ngIf]="requestorFound === 1">
-              <th>Action</th>
+                <th>Action</th>
               </ng-template>
 
             </thead>
@@ -660,13 +664,13 @@
                     (click)="viewRemarksItemFromList(item)"><span class="fa fa-eye"></span> View </button>
                 </td>
                 <ng-template [ngIf]="requestorFound === 1">
-                <td>
-                  <button id="viewModalClose" [hidden]="true" data-dismiss="modal" mat-stroked-button
-                    color="primary">close</button>
-                  <button mat-stroked-button color="primary" class="editbtnStyle" data-toggle="modal"
-                    data-target="#editItemFromList" data-backdrop="false" data-keyboard="false"
-                    (click)="editItemFromList(item)"><span class="fa fa-pencil"></span> Edit </button>
-                </td>
+                  <td>
+                    <button id="viewModalClose" [hidden]="true" data-dismiss="modal" mat-stroked-button
+                      color="primary">close</button>
+                    <button mat-stroked-button color="primary" class="editbtnStyle" data-toggle="modal"
+                      data-target="#editItemFromList" data-backdrop="false" data-keyboard="false"
+                      (click)="editItemFromList(item)"><span class="fa fa-pencil"></span> Edit </button>
+                  </td>
                 </ng-template>
               </tr>
             </tbody>

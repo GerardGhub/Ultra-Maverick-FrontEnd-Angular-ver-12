@@ -325,7 +325,7 @@ export class UserAccountComponent implements OnInit {
   onEditClick(event, userInfo: UserAccount) {
     this.editUser.reset();
     this.editUser.patchValue(userInfo);
- 
+
     this.validateReqAndApproveIfBoolean(event, userInfo);
     this.validatetagApprovedOnEdit(event, userInfo);
     this.validateifApproverOrNot(event, userInfo);
@@ -333,25 +333,25 @@ export class UserAccountComponent implements OnInit {
     this.userinfo = userInfo;
 
   }
-validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
-  if (typeof (userInfo.approver.valueOf) == "boolean") {
-  
-  } else {
- 
+  validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
+    if (typeof (userInfo.approver.valueOf) == "boolean") {
+
+    } else {
+
       this.editUser.patchValue({
         Approver: false
       });
-  }
+    }
 
-  if (typeof (userInfo.requestor.valueOf) == "boolean") {
-  
-  } else {
- 
+    if (typeof (userInfo.requestor.valueOf) == "boolean") {
+
+    } else {
+
       this.editUser.patchValue({
         Requestor: false
       });
+    }
   }
-}
 
 
   validateifApproverOrNot(event, userInfo: UserAccount) {
@@ -822,11 +822,11 @@ validateReqAndApproveIfBoolean(event, userInfo: UserAccount) {
                 this.AspNetUsers[this.editIndex] = response;
                 this.successMessage = 'Registered Successfully!';
                 this.registerUser.reset();
-
-                console.log(response);
-
                 $('#closeRegistrationModal').trigger('click');
-                this.successToaster();
+                setTimeout(() => {
+                  this.getLists();
+                  this.successToaster();
+                }, 400);
               },
               (error) => {
                 this.errorMessageFromResponse = error.error.message;

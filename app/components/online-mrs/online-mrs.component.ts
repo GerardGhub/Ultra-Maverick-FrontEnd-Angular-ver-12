@@ -20,6 +20,8 @@ export class OnlineMRSComponent implements OnInit {
   addedItemList: any = [];
   viewAddedItemList: any = [];
 
+  requestorFound: number = 0;
+
   approvedOrderList: any = [];
   cancelledOrderList: any = [];
   cancelReasonList: any = [];
@@ -88,7 +90,7 @@ export class OnlineMRSComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     public appComponent: AppComponent
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getUserInformation();
@@ -104,6 +106,7 @@ export class OnlineMRSComponent implements OnInit {
     this.OrderList = this.appComponent.OrderList;
     this.ApprovedOrders = this.appComponent.ApprovedOrders;
     this.CancelledOrders = this.appComponent.CancelledOrders;
+    alert(this.userId);
   }
 
   getParentList() {
@@ -233,7 +236,7 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = 0;
   }
 
-  onFilterCategory(val: any) {}
+  onFilterCategory(val: any) { }
 
   onSearchTextKeyup(val: any) {
     this.calculateNoOfPages();
@@ -257,7 +260,7 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = 0;
   }
 
-  onFilterCategoryApproved(val: any) {}
+  onFilterCategoryApproved(val: any) { }
 
   onSearchTextKeyupApproved(val: any) {
     this.calculateNoOfPagesApproved();
@@ -281,7 +284,7 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = 0;
   }
 
-  onFilterCategoryCancelled(val: any) {}
+  onFilterCategoryCancelled(val: any) { }
 
   onSearchTextKeyupCancelled(val: any) {
     this.calculateNoOfPagesCancelled();
@@ -391,6 +394,7 @@ export class OnlineMRSComponent implements OnInit {
   }
 
   clickUpdate(item: any) {
+
     this.editParent.patchValue({
       mrs_id: item.mrs_id,
       mrs_req_desc: item.mrs_req_desc,
@@ -514,6 +518,12 @@ export class OnlineMRSComponent implements OnInit {
   viewOrderClickParent(item: any) {
     const res = this.parentData.filter((list) => list.mrs_id === item.mrs_id);
     this.viewAddedItemList = res;
+
+    //Validate Yung Requestor Lang dapat makakapagedit ng request
+    if (this.userId == item.user_id) {
+      this.requestorFound = 1;
+    }
+    //End
 
     this.viewAddedItemList.map((itm) => {
       this.OrderBy = itm.mrs_requested_by;

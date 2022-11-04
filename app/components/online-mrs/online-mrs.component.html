@@ -642,7 +642,10 @@
               <th>UOM</th>
               <th>Serve</th>
               <th class="display-none">Remarks</th>
+              <ng-template [ngIf]="requestorFound === 1">
               <th>Action</th>
+              </ng-template>
+
             </thead>
             <tbody *ngFor="let parent of viewAddedItemList">
               <tr *ngFor="let item of parent.material_request_logs">
@@ -656,14 +659,15 @@
                     data-target="#viewItemRemarksFromList" data-backdrop="false" data-keyboard="false"
                     (click)="viewRemarksItemFromList(item)"><span class="fa fa-eye"></span> View </button>
                 </td>
+                <ng-template [ngIf]="requestorFound === 1">
                 <td>
                   <button id="viewModalClose" [hidden]="true" data-dismiss="modal" mat-stroked-button
                     color="primary">close</button>
                   <button mat-stroked-button color="primary" class="editbtnStyle" data-toggle="modal"
                     data-target="#editItemFromList" data-backdrop="false" data-keyboard="false"
                     (click)="editItemFromList(item)"><span class="fa fa-pencil"></span> Edit </button>
-                  <!-- <button mat-stroked-button color="warn" (click)="removeItemFromList(item)" class="editbtnStyle" data-toggle="modal" data-target="#deleteItemFromList" data-backdrop="false" data-keyboard="false"><span class="fa fa-minus-circle"></span> Remove</button> -->
                 </td>
+                </ng-template>
               </tr>
             </tbody>
           </table>

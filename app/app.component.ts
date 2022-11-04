@@ -278,7 +278,6 @@ export class AppComponent {
           // alert(status.moduleName);
           if (status.modulename === 'qc-receiving-route') {
             this.QCReceiving = 1;
-
           }
           else if (status.modulename === 'wh-receiving-route') {
             this.WhReceiving = 1;
@@ -286,7 +285,6 @@ export class AppComponent {
           else if (status.modulename === 'wh-receivinglist-route') {
             this.WHReceivingList = 1;
           }
-
 
           else if (status.modulename === 'approval-route') {
             this.Approval = 1;

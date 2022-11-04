@@ -658,9 +658,7 @@ export class OnlineMRSComponent implements OnInit {
           this.getParentList();
           this.addOrderItemSubmit();
           setTimeout(() => {
-
             this.getParentList();
-      
           }, 400);
 
         },

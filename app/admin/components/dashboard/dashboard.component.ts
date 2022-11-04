@@ -78,16 +78,8 @@ export class DashboardComponent implements OnInit {
     });
    
 
-
-
     this.loginService.detectIfAlreadyLoggedIn();
-
-
-
     this.ToDay = new Date();
-
-   
-
     this.DashboardPoSummary();
     this.DashboardPoSummaryCancelled();
     this.DashboardPoSummaryPartialReceiving();
@@ -98,18 +90,12 @@ export class DashboardComponent implements OnInit {
     // this.DashboardDistinctCancelledPreparedStoreOrder();
     this.DashboardAllTotalCancelledItems();
     this.DashboardAllStoreTotalDispatchDistinct();
-    // this.IntervalPageforRefresh();
+
 
     this.appComponent.getUserRoleModules();
   }
 
   IntervalPageforRefresh() {
-    // this.updateSubscription = interval(1000).subscribe(
-    //   (val) => { this.DashboardPoSummary()
-    // }
-
-    // );
-    //in 10 seconds do something
     interval(10000).subscribe((x) => {
       this.DashboardPoSummary();
     });

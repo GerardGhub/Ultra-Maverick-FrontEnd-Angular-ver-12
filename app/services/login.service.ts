@@ -17,9 +17,9 @@ export class LoginService {
     private jwtHelperService: JwtHelperService
   ) {}
 
-  currentUserName: string = null;
-  currentUserRole: string = null;
-  fullName: string = null;
+  currentUserName: string = '';
+  currentUserRole: string = '';
+  fullName: string = '';
   Userid: number = 0;
   departmentId: number = 0;
   unitId: number = 0;
@@ -27,7 +27,7 @@ export class LoginService {
   approverRole: boolean;
 
   //For Solution Earlier
-  currentUserRoleSession: string = null;
+  currentUserRoleSession: string = '';
 
   public Login(loginViewModel: LoginViewModel): Observable<any> {
     this.httpClient = new HttpClient(this.httpBackend);

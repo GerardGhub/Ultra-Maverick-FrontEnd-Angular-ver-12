@@ -97,8 +97,10 @@ export class LoginService {
   }
 
   public Logout() {
+   
     sessionStorage.removeItem('currentUser');
-    this.currentUserName = null;
+    window.location.reload();
+
   }
 
   public isAuthenticated(): boolean {

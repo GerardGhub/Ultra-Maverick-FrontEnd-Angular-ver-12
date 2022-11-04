@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
-import { DashboardService } from 'src/app/services/dashboard.service';
-import { LoginService } from 'src/app/services/login.service';
+import { DashboardService } from '../../../services/dashboard.service';
+import { LoginService } from '../../../services/login.service';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { columnChartOptions } from 'src/app/charts/column-chart';
-import { Booking } from 'src/app/models/booking';
-import { Project } from 'src/app/models/project';
+import { columnChartOptions } from '../../../charts/column-chart';
+import { Project } from '../../../models/project';
 import { interval, Observable, Subscription } from 'rxjs';
-import { WhCheckerDashboardService } from 'src/app/services/wh-checker-dashboard.service';
-import { DryWhStoreOrders } from 'src/app/models/dry-wh-store-orders';
+import { WhCheckerDashboardService } from '../../../services/wh-checker-dashboard.service';
+import { DryWhStoreOrders } from '../../../models/dry-wh-store-orders';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,30 +36,30 @@ export class DashboardComponent implements OnInit {
   //properties
   dashboardGridCols: number = 4;
   cardColspan: number = 2;
-  bookings: Booking[] = [];
   WhRejects: Project[] = [];
   WhStoreOrders: DryWhStoreOrders[] = [];
   columnChart: Chart = new Chart(columnChartOptions);
   bookingsLoadingStarted: boolean = false;
   projects: Project[] = [];
-  totalPoRowCount: number = null;
-  totalPoRowCountCancelled: number = null;
-  totalPoPartialReceiving: number = null;
-  totalPoPartialRejectatWH: number = null;
+  totalPoRowCount: number = 0;
+  totalPoRowCountCancelled: number = 0;
+  totalPoPartialReceiving: number = 0;
+  totalPoPartialRejectatWH: number = 0;
   private updateSubscription: Subscription;
-  totalPartialPoReceivingRejectRowCount: number = null;
+  totalPartialPoReceivingRejectRowCount: number = 0;
 
-  totalStoreOrderRowCount: number = null;
-  totalStoreOrderPreparedDistinctRowCount: number = null;
+  totalStoreOrderRowCount: number = 0;
+  totalStoreOrderPreparedDistinctRowCount: number = 0;
 
-  totalCancelledTransactions: number = null;
-  totalStoreDispatching: number = null;
+  totalCancelledTransactions: number = 0;
+  totalStoreDispatching: number = 0;
 
   constructor(
     private dashboardService: DashboardService,
     public loginService: LoginService,
     private mediaObserver: MediaObserver,
-    private whCheckerDashboardService: WhCheckerDashboardService
+    private whCheckerDashboardService: WhCheckerDashboardService,
+    public appComponent: AppComponent
   ) {}
 
   ngOnInit() {
@@ -76,41 +76,17 @@ export class DashboardComponent implements OnInit {
         this.cardColspan = 2;
       }
     });
-    //
+   
 
-    //bookings
-    // this.bookingsLoadingStarted = true;
-    // this.dashboardService.getBookings().subscribe(
-    //   (response: any) =>
-    //   {
-    //     this.bookings = response;
-    //     this.bookingsLoadingStarted = false;
-    //     this.totalPartialPoReceivingRejectRowCount = response.length;
-    //   },
-    //   (error) =>
-    //   {
-    //     console.log(error);
-    //     this.bookingsLoadingStarted = false;
-    //   }
-    // );
+
 
     this.loginService.detectIfAlreadyLoggedIn();
-    this.Designation = 'Team Leader';
-    // this.Username = "Gerard Singian";
+
+
 
     this.ToDay = new Date();
 
-    this.Clients = [
-      'ABC Infotech Ltd.',
-      'DEF Software Solutions',
-      'GHI Industries',
-    ];
-
-    this.Projects = ['Project A', 'Project B', 'Project C', 'Project D'];
-
-    for (var i = 2019; i >= 2010; i--) {
-      this.Years.push(i);
-    }
+   
 
     this.DashboardPoSummary();
     this.DashboardPoSummaryCancelled();
@@ -123,6 +99,8 @@ export class DashboardComponent implements OnInit {
     this.DashboardAllTotalCancelledItems();
     this.DashboardAllStoreTotalDispatchDistinct();
     // this.IntervalPageforRefresh();
+
+    this.appComponent.getUserRoleModules();
   }
 
   IntervalPageforRefresh() {

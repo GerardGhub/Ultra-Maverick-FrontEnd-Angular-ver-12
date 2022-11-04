@@ -133,7 +133,7 @@ export class AppComponent {
     this.getForApproval();
     this.totalForLabtestForApproval();
     this.activeUserRoleId = this.loginService.currentUserRoleSession;
-
+alert(this.activeUserRoleId);
     this.getUserRoleModules();
 
   }
@@ -266,7 +266,7 @@ export class AppComponent {
   }
 
 
-  getUserRoleModules() {
+  public getUserRoleModules() {
     this.userAccountService.getUserRoleList(this.activeUserRoleId).subscribe((response: RoleModules[]) => {
       if (response) {
         this.roleModulesSummary = response;
@@ -305,6 +305,7 @@ export class AppComponent {
           }
           else if (status.modulename === 'preparation-route') {
             this.Preparation = 1;
+        
           }
           else if (status.modulename === 'onlinemrs-route') {
             this.OnlineMrs = 1;
@@ -349,8 +350,7 @@ export class AppComponent {
           else if (status.modulename == "cancelled-po-route") {
             this.CancelledPo = 1;
           }
-
-
+   
 
         });
 

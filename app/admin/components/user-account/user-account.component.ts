@@ -36,8 +36,8 @@ export class UserAccountComponent implements OnInit {
 
   //Objects for Delete
   deleteRejectStatus: RejectedStatus = new RejectedStatus();
-  editIndex: number = null;
-  deleteIndex: number = null;
+  editIndex: number = 0;
+  deleteIndex: number = 0;
 
   //Properties for Searching
   searchBy: string = 'lastName';

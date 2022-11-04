@@ -654,8 +654,15 @@ export class OnlineMRSComponent implements OnInit {
       .saveParentList(this.requestOrderDescForm.value)
       .subscribe(
         (response) => {
+
           this.getParentList();
           this.addOrderItemSubmit();
+          setTimeout(() => {
+
+            this.getParentList();
+      
+          }, 400);
+
         },
         (error) => {
           console.log(error.error.message);

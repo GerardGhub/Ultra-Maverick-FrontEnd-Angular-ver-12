@@ -25,6 +25,7 @@ import { CancelledOrderService } from './admin/components/store-order-cancelled-
 import { RoleModules } from './models/rolemodules';
 import { UserAccountService } from './services/user-account.service';
 import { NgModel } from '@angular/forms';
+import { OnlineMrsService } from './components/online-mrs/services/online-mrs.service';
 
 
 
@@ -53,6 +54,8 @@ export class AppComponent {
   totalForApproval: number = 0;
   activeUserRoleId: string = "";
 
+  MRSArrayData: any = [];
+
   totalforlabtestforapproval: number = 0;
 
   totalPoPartialReceivingNearlyExpiryApproval = 0;
@@ -64,6 +67,7 @@ export class AppComponent {
   totalDispatchingRowCount: number = 0;
   totalCancelledCount: number = 0;
   totalStoreOrderRowCount: number = 0;
+  totalMRSOrder: number = 0;
 
   //Parent Menu 1 for Tagged 0 else
   QCReceiving: number = 0;
@@ -110,7 +114,8 @@ export class AppComponent {
     private whCheckerDashboardService: WhCheckerDashboardService,
     private preparedOrderService: PreparedOrdersService,
     private cancelledOrderService: CancelledOrderService,
-    private userAccountService: UserAccountService
+    private userAccountService: UserAccountService,
+    private onlineMrsService: OnlineMrsService
   ) { }
 
   ngOnInit() {
@@ -134,9 +139,27 @@ export class AppComponent {
     this.totalForLabtestForApproval();
     this.activeUserRoleId = this.loginService.currentUserRoleSession;
 
+    this.getMRSOrderList();
     this.getUserRoleModules();
 
   }
+
+  getMRSOrderList() {
+    this.onlineMrsService.getParentList(this.loginService.Userid).subscribe(
+      (response) => {
+        this.MRSArrayData = response;
+        if (response) {
+          this.totalMRSOrder = response.length;
+        }
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    );
+  }
+
+
+
 
   getForLabTest() {
     this.forLabtestService

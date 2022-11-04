@@ -777,9 +777,11 @@ export class OnlineMRSComponent implements OnInit {
             .approvedOrderRequest(this.approveOrderRequestForm.value)
             .subscribe(
               (response) => {
-                this.getParentList();
-                this.getApprovedList();
-                this.successMessage = 'Approved Successfully!';
+                setTimeout(() => {
+                  this.getParentList();
+                  this.getApprovedList();
+                  this.successMessage = 'Approved Successfully!';
+                }, 400);
                 this.approveOrderRequestForm.reset();
                 $('#approvedOrderModalClose').trigger('click');
 

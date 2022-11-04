@@ -54,8 +54,6 @@ export class OnlineMrsService {
   }
 
 
-
-  // ITEMS
   getItemList(): Observable<any> {
     return this.httpClient.get("/api/rawmaterials", {responseType: "json"});
   }
@@ -69,8 +67,6 @@ export class OnlineMrsService {
   }
 
 
-
-  //INSERT ORDERS
   saveOrders(data: any): Observable<any>{
     return this.httpClient.post("/api/material_request_logs_insert", data, {responseType: "json"})
   }

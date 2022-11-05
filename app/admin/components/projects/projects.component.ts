@@ -81,15 +81,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
   clientLocations: Observable<ClientLocation[]>;
   showLoading: boolean = true;
 
-  allowableqty: number = null;
-  actualqty: number = null;
-  expirable_material: string = null;
+  allowableqty: number = 0;
+  actualqty: number = 0;
+  expirable_material: string = '';
 
   newProject: Project = new Project();
   editProject: Project = new Project();
-  editIndex: number = null;
+  editIndex: number = 0;
   deleteProject: Project = new Project();
-  deleteIndex: number = null;
+  deleteIndex: number = 0;
   searchBy: string = 'po_number';
   searchText: string = '';
   ToDay: Date;
@@ -100,15 +100,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
   PartialComment: string = '';
   currentPageIndex: number = 0;
   pages: any[] = [];
-  pageSize: number = 10;
+  pageSize: number = 7;
   dualbindingchanges = 0;
 
-  totalPoRowCount: number = null;
-  totalPartial: number = null;
+  totalPoRowCount: number = 0;
+  totalPartial: number = 0;
 
-  totalCancelledPoRowCount: number = null;
+  totalCancelledPoRowCount: number = 0;
 
-  totalPartialReceivingCancel: number = null;
+  totalPartialReceivingCancel: number = 0;
 
   @ViewChild('newForm') newForm: NgForm;
   @ViewChild('editForm') editForm: NgForm;
@@ -530,36 +530,36 @@ export class ProjectsComponent implements OnInit, OnChanges {
           p.a_remarks = response.a_remarks;
           this.projects.push(p);
 
-          this.newProject.projectName = null;
-          this.newProject.dateOfStart = null;
-          this.newProject.teamSize = null;
+          this.newProject.projectName = '';
+          this.newProject.dateOfStart = '';
+          this.newProject.teamSize = 0;
           this.newProject.active = false;
-          this.newProject.clientLocationID = null;
-          this.newProject.status = null;
-          this.newProject.is_activated = null;
-          this.newProject.supplier = null;
-          this.newProject.item_code = null;
-          this.newProject.po_number = null;
-          this.newProject.po_date = null;
-          this.newProject.pr_number = null;
-          this.newProject.pr_date = null;
-          this.newProject.qty_uom = null;
-          this.newProject.qty_order = null;
-          this.newProject.mfg_date = null;
-          this.newProject.expiration_date = null;
-          this.newProject.expected_delivery = null;
-          this.newProject.actual_delivery = null;
-          this.newProject.actual_remaining_receiving = null;
-          this.newProject.received_by_QA = null;
-          this.newProject.status_of_reject_one = null;
-          this.newProject.status_of_reject_two = null;
-          this.newProject.status_of_reject_three = null;
-          this.newProject.count_of_reject_one = null;
-          this.newProject.count_of_reject_two = null;
-          this.newProject.count_of_reject_three = null;
-          this.newProject.total_of_reject_mat = null;
-          this.newProject.a_compliance = null;
-          this.newProject.a_remarks = null;
+          this.newProject.clientLocationID = 0;
+          this.newProject.status = "";
+          this.newProject.is_activated = "";
+          this.newProject.supplier = "";
+          this.newProject.item_code = "";
+          this.newProject.po_number = "";
+          this.newProject.po_date = "";
+          this.newProject.pr_number = "";
+          this.newProject.pr_date = "";
+          this.newProject.qty_uom = "";
+          this.newProject.qty_order = "";
+          this.newProject.mfg_date = "";
+          this.newProject.expiration_date = "";
+          this.newProject.expected_delivery = "";
+          this.newProject.actual_delivery = "";
+          this.newProject.actual_remaining_receiving = 0;
+          this.newProject.received_by_QA = "";
+          this.newProject.status_of_reject_one = "";
+          this.newProject.status_of_reject_two = "";
+          this.newProject.status_of_reject_three = "";
+          this.newProject.count_of_reject_one = "";
+          this.newProject.count_of_reject_two = "";
+          this.newProject.count_of_reject_three = "";
+          this.newProject.total_of_reject_mat = "";
+          this.newProject.a_compliance = "";
+          this.newProject.a_remarks = "";
           $('#newFormCancel').trigger('click');
           // this.ngOnInit();
           this.calculateNoOfPages();
@@ -581,18 +581,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   onEditClick(event, index: number) {
+    alert(index);
     //Additional Binding of Searching
-    if ($('#txtSearchText').is(':visible')) {
+    if ($('#txtSearchText').is(':empty')) {
       //Show Visibilit
-      this.projectsService
-        .SearchProjects('Po_number', this.searchText)
-        .subscribe((response: Project[]) => {
-          this.projects = response;
-          this.showLoading = false;
-          this.calculateNoOfPages();
-          this.totalPoRowCount = response.length;
-        });
-    } else {
+      //START
       this.projectsService.getAllProjects().subscribe((response: Project[]) => {
         this.projects = response;
       });
@@ -687,7 +680,21 @@ export class ProjectsComponent implements OnInit, OnChanges {
         }
       } else {
       }
-    }
+      //END
+   
+    } 
+    else 
+    {
+      this.projectsService
+      .SearchProjects('Po_number', this.searchText)
+      .subscribe((response: Project[]) => {
+        this.projects = response;
+        this.showLoading = false;
+        this.calculateNoOfPages();
+        this.totalPoRowCount = response.length;
+      });
+      alert("AAAA5");
+    }///
 
     this.editForm.resetForm();
     this.received_by.nativeElement.value = this.loginService.fullName;

@@ -25,13 +25,10 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" 
-          class="form-control "
-          placeholder="Find here...." 
-          id="txtSearchText" 
-          name="SearchText"
+          <input type="search" class="form-control " 
           autocomplete="off"
-            [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+          placeholder="Find here...." id="txtSearchText" name="SearchText"
+            autocomplete="off" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
         </div>
       </div>
 
@@ -56,7 +53,7 @@
             <th>System Role</th>
             <th>Requestor</th>
             <th>Approver</th>
-      
+
             <th class="text-center" style="width:200px">Actions</th>
           </tr>
           <tr
@@ -70,7 +67,7 @@
             <td>{{item.userRole}}</td>
             <td>{{item.requestor}}</td>
             <td>{{item.approver}}</td>
-  
+
             <td class="text-center">
               <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, item)"
                 data-backdrop="false" data-keyboard="false" data-toggle="modal" data-target="#editUserModal"><span
@@ -298,15 +295,14 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Approver 1:</mat-label>
                   <mat-select formControlName="first_approver_id" class="example-full-width"
-                    (change)="getNewFirstApproverId($event.target.value)" 
-                    (selectionChange)="getNewFirstApproverId($event.value)" 
-                    >
+                    (change)="getNewFirstApproverId($event.target.value)"
+                    (selectionChange)="getNewFirstApproverId($event.value)">
                     <mat-option value="">Not Applicable</mat-option>
-                    <mat-option *ngFor="let item of approverList"  [value]="item.user_identity">{{ item.firstName + " "
+                    <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
                       item.lastName | uppercase}} </mat-option>
                   </mat-select>
-              
+
                 </mat-form-field>
               </div>
 
@@ -315,8 +311,7 @@
                   <mat-label>Approver 2:</mat-label>
                   <mat-select formControlName="second_approver_id" class="example-full-width"
                     (change)="getNewSecondApproverId($event.target.value)"
-                    (selectionChange)="getNewSecondApproverId($event.value)"
-                    >
+                    (selectionChange)="getNewSecondApproverId($event.value)">
                     <mat-option value="">Not Applicable</mat-option>
                     <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
@@ -330,8 +325,7 @@
                   <mat-label>Approver 3:</mat-label>
                   <mat-select formControlName="third_approver_id" class="example-full-width"
                     (change)="getNewThirdApproverId($event.target.value)"
-                    (selectionChange)="getNewThirdApproverId($event.value)"
-                    >
+                    (selectionChange)="getNewThirdApproverId($event.value)">
                     <mat-option value="">Not Applicable</mat-option>
                     <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
@@ -341,14 +335,13 @@
               </div>
 
               <div class="form-group col-md-3">
-         
+
 
                 <mat-form-field appearance="outline" class="example-full-width">
                   <mat-label>Approver 4:</mat-label>
                   <mat-select formControlName="fourth_approver_id" class="example-full-width"
                     (change)="getNewFourthApproverId($event.target.value)"
-                    (selectionChange)="getNewFourthApproverId($event.value)"
-                    >
+                    (selectionChange)="getNewFourthApproverId($event.value)">
                     <mat-option value="">Not Applicable</mat-option>
                     <mat-option *ngFor="let item of approverList" [value]="item.user_identity">{{ item.firstName + " "
                       +
@@ -455,13 +448,13 @@
           <hr>
           <div class="form-row">
             <div class="form-group col-sm-3">
-              <input type="checkbox"  formControlName="Approver">
+              <input type="checkbox" formControlName="Approver">
               <div>
                 <span>Approver</span>
               </div>
             </div>
             <div class="form-group col-sm-3">
-              <input type="checkbox"  formControlName="Requestor">
+              <input type="checkbox" formControlName="Requestor">
               <div>
                 <span>Requestor</span>
               </div>
@@ -539,5 +532,3 @@
     </div>
   </div>
 </div>
-
-

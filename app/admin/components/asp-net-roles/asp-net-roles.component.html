@@ -23,8 +23,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" autocomplete="off"
-            name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+          <input type="search" class="form-control " placeholder="Find here...." id="txtSearchText" autocomplete="off"
+            name="SearchText" [(ngModel)]="searchText" autofocus="off" (keyup)="onSearchTextChange($event)">
         </div>
       </div>
       <div class="ml-auto p-2">
@@ -71,13 +71,13 @@
             <td class="text-center">
               <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, role)"
                 data-toggle="modal" data-target="#editModalModuleTagging" data-backdrop="false" data-keyboard="false">
-                <mat-icon>turned_in_not</mat-icon>
+                <mat-icon>turned_in_not</mat-icon>Access
               </button>&nbsp;
             </td>
             <td class="text-center">
               <button mat-stroked-button color="primary" class="editbtnStyle" (click)="onEditClick($event, role)"
                 data-toggle="modal" data-target="#editModal1" data-backdrop="false" data-keyboard="false">
-                <mat-icon> update</mat-icon>
+                <mat-icon> update</mat-icon> Update
               </button>&nbsp;
             </td>
           </tr>

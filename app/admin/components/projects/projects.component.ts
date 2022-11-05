@@ -59,7 +59,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     private tblNearlyExpiryMgmtService: TblNearlyExpiryMgmtService,
     private formBuilder: FormBuilder,
     private qcService: QCService,
-    public appComponent : AppComponent
+    public appComponent: AppComponent
   ) {
 
   }
@@ -244,7 +244,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
     this.PoReceiving = this.appComponent.PoReceiving;
     this.CancelledPo = this.appComponent.CancelledPo;
-  
+
   }
 
   any(event: any) {
@@ -348,7 +348,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.getPOcancelledList();
 
     this.ChildForm = "4000";
-    this.dualbindingchanges ++;
+    this.dualbindingchanges++;
 
     this.ChildForm = this.dualbindingchanges.toString();
 
@@ -581,14 +581,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   onEditClick(event, index: number) {
-    alert(index);
+
     //Additional Binding of Searching
-    if ($('#txtSearchText').is(':empty')) {
+    if ($('#txtSearchText').val().length == 0) {
+
       //Show Visibilit
       //START
-      this.projectsService.getAllProjects().subscribe((response: Project[]) => {
-        this.projects = response;
-      });
+      // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
+      //   this.projects = response;
+      // });
 
       if (this.currentPageIndex == 1) {
         if (index == 0) {
@@ -681,20 +682,30 @@ export class ProjectsComponent implements OnInit, OnChanges {
       } else {
       }
       //END
+
+    }
+    else {
+
+      // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
+      //   this.projects = response;
+      // });
+
+  
+
+        this.projectsService
+          .SearchProjects('Po_number', this.searchText)
+          .subscribe((response: Project[]) => {
+            this.projects = response;
+            this.showLoading = false;
+            this.calculateNoOfPages();
+            this.totalPoRowCount = response.length;
+          });
    
-    } 
-    else 
-    {
-      this.projectsService
-      .SearchProjects('Po_number', this.searchText)
-      .subscribe((response: Project[]) => {
-        this.projects = response;
-        this.showLoading = false;
-        this.calculateNoOfPages();
-        this.totalPoRowCount = response.length;
-      });
-      alert("AAAA5");
+
+
     }///
+
+
 
     this.editForm.resetForm();
     this.received_by.nativeElement.value = this.loginService.fullName;
@@ -733,16 +744,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
       this.editProject.is_activated = this.Activator;
 
       this.editProject.unit_price = this.projects[index].unit_price;
-      // this.editProject.mfg_date = this.projects[index].mfg_date;
-      // this.editProject.expiration_date = this.projects[index].expiration_date;
-      // this.editProject.expected_delivery = this.projects[index].expected_delivery;
-      // this.editProject.actual_delivery = this.projects[index].actual_delivery;
 
-      // this.editProject.actual_remaining_receiving = this.ActualRemaining;
       this.editProject.actual_remaining_receiving =
         this.projects[index].actual_remaining_receiving;
       this.editProject.received_by_QA = this.activeUser;
-      // this.editProject.total_of_reject_mat = this.totalofReject.nativeElement.
+
       this.editProject.qcReceivingDate = this.ToDay;
 
       this.editProject.status_of_reject_one = this.StringNone;
@@ -786,7 +792,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
       //C
       this.editProject.c_inner_walls_clean_dos =
         this.projects[index].c_inner_walls_clean_dos;
- 
+
       //D
       this.editProject.d_plastic_curtains_dos =
         this.projects[index].d_plastic_curtains_dos;
@@ -812,7 +818,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
       //C
       this.editProject.c_uncessary_items_tres =
         this.projects[index].c_uncessary_items_tres;
-   
+
       //D
       this.editProject.d_products_cover_tres =
         this.projects[index].d_products_cover_tres;
@@ -1286,10 +1292,10 @@ export class ProjectsComponent implements OnInit, OnChanges {
       );
     }
     console.log("Received Item 2 ");
- 
+
 
     setTimeout(() => {
-    
+
       this.getPOrecievingList();
     }, 300);
   }
@@ -1326,7 +1332,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
         p.received_by_QA = response.received_by_QA;
 
         this.projects.push(p);
-     
+
       },
       (error) => {
         console.log(error);

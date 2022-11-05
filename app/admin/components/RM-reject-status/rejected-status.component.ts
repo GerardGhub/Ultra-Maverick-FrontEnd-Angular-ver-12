@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RejectedStatus } from 'src/app/models/rejected-status';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { RejectedStatusService } from 'src/app/services/rejected-status.service';
+import { RejectedStatus } from '../../../models/rejected-status';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { RejectedStatusService } from '../../../services/rejected-status.service';
 import * as $ from "jquery";
 import { Observable } from 'rxjs';
-import { SystemCapabilityStatusService } from 'src/app/services/system-capability-status.service';
-import { SystemCapabilityStatus } from 'src/app/models/system-capability-status';
+import { SystemCapabilityStatusService } from '../../../services/system-capability-status.service';
+import { SystemCapabilityStatus } from '../../../models/system-capability-status';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 

@@ -3,35 +3,8 @@
   <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px" *ngIf="showLoading"></i>
 </h5>
 
-<!-- RM rejected status Table -->
+
 <div class="row">
-  <!-- <div class="col-xl-12">
-    <div class="form-group row">
-      <label for="drpSearchBy" class="col-form-label col-md-6 col-lg-2 offset-xl-1 col-xl-2 text-right">Search
-        by:</label>
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
-          <option value="reject_status_name">Description</option>
-        </select>
-      </div>
-
-      <label for="textSearchText" class="col-form-label col-md-6 col-lg-2 col-xl-1 text-right">Search:</label>
-      <div class="col-md-6 col-lg-4 col-xl-3">
-        <div class="input-group">
-          <input type="text" class="form-control" id="txtSearchText" name="SearchText" [(ngModel)]="searchText"
-            (keyup)="onSearchTextChange($event)">
-        </div>
-      </div>
-
-      <div class="col-md-12 col-lg-12 col-xl-2">
-        <button mat-stroked-button color="primary" data-toggle="modal" data-target="#newRMrejectedStatusModal"
-          data-backdrop="false" data-keyboard="false" (click)="onNewClick($event)">
-          <mat-icon>add_circle_outline</mat-icon>Add
-        </button>
-      </div>
-    </div>
-  </div> -->
-
   <div class="col-sm-12">
     <div class="d-flex">
 
@@ -40,11 +13,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
           </div>
-            <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)" >
-              <option value="">All</option>
-              <option value="Active">Active</option>
-              <option value="InActive">InActive</option>
-            </select>
+          <select class="form-control" id="drpSearchBy" name="SearchBy" (change)="onFilterStatus($event.target.value)">
+            <option value="">All</option>
+            <option value="Active">Active</option>
+            <option value="InActive">InActive</option>
+          </select>
         </div>
       </div>
 
@@ -53,11 +26,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText" name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
+          <input type="search" class="form-control" autocomplete="off" placeholder="Find here...." id="txtSearchText" name="SearchText"
+            [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)">
         </div>
       </div>
       <div class="ml-auto p-2">
-        <button  class="addbtnStyle" data-toggle="modal" data-target="#newRMrejectedStatusModal" data-backdrop="false" data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add Reject Status</button>
+        <button class="addbtnStyle" data-toggle="modal" data-target="#newRMrejectedStatusModal" data-backdrop="false"
+          data-keyboard="false" (click)="onNewClick($event)"><span class="fa fa-plus"> </span> Add Reject
+          Status</button>
       </div>
     </div>
   </div>
@@ -85,8 +61,11 @@
             <td>{{item.is_active}}</td>
             <td class="text-center">
               <button mat-stroked-button color="primary" (click)="onEditClick($event, item)" data-toggle="modal"
-                data-target="#editRMrejectedStatusModal" class="editbtnStyle" data-backdrop="false" data-keyboard="false"><mat-icon> update</mat-icon></button>&nbsp;
-              <!-- <button mat-stroked-button color="warn" (click)="onDeleteClick($event, item)" data-toggle="modal" data-target="#deleteRMrejectedStatusModal" data-backdrop="false" data-keyboard="false">Delete</button> -->
+                data-target="#editRMrejectedStatusModal" class="editbtnStyle" data-backdrop="false"
+                data-keyboard="false">
+                <mat-icon> update</mat-icon> Edit
+              </button>&nbsp;
+
             </td>
           </tr>
         </table>
@@ -162,14 +141,15 @@
                 [ngClass]="{ 'is-invalid': newForm.get('reject_status_name').invalid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid), 'is-valid': newForm.get('reject_status_name').valid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid) }"
                 #RejectStatusDescription>
               <span class="text-danger"
-                *ngIf="newForm.get('reject_status_name').invalid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid) && newForm.get('reject_status_name').errors?.required">Description can't be blank</span>
+                *ngIf="newForm.get('reject_status_name').invalid && (newForm.get('reject_status_name').dirty || newForm.get('reject_status_name').touched || newForm.valid) && newForm.get('reject_status_name').errors?.required">Description
+                can't be blank</span>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Status </label>
             <div class="col-sm-8">
-              <input type="text" [(ngModel)] = "activeVal" class="form-control" formControlName="is_active" readonly>
+              <input type="text" [(ngModel)]="activeVal" class="form-control" formControlName="is_active" readonly>
               <!-- <select id="txtNewis_active" class="form-control" name="is_active" formControlName="is_active"
                 maxlength="30" #defaultTextBox_New
                 [ngClass]="{ 'is-invalid': newForm.get('is_active').invalid && (newForm.get('is_active').dirty || newForm.get('is_active').touched || newForm.valid), 'is-valid': newForm.get('is_active').valid && (newForm.get('is_active').dirty || newForm.get('is_active').touched || newForm.valid) }">
@@ -242,7 +222,8 @@
           <!-- <button class="btn btn-warning" data-dismiss="modal" id="editClientLocationFormCancel" type="button">Cancel</button> -->
           <button mat-stroked-button color="accent" class="mr-1" data-dismiss="modal"
             id="editRMrejectedStatusCancelModal" type="button">Cancel</button>
-          <button mat-stroked-button color="primary" [disabled]="!editForm.valid" (click)="onUpdateClick()">Update</button>
+          <button mat-stroked-button color="primary" [disabled]="!editForm.valid"
+            (click)="onUpdateClick()">Update</button>
         </div>
       </div>
     </div>

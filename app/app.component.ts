@@ -103,6 +103,8 @@ export class AppComponent {
   PoReceiving: number = 0;
   CancelledPo: number = 0;
 
+
+
   constructor(
     private dashboardService: DashboardService,
     public loginService: LoginService,
@@ -119,7 +121,8 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    this.loginService.detectIfAlreadyLoggedIn();
+
+    this.detectAlreadyLogin();
     this.totalPreparationCount();
 
 
@@ -142,6 +145,11 @@ export class AppComponent {
     this.getMRSOrderList();
     this.getUserRoleModules();
 
+
+  }
+
+  public detectAlreadyLogin() {
+    this.loginService.detectIfAlreadyLoggedIn();
   }
 
   getMRSOrderList() {

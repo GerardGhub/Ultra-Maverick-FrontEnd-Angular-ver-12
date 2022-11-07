@@ -61,9 +61,11 @@
 
   </mat-menu>
 
+  <mat-menu #user="matMenu">
+    
 
-  <mat-menu #user="matMenu" *ngIf="loginService.currentUserName != null">
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
+
   </mat-menu>
 
   <!-- menu ends -->

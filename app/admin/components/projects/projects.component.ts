@@ -1297,7 +1297,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
     setTimeout(() => {
 
       this.getPOrecievingList();
-    }, 300);
+    }, 400);
   }
 
   InsertPartialDatainMasterTable() {
@@ -1993,7 +1993,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
           $('#CancelPO').show();
         }
       }, 170);
-    }, 100);
+    }, 400);
   }
 
   UpdateDeactivatedTransactions() {

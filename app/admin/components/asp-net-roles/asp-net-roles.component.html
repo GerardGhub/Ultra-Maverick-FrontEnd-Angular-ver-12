@@ -230,7 +230,7 @@
           <div class="form-group">
             <label for="drpEditClientLocation" class="col-sm-4 col-form-label">Main Menu </label>
             <div class="col-sm-6">
-              <select id="txtmainmodule" class="form-control" (change)="getNewFourthApproverId($event.target.value)"
+              <select id="txtmainmodule" class="form-control" (change)="getMainMenuId($event.target.value)"
                 maxlength="30" #defaultTextBox_New #UpdateDesc>
                 <option value="null">Please Select</option>
                 <option *ngFor="let menu of MainMenu | async" [value]="menu.id">
@@ -259,7 +259,7 @@
                     <td class="text-center">
                       <button mat-stroked-button color="primary" class="editbtnStyle"
                         (click)="onUntaggedClick($event, role)">
-                        <mat-icon>remove_circle_outline</mat-icon>
+                        <mat-icon>remove_circle_outline</mat-icon> Tag
                       </button>&nbsp;
                     </td>
                   </tr>

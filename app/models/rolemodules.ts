@@ -6,6 +6,8 @@ export class RoleModules {
     isactive: boolean;
     submenuname:string;
     modulename: string;
+    mainmodulename: string;
+    isparent: string;
 
     constructor()
     {
@@ -15,5 +17,7 @@ export class RoleModules {
         this.isactive = false;
         this.submenuname = "";
         this.modulename = "";
+        this.mainmodulename = "";
+        this.isparent = "";
     }
 }

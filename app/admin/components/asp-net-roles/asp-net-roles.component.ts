@@ -16,6 +16,8 @@ import { UserAccountService } from '../../../services/user-account.service';
 import { RoleModules } from '../../../models/rolemodules';
 
 
+
+
 @Component({
   selector: 'app-asp-net-roles',
   templateUrl: './asp-net-roles.component.html',
@@ -156,12 +158,14 @@ export class AspNetRolesComponent implements OnInit {
     const taggedData = this.RoleModule.filter(status => status.isactive === true);
     this.RoleModule = taggedData;
     this.totalRoleModulesUntaggedNewRowCount = taggedData.length;
+
     this.calculateNoOfPagesTagged();
-//    if (this.totalRoleModulesTaggedRowCount == 0 && this.totalRoleModulesUntaggedNewRowCount == 0)
-    if (this.totalRoleModulesUntaggedNewRowCount == 0)
-     {
+    //    if (this.totalRoleModulesTaggedRowCount == 0 && this.totalRoleModulesUntaggedNewRowCount == 0)
 
+    //if the Total Untagged == 0
+    if (this.totalRoleModulesUntaggedNewRowCount == 0) {
 
+      alert("A" + this.totalRoleModulesTaggedRowCount);
       this.userAccountService.getUserRoleByAdminId(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
 
         (response: RoleModules[]) => {
@@ -169,19 +173,21 @@ export class AspNetRolesComponent implements OnInit {
           if (response) {
             this.RoleModule = response;
 
-            const taggedData = this.RoleModule.filter(status => status.isactive === false
-              || status.isactive === true);
 
-         
-            for( var i=taggedData.length - 1; i>=0; i--){
-              for( var j=0; j<untaggedData.length; j++){
-                  if(taggedData[i] && (taggedData[i].moduleid === untaggedData[j].moduleid)){
-                      taggedData.splice(i, 1);
-                  }
+            const taggedData = this.RoleModule.filter(status => (status.isactive === false
+              || status.isactive === true)
+              && status.isparent != 'Parent');
+
+            console.error(taggedData);
+            for (var i = taggedData.length - 1; i >= 0; i--) {
+              for (var j = 0; j < untaggedData.length; j++) {
+                if (taggedData[i] && (taggedData[i].moduleid === untaggedData[j].moduleid)) {
+                  taggedData.splice(i, 1);
+                }
               }
-          }
+            }
 
-  console.log(taggedData);
+            console.log(taggedData);
 
 
             this.RoleModule = taggedData;
@@ -195,13 +201,9 @@ export class AspNetRolesComponent implements OnInit {
   }
 
 
-  getNewFourthApproverId(roleid) {
-
-
+  getMainMenuId(roleid) {
     this.activeModuleId = roleid;
     this.getUserRoleModules();
-
-   
   }
 
   calculateNoOfPages() {
@@ -407,13 +409,11 @@ export class AspNetRolesComponent implements OnInit {
   onUntaggedClick(event, StatusParam: RoleModules) {
 
     this.editFormTaggedModule.reset();
-    if (this.totalRoleModulesUntaggedNewRowCount == 0)
-    {
+    if (this.totalRoleModulesUntaggedNewRowCount == 0) {
       //Buje
       this.TaggingRoleId = this.activeModuleId;
     }
-    else
-    {
+    else {
       // this.TaggingRoleId = this.na
     }
 

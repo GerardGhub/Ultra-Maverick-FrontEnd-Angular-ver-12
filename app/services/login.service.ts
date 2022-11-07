@@ -18,7 +18,7 @@ export class LoginService {
   ) {}
 
   currentUserName: string = null;
-  currentUserRole: string = '';
+  currentUserRole: string = null;
   fullName: string = '';
   Userid: number = 0;
   departmentId: number = 0;
@@ -97,11 +97,8 @@ export class LoginService {
   }
 
   public Logout() {
-   
     sessionStorage.removeItem('currentUser');
-
-    // window.location.reload();
-
+    window.location.reload();
   }
 
   public isAuthenticated(): boolean {

@@ -59,14 +59,14 @@
     </ng-container>
 
   </mat-menu>
-  <ng-container *ngIf="loginService.currentUserName != null">
+
   <mat-menu #user="matMenu">
     
 
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
 
   </mat-menu>
-</ng-container>
+
   <!-- menu ends -->
 </mat-toolbar>
 

@@ -73,27 +73,32 @@ export class LoginComponent implements OnInit {
       (response) => {
         if (this.loginService.currentUserRoleSession == 'Admin') {
           this.router.navigate(['/admin', 'dashboard']);
-          // this.WelcomeMessage();
+
         } else if (
           this.loginService.currentUserRoleSession == 'WarehouseChecker'
         ) {
           this.router.navigate(['/admin', 'dashboard']);
-          // this.WelcomeMessage();
+
         } else if (this.loginService.currentUserRoleSession == 'QC Staff') {
           this.router.navigate(['/admin', 'dashboard']);
-          // this.WelcomeMessage();
+        } else if (this.loginService.currentUserRoleSession == 'QA Staff') {
+          this.router.navigate(['/admin', 'dashboard']);
+
         } else if (this.loginService.currentUserRoleSession == 'QCSupervisor') {
           this.router.navigate(['/admin', 'dashboard']);
-          // this.WelcomeMessage();
+ 
         } else {
-          // this.router.navigate(["/admin", "dashboard"]);
-          // this.WelcomeMessage();  this.router.navigate(["/employee", "tasks"]);
+          this.router.navigate(["/admin", "dashboard"]);
+    
         }
+     
+          this.WelcomeMessage();
       },
       (error) => {
         console.log(error);
         this.errorMessageFromResponse = 'Invalid Username or Password';
-        // this.InvalidCredentials();
+        // this.errorToaster();
+        this.InvalidCredentials();
       }
     );
   }
@@ -106,9 +111,7 @@ export class LoginComponent implements OnInit {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Invalid Username or Password!',
-      // ,
-      // footer: '<a href>Why do I have this issue?</a>'
+      text: 'Invalid Credentials!',
     });
   }
 
@@ -118,7 +121,7 @@ export class LoginComponent implements OnInit {
       icon: 'success',
       title: 'Welcome to Ultra Maverick',
       showConfirmButton: false,
-      timer: 100,
+      timer: 600,
     });
   }
 

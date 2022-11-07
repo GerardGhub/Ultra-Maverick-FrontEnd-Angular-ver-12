@@ -87,7 +87,7 @@
                   <td class="td-text-left">{{ item.supplier }}</td>
                   <td>{{ item.qty_order | number: "1.0":"en-US" }}</td>
                   <td>
-                    {{ item.actual_delivery | number: "1.0":"en-US" }}
+                    {{ item.actual_delivery | number: "1.0":"en-US" }}            
                     <mat-icon class="zerobadge{{ item.total_of_reject_mat | number }}"
                       matBadge="{{ item.total_of_reject_mat | number }}" matBadgeColor="warn">
                     </mat-icon>

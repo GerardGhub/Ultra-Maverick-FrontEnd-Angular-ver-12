@@ -140,7 +140,6 @@ export class AspNetRolesComponent implements OnInit {
       (response: RoleModules[]) => {
         if (response) {
           this.RoleModule = response;
-          // console.error(response);
           this.getModulesUntagged();
         }
       });
@@ -165,7 +164,7 @@ export class AspNetRolesComponent implements OnInit {
     //if the Total Untagged == 0
     if (this.totalRoleModulesUntaggedNewRowCount == 0) {
 
-      alert("A" + this.totalRoleModulesTaggedRowCount);
+
       this.userAccountService.getUserRoleByAdminId(this.RoleId.nativeElement.value, Number(this.activeModuleId)).subscribe(
 
         (response: RoleModules[]) => {

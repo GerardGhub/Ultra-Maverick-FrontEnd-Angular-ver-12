@@ -114,7 +114,8 @@
         <!-- PO Dashboard Module -->
 
         <!-- PO Recieving Module -->
-        <ng-container *ngIf="QCReceiving === 1 ">
+        <!-- <ng-container *ngIf="QCReceiving === 1 "> -->
+        <ng-container *ngIf="PoReceiving === 1 || CancelledPo === 1">
           <a class="system-name" [routerLink]=" [ '/admin', 'qc-recieving' ] " mat-list-item
             routerLinkActive="link-active">
             <mat-icon>local_shipping</mat-icon>&nbsp; QC Receiving &nbsp;&nbsp;
@@ -124,7 +125,7 @@
         </ng-container>
 
         <!-- wh recieving Module -->
-        <ng-container *ngIf="WhReceiving === 1 ">
+        <ng-container *ngIf="WHReceivingList === 1 ">
           <a [routerLink]=" [ '/admin', 'wh-recieving' ] " mat-list-item routerLinkActive="link-active">
             <mat-icon>inventory_2</mat-icon>&nbsp;WH Receiving &nbsp;&nbsp;
             <span class="badge badge-pill badge-danger zerobadge{{ totalPoPartialReceiving | number}}">{{
@@ -133,7 +134,7 @@
         </ng-container>
 
         <!-- Approval Module -->
-        <ng-container *ngIf="Approval === 1 ">
+        <ng-container *ngIf="NearlyExpiryApproval === 1 || WHRejectionApproval === 1">
           <a class="system-name" mat-list-item routerLinkActive="link-active" #menuTrigger="matMenuTrigger"
             [matMenuTriggerFor]="menu1">
             <mat-icon>check_box</mat-icon>
@@ -200,7 +201,7 @@
         </ng-container>
 
         <!-- Online MRS Module -->
-        <ng-container *ngIf="OnlineMrs === 1 ">
+        <ng-container *ngIf="OrderList === 1 || ApprovedOrders === 1 || CancelledOrders === 1 ">
           <a class="system-name" [routerLink]="[  '/admin', 'online-mrs'  ]" mat-list-item
             routerLinkActive="link-active">
             <mat-icon>wallpaper</mat-icon>

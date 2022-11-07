@@ -9,7 +9,6 @@
         <mat-icon>menu</mat-icon>
       </button>
     </ng-container>
-
     <div class="umLogo">
     </div>
 
@@ -34,7 +33,7 @@
   <div>
     <ng-container *ngIf="loginService.currentUserName != null">
       <button class="system-name" type="button" mat-stroked-button class="mr" fxHide.lt-md="true"
-        [matMenuTriggerFor]="user" matTooltip="User" matTooltipClass="yellow-back">
+        [matMenuTriggerFor]="user" matTooltip="User" matTooltipClass="yellow-back" (click)="detectAlreadyLogin()"> 
         <mat-icon>account_circle</mat-icon> {{loginService.currentUserName | uppercase}}
       </button>
 
@@ -60,14 +59,14 @@
     </ng-container>
 
   </mat-menu>
-
+  <ng-container *ngIf="loginService.currentUserName != null">
   <mat-menu #user="matMenu">
     
 
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
 
   </mat-menu>
-
+</ng-container>
   <!-- menu ends -->
 </mat-toolbar>
 

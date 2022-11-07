@@ -149,6 +149,7 @@ export class AppComponent {
   }
 
   public detectAlreadyLogin() {
+
     this.loginService.detectIfAlreadyLoggedIn();
   }
 

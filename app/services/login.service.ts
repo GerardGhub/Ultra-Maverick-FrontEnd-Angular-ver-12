@@ -17,7 +17,7 @@ export class LoginService {
     private jwtHelperService: JwtHelperService
   ) {}
 
-  currentUserName: string = '';
+  currentUserName: string = null;
   currentUserRole: string = '';
   fullName: string = '';
   Userid: number = 0;
@@ -99,7 +99,8 @@ export class LoginService {
   public Logout() {
    
     sessionStorage.removeItem('currentUser');
-    window.location.reload();
+
+    // window.location.reload();
 
   }
 

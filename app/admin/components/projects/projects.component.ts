@@ -690,17 +690,17 @@ export class ProjectsComponent implements OnInit, OnChanges {
       //   this.projects = response;
       // });
 
-  
 
-        this.projectsService
-          .SearchProjects('Po_number', this.searchText)
-          .subscribe((response: Project[]) => {
-            this.projects = response;
-            this.showLoading = false;
-            this.calculateNoOfPages();
-            this.totalPoRowCount = response.length;
-          });
-   
+
+      this.projectsService
+        .SearchProjects('Po_number', this.searchText)
+        .subscribe((response: Project[]) => {
+          this.projects = response;
+          this.showLoading = false;
+          this.calculateNoOfPages();
+          this.totalPoRowCount = response.length;
+        });
+
 
 
     }///
@@ -1813,7 +1813,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
         this.projects[index].total_of_reject_mat;
       //Section 1
       //A
-//Bluk Payload Remove
+      //Bluk Payload Remove
       $('txtexpected_delivery').val('');
 
       //Addition Set Point for Validation of Partial Data

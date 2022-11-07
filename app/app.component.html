@@ -61,23 +61,9 @@
 
   </mat-menu>
 
-  <mat-menu #bookings="matMenu">
-    <a [routerLink]="[ '/booking' ]" mat-menu-item>New Booking</a>
-    <a [routerLink]="[ '/bookings-list' ]" mat-menu-item>Bookings List</a>
-  </mat-menu>
 
-  <mat-menu #user="matMenu">
+  <mat-menu #user="matMenu" *ngIf="loginService.currentUserName != null">
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
-  </mat-menu>
-
-  <mat-menu #notifications="matMenu">
-    <button mat-menu-item>
-      <mat-icon>email</mat-icon> Email from Converge
-    </button>
-    <mat-divider></mat-divider>
-    <button mat-menu-item>
-      <mat-icon>receipt_long</mat-icon> Send Bills to Customers
-    </button>
   </mat-menu>
 
   <!-- menu ends -->

@@ -183,19 +183,29 @@
             [matMenuTriggerFor]="menu_prep">
             <mat-icon>add_shopping_cart</mat-icon>
             &nbsp;Preparation &nbsp;&nbsp;
-            <span class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{
-              totalPreparationBadge | number }}</span>
+            <span class="badge badge-pill badge-danger zerobadge{{ totalSumofPreparation | number }}">{{
+              totalSumofPreparation | number }}</span>
           </a>
           <mat-menu #menu_prep="matMenu">
+
             <button mat-menu-item>
               <!-- <mat-icon>add_shopping_cart</mat-icon> -->
-              <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s <span
-                  class="badge badge-pill badge-danger zerobadge{{ totalPreparationBadge | number }}">{{
-                  totalPreparationBadge | number }}</span></span>
+              <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s 
+                <span class="badge badge-pill badge-danger zerobadge{{totalStoreOrderRowCount | number }}">
+                  {{totalStoreOrderRowCount}}
+                </span>     
+              </span>
             </button>
+
             <button mat-menu-item>
               <!-- <mat-icon>add_shopping_cart</mat-icon> -->
-              <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s</span>
+              <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s
+
+                <span class="badge badge-pill badge-danger zerobadge{{totalInternalOrderPreparation | number }}">
+                  {{totalInternalOrderPreparation}}
+                </span>
+              </span>
+               
             </button>
           </mat-menu>
         </ng-container>

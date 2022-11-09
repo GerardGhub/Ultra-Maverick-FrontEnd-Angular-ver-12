@@ -26,6 +26,8 @@ import { RoleModules } from './models/rolemodules';
 import { UserAccountService } from './services/user-account.service';
 import { NgModel } from '@angular/forms';
 import { OnlineMrsService } from './components/online-mrs/services/online-mrs.service';
+import { OnlineOrderService } from './components/internal-preparation/services/internal-order.service';
+import { MaterialRequestMaster } from './components/internal-preparation/models/material-request-master';
 
 
 
@@ -45,6 +47,7 @@ export class AppComponent {
   roleModulesSummaryForEach: RoleModules[] = [];
   storeOrders: DryWhStoreOrders[] = [];
   projects: DryWhStoreOrders[] = [];
+  InternalOrderList: MaterialRequestMaster[] = [];
   totalPoRowCount: number = 0;
   totalRoleModulesRowCount: number = 0;
   totalPoRowCountCancelled: number = 0;
@@ -68,7 +71,8 @@ export class AppComponent {
   totalCancelledCount: number = 0;
   totalStoreOrderRowCount: number = 0;
   totalMRSOrder: number = 0;
-
+  totalInternalOrderPreparation: number = 0;
+  totalSumofPreparation: number = 0;
   //Parent Menu 1 for Tagged 0 else
   QCReceiving: number = 0;
   //Array {
@@ -122,7 +126,8 @@ export class AppComponent {
     private preparedOrderService: PreparedOrdersService,
     private cancelledOrderService: CancelledOrderService,
     private userAccountService: UserAccountService,
-    private onlineMrsService: OnlineMrsService
+    private onlineMrsService: OnlineMrsService,
+    private onlineOrderService: OnlineOrderService
   ) { }
 
   ngOnInit() {
@@ -151,6 +156,22 @@ export class AppComponent {
     this.getUserRoleModules();
 
 
+    //Internal Preparation Badge
+    this.getInternalOrderList();
+
+  }
+
+
+
+
+  getInternalOrderList() {
+    this.onlineOrderService.getOrderList().subscribe((response) => {
+      if (response) {
+        this.InternalOrderList = response;
+        this.totalInternalOrderPreparation = response.length;
+      }
+    });
+    this.totalSumofPreparation = this.totalStoreOrderRowCount + this.totalInternalOrderPreparation;
   }
 
   public detectAlreadyLogin() {

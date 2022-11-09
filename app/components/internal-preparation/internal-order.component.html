@@ -10,7 +10,7 @@
           >
         </li>
         <li class="breadcrumb-item dashboardActive" aria-current="page">
-          Internal Orders Preparation X
+          Internal Orders Preparation
         </li>
       </ol>
     </nav>
@@ -36,11 +36,8 @@
                   name="SearchBy"
                   [(ngModel)]="searchBy"
                 >
-                  <option value="is_approved_prepa_date">Preparation Date</option>
-                  <option value="category">Category</option>
-                  <option value="store_name">Store</option>
-                  <option value="route">Route</option>
-                  <option value="area">Area</option>
+                  <option value="department_name">DEPARTMENT</option>
+                  <option value="mrs_req_desc">DESCRIPTION</option>       
                 </select>
               </div>
             </div>
@@ -53,10 +50,11 @@
                   ></span>
                 </div>
                 <input
-                  type="text"
+                  type="search"
                   class="form-control"
                   placeholder="Find here...."
                   id="txtSearchText"
+                  autocomplete="off"
                   name="SearchText"
                   [(ngModel)]="searchText"
                   (keyup)="onSearchInternalOrder($event)"
@@ -73,32 +71,32 @@
                   <tr class="text-light header-bg-color-um system-name">
                       <th>
                           Preparation Date
-                          <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'reject_status_name' "
-                              (click)="sortBy = 'reject_status_name'; sortOrder = 'ASC' "></i>
+                          <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'is_approved_prepa_date' "
+                              (click)="sortBy = 'is_approved_prepa_date'; sortOrder = 'ASC' "></i>
 
                           <i class="fa fa-sort-up hand-icon text-primary"
-                              *ngIf="sortBy == 'reject_status_name' && sortOrder == 'ASC' "
+                              *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'ASC' "
                               (click)="sortOrder = 'DESC' "></i>
 
                           <i class="fa fa-sort-down hand-icon text-primary"
-                              *ngIf="sortBy == 'reject_status_name' && sortOrder == 'DESC' "
+                              *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'DESC' "
                               (click)="sortOrder = 'ASC' "></i>
                       </th>
-                      <th>Category</th>
-                      <th>Store</th>
-                      <th>Route</th>
-                      <th>Area</th>
-
-                      <!-- <th class="text-center" style="width:200px">Actions</th> -->
+                      <th>Department</th>
+                      <th>Description</th>
+                      <th>Requested By</th>
+                      <th>Total Item/s</th>
+                      <th>Prepared Item/s</th>
                   </tr>
 
                   <tr
                       *ngFor="let item of InternalOrderList | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
-                      <td>{{item.category}}</td>
-                      <td>{{item.store_name}}</td>
-                      <td>{{item.route}}</td>
-                      <td>{{item.area}}</td>
+                      <td>{{item.department_name}}</td>
+                      <td>{{item.mrs_req_desc}}</td>
+                      <td>{{item.mrs_requested_by}}</td>
+                      <td>{{item.totalItems}}</td>
+                      <td>{{item.totalPreparedItems}}</td>
                   </tr>
               </table>
               </div>
@@ -152,7 +150,7 @@
 
               <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
                   <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
-                      onclick="return false">Nexts</a>
+                      onclick="return false">Next</a>
               </li>
             </ul>
           </div>

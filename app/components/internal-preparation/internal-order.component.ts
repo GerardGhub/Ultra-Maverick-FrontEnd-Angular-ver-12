@@ -5,6 +5,7 @@ import { OnlineOrderService } from "./services/internal-order.service";
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
 import { FilterPipe } from "src/app/pipes/filter.pipe";
+import { MaterialRequestMaster } from "./models/material-request-master";
 
 @Component({
   selector: "app-internal-order",
@@ -14,12 +15,12 @@ import { FilterPipe } from "src/app/pipes/filter.pipe";
 
 export class InternalOrderComponent implements OnInit {
   constructor(
-    private OnlineOrderService : OnlineOrderService,
+    private onlineOrderService : OnlineOrderService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
   ){}
 
-  InternalOrderList: any = [];
+  InternalOrderList: MaterialRequestMaster[] = [];
   PreparedOrderList: any = [];
   DispatchOrderList: any = [];
   CancelledOrderList: any = [];
@@ -28,8 +29,9 @@ export class InternalOrderComponent implements OnInit {
   deleteIndex: number = null;
 
   //Properties for Searching
-  searchBy: string = 'reject_status_name';
+  searchBy: string = 'department_name';
   searchText: string = '';
+  showLoading: boolean = true;
 
   //Properties for Paging
   currentPageIndex: number = 0;
@@ -37,16 +39,27 @@ export class InternalOrderComponent implements OnInit {
   pageSize: number = 7;
 
   //Properties for Sorting
-  sortBy: string = 'reject_status_name';
+  sortBy: string = 'department_name';
   sortOrder: string = 'ASC';
+  totalOrderRowCount: number = 0;
 
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+  ngOnInit(){
+    this.getInternalOrderList();
 
   }
 
+
+  getInternalOrderList() {
+    this.onlineOrderService.getOrderList().subscribe((response) => {
+      if (response) {
+        this.InternalOrderList = response;
+        this.showLoading = false;
+        this.totalOrderRowCount = response.length;
+        this.calculateNoOfPagesInternalOrders();
+      }
+    });
+  }
 
   // Internal Orders *****************************************************************************************************
 

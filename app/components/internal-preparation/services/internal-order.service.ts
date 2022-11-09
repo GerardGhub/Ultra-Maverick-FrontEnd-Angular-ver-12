@@ -14,7 +14,7 @@ export class OnlineOrderService {
 
 
   getOrderList(): Observable<any>{
-    return this.httpClient.get("", {responseType: "json"})
+    return this.httpClient.get('/api/material_request_master/mrs_orders', {responseType: "json"})
   }
 
 }

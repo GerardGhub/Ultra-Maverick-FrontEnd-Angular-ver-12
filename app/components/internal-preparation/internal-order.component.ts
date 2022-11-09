@@ -42,11 +42,11 @@ export class InternalOrderComponent implements OnInit {
   sortBy: string = 'department_name';
   sortOrder: string = 'ASC';
   totalOrderRowCount: number = 0;
-
+  totalPreparedOrderRowCount: number = 0;
 
   ngOnInit(){
     this.getInternalOrderList();
-
+    this.getInternalPreparedOrderList();
   }
 
 
@@ -57,6 +57,17 @@ export class InternalOrderComponent implements OnInit {
         this.showLoading = false;
         this.totalOrderRowCount = response.length;
         this.calculateNoOfPagesInternalOrders();
+      }
+    });
+  }
+
+  getInternalPreparedOrderList() {
+    this.onlineOrderService.getPreparedDistinctOrder().subscribe((response) => {
+      if (response) {
+        this.PreparedOrderList = response;
+        this.showLoading = false;
+        this.totalPreparedOrderRowCount = response.length;
+        this.calculateNoOfPagesPreparedOrders();
       }
     });
   }

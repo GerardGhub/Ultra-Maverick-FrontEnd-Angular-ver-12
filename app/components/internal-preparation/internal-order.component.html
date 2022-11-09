@@ -201,12 +201,12 @@
                     <tr class="text-light header-bg-color-um system-name">
 
                       <th>Preparation Date</th>
-                      <th>Category</th>
-                      <th>Fox</th>
-                      <th>Store</th>
-                      <th>Route</th>
-                      <th>Area</th>
-                      <th>Total Item(s)</th>
+                      <th>Department</th>
+                      <th>Description</th>
+                      <th>Requested By</th>
+                      <th>Total Item/s</th>
+                      <th>Prepared Item/s</th>
+          
                       <th class="text-center">Actions</th>
                     </tr>
                   </thead>
@@ -214,16 +214,16 @@
                     <tr
                       *ngFor="let item of PreparedOrderList | filter: searchBy : searchText | paging : currentPageIndex : pageSize; let i = index">
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy"}}</td>
-                      <td>{{item.category}}</td>
-                      <td>{{item.fox}}</td>
-                      <td>{{item.store_name}}</td>
-                      <td>{{item.route}}</td>
-                      <td>{{item.area}}</td>
+                      <td>{{item.department_name}}</td>
+                      <td>{{item.mrs_req_desc}}</td>
+                      <td>{{item.mrs_requested_by}}</td>
                       <td>{{item.total_state_repack | number:'1.0':'en-US'}}
                         <mat-icon class="zerobadge{{item.total_state_repack_cancelled_qty | number:'1.0':'en-US'}}"
                           matBadge="{{item.total_state_repack_cancelled_qty | number:'1.0':'en-US'}}" matBadgeColor="accent">
                         </mat-icon>
                       </td>
+                      <td>{{item.totalPreparedItems | number:'1.0':'en-US'}}</td>
+                
                       <td class="text-center">
                         <button (click)="onEditClick($event, i)" data-toggle="modal" data-target="#editModal"
                           data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="primary"

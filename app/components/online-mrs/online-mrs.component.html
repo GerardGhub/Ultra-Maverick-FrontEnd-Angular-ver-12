@@ -77,8 +77,8 @@
                     <td>{{item.mrs_id}}</td>
                     <td>{{item.mrs_req_desc}}
 
-                      <ng-container *ngIf="Role === 'Admin' || approverRole === false || requestorFound === 1 ">
-                        <button mat-stroked-button class="editbtnStyle" data-toggle="modal" data-target="#editParent"
+                      <ng-container *ngIf="Role === 'Admin' || approverRole === false || requestorFound === 1 " >
+                        <button  mat-stroked-button class="editbtnStyle display-none" id="EditDescriptionClick" data-toggle="modal" data-target="#editParent"
                           data-backdrop="false" data-keyboard="false" (click)="clickUpdate(item)"><span
                             class="fa fa-pencil"> </span></button>
                       </ng-container>
@@ -196,11 +196,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                   </div>
-                  <input type="search" 
-                  class="form-control" placeholder="Find here...." id="txtSearchText"
-                    name="SearchText"
-                    autocomplete ="off" 
-                    [(ngModel)]="searchText" 
+                  <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                    name="SearchText" autocomplete="off" [(ngModel)]="searchText"
                     (keyup)="onSearchTextKeyupApproved($event)" />
                 </div>
               </div>
@@ -325,12 +322,9 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                   </div>
-                  <input type="search"
-                   class="form-control" 
-                   placeholder="Find here...." 
-                   id="txtSearchText"
-                   autocomplete="off"
-                    name="SearchText" [(ngModel)]="searchText" (keyup)="onSearchTextKeyupCancelled($event)" />
+                  <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                    autocomplete="off" name="SearchText" [(ngModel)]="searchText"
+                    (keyup)="onSearchTextKeyupCancelled($event)" />
                 </div>
               </div>
             </div>
@@ -351,7 +345,7 @@
                       <th>Cancelled Date</th>
                       <th>Reason</th>
                       <th>Total Item/s</th>
-                        <th style="width: 20%;" class="text-center">Actions</th>             
+                      <th style="width: 20%;" class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tr
@@ -641,7 +635,14 @@
       </div>
       <div class="modal-body">
 
-        <h5 style="font-weight: bold;">Order List</h5>
+        <h5 style="font-weight: bold; display: inline;">Order List</h5>
+        <div class="order-title">
+          {{parentTitle}}
+          <ng-container *ngIf="Role === 'Admin' || approverRole === false || requestorFound === 1 ">
+            <button mat-stroked-button class="editbtnStyle" (click)="clickUpdateItems()"><span class="fa fa-pencil">
+              </span></button>
+          </ng-container>
+        </div>
         <div class="col-lg-12 items-div">
           <table class="table table-bordered table-sm">
             <thead>

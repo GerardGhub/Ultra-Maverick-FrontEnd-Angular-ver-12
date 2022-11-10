@@ -9,12 +9,13 @@
   color: white;
   border: none !important;
   min-height: 1em !important;
+
   :hover {
     background-color: #cfd9f0;
   }
 }
 
-th{
+th {
   font-weight: bold !important;
 }
 
@@ -23,6 +24,7 @@ input {
   border-width: 0 0 2px;
   border-color: blue
 }
+
 input:focus {
   border-color: green
 }
@@ -32,6 +34,7 @@ select {
   border-width: 0 0 2px;
   border-color: blue
 }
+
 select:focus {
   border-color: green
 }
@@ -49,20 +52,26 @@ select:focus {
   background-color: cornsilk;
 }
 
-.disable-text{
+.disable-text {
   background-color: rgb(255, 255, 255);
 }
 
-.space-div{
+.space-div {
   padding-right: 10px;
 }
 
-.btn-search{
-  background-color: #4d616a ;
+.btn-search {
+  background-color: #4d616a;
   color: white;
   border: none;
 }
 
 .display-none {
-  display:none;
+  display: none;
+}
+
+.order-title {
+  text-align: center;
+  font-size: 14px;
+  padding-bottom: 5px;
 }

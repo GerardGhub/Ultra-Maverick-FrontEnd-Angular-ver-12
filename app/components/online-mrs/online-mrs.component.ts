@@ -39,6 +39,8 @@ export class OnlineMRSComponent implements OnInit {
   pageSize: number = 7;
   showLoading: boolean = true;
 
+  parentTitle: string = '';
+
   departmentId: number = 0;
   fullName: string = '';
   userId: number;
@@ -518,6 +520,7 @@ export class OnlineMRSComponent implements OnInit {
   viewOrderClickParent(item: any) {
     const res = this.parentData.filter((list) => list.mrs_id === item.mrs_id);
     this.viewAddedItemList = res;
+    this.parentTitle = item.mrs_req_desc;
 
     //Validate Yung Requestor Lang dapat makakapagedit ng request
     if (this.userId == item.user_id) {
@@ -535,6 +538,11 @@ export class OnlineMRSComponent implements OnInit {
       this.IssuedBy = itm.mrs_issued_by;
       this.IssuedDate = itm.mrs_issued_date;
     });
+  }
+
+  clickUpdateItems() {
+    $('#viewModalClose').trigger('click');
+    $('#EditDescriptionClick').trigger('click');
   }
 
   viewOrderClickApproved(item: any) {

@@ -24,7 +24,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText"
+          <input type="search" class="form-control"
+          autocomplete="off"
+          placeholder="Find here...." id="txtSearchText"
             [(ngModel)]="searchText" name="SearchText" (keyup)="onSearchTextChange($event)">
         </div>
       </div>

@@ -25,7 +25,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
           </div>
-          <input type="text" class="form-control " placeholder="Find here...." id="txtSearchText"
+          <input type="search" class="form-control" autocomplete="off" placeholder="Find here...." id="txtSearchText"
             [(ngModel)]="searchText" name="SearchText" (keyup)="onSearchTextChange($event)">
         </div>
       </div>
@@ -39,7 +39,7 @@
 
   <div class="col-xl-12">
     <div class="row">
-      <!-- table table-striped table-bordered nowrap table-responsive-sm -->
+->
       <div class="col-xl-12 col-lg-9 mx-auto scrollableTable tbl-text">
         <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
           <tr class="text-light header-bg-color-um system-name">

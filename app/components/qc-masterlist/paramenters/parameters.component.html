@@ -138,12 +138,13 @@
           <div class="form-group">
             <label for="formGroupExampleInput">Description</label>
             <select class="form-control" formControlName="cp_gchild_key">
-              <option *ngFor="let item of descriptionList" [value]="item.gc_id">{{item.cc_Description}} --- {{item.gc_description}}</option>
+              <option *ngFor="let item of descriptionList" [value]="item.gc_id">{{item.cc_Description}} ---
+                {{item.gc_description}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput">Parameter:</label>
-            <input type="text" class="form-control" formControlName="cp_description">
+            <input type="text" autocomplete="off" class="form-control" formControlName="cp_description">
           </div>
           <input type="text" [hidden]="true" formControlName="cp_added_by">
         </form>

@@ -22,8 +22,8 @@
       <mat-tab>
         <ng-template mat-tab-label>
           Store Orders
-          <!-- &nbsp; <span *ngIf="totalStoreOrderRowCount"
-            class="badge badge-danger zerobadge{{ totalStoreOrderRowCount }}">{{ totalStoreOrderRowCount }}</span> -->
+          &nbsp; <span
+            class="badge badge-danger zerobadge{{ totalStoreOrderRowCount }}">{{ totalStoreOrderRowCount }}</span>
         </ng-template>
 
      
@@ -66,16 +66,6 @@
                     <tr class="text-light header-bg-color-um system-name">
                       <th style="width:14%">
                       Preparation Date
-                        <!-- <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'reject_status_name' "
-                          (click)="sortBy = 'reject_status_name'; sortOrder = 'ASC' "></i>
-
-                        <i class="fa fa-sort-up hand-icon text-primary"
-                          *ngIf="sortBy == 'reject_status_name' && sortOrder == 'ASC' "
-                          (click)="sortOrder = 'DESC' "></i>
-
-                        <i class="fa fa-sort-down hand-icon text-primary"
-                          *ngIf="sortBy == 'reject_status_name' && sortOrder == 'DESC' "
-                          (click)="sortOrder = 'ASC' "></i> -->
                       </th>
                       <th style="width:14%">Category</th>
                       <th style="width:14%">Store</th>

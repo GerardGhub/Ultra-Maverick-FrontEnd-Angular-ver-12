@@ -161,7 +161,7 @@
       <mat-tab>
         <ng-template mat-tab-label>
           Prepared Orders
-          <!-- &nbsp; <span *ngIf="totalStoreOrderRowCount" class="badge badge-danger zerobadge{{ totalStoreOrderRowCount }}">{{ totalStoreOrderRowCount }}</span> -->
+          &nbsp; <span class="badge badge-danger zerobadge{{ totalPreparedOrderRowCount }}">{{ totalPreparedOrderRowCount }}</span>
         </ng-template>
 
         <div class="col-sm-12" style="padding-top: 2em;">
@@ -225,13 +225,26 @@
                       <td>{{item.totalPreparedItems | number:'1.0':'en-US'}}</td>
                 
                       <td class="text-center">
-                        <button (click)="onEditClick($event, i)" data-toggle="modal" data-target="#editModal"
+                        <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
+                        data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="success"
+                        mat-stroked-button>
+                        <span class="fa fa-eye"></span> View
+                      </button>
+        
+        
+        
+                        <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
                           data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="primary"
-                          mat-stroked-button
-                        >
+                          mat-stroked-button>
                           <span class="fa fa-check-circle"></span> Approve
                         </button>
-
+        
+                        <button (click)="onCancelOrderClick(item)" data-toggle="modal" data-target="#cancelOrderModal"
+                          data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="warn"
+                          mat-stroked-button>
+                          <span class="fa fa-ban"></span> Cancel
+                        </button>
+        
                       </td>
                     </tr>
                   </tbody>
@@ -588,3 +601,156 @@
 
   </div>
 </div>
+
+
+<!-- Approval -->
+<form [formGroup]="approvalForm" novalidate="novalidate" appClientLocationStatusValidator>
+  <div class="modal" role="dialog" id="preparedOrderApprovalModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="width: auto;">
+        <div class="modal-header bg-all">
+          <div class="modal-title white-color">Prepared Orders Approval</div>
+          <button type="button" class="close" data-dismiss="modal" #closeAddExpenseModal><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <mat-card class="text-bold">Internal Information
+          </mat-card><br>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" class="text-color" matInput formControlName="prep_date" readonly="readonly">
+                <mat-label>Preparation Date</mat-label>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" class="text-color" matInput formControlName="mrs_req_desc" readonly="readonly">
+                <mat-label>Description</mat-label>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" class="text-color" matInput formControlName="department_name" readonly="readonly">
+                <mat-label>Department Name</mat-label>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" matInput class="text-color" readonly="readonly" name="route" formControlName="mrs_requested_by">
+                <mat-label>Requested By</mat-label>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" matInput class="text-color" readonly="readonly" formControlName="mrs_requested_date">
+                <mat-label>Requested Date</mat-label>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
+                <input type="text" class="text-color" matInput readonly="readonly" formControlName="recieving_date">
+                <mat-label>Receiving Date</mat-label>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <mat-form-field floatLabel="auto" appearance="outline" color="primary" [hidden]="true">
+            <input type="text" class="text-color" matInput readonly="readonly" formControlName="id">
+            <mat-label>id</mat-label>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="auto" appearance="outline" color="primary" [hidden]="true">
+            <input type="text" class="text-color" matInput readonly="readonly" formControlName="Is_wh_approved">
+            <mat-label>Is_wh_approved</mat-label>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="auto" appearance="outline" color="primary" [hidden]="true">
+            <input type="text" class="text-color" matInput readonly="readonly" formControlName="Is_wh_approved_by">
+            <mat-label>Is_wh_approved_by</mat-label>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="auto" appearance="outline" color="primary" [hidden]="true">
+            <input type="text" class="text-color" matInput readonly="readonly" formControlName="Is_wh_approved_date">
+            <mat-label>Is_wh_approved_date</mat-label>
+          </mat-form-field>
+
+          <mat-form-field floatLabel="auto" appearance="outline" color="primary" [hidden]="true">
+            <input type="text" class="text-color" matInput readonly="readonly"
+              formControlName="Wh_checker_move_order_no">
+            <mat-label>Wh_checker_move_order_no</mat-label>
+          </mat-form-field>
+
+
+
+          <div class="flex">
+            <div class="box-1">
+              <mat-card class="text-bold">Recieving Information </mat-card>
+            </div>
+            <div class="box-2">
+              <mat-card class="text-bold">Move Order No. {{totalStoreOrderDispatching}}</mat-card>
+            </div>
+          </div>
+
+          <div class="flex">
+            <div class="box-1">
+              <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width: 100%"
+                id="GridView2">
+                <thead>
+                  <tr>
+                    <!-- <th>Parent</th> -->
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Uom</th>
+                    <th>Serve</th>
+                    <th class="hideObject">Total Items</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of itemList">
+                    <!-- <td>{{item.fK_dry_wh_orders_parent_id}}</td> -->
+                    <td>{{item.id}}</td>
+                    <td>{{item.mrs_item_description}}</td>
+                    <td>{{item.mrs_uom}}</td>
+                    <td>{{item.prepared_allocated_qty | number}}</td>
+                    <td class="hideObject">{{c | number}}</td>
+                    <td class="text-center">
+                      <button (click)="onCancelItemClick(item)" data-toggle="modal" data-target="#cancelOrderItemModal"
+                        data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
+                        mat-stroked-button>
+                        <span class="fa fa-ban"></span> cancel
+                      </button>&nbsp;
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+
+        <div class="modal-footer">
+          <button mat-stroked-button color="primary" id="ApproveButton" [hidden]="hideApproveButton" class="mr-2"
+            (click)="approvedOrder()" [disabled]="!approvalForm.valid">Approve</button>
+          <button [hidden]="true" mat-stroked-button color="warn" data-dismiss="modal"
+            id="closeApprovalModal">Cancel</button>
+
+          <ng-container *ngIf="hideApproveButton">
+            <p style="color: red; margin:auto">
+              You can't approve this order, due to cancelled Item/s!
+            </p>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -21,4 +21,16 @@ export class OnlineOrderService {
     return this.httpClient.get('api/material_request_master/distinct_mrs_orders', {responseType: "json"});
   }
 
+  approveOrder(item: any): Observable<any> {
+    return this.httpClient.put('api/store_orders', item, {
+      responseType: 'json',
+    });
+  }
+
+  searchItems(id: number): Observable<any> {
+    return this.httpClient.get('/api/material_request_master/search/' + id, {
+      responseType: 'json',
+    });
+  }
+
 }

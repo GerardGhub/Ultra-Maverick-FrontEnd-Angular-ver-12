@@ -4,14 +4,14 @@ import * as moment from 'moment';
 import * as $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { CancelledPOTransactionStatus } from 'src/app/models/cancelled-potransaction-status';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { CancelledPOTransactionStatusService } from 'src/app/services/cancelled-potransaction-status.service';
-import { ClientLocationsService } from 'src/app/services/client-locations.service';
-import { LoginService } from 'src/app/services/login.service';
+import { CancelledPOTransactionStatus } from '../../../models/cancelled-potransaction-status';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { CancelledPOTransactionStatusService } from '../../../services/cancelled-potransaction-status.service';
+import { ClientLocationsService } from '../../../services/client-locations.service';
+import { LoginService } from '../../../services/login.service';
 import Swal from 'sweetalert2';
-import { DryWhStoreOrders } from 'src/app/models/dry-wh-store-orders';
-import { WhCheckerDashboardService } from 'src/app/services/wh-checker-dashboard.service';
+import { DryWhStoreOrders } from '../../../models/dry-wh-store-orders';
+import { WhCheckerDashboardService } from '../../../services/wh-checker-dashboard.service';
 import { PreparedOrdersService } from './services/prepared-order.service';
 import { DispatchingService } from '../store-order-dispatching/services/dispaching-order.service';
 import { CancelledOrderService } from '../store-order-cancelled-transaction/services/cancelled-order.service';
@@ -62,10 +62,10 @@ export class PreparedStoreOrderComponent implements OnInit {
   successMessage: string = '';
   hideApproveButton: number;
 
-  totalStoreOrderRowCount: number = null;
-  totalPreparedOrdersCount: number = null;
-  totalDispatchingRowCount: number = null;
-  totalCancelledCount: number = null;
+  totalStoreOrderRowCount: number = 0;
+  totalPreparedOrdersCount: number = 0;
+  totalDispatchingRowCount: number = 0;
+  totalCancelledCount: number = 0;
 
   constructor(
     private clientLocationsService: ClientLocationsService,

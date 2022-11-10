@@ -853,7 +853,7 @@
                     }" (dateChange)="selectExpiryDate($event)" #ExpiryDateChild />
 
                   <mat-hint align="end" *ngFor="let nearlyexpiry of AllowableNearlyExpiryDays | async"
-                    [value]="nearlyexpiry.p_nearly_expiry_desc">{{ nearlyexpiry.p_nearly_expiry_desc }} days to
+                    [value]="nearlyexpiry.p_nearly_expiry_desc">{{ nearlyexpiry.p_nearly_expiry_desc }} days allowable to
                     expire</mat-hint>
 
                   <mat-datepicker-toggle matSuffix [for]="dobDatepicker">

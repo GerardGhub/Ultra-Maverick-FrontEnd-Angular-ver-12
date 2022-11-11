@@ -187,7 +187,6 @@ export class InternalOrderComponent implements OnInit {
     );
 
 
-    console.warn(item);
     this.approvalForm.patchValue({
       id: item.id,
       prep_date: shortDate,

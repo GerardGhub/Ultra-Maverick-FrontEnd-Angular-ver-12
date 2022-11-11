@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 import { OnlineMrsService } from './services/online-mrs.service';
 import * as $ from 'jquery';
 import { AppComponent } from '../../app.component';
+import { RoleModules } from '../../models/rolemodules';
+import { Observable } from 'rxjs';
+import { MainMenus } from '../../models/main-menus';
 
 @Component({
   selector: 'app-root',
@@ -19,28 +22,37 @@ export class OnlineMRSComponent implements OnInit {
   itemList: any = [];
   addedItemList: any = [];
   viewAddedItemList: any = [];
-
+  RoleModule: RoleModules[] = [];
+  MainMenu: Observable<MainMenus[]>;
   requestorFound: number = 0;
 
   approvedOrderList: any = [];
   cancelledOrderList: any = [];
   cancelReasonList: any = [];
   returnReasonList: any = [];
+  // pagesTagged: any[] = [];
 
   searchBy: string = 'mrs_req_desc';
   searchText: string = '';
+
+  searchTextRM: string = '';
+  searchByRM: string = 'item_code';
 
   sortBy: string = 'mrs_req_desc';
   sortOrder: string = 'ASC';
 
   //Properties for Paging
   currentPageIndex: number = 0;
+  currentPageIndexModuleTagged: number = 0;
   pages: any[] = [];
+
+  pagesRawMats: any[] = [];
   pageSize: number = 7;
   showLoading: boolean = true;
 
   parentTitle: string = '';
 
+  totalRoleModulesUntaggedNewRowCount: number = 0;
   departmentId: number = 0;
   fullName: string = '';
   userId: number;
@@ -143,9 +155,70 @@ export class OnlineMRSComponent implements OnInit {
   getItemList() {
     this.onlineMrsService.getItemList().subscribe((response) => {
       this.itemList = response;
+      if (response) {
+        this.totalRoleModulesUntaggedNewRowCount = response.length;
+      }
+      this.calculateNoOfPagesTagged();
     });
   }
 
+
+
+  onSearchTextChange(event) {
+
+    this.calculateNoOfPagesTagged();
+  }
+
+  onFilterStatus(val) {
+
+    if (!val) {
+      this.getItemList();
+    } else {
+
+
+      if (val === "") {
+
+      }
+      else if (val === "true") {
+        val = true;
+      }
+      else if (val === "false") {
+
+        val = false;
+      }
+
+      const status = this.itemList.filter(status => status.isactive === val);
+      this.itemList = status;
+      // this.showLoading = false;
+      this.calculateNoOfPages();
+    }
+
+  }
+
+  calculateNoOfPagesTagged() {
+  
+    //Get no. of Pages
+
+
+    const searchData = this.itemList.filter(status => status.item_code.includes(this.searchTextRM)
+      );
+      this.itemList = searchData;
+
+      console.warn(this.itemList);
+
+    let filterPipe = new FilterPipe();
+    var noOfPages = Math.ceil(filterPipe.transform(this.itemList, this.searchByRM, this.searchTextRM).length / this.pageSize);
+
+    this.pagesRawMats = [];
+
+    //Generate pages
+    for (let i = 0; i < noOfPages; i++) {
+      this.pagesRawMats.push({ pageIndex: i });
+    }
+
+    this.currentPageIndexModuleTagged = 0;
+  }
+  
   getApprovedList() {
     this.onlineMrsService
       .getApprovedOrderRequest(this.loginService.Userid)
@@ -193,6 +266,9 @@ export class OnlineMRSComponent implements OnInit {
       this.cancelReasonList = response;
     });
   }
+
+
+
 
   getReturnReasonList() {
     this.onlineMrsService.returnOrderReasonList().subscribe((response) => {
@@ -302,13 +378,21 @@ export class OnlineMRSComponent implements OnInit {
   }
 
   onSearchItemCode() {
+
+
+  
+
+
     const getItem = this.itemList.filter(
       (item) => item.item_code === this.mrs_item_code
     );
 
     if (getItem.length == 0) {
+      
       this.successMessage = 'No Item Found!';
       this.errorToaster();
+      this.getItemList();
+      $('#showRawMatsModal').trigger('click');
       this.itemReqForm.patchValue({
         mrs_item_description: '',
         mrs_item_code: '',
@@ -323,6 +407,13 @@ export class OnlineMRSComponent implements OnInit {
           mrs_uom: item.primary_unit,
         });
       });
+    }
+  }
+
+  onPageIndexClickedModuleTagged(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pagesRawMats.length) {
+      this.currentPageIndexModuleTagged = ind;
     }
   }
 

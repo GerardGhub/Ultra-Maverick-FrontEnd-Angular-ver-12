@@ -979,7 +979,7 @@
                     <td>{{item.primary_unit}}</td>
                     <td class="text-center">
                       <button mat-stroked-button color="primary" class="editbtnStyle"
-                        (click)="onUntaggedClick($event, item)">
+                        (click)="onSelectRMClick($event, item)">
                         <mat-icon>remove_circle_outline</mat-icon> Select
                       </button>&nbsp;
                     </td>
@@ -1057,7 +1057,7 @@
 
         </div>
         <div class="modal-footer">
-          <button mat-stroked-button color="accent" class="mr-1" id="editCancelModal" data-dismiss="modal"
+          <button mat-stroked-button color="accent" class="mr-1" id="editCancelModalRM" data-dismiss="modal"
             type="button">Cancel</button>
 
         </div>

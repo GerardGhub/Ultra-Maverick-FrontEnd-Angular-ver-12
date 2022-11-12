@@ -11,6 +11,7 @@ import { AppComponent } from '../../app.component';
 import { RoleModules } from '../../models/rolemodules';
 import { Observable } from 'rxjs';
 import { MainMenus } from '../../models/main-menus';
+import { RawMaterials } from '../../models/raw-material';
 
 @Component({
   selector: 'app-root',
@@ -170,6 +171,17 @@ export class OnlineMRSComponent implements OnInit {
       this.getItemList();
     }
     this.calculateNoOfPagesTagged();
+  }
+
+  onSelectRMClick(event, item: RawMaterials) {
+    console.warn(item);
+    //Paatch raw mats details Tasa
+    this.itemReqForm.patchValue({
+      mrs_item_description: item.item_description,
+      mrs_item_code: item.item_code,
+      mrs_uom: item.primary_unit,
+    });
+    $('#editCancelModalRM').trigger('click');
   }
 
   onFilterStatus(val) {
@@ -653,7 +665,9 @@ export class OnlineMRSComponent implements OnInit {
   viewOrderClickApproved(item: any) {
     const res = this.approvedOrderList.filter(
       (list) => list.mrs_id === item.mrs_id
+
     );
+    this.parentTitle = item.mrs_req_desc;
     this.viewAddedItemList = res;
 
     this.viewAddedItemList.map((itm) => {

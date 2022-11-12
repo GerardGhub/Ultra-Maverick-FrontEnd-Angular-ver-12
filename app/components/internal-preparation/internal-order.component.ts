@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { LoginService } from '../../services/login.service';
 import { DryWhStoreOrders } from "../../models/dry-wh-store-orders";
 import { WhCheckerDashboardService } from "../../services/wh-checker-dashboard.service";
+import { RawMaterials } from "../../models/raw-material";
 
 @Component({
   selector: "app-internal-order",
@@ -138,6 +139,12 @@ export class InternalOrderComponent implements OnInit {
       }
     });
   }
+
+  onUntaggedClick(event, StatusParam: RawMaterials) {
+    console.warn(StatusParam);
+
+  }
+
 
   getInternalPreparedOrderList() {
     this.onlineOrderService.getPreparedDistinctOrder().subscribe((response) => {

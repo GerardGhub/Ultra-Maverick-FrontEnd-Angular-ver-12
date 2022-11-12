@@ -120,7 +120,7 @@ export class OnlineMRSComponent implements OnInit {
     this.OrderList = this.appComponent.OrderList;
     this.ApprovedOrders = this.appComponent.ApprovedOrders;
     this.CancelledOrders = this.appComponent.CancelledOrders;
- 
+
   }
 
   getParentList() {
@@ -196,15 +196,15 @@ export class OnlineMRSComponent implements OnInit {
   }
 
   calculateNoOfPagesTagged() {
-  
+
     //Get no. of Pages
 
 
     const searchData = this.itemList.filter(status => status.item_code.includes(this.searchTextRM)
-      );
-      this.itemList = searchData;
+    );
+    this.itemList = searchData;
 
-      console.warn(this.itemList);
+    console.warn(this.itemList);
 
     let filterPipe = new FilterPipe();
     var noOfPages = Math.ceil(filterPipe.transform(this.itemList, this.searchByRM, this.searchTextRM).length / this.pageSize);
@@ -218,7 +218,7 @@ export class OnlineMRSComponent implements OnInit {
 
     this.currentPageIndexModuleTagged = 0;
   }
-  
+
   getApprovedList() {
     this.onlineMrsService
       .getApprovedOrderRequest(this.loginService.Userid)
@@ -380,34 +380,42 @@ export class OnlineMRSComponent implements OnInit {
   onSearchItemCode() {
 
 
-  
+
 
 
     const getItem = this.itemList.filter(
       (item) => item.item_code === this.mrs_item_code
     );
 
-    if (getItem.length == 0) {
-      
-      this.successMessage = 'No Item Found!';
-      this.errorToaster();
-      this.getItemList();
+    if ($('#txtSearchText').is(':empty')) {
       $('#showRawMatsModal').trigger('click');
-      this.itemReqForm.patchValue({
-        mrs_item_description: '',
-        mrs_item_code: '',
-        mrs_uom: '',
-        mrs_order_qty: '',
-      });
-    } else {
-      getItem.forEach((item) => {
-        this.itemReqForm.patchValue({
-          mrs_item_description: item.item_description,
-          mrs_item_code: item.item_code,
-          mrs_uom: item.primary_unit,
-        });
-      });
     }
+    else {
+
+      if (getItem.length == 0) {
+
+        this.successMessage = 'No Item Found!';
+        this.errorToaster();
+        this.getItemList();
+
+        this.itemReqForm.patchValue({
+          mrs_item_description: '',
+          mrs_item_code: '',
+          mrs_uom: '',
+          mrs_order_qty: '',
+        });
+      }
+      else {
+        getItem.forEach((item) => {
+          this.itemReqForm.patchValue({
+            mrs_item_description: item.item_description,
+            mrs_item_code: item.item_code,
+            mrs_uom: item.primary_unit,
+          });
+        });
+      }
+    }
+
   }
 
   onPageIndexClickedModuleTagged(ind) {

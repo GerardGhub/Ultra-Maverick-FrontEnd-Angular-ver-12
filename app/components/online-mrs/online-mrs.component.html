@@ -498,7 +498,7 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <div class="input-group searchBtnStyle">
-                <input type="text" class="form-control text-required-color" placeholder="item code"
+                <input type="text" id="txtSearchText" class="form-control text-required-color" placeholder="Item code"
                   [(ngModel)]="mrs_item_code" [ngModelOptions]="{standalone: true}" />
                 <div class="input-group-append ">
                   <button (click)="onSearchItemCode()" [disabled]="!requestOrderDescForm.valid" class="btn-search"

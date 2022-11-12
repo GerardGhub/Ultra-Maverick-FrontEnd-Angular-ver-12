@@ -397,16 +397,13 @@ export class OnlineMRSComponent implements OnInit {
 
   onSearchItemCode() {
 
-
-
-
-
     const getItem = this.itemList.filter(
       (item) => item.item_code === this.mrs_item_code
     );
 
-    if ($('#txtSearchText').is(':empty')) {
+    if ($('#txtSearchTextID').val().length === 0) {
       $('#showRawMatsModal').trigger('click');
+      // alert($('#txtSearchTextID').val().length);
     }
     else {
 

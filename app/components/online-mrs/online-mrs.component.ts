@@ -166,6 +166,9 @@ export class OnlineMRSComponent implements OnInit {
 
   onSearchTextChange(event) {
 
+    if ($('#txtSearchText').is(':empty')) {
+      this.getItemList();
+    }
     this.calculateNoOfPagesTagged();
   }
 
@@ -202,9 +205,12 @@ export class OnlineMRSComponent implements OnInit {
 
     const searchData = this.itemList.filter(status => status.item_code.includes(this.searchTextRM)
     );
+    this.totalRoleModulesUntaggedNewRowCount = searchData.length;
     this.itemList = searchData;
 
-    console.warn(this.itemList);
+
+
+    // console.warn(this.itemList);
 
     let filterPipe = new FilterPipe();
     var noOfPages = Math.ceil(filterPipe.transform(this.itemList, this.searchByRM, this.searchTextRM).length / this.pageSize);

@@ -11,6 +11,9 @@ import { LoginService } from '../../services/login.service';
 import { DryWhStoreOrders } from "../../models/dry-wh-store-orders";
 import { WhCheckerDashboardService } from "../../services/wh-checker-dashboard.service";
 import { RawMaterials } from "../../models/raw-material";
+import { Observable } from "rxjs";
+import { CancelledPOTransactionStatus } from "../../models/cancelled-potransaction-status";
+import { CancelledPOTransactionStatusService } from "../../services/cancelled-potransaction-status.service";
 
 @Component({
   selector: "app-internal-order",
@@ -25,6 +28,7 @@ export class InternalOrderComponent implements OnInit {
     private toastr: ToastrService,
     public loginService: LoginService,
     private whCheckerDashboardService: WhCheckerDashboardService,
+    private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService
   ) { }
 
   InternalOrderList: MaterialRequestMaster[] = [];
@@ -33,7 +37,7 @@ export class InternalOrderComponent implements OnInit {
   PreparedOrderList: any = [];
   DispatchOrderList: any = [];
   CancelledOrderList: any = [];
-
+  CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
   totalStoreOrderDispatching: number = 0;
 
   editIndex: number = 0;
@@ -71,6 +75,8 @@ export class InternalOrderComponent implements OnInit {
     this.reactiveForms();
     this.getInternalOrderList();
     this.getInternalPreparedOrderList();
+    this.CancelPoSummary =
+    this.cancelledPOTransactionStatusService.getListOfStatusOfData();
   }
 
   // REACTIVE FORMS *********************************************************************************
@@ -94,26 +100,24 @@ export class InternalOrderComponent implements OnInit {
     });
 
     this.cancelOrderItemForm = this.formBuilder.group({
-      item_code: this.formBuilder.control(null, [Validators.required]),
-      item_desc: this.formBuilder.control(null, [Validators.required]),
+      mrs_item_code: this.formBuilder.control(null, [Validators.required]),
+      mrs_item_description: this.formBuilder.control(null, [Validators.required]),
 
-      FK_dry_wh_orders_parent_id: this.formBuilder.control(null, [
+      id: this.formBuilder.control(null, [
         Validators.required,
       ]),
-      primary_id: this.formBuilder.control(null, [Validators.required]),
+      // primary_id: this.formBuilder.control(null, [Validators.required]),
       Is_wh_checker_cancel: this.formBuilder.control(null, [
         Validators.required,
       ]),
-      Is_wh_checker_cancel_by: this.formBuilder.control(null, [
+      deactivated_by: this.formBuilder.control(null, [
         Validators.required,
       ]),
-      Is_wh_checker_cancel_date: this.formBuilder.control(null, [
-        Validators.required,
-      ]),
+
       Is_wh_checker_cancel_reason: this.formBuilder.control(null, [
         Validators.required,
       ]),
-      total_state_repack_cancelled_qty: this.formBuilder.control(null),
+
     });
 
     this.cancelOrderForm = this.formBuilder.group({
@@ -229,6 +233,52 @@ export class InternalOrderComponent implements OnInit {
         this.totalStoreOrderDispatching = response.length + 1;
       });
   }
+
+
+  onCancelItemClick(item: any) {
+ 
+    this.cancelOrderItemForm.patchValue({
+      mrs_item_code: item.mrs_item_code,
+      mrs_item_description: item.mrs_item_description,
+      id: item.id,
+      Is_wh_checker_cancel: '1',
+      deactivated_by: this.loginService.fullName,
+    });
+    console.error(item);
+  }
+
+
+  cancelOrderItem() {
+    if (this.cancelOrderItemForm.valid) {
+      Swal.fire({
+        title: 'Are you sure you want to cancel the item?',
+        text: '',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onlineOrderService
+            .cancelOrderItem(this.cancelOrderItemForm.value)
+            .subscribe((response) => {
+              // this.getPreparedOrderList();
+              this.tabRefresh();
+
+              this.successMessage = 'Item Cancel Successfully!';
+
+              this.cancelOrderItemForm.reset();
+
+              $('#cancelOrderCloseModal').trigger('click');
+              $('#closeApprovalModal').trigger('click');
+              this.successToaster();
+            });
+        }
+      });
+    }
+  }
+
 
   // CRUD OPERATION *********************************************************************************
   approvedOrder() {

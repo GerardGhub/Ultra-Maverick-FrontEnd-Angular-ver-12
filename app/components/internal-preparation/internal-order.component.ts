@@ -114,7 +114,7 @@ export class InternalOrderComponent implements OnInit {
         Validators.required,
       ]),
 
-      Is_wh_checker_cancel_reason: this.formBuilder.control(null, [
+      cancel_reason: this.formBuilder.control(null, [
         Validators.required,
       ]),
 
@@ -243,6 +243,7 @@ export class InternalOrderComponent implements OnInit {
       id: item.id,
       Is_wh_checker_cancel: '1',
       deactivated_by: this.loginService.fullName,
+      cancel_reason: item.cancel_reason
     });
     console.error(item);
   }

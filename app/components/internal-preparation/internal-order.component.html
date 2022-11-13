@@ -787,7 +787,7 @@
 
           <mat-form-field appearance="fill" class="w-100">
             <mat-label style="color:red">Reason</mat-label>
-            <mat-select formControlName="Is_wh_checker_cancel_reason">
+            <mat-select formControlName="cancel_reason">
               <mat-option *ngFor="let status of CancelPoSummary | async" [value]="status.status_name">
                 {{status.status_name}}
               </mat-option>

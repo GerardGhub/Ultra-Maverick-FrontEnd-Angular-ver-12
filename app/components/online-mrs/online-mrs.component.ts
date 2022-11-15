@@ -46,6 +46,7 @@ export class OnlineMRSComponent implements OnInit {
   currentPageIndex: number = 0;
   currentPageIndexModuleTagged: number = 0;
   pages: any[] = [];
+  pagesCancelled: any[] = [];
 
   pagesRawMats: any[] = [];
   pageSize: number = 7;
@@ -261,17 +262,9 @@ export class OnlineMRSComponent implements OnInit {
             this.cancelledOrderCount = response.length;
           }
 
-          // if(this.Role === "Admin"){
-          //   this.cancelledOrderList = response;
-          //   this.cancelledOrderCount = response.length;
-          // }else{
-          //   const dataById = response.filter(item => item.user_id === this.loginService.Userid);
-          //   this.cancelledOrderList = dataById;
-          //   this.cancelledOrderCount = dataById.length;
-          // }
-
           this.showLoading = false;
-          this.calculateNoOfPages();
+          this.calculateNoOfPagesDynamic(this.cancelledOrderList);
+          // this.calculateNoOfPages();
         },
         (error) => {
           console.log(error.error.message);
@@ -322,6 +315,20 @@ export class OnlineMRSComponent implements OnInit {
     let filterPipe = new FilterPipe();
     var noOfPages = Math.ceil(
       filterPipe.transform(this.parentData, this.searchBy, this.searchText)
+        .length / this.pageSize
+    );
+    this.pages = [];
+
+    for (let i = 0; i < noOfPages; i++) {
+      this.pages.push({ pageIndex: i });
+    }
+    this.currentPageIndex = 0;
+  }
+
+  calculateNoOfPagesDynamic(parentData) {
+    let filterPipe = new FilterPipe();
+    var noOfPages = Math.ceil(
+      filterPipe.transform(parentData, this.searchBy, this.searchText)
         .length / this.pageSize
     );
     this.pages = [];
@@ -686,6 +693,7 @@ export class OnlineMRSComponent implements OnInit {
     this.viewAddedItemList = res;
 
     this.viewAddedItemList.map((itm) => {
+      this.parentTitle = item.mrs_req_desc;
       this.OrderBy = itm.mrs_requested_by;
       this.OrderDate = itm.mrs_requested_date;
 

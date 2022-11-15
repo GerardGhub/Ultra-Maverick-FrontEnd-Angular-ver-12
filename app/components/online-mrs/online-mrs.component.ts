@@ -44,6 +44,7 @@ export class OnlineMRSComponent implements OnInit {
 
   //Properties for Paging
   currentPageIndex: number = 0;
+  currentPageIndexCancelled: number = 0;
   currentPageIndexModuleTagged: number = 0;
   pages: any[] = [];
   pagesCancelled: any[] = [];
@@ -263,7 +264,7 @@ export class OnlineMRSComponent implements OnInit {
           }
 
           this.showLoading = false;
-          this.calculateNoOfPagesDynamic(this.cancelledOrderList);
+          this.calculateNoOfPagesDynamic();
           // this.calculateNoOfPages();
         },
         (error) => {
@@ -310,6 +311,11 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = pageIndex;
   }
 
+  
+  onPageIndexClickedCancelled(pageIndex: number) {
+    this.currentPageIndexCancelled = pageIndex;
+  }
+
   // Parent data search ********************************************************
   calculateNoOfPages() {
     let filterPipe = new FilterPipe();
@@ -325,18 +331,18 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = 0;
   }
 
-  calculateNoOfPagesDynamic(parentData) {
+  calculateNoOfPagesDynamic() {
     let filterPipe = new FilterPipe();
     var noOfPages = Math.ceil(
-      filterPipe.transform(parentData, this.searchBy, this.searchText)
+      filterPipe.transform(this.cancelledOrderList, this.searchBy, this.searchText)
         .length / this.pageSize
     );
-    this.pages = [];
+    this.pagesCancelled = [];
 
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesCancelled.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexCancelled = 0;
   }
 
   onFilterCategory(val: any) { }

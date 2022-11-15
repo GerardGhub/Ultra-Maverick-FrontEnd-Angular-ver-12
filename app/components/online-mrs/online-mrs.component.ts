@@ -45,9 +45,11 @@ export class OnlineMRSComponent implements OnInit {
   //Properties for Paging
   currentPageIndex: number = 0;
   currentPageIndexCancelled: number = 0;
-  currentPageIndexModuleTagged: number = 0;
+  currentPageIndexApproved: number = 0;
+  currentPageIndexRM: number = 0;
   pages: any[] = [];
   pagesCancelled: any[] = [];
+  pagesApproved: any[] = [];
 
   pagesRawMats: any[] = [];
   pageSize: number = 7;
@@ -236,7 +238,7 @@ export class OnlineMRSComponent implements OnInit {
       this.pagesRawMats.push({ pageIndex: i });
     }
 
-    this.currentPageIndexModuleTagged = 0;
+    this.currentPageIndexRM = 0;
   }
 
   getApprovedList() {
@@ -311,6 +313,10 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndex = pageIndex;
   }
 
+  onPageIndexClickedApproved(pageIndex: number) {
+    this.currentPageIndexApproved = pageIndex;
+  }
+
   
   onPageIndexClickedCancelled(pageIndex: number) {
     this.currentPageIndexCancelled = pageIndex;
@@ -330,6 +336,7 @@ export class OnlineMRSComponent implements OnInit {
     }
     this.currentPageIndex = 0;
   }
+
 
   calculateNoOfPagesDynamic() {
     let filterPipe = new FilterPipe();
@@ -361,12 +368,12 @@ export class OnlineMRSComponent implements OnInit {
         this.searchText
       ).length / this.pageSize
     );
-    this.pages = [];
+    this.pagesApproved = [];
 
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesApproved.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexApproved = 0;
   }
 
   onFilterCategoryApproved(val: any) { }
@@ -446,10 +453,10 @@ export class OnlineMRSComponent implements OnInit {
 
   }
 
-  onPageIndexClickedModuleTagged(ind) {
+  onPageIndexClickedRM(ind) {
     //Set currentPageIndex
     if (ind >= 0 && ind < this.pagesRawMats.length) {
-      this.currentPageIndexModuleTagged = ind;
+      this.currentPageIndexRM = ind;
     }
   }
 

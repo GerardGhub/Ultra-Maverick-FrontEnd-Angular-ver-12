@@ -254,7 +254,7 @@
                 </li>
               </ng-container>
 
-              <ng-container *ngIf="pages.length > 10">
+              <ng-container *ngIf="pagesApproved.length > 10">
                 <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexApproved == 0}"
                   (click)="onPageIndexClickedApproved(0)">
                   <a class="page-link" href="#" onclick="return false">1</a>

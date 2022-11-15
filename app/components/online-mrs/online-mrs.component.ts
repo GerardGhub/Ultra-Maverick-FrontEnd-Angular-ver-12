@@ -251,7 +251,7 @@ export class OnlineMRSComponent implements OnInit {
         }
 
         this.showLoading = false;
-        this.calculateNoOfPages();
+        this.calculateNoOfPagesApproved();
       });
   }
 
@@ -317,7 +317,7 @@ export class OnlineMRSComponent implements OnInit {
     this.currentPageIndexApproved = pageIndex;
   }
 
-  
+
   onPageIndexClickedCancelled(pageIndex: number) {
     this.currentPageIndexCancelled = pageIndex;
   }

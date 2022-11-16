@@ -45,6 +45,7 @@ export class InternalOrderComponent implements OnInit {
   deleteIndex: number = 0;
   hideApproveButton: number;
   MRSId: number = 0;
+  totalPreparedItems: number = 0;
 
   approvalForm: FormGroup;
   cancelOrderItemForm: FormGroup;
@@ -221,7 +222,7 @@ export class InternalOrderComponent implements OnInit {
       'MM-DD-YYYY'
     );
 
-alert("A");
+
     this.approvalForm.patchValue({
       id: item.id,
       prep_date: shortDate,
@@ -243,7 +244,10 @@ alert("A");
   }
 
   CloseViewOrderRedirectToInternalOrder() {
-window.location.reload();
+    if (this.totalPreparedItems === 0) {}else {
+      window.location.reload();
+    }
+
   }
 
   onPageIndexClicked(ind) {

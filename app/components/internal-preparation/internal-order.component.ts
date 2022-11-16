@@ -40,6 +40,7 @@ export class InternalOrderComponent implements OnInit {
   CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
   totalStoreOrderDispatching: number = 0;
   totalDispatchingCount: number = 0;
+  totalCancelledOrderParent: number = 0;
 
   editIndex: number = 0;
   deleteIndex: number = 0;
@@ -83,8 +84,9 @@ export class InternalOrderComponent implements OnInit {
     this.getInternalOrderList();
     this.getInternalPreparedOrderList();
     this.CancelPoSummary =
-    this.cancelledPOTransactionStatusService.getListOfStatusOfData();
+      this.cancelledPOTransactionStatusService.getListOfStatusOfData();
     this.getDispatchingOrderList();
+    this.getCancelledParentOrder();
   }
 
   getDispatchingOrderList() {
@@ -95,6 +97,16 @@ export class InternalOrderComponent implements OnInit {
         this.totalStoreOrderDispatching = response.length;
         this.totalDispatchingCount = response.length;
         this.calculateNoOfPagesDispatchOrders();
+      }
+    });
+  }
+
+  getCancelledParentOrder() {
+    this.onlineOrderService.getCancelOrderParent().subscribe((response) => {
+      if (response) {
+          this.CancelledOrderList = response;
+          this.showLoading = false;
+          this.totalCancelledOrderParent = response.length;
       }
     });
   }
@@ -244,7 +256,7 @@ export class InternalOrderComponent implements OnInit {
   }
 
   CloseViewOrderRedirectToInternalOrder() {
-    if (this.totalPreparedItems === 0) {}else {
+    if (this.totalPreparedItems === 0) { } else {
       window.location.reload();
     }
 
@@ -283,7 +295,7 @@ export class InternalOrderComponent implements OnInit {
 
 
   onCancelItemClick(item: any) {
- 
+
     this.cancelOrderItemForm.patchValue({
       mrs_item_code: item.mrs_item_code,
       mrs_item_description: item.mrs_item_description,
@@ -315,22 +327,22 @@ export class InternalOrderComponent implements OnInit {
 
               this.onlineOrderService.searchItems(this.MRSId).subscribe((response) => {
                 this.itemList = response;
-                // console.log(response);
+
               });
 
-              // this.cancelOrderItemForm.reset();
-   
-      
+
+              //Modifier if you cancel some fucking orders
+              this.totalPreparedItems = 1;
               $('#cancelOrderCloseModal').trigger('click');
               // $('#closeApprovalModal').trigger('click');
               this.successMessage = 'Item Cancel Successfully!';
               this.successToaster();
               setTimeout(() => {
-                this.tabRefresh();               
-                    }, 200);
-     
+                this.tabRefresh();
+              }, 200);
+
             });
-       ;
+          ;
         }
 
       });
@@ -348,44 +360,44 @@ export class InternalOrderComponent implements OnInit {
         mrs_id: item.id,
         Wh_checker_move_order_no: this.totalStoreOrderDispatching
       });
-    },100);
+    }, 100);
 
     // if (this.approvalForm.valid) {
-      //Bujerard
-   
+    //Bujerard
 
-      Swal.fire({
-        title: 'Are you sure that you want to approve?',
-        text: '',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.onlineOrderService
-            .approvePreparationOrder(this.approvalForm.value)
-            .subscribe(
-              (response) => {
 
-                setTimeout(() => {
-                  this.tabRefresh();
-                }, 400);
+    Swal.fire({
+      title: 'Are you sure that you want to approve?',
+      text: '',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onlineOrderService
+          .approvePreparationOrder(this.approvalForm.value)
+          .subscribe(
+            (response) => {
 
-                this.successMessage = 'Approved Successfully!';
-                this.approvalForm.reset();
+              setTimeout(() => {
+                this.tabRefresh();
+              }, 400);
 
-                $('#closeApprovalModal').trigger('click');
-                this.successToaster();
-              },
-              (error) => {
-                this.errorMessage = error.error.message;
-                this.errorToaster();
-              }
-            );
-        }
-      });
+              this.successMessage = 'Approved Successfully!';
+              this.approvalForm.reset();
+
+              $('#closeApprovalModal').trigger('click');
+              this.successToaster();
+            },
+            (error) => {
+              this.errorMessage = error.error.message;
+              this.errorToaster();
+            }
+          );
+      }
+    });
     // }
   }
 
@@ -417,7 +429,7 @@ export class InternalOrderComponent implements OnInit {
     this.currentPageIndexPreparedOrders = 0;
   }
 
-  
+
 
   onSearchPreparedOrder(event) {
     this.calculateNoOfPagesPreparedOrders();

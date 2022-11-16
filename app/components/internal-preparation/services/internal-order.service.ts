@@ -20,6 +20,11 @@ export class OnlineOrderService {
     return this.httpClient.get('/api/material_request_master/dispatching', { responseType: "json"})
   }
 
+  getCancelOrderParent(): Observable<any> {
+    return this.httpClient.get('/api/material_request_master/mrs_orders/cancelled', {responseType: "json"});
+  }
+
+
   getPreparedDistinctOrder(): Observable<any> {
     return this.httpClient.get('api/material_request_master/distinct_mrs_orders', {responseType: "json"});
   }

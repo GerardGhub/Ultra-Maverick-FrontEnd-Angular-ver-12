@@ -39,6 +39,7 @@ export class InternalOrderComponent implements OnInit {
   CancelledOrderList: any = [];
   CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
   totalStoreOrderDispatching: number = 0;
+  totalDispatchingCount: number = 0;
 
   editIndex: number = 0;
   deleteIndex: number = 0;
@@ -61,6 +62,7 @@ export class InternalOrderComponent implements OnInit {
   //Properties for Paging
   currentPageIndex: number = 0;
   currentPageIndexPreparedOrders: number = 0;
+  currentPageIndexDispatching: number = 0;
   pages: any[] = [];
   pagesPreparedOrders: any[] = [];
   pagesDispatching: any[] = [];
@@ -81,12 +83,27 @@ export class InternalOrderComponent implements OnInit {
     this.getInternalPreparedOrderList();
     this.CancelPoSummary =
     this.cancelledPOTransactionStatusService.getListOfStatusOfData();
+    this.getDispatchingOrderList();
   }
+
+  getDispatchingOrderList() {
+    this.onlineOrderService.getOrderForDispatchingList().subscribe((response) => {
+      if (response) {
+        this.DispatchOrderList = response;
+        this.showLoading = false;
+        this.totalStoreOrderDispatching = response.length;
+        this.totalDispatchingCount = response.length;
+        this.calculateNoOfPagesDispatchOrders();
+      }
+    });
+  }
+
 
   // REACTIVE FORMS *********************************************************************************
   reactiveForms() {
     this.approvalForm = this.formBuilder.group({
       id: this.formBuilder.control(null, [Validators.required]),
+      mrs_id: this.formBuilder.control(null, [Validators.required]),
       prep_date: this.formBuilder.control(null, [Validators.required]),
       recieving_date: this.formBuilder.control(null, [Validators.required]),
       mrs_req_desc: this.formBuilder.control(null, [Validators.required]),
@@ -95,7 +112,7 @@ export class InternalOrderComponent implements OnInit {
       mrs_requested_date: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved_by: this.formBuilder.control(null, [Validators.required]),
-      is_approved_by: this.formBuilder.control(null, [Validators.required]),
+      Is_wh_checker_approval_by: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved_date: this.formBuilder.control(null, [
         Validators.required,
       ]),
@@ -111,7 +128,8 @@ export class InternalOrderComponent implements OnInit {
       id: this.formBuilder.control(null, [
         Validators.required,
       ]),
-      // primary_id: this.formBuilder.control(null, [Validators.required]),
+      mrs_id: this.formBuilder.control(null, [Validators.required,]),
+
       Is_wh_checker_cancel: this.formBuilder.control(null, [
         Validators.required,
       ]),
@@ -203,7 +221,7 @@ export class InternalOrderComponent implements OnInit {
       'MM-DD-YYYY'
     );
 
-
+alert("A");
     this.approvalForm.patchValue({
       id: item.id,
       prep_date: shortDate,
@@ -213,7 +231,7 @@ export class InternalOrderComponent implements OnInit {
       mrs_requested_date: item.mrs_requested_date,
       mrs_requested_by: item.mrs_requested_by,
       Is_wh_approved: 1,
-      Is_wh_approved_by: this.loginService.fullName,
+      Is_wh_checker_approval_by: this.loginService.fullName,
       Is_wh_approved_date: this.dateToday,
       Wh_checker_move_order_no: this.totalStoreOrderDispatching,
     });
@@ -242,12 +260,20 @@ window.location.reload();
     }
   }
 
+  onPageIndexClickedDispatching(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pagesDispatching.length) {
+      this.currentPageIndexDispatching = ind;
+    }
+  }
+
   getCountOrderDispatching() {
     this.whCheckerDashboardService
       .getAllDispatchingStoreOrders()
       .subscribe((response) => {
         this.storedispatchingrecords = response;
         this.totalStoreOrderDispatching = response.length + 1;
+
       });
   }
 
@@ -260,7 +286,8 @@ window.location.reload();
       id: item.id,
       Is_wh_checker_cancel: '1',
       deactivated_by: this.loginService.fullName,
-      cancel_reason: item.cancel_reason
+      cancel_reason: item.cancel_reason,
+      mrs_id: this.MRSId
     });
     console.error(item);
   }
@@ -310,11 +337,18 @@ window.location.reload();
 
   // CRUD OPERATION *********************************************************************************
   approvedOrder(item: any) {
+    this.getCountOrderDispatching();
+    setTimeout(() => {
+      this.approvalForm.patchValue({
+        Is_wh_checker_approval_by: this.loginService.currentUserName,
+        mrs_id: item.id,
+        Wh_checker_move_order_no: this.totalStoreOrderDispatching
+      });
+    },100);
+
     // if (this.approvalForm.valid) {
       //Bujerard
-      this.approvalForm.patchValue({
-        is_approved_by: this.loginService.currentUserName
-      });
+   
 
       Swal.fire({
         title: 'Are you sure that you want to approve?',
@@ -394,13 +428,13 @@ window.location.reload();
       filterPipe.transform(this.DispatchOrderList, this.searchBy, this.searchText)
         .length / this.pageSize
     );
-    this.pages = [];
+    this.pagesDispatching = [];
 
     //Generate pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesDispatching.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexDispatching = 0;
   }
 
   onSearchDispatchOrders(event) {

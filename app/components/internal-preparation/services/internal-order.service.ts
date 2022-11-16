@@ -16,6 +16,9 @@ export class OnlineOrderService {
   getOrderList(): Observable<any>{
     return this.httpClient.get('/api/material_request_master/mrs_orders', {responseType: "json"})
   }
+  getOrderForDispatchingList(): Observable<any> {
+    return this.httpClient.get('/api/material_request_master/dispatching', { responseType: "json"})
+  }
 
   getPreparedDistinctOrder(): Observable<any> {
     return this.httpClient.get('api/material_request_master/distinct_mrs_orders', {responseType: "json"});

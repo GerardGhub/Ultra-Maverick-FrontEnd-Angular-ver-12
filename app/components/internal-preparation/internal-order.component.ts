@@ -37,6 +37,8 @@ export class InternalOrderComponent implements OnInit {
   PreparedOrderList: any = [];
   DispatchOrderList: any = [];
   CancelledOrderList: any = [];
+  
+
   CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
   totalStoreOrderDispatching: number = 0;
   totalDispatchingCount: number = 0;
@@ -65,9 +67,13 @@ export class InternalOrderComponent implements OnInit {
   currentPageIndex: number = 0;
   currentPageIndexPreparedOrders: number = 0;
   currentPageIndexDispatching: number = 0;
+  currentPageIndexCancelledOrder: number = 0;
+
+  //Pages Storage
   pages: any[] = [];
   pagesPreparedOrders: any[] = [];
   pagesDispatching: any[] = [];
+  pagesCancelledTransaction: any[] = [];
   pageSize: number = 7;
 
   errorMessage: string = '';
@@ -107,6 +113,7 @@ export class InternalOrderComponent implements OnInit {
           this.CancelledOrderList = response;
           this.showLoading = false;
           this.totalCancelledOrderParent = response.length;
+          this.calculateNoOfPagesCancelledOrders();
       }
     });
   }
@@ -266,6 +273,13 @@ export class InternalOrderComponent implements OnInit {
     //Set currentPageIndex
     if (ind >= 0 && ind < this.pages.length) {
       this.currentPageIndex = ind;
+    }
+  }
+
+  onPageIndexClickedCancelledOrder(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pagesCancelledTransaction.length) {
+      this.currentPageIndexCancelledOrder = ind;
     }
   }
 
@@ -466,13 +480,13 @@ export class InternalOrderComponent implements OnInit {
       filterPipe.transform(this.CancelledOrderList, this.searchBy, this.searchText)
         .length / this.pageSize
     );
-    this.pages = [];
+    this.pagesCancelledTransaction = [];
 
     //Generate pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesCancelledTransaction.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexCancelledOrder = 0;
   }
 
   onSearchCancelledOrders(event) {

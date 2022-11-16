@@ -276,7 +276,7 @@ export class InternalOrderComponent implements OnInit {
       .getAllDispatchingStoreOrders()
       .subscribe((response) => {
         this.storedispatchingrecords = response;
-        this.totalStoreOrderDispatching = response.length + 1;
+        this.totalStoreOrderDispatching = response.length + 1 + this.totalDispatchingCount;
 
       });
   }

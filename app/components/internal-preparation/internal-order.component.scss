@@ -6,4 +6,10 @@
     display: none;
   }
   
+  .input-transparent {
+    border: transparent;
+  }
   
+  input:focus {
+    outline: none;
+  }

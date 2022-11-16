@@ -43,6 +43,7 @@ export class InternalOrderComponent implements OnInit {
   editIndex: number = 0;
   deleteIndex: number = 0;
   hideApproveButton: number;
+  MRSId: number = 0;
 
   approvalForm: FormGroup;
   cancelOrderItemForm: FormGroup;
@@ -59,7 +60,10 @@ export class InternalOrderComponent implements OnInit {
 
   //Properties for Paging
   currentPageIndex: number = 0;
+  currentPageIndexPreparedOrders: number = 0;
   pages: any[] = [];
+  pagesPreparedOrders: any[] = [];
+  pagesDispatching: any[] = [];
   pageSize: number = 7;
 
   errorMessage: string = '';
@@ -91,6 +95,7 @@ export class InternalOrderComponent implements OnInit {
       mrs_requested_date: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved_by: this.formBuilder.control(null, [Validators.required]),
+      is_approved_by: this.formBuilder.control(null, [Validators.required]),
       Is_wh_approved_date: this.formBuilder.control(null, [
         Validators.required,
       ]),
@@ -154,7 +159,6 @@ export class InternalOrderComponent implements OnInit {
     this.onlineOrderService.getPreparedDistinctOrder().subscribe((response) => {
       if (response) {
         this.PreparedOrderList = response;
-        this.showLoading = false;
         this.totalPreparedOrderRowCount = response.length;
         this.calculateNoOfPagesPreparedOrders();
       }
@@ -192,6 +196,8 @@ export class InternalOrderComponent implements OnInit {
       this.hideApproveButton = null;
     }
 
+    this.MRSId = item.id;
+
     this.getCountOrderDispatching();
     let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
       'MM-DD-YYYY'
@@ -214,14 +220,25 @@ export class InternalOrderComponent implements OnInit {
 
     this.onlineOrderService.searchItems(item.id).subscribe((response) => {
       this.itemList = response;
-      console.log(response);
+      // console.log(response);
     });
+  }
+
+  CloseViewOrderRedirectToInternalOrder() {
+window.location.reload();
   }
 
   onPageIndexClicked(ind) {
     //Set currentPageIndex
     if (ind >= 0 && ind < this.pages.length) {
       this.currentPageIndex = ind;
+    }
+  }
+
+  onPageIndexClickedPreparedOrders(ind) {
+    //Set currentPageIndex
+    if (ind >= 0 && ind < this.pagesPreparedOrders.length) {
+      this.currentPageIndexPreparedOrders = ind;
     }
   }
 
@@ -264,26 +281,41 @@ export class InternalOrderComponent implements OnInit {
           this.onlineOrderService
             .cancelOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
-              // this.getPreparedOrderList();
-              this.tabRefresh();
 
-              this.successMessage = 'Item Cancel Successfully!';
+              this.onlineOrderService.searchItems(this.MRSId).subscribe((response) => {
+                this.itemList = response;
+                // console.log(response);
+              });
 
-              this.cancelOrderItemForm.reset();
-
+              // this.cancelOrderItemForm.reset();
+   
+      
               $('#cancelOrderCloseModal').trigger('click');
-              $('#closeApprovalModal').trigger('click');
+              // $('#closeApprovalModal').trigger('click');
+              this.successMessage = 'Item Cancel Successfully!';
               this.successToaster();
+              setTimeout(() => {
+                this.tabRefresh();               
+                    }, 200);
+     
             });
+       ;
         }
+
       });
     }
+
   }
 
 
   // CRUD OPERATION *********************************************************************************
-  approvedOrder() {
-    if (this.approvalForm.valid) {
+  approvedOrder(item: any) {
+    // if (this.approvalForm.valid) {
+      //Bujerard
+      this.approvalForm.patchValue({
+        is_approved_by: this.loginService.currentUserName
+      });
+
       Swal.fire({
         title: 'Are you sure that you want to approve?',
         text: '',
@@ -295,7 +327,7 @@ export class InternalOrderComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.onlineOrderService
-            .approveOrder(this.approvalForm.value)
+            .approvePreparationOrder(this.approvalForm.value)
             .subscribe(
               (response) => {
 
@@ -316,7 +348,7 @@ export class InternalOrderComponent implements OnInit {
             );
         }
       });
-    }
+    // }
   }
 
 
@@ -337,15 +369,17 @@ export class InternalOrderComponent implements OnInit {
       filterPipe.transform(this.PreparedOrderList, this.searchBy, this.searchText)
         .length / this.pageSize
     );
-    this.pages = [];
+    this.pagesPreparedOrders = [];
 
     //Generate pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesPreparedOrders.push({ pageIndex: i });
     }
 
-    this.currentPageIndex = 0;
+    this.currentPageIndexPreparedOrders = 0;
   }
+
+  
 
   onSearchPreparedOrder(event) {
     this.calculateNoOfPagesPreparedOrders();

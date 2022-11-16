@@ -22,7 +22,13 @@ export class OnlineOrderService {
   }
 
   approveOrder(item: any): Observable<any> {
-    return this.httpClient.put('api/store_orders', item, {
+    return this.httpClient.put('api/material_request_master/approve', item, {
+      responseType: 'json',
+    });
+  }
+
+  approvePreparationOrder(item: any): Observable<any> {
+    return this.httpClient.put('api/material_request_master/wh_checker_approval', item, {
       responseType: 'json',
     });
   }

@@ -423,18 +423,14 @@ console.log(item);
       }).then((result) => {
         if (result.isConfirmed) {
           this.onlineOrderService
-            .cancelOrderItem(this.cancelOrderItemForm.value)
+            .returnOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
-
-              this.onlineOrderService.searchItems(this.MRSId).subscribe((response) => {
+              this.onlineOrderService.searchItemsInactive(this.MRSId).subscribe((response) => {
                 this.itemList = response;
-
               });
-
-
               //Modifier if you cancel some fucking orders
               this.totalPreparedItems = 1;
-              $('#cancelOrderCloseModal').trigger('click');
+              $('#returnOrderCloseModal').trigger('click');
               // $('#closeApprovalModal').trigger('click');
               this.successMessage = 'Item Cancel Successfully!';
               this.successToaster();

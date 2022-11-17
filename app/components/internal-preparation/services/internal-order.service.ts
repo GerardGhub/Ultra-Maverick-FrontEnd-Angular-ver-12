@@ -49,6 +49,12 @@ export class OnlineOrderService {
     );
   }
 
+  returnOrderItem(item: any): Observable<any> {
+    return this.httpClient.put('/api/material_request_logs_activate', item, { responseType: 'json'});
+  }
+
+
+
   searchItems(id: number): Observable<any> {
     return this.httpClient.get('/api/material_request_master/search/' + id, {
       responseType: 'json'});

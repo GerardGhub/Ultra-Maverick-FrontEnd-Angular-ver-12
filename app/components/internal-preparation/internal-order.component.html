@@ -520,12 +520,8 @@
                           <td>{{item.totalPreparedItems | number}}</td>
                           <td>{{item.totalRejectItems | number}}</td>
                           <td class="text-center">
-                            <!-- <button mat-icon-button color="black" (click)="onEditClick($event, i)"
-                              data-toggle="modal" data-target="#editModal" data-backdrop="false" title="View"
-                              data-keyboard="false">
-                              <mat-icon>remove_red_eye</mat-icon>
-                            </button>&nbsp; -->
-                            <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderCancelModal"
+              
+                            <button (click)="onViewCancelledClick(item)" data-toggle="modal" data-target="#preparedOrderCancelModal"
                             data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="success"
                             mat-stroked-button>
                             <span class="fa fa-eye"></span> View

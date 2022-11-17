@@ -262,6 +262,38 @@ export class InternalOrderComponent implements OnInit {
     });
   }
 
+  onViewCancelledClick(item: any) {
+  
+
+    this.MRSId = item.id;
+
+    this.getCountOrderDispatching();
+    let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
+      'MM-DD-YYYY'
+    );
+
+
+    this.approvalForm.patchValue({
+      id: item.id,
+      prep_date: shortDate,
+      recieving_date: this.dateToday,
+      mrs_req_desc: item.mrs_req_desc,
+      department_name: item.department_name,
+      mrs_requested_date: item.mrs_requested_date,
+      mrs_requested_by: item.mrs_requested_by,
+      Is_wh_approved: 1,
+      Is_wh_checker_approval_by: this.loginService.fullName,
+      Is_wh_approved_date: this.dateToday,
+      Wh_checker_move_order_no: this.totalStoreOrderDispatching,
+    });
+
+    this.onlineOrderService.searchItemsInactive(item.mrs_id).subscribe((response) => {
+      this.itemList = response;
+
+    });
+  }
+
+
   CloseViewOrderRedirectToInternalOrder() {
     if (this.totalPreparedItems === 0) { } else {
       window.location.reload();

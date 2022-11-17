@@ -51,8 +51,11 @@ export class OnlineOrderService {
 
   searchItems(id: number): Observable<any> {
     return this.httpClient.get('/api/material_request_master/search/' + id, {
-      responseType: 'json',
-    });
+      responseType: 'json'});
+  }
+
+  searchItemsInactive(id: number): Observable<any> {
+    return this.httpClient.get('/api/material_request_logs/search/partial_inactive/' + id, {responseType: 'json'});
   }
   
 

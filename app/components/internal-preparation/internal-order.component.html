@@ -853,7 +853,7 @@
                 id="GridView2">
                 <thead>
                   <tr>
-                    <!-- <th>Parent</th> -->
+
                     <th>ID</th>
                     <th>Description</th>
                     <th>Uom</th>
@@ -865,7 +865,7 @@
 
                 <tbody>
                   <tr *ngFor="let item of itemList">
-                    <!-- <td>{{item.fK_dry_wh_orders_parent_id}}</td> -->
+      
                     <td>{{item.id}}</td>
                     <td>{{item.mrs_item_description}}</td>
                     <td>{{item.mrs_uom}}</td>
@@ -874,10 +874,10 @@
                     <td class="text-center">
                 
 
-                      <button (click)="onCancelItemClick(item)" data-toggle="modal" data-target="#cancelOrderItemModal"
+                      <button (click)="onReturnItemClick(item)" data-toggle="modal" data-target="#returnOrderItemModal"
                       data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
                       mat-stroked-button>
-                      <span class="fa fa-ban"></span> cancel
+                      <span class="fa fa-ban"></span> return
                     </button>&nbsp;
 
                     </td>
@@ -953,6 +953,55 @@
       </div>
     </div>
   </div>
+</form>
+
+
+<!-- Return Partial Item -->
+<form [formGroup]="cancelOrderItemForm">
+  <div class="modal" role="dialog" id="returnOrderItemModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width:auto">
+        <div class="modal-header bg-all">
+          <div class="modal-title white-color">Return Order Item</div>
+          <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        </div>
+        <div class="modal-body">
+
+          <mat-form-field class="w-100" [hidden]="true" floatLabel="auto" appearance="outline" color="primary">
+            <input type="text" matInput formControlName="id" readonly="readonly">
+            <mat-label>Individual Id</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="w-100" floatLabel="auto" appearance="outline" color="primary">
+            <input type="text" matInput formControlName="mrs_item_code" readonly="readonly">
+            <mat-label>Item Code</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="w-100" floatLabel="auto" appearance="outline" color="primary">
+            <input type="text" matInput formControlName="mrs_item_description" readonly="readonly">
+            <mat-label>Item Description</mat-label>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label style="color:red">Reason</mat-label>
+            <mat-select formControlName="cancel_reason">
+              <mat-option *ngFor="let status of CancelPoSummary | async" [value]="status.status_name">
+                {{status.status_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" id="cancelOrderCloseModal" [hidden]="true" data-dismiss="modal"
+            class="mr-2">Cancel</button>
+          <button mat-stroked-button color="warn" class="" data-dismiss="modal" [disabled]="!cancelOrderItemForm.valid"
+            (click)="returnOrderItemPartial()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{cancelOrderItemForm.value | json}}
 </form>
 
 

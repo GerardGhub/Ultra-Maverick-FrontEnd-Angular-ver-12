@@ -351,7 +351,21 @@ export class InternalOrderComponent implements OnInit {
       cancel_reason: item.cancel_reason,
       mrs_id: this.MRSId
     });
-    console.error(item);
+
+  }
+
+  onReturnItemClick(item: any) {
+console.log(item);
+    this.cancelOrderItemForm.patchValue({
+      mrs_item_code: item.mrs_item_code,
+      mrs_item_description: item.mrs_item_description,
+      id: item.id,
+      Is_wh_checker_cancel: '1',
+      deactivated_by: this.loginService.fullName,
+      cancel_reason: item.cancel_reason,
+      mrs_id: item.mrs_transact_no
+    });
+
   }
 
 
@@ -396,7 +410,46 @@ export class InternalOrderComponent implements OnInit {
 
   }
 
+  returnOrderItemPartial() {
+    if (this.cancelOrderItemForm.valid) {
+      Swal.fire({
+        title: 'Are you sure you want to return the item?',
+        text: '',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onlineOrderService
+            .cancelOrderItem(this.cancelOrderItemForm.value)
+            .subscribe((response) => {
 
+              this.onlineOrderService.searchItems(this.MRSId).subscribe((response) => {
+                this.itemList = response;
+
+              });
+
+
+              //Modifier if you cancel some fucking orders
+              this.totalPreparedItems = 1;
+              $('#cancelOrderCloseModal').trigger('click');
+              // $('#closeApprovalModal').trigger('click');
+              this.successMessage = 'Item Cancel Successfully!';
+              this.successToaster();
+              setTimeout(() => {
+                this.tabRefresh();
+              }, 200);
+
+            });
+          ;
+        }
+
+      });
+    }
+
+  }
   // CRUD OPERATION *********************************************************************************
   approvedOrder(item: any) {
     this.getCountOrderDispatching();

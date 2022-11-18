@@ -35,6 +35,18 @@ export class OnlineOrderService {
     });
   }
 
+  cancelParentPreparationOrder(item: any): Observable<any> {
+    return this.httpClient.put('api/material_request_master/wh_checker_cancel', item, {
+      responseType: 'json',
+    });
+  }
+
+  returnParentPreparationOrder(item: any) :Observable<any> {
+    return this.httpClient.put('api/material_request_master/wh_checker_cancel/return', item, {
+      responseType: 'json',
+    });
+  }
+
   approvePreparationOrder(item: any): Observable<any> {
     return this.httpClient.put('api/material_request_master/wh_checker_approval', item, {
       responseType: 'json',

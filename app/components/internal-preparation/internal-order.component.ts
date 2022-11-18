@@ -37,7 +37,7 @@ export class InternalOrderComponent implements OnInit {
   PreparedOrderList: any = [];
   DispatchOrderList: any = [];
   CancelledOrderList: any = [];
-  
+
 
   CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
   totalStoreOrderDispatching: number = 0;
@@ -53,6 +53,7 @@ export class InternalOrderComponent implements OnInit {
   approvalForm: FormGroup;
   cancelOrderItemForm: FormGroup;
   cancelOrderForm: FormGroup;
+  returnParentMRSOrderForm: FormGroup;
 
   //Properties for Searching
   searchBy: string = 'department_name';
@@ -110,10 +111,10 @@ export class InternalOrderComponent implements OnInit {
   getCancelledParentOrder() {
     this.onlineOrderService.getCancelOrderParent().subscribe((response) => {
       if (response) {
-          this.CancelledOrderList = response;
-          this.showLoading = false;
-          this.totalCancelledOrderParent = response.length;
-          this.calculateNoOfPagesCancelledOrders();
+        this.CancelledOrderList = response;
+        this.showLoading = false;
+        this.totalCancelledOrderParent = response.length;
+        this.calculateNoOfPagesCancelledOrders();
       }
     });
   }
@@ -164,11 +165,17 @@ export class InternalOrderComponent implements OnInit {
     });
 
     this.cancelOrderForm = this.formBuilder.group({
-      id: this.formBuilder.control(null, [Validators.required]),
-      is_cancel_by: this.formBuilder.control(null, [Validators.required]),
+      mrs_id: this.formBuilder.control(null, [Validators.required]),
+      is_wh_checker_cancel_by: this.formBuilder.control(null, [Validators.required]),
       Is_wh_checker_cancel_reason: this.formBuilder.control(null, [
         Validators.required,
       ]),
+    });
+
+    this.returnParentMRSOrderForm = this.formBuilder.group({
+      mrs_id: this.formBuilder.control(null, [Validators.required]),
+      is_wh_checker_cancel_by: this.formBuilder.control(null, [Validators.required]),
+      Is_wh_checker_cancel_reason: this.formBuilder.control(null, [Validators.required,]),
     });
   }
 
@@ -263,7 +270,7 @@ export class InternalOrderComponent implements OnInit {
   }
 
   onViewCancelledClick(item: any) {
-  
+
 
     this.MRSId = item.id;
 
@@ -354,8 +361,63 @@ export class InternalOrderComponent implements OnInit {
 
   }
 
+  onCancelOrderClick(item: any) {
+
+    this.cancelOrderForm.patchValue({
+      mrs_id: item.id,
+      Is_wh_checker_cancel: '1',
+      is_wh_checker_cancel_by: this.loginService.fullName,
+      is_wh_checker_cancel_reason: item.cancel_reason,
+    });
+
+  }
+
+
+  onReturnParentPreparationOrderClick(item: any) {
+
+    //Typescript
+    console.error(item);
+    this.returnParentMRSOrderForm.patchValue({
+      mrs_id: item.mrs_id,
+      is_wh_checker_cancel_by: this.loginService.fullName,
+      is_wh_checker_cancel_reason: item.cancel_reason,
+    });
+
+
+
+    Swal.fire({
+      title: 'Are you sure you want to return?',
+      text: '',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onlineOrderService
+          .returnParentPreparationOrder(this.returnParentMRSOrderForm.value)
+          .subscribe((response) => {
+
+            //stampede
+            this.successMessage = 'Order Return Successfully!';
+            this.successToaster();
+
+            setTimeout(() => {
+              this.getDispatchingOrderList();
+              this.getInternalOrderList();
+              this.getInternalPreparedOrderList();
+            }, 400);
+          });
+      }
+    });
+
+
+
+  }
+
   onReturnItemClick(item: any) {
-console.log(item);
+    console.log(item);
     this.cancelOrderItemForm.patchValue({
       mrs_item_code: item.mrs_item_code,
       mrs_item_description: item.mrs_item_description,
@@ -446,6 +508,32 @@ console.log(item);
     }
 
   }
+
+  CancelOrderClick() {
+    if (this.cancelOrderForm.valid) {
+      Swal.fire({
+        title: 'Are you sure you want to cancel?',
+        text: '',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onlineOrderService
+            .cancelParentPreparationOrder(this.cancelOrderForm.value)
+            .subscribe((response) => {
+              this.getInternalOrderList();
+              //stampede
+              this.successMessage = 'Order Cancelled Successfully!';
+              this.successToaster();
+            });
+        }
+      });
+    }
+  }
+
   // CRUD OPERATION *********************************************************************************
   approvedOrder(item: any) {
     this.getCountOrderDispatching();

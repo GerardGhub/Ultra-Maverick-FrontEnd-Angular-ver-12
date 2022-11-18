@@ -109,6 +109,7 @@ export class InternalOrderComponent implements OnInit {
   }
 
   getCancelledParentOrder() {
+    alert("Alak man");
     this.onlineOrderService.getCancelOrderParent().subscribe((response) => {
       if (response) {
         this.CancelledOrderList = response;
@@ -117,6 +118,8 @@ export class InternalOrderComponent implements OnInit {
         this.calculateNoOfPagesCancelledOrders();
       }
     });
+    this.getInternalPreparedOrderList();
+   
   }
 
 
@@ -226,7 +229,7 @@ export class InternalOrderComponent implements OnInit {
       this.pages.push({ pageIndex: i });
     }
 
-    this.currentPageIndex = 0;
+    this.currentPageIndexPreparedOrders = 0;
   }
 
   onSearchInternalOrder(event) {
@@ -265,7 +268,7 @@ export class InternalOrderComponent implements OnInit {
 
     this.onlineOrderService.searchItems(item.id).subscribe((response) => {
       this.itemList = response;
-      // console.log(response);
+  
     });
   }
 
@@ -376,7 +379,7 @@ export class InternalOrderComponent implements OnInit {
   onReturnParentPreparationOrderClick(item: any) {
 
     //Typescript
-    console.error(item);
+
     this.returnParentMRSOrderForm.patchValue({
       mrs_id: item.mrs_id,
       is_wh_checker_cancel_by: this.loginService.fullName,
@@ -403,12 +406,14 @@ export class InternalOrderComponent implements OnInit {
             this.successMessage = 'Order Return Successfully!';
             this.successToaster();
 
-            setTimeout(() => {
-              this.getDispatchingOrderList();
-              this.getInternalOrderList();
-              this.getInternalPreparedOrderList();
-            }, 400);
+         
           });
+          setTimeout(() => {
+            alert("execute na");
+            this.getDispatchingOrderList();
+            this.getInternalPreparedOrderList();
+          }, 900);
+    
       }
     });
 
@@ -417,7 +422,7 @@ export class InternalOrderComponent implements OnInit {
   }
 
   onReturnItemClick(item: any) {
-    console.log(item);
+
     this.cancelOrderItemForm.patchValue({
       mrs_item_code: item.mrs_item_code,
       mrs_item_description: item.mrs_item_description,
@@ -512,7 +517,7 @@ export class InternalOrderComponent implements OnInit {
   CancelOrderClick() {
     if (this.cancelOrderForm.valid) {
       Swal.fire({
-        title: 'Are you sure you want to cancel?',
+        title: 'Are you sure you want to cancels?',
         text: '',
         icon: 'info',
         showCancelButton: true,
@@ -524,7 +529,12 @@ export class InternalOrderComponent implements OnInit {
           this.onlineOrderService
             .cancelParentPreparationOrder(this.cancelOrderForm.value)
             .subscribe((response) => {
-              this.getInternalOrderList();
+      
+                this.getInternalOrderList();
+                this.getInternalPreparedOrderList();
+                this.getDispatchingOrderList();
+           
+          
               //stampede
               this.successMessage = 'Order Cancelled Successfully!';
               this.successToaster();

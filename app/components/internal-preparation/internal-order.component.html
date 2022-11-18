@@ -12,6 +12,7 @@
         <li class="breadcrumb-item dashboardActive" aria-current="page">
           Internal Orders Preparation
         </li>
+        <button (click)="getCancelledParentOrder()">Burat Me</button>
       </ol>
     </nav>
 
@@ -213,7 +214,7 @@
                   </thead>
                   <tbody>
                     <tr
-                      *ngFor="let item of PreparedOrderList | filter: searchBy : searchText | paging : currentPageIndex : pageSize; let i = index">
+                      *ngFor="let item of PreparedOrderList | filter: searchBy : searchText | paging : currentPageIndexPreparedOrders : pageSize; let i = index">
                       <td>{{item.id}}</td>
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy"}}</td>
                       <td>{{item.department_name}}</td>
@@ -530,7 +531,7 @@
                           <ng-container *ngIf="item.is_wh_checker_cancel == 1">
                           <button (click)="onReturnParentPreparationOrderClick(item)"  title="Return" data-keyboard="false" class="editbtnStyle" color="success"
                           mat-stroked-button>
-                          <span class="fa fa-eye"></span> Return
+                          <span class="fa fa-undo"></span> Return
                         </button>
 </ng-container>
                           </td>

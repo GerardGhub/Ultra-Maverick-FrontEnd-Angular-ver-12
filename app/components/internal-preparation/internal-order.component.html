@@ -12,7 +12,8 @@
         <li class="breadcrumb-item dashboardActive" aria-current="page">
           Internal Orders Preparation
         </li>
-        <button (click)="getCancelledParentOrder()">Burat Me</button>
+        <!-- <button (click)="getCancelledParentOrder()">Burat Me</button>
+        <button (click)="getInternalPreparedOrderList()">Burat Me 2</button> -->
       </ol>
     </nav>
 
@@ -93,7 +94,7 @@
 
                   <tr
                       *ngFor="let item of InternalOrderList | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
-                   <td>{{item.id}}</td>
+                   <td>{{item.mrs_id}}</td>
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
                       <td>{{item.department_name}}</td>
                       <td>{{item.mrs_req_desc}}</td>
@@ -606,7 +607,7 @@
 
 
 <!-- Approval -->
-<form [formGroup]="approvalForm" novalidate="novalidate" appClientLocationStatusValidator>
+<form [formGroup]="approvalForm" novalidate="novalidate" appClientLocationStatusValidator3>
   <div class="modal" role="dialog" id="preparedOrderApprovalModal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="width: auto;">
@@ -763,7 +764,7 @@
 
 
 <!-- Cancelled Modal -->
-<form [formGroup]="approvalForm" novalidate="novalidate" appClientLocationStatusValidator>
+<form [formGroup]="approvalForm" novalidate="novalidate" appClientLocationStatusValidator2>
   <div class="modal" role="dialog" id="preparedOrderCancelModal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="width: auto;">

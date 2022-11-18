@@ -94,6 +94,7 @@ export class InternalOrderComponent implements OnInit {
       this.cancelledPOTransactionStatusService.getListOfStatusOfData();
     this.getDispatchingOrderList();
     this.getCancelledParentOrder();
+    $('#mens').trigger('click');
   }
 
   getDispatchingOrderList() {
@@ -109,7 +110,7 @@ export class InternalOrderComponent implements OnInit {
   }
 
   getCancelledParentOrder() {
-    alert("Alak man");
+
     this.onlineOrderService.getCancelOrderParent().subscribe((response) => {
       if (response) {
         this.CancelledOrderList = response;
@@ -118,7 +119,7 @@ export class InternalOrderComponent implements OnInit {
         this.calculateNoOfPagesCancelledOrders();
       }
     });
-    this.getInternalPreparedOrderList();
+
    
   }
 
@@ -207,8 +208,14 @@ export class InternalOrderComponent implements OnInit {
     this.onlineOrderService.getPreparedDistinctOrder().subscribe((response) => {
       if (response) {
         this.PreparedOrderList = response;
+        this.showLoading = false;
         this.totalPreparedOrderRowCount = response.length;
+
         this.calculateNoOfPagesPreparedOrders();
+      }
+      if (response.status == 204)
+      {
+        this.ngOnInit();
       }
     });
   }
@@ -409,7 +416,7 @@ export class InternalOrderComponent implements OnInit {
          
           });
           setTimeout(() => {
-            alert("execute na");
+
             this.getDispatchingOrderList();
             this.getInternalPreparedOrderList();
           }, 900);
@@ -517,7 +524,7 @@ export class InternalOrderComponent implements OnInit {
   CancelOrderClick() {
     if (this.cancelOrderForm.valid) {
       Swal.fire({
-        title: 'Are you sure you want to cancels?',
+        title: 'Are you sure you want to cancel?',
         text: '',
         icon: 'info',
         showCancelButton: true,
@@ -532,12 +539,14 @@ export class InternalOrderComponent implements OnInit {
       
                 this.getInternalOrderList();
                 this.getInternalPreparedOrderList();
+   
                 this.getDispatchingOrderList();
            
           
               //stampede
               this.successMessage = 'Order Cancelled Successfully!';
               this.successToaster();
+   
             });
         }
       });

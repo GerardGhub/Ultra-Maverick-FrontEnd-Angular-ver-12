@@ -61,6 +61,7 @@ export class OnlineMRSComponent implements OnInit {
   departmentId: number = 0;
   fullName: string = '';
   userId: number;
+  mrs_id_order_list: number = 0;
   mrs_item_code: string = '';
   mrs_id: number = 0;
   mrs_remarks: string = '';
@@ -93,6 +94,7 @@ export class OnlineMRSComponent implements OnInit {
   requestOrderDescForm: FormGroup;
   removeItemForm: FormGroup;
   editItemForm: FormGroup;
+  cancelItemFormPartial: FormGroup;
   approveOrderRequestForm: FormGroup;
   cancelOrderRequestForm: FormGroup;
   returnOrderRequestForm: FormGroup;
@@ -135,6 +137,9 @@ export class OnlineMRSComponent implements OnInit {
         if (response) {
           this.requestOrderCount = response.length;
         }
+        
+
+ 
 
         const userRole = this.loginService.currentUserRoleSession;
         this.Role = userRole;
@@ -504,6 +509,15 @@ export class OnlineMRSComponent implements OnInit {
       mrs_uom: this.formBuilder.control(null, [Validators.required]),
     });
 
+    this.cancelItemFormPartial = this.formBuilder.group({
+      id: this.formBuilder.control(null, [Validators.required]),
+      deactivated_by: this.formBuilder.control(null, [Validators.required]),
+      mrs_order_qty: this.formBuilder.control(null, [Validators.required]),
+      mrs_item_code: this.formBuilder.control(null, [Validators.required]),
+      mrs_uom: this.formBuilder.control(null, [Validators.required]),
+      mrs_id: this.formBuilder.control(null, [Validators.required]),
+    })
+
     this.approveOrderRequestForm = this.formBuilder.group({
       is_approved_by: this.formBuilder.control(null, [Validators.required]),
       mrs_id: this.formBuilder.control(null, [Validators.required]),
@@ -593,6 +607,18 @@ export class OnlineMRSComponent implements OnInit {
     });
   }
 
+  
+  cancelItemFromList(item: any) {
+    this.cancelItemFormPartial.patchValue({
+      id: item.id,
+      mrs_order_qty: item.mrs_order_qty,
+      mrs_item_code: item.mrs_item_code,
+      mrs_uom: item.mrs_uom,
+      deactivated_by: this.loginService.currentUserName,
+       mrs_id: item.mrs_id,
+    });
+  }
+
   viewRemarksItemFromList(item: any) {
     this.mrs_cancel_reason = item.mrs_remarks;
   }
@@ -649,6 +675,13 @@ export class OnlineMRSComponent implements OnInit {
   removeItem(index: any) {
     this.addedItemList.splice(index, 1);
   }
+
+getOrderList( mrs_id: number)
+{
+  const res = this.parentData.filter((list) => list.mrs_id === mrs_id);
+  this.viewAddedItemList = res;
+
+}
 
   // view order list ***********************************************************
   viewOrderClickParent(item: any) {
@@ -894,6 +927,56 @@ export class OnlineMRSComponent implements OnInit {
               },
               (error) => {
                 console.log(error.error.message);
+              }
+            );
+        }
+      });
+    }
+  }
+
+  
+  cancelItemListSubmit() {
+    //Cancel partial Item
+    // console.error(this.cancelItemFormPartial.value);
+    // console.log(this.cancelItemFormPartial.value.mrs_id);
+    this.mrs_id_order_list = this.cancelItemFormPartial.value.mrs_id;
+    if (this.cancelItemFormPartial.valid) {
+      Swal.fire({
+        title: 'Are you sure that you want to Cancel?',
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onlineMrsService
+            .cancelItemFromList(this.cancelItemFormPartial.value)
+            .subscribe(
+              (response) => {
+                this.getParentList();
+//breakpoint
+
+      
+  
+
+                $('#cancelItemModalpartialClose').trigger('click');
+       
+
+
+                this.successToaster();
+    
+                this.successMessage = 'Cancelled Successfully!';
+        setTimeout(() => {
+          this.getOrderList(this.mrs_id_order_list);
+        },500);
+
+                this.cancelItemFormPartial.reset();
+              },
+              (error) => {
+                console.log(error.error.message);
+                this.errorToaster();
               }
             );
         }

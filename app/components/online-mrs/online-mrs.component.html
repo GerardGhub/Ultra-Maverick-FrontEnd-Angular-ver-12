@@ -678,11 +678,14 @@
                 </td>
                 <ng-template [ngIf]="requestorFound === 1">
                   <td>
-                    <button id="viewModalClose" [hidden]="true" data-dismiss="modal" mat-stroked-button
-                      color="primary">close</button>
+               
                     <button mat-stroked-button color="primary" class="editbtnStyle" data-toggle="modal"
                       data-target="#editItemFromList" data-backdrop="false" data-keyboard="false"
                       (click)="editItemFromList(item)"><span class="fa fa-pencil"></span> Edit </button>
+
+                      <button mat-stroked-button color="warn" class="editbtnStyle" data-toggle="modal"
+                      data-target="#cancelItemFromList" data-backdrop="false" data-keyboard="false"
+                      (click)="cancelItemFromList(item)"><span class="fa fa-trash"></span> Cancel </button>
                   </td>
                 </ng-template>
               </tr>
@@ -886,6 +889,44 @@
               color="primary">close</button>
             <button mat-stroked-button [disabled]="!editItemForm.valid" color="primary"
               (click)="editItemListSubmit()">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- cancel item modal ********************************************************************************************************************************************* -->
+<div class="modal" role="dialog" id="cancelItemFromList">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header bg-all text-white">
+        <div class="modal-title">Cancel Item From List</div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cancelItemFormPartial">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputEmail4">Item Code:</label>
+              <input type="text" class="form-control" formControlName="mrs_item_code" readonly>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="inputEmail4">Order qty:</label>
+              <input type="number" class="form-control" formControlName="mrs_order_qty" readonly>
+            </div>
+            <input type="number" class="form-control" [hidden]="true" [(ngModel)]="mrs_id" formControlName="id"
+              readonly>
+          </div>
+
+          <div class="modal-footer">
+            <button id="cancelItemModalpartialClose" [hidden]="true" data-dismiss="modal" mat-stroked-button
+              color="primary">close</button>
+            <button mat-stroked-button [disabled]="!cancelItemFormPartial.valid" color="primary"
+              (click)="cancelItemListSubmit()">Submit</button>
           </div>
         </form>
       </div>

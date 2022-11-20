@@ -62,6 +62,10 @@ export class OnlineMrsService {
     return this.httpClient.put("/api/material_request_logs_update", data, {responseType: "json"})
   }
 
+  cancelItemFromList(data: any): Observable<any>{
+    return this.httpClient.put("/api/material_request_logs_requestor_cancel", data, {responseType: "json"})
+  }
+
   removeItemFromList(id: any): Observable<any>{
     return this.httpClient.delete("/api/material_request_logs/" + id, {responseType: "json"})
   }

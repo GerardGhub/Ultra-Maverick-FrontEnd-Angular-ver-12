@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, NoPreloading, PreloadAllModules } from '@angular/router';
 import { AboutComponent } from "./admin/components/about/about.component";
 import { CanDeactivateGuardService } from './guards/can-deactivate-guard.service';
-
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LoginComponent } from './components/login/login.component';
-import { SandboxComponent } from './sandbox/sandbox.component';
+
 
 
 const routes: Routes = [

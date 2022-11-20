@@ -29,7 +29,7 @@ import { LabTestSubRemarksComponent } from './components/lt-laboratory-test-sub-
 import { ProjectsCancelledPoComponent } from './components/projects-cancelled-po/projects-cancelled-po.component';
 import { PreparedStoreOrderComponent } from './components/store-order-prepared/prepared-store-order.component';
 import { StoreOrderActiveCancelledTransactionComponent } from './components/store-order-cancelled-transaction/store-order-active-cancelled-transaction.component';
-import { SandboxComponent } from '../sandbox/sandbox.component';
+// import { SandboxComponent } from '../sandbox/sandbox.component';
 import { ParentMainModulesComponent } from './components/parent-main-modules/parent-main-modules.component';
 import { ModulesComponent } from './components/modules/modules.component';
 
@@ -57,7 +57,7 @@ import { ModulesComponent } from './components/modules/modules.component';
     ProjectsCancelledPoComponent,
     PreparedStoreOrderComponent,
     StoreOrderActiveCancelledTransactionComponent,
-    SandboxComponent,
+    // SandboxComponent,
     ParentMainModulesComponent,
     ModulesComponent,
   ],

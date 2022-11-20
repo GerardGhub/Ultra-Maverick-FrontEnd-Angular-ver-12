@@ -17,7 +17,7 @@ import { StoreOrderDispatchingRecordComponent } from '../components/store-order-
 import { ForLabtestComponent } from '../../components/labtest-module/for-labtest/for-labtest.component';
 import { LabtestRecordsComponent } from '../../components/labtest-module/labtest-records/labtest-records.component';
 import { OnlineMRSComponent } from '../../components/online-mrs/online-mrs.component';
-import { SandboxComponent } from '../../../app/sandbox/sandbox.component';
+// import { SandboxComponent } from '../../../app/sandbox/sandbox.component';
 import { InternalOrderComponent } from '../../components/internal-preparation/internal-order.component';
 import { ParentMainModulesComponent } from '../components/parent-main-modules/parent-main-modules.component';
 
@@ -128,7 +128,7 @@ const routes: Routes = [
         component: MastersComponent,
         data: { linkIndex: 21 },
       },
-      { path: 'sandbox', component: SandboxComponent, data: { linkIndex: 22 } },
+      // { path: 'sandbox', component: SandboxComponent, data: { linkIndex: 22 } },
       {
         path: 'internal-order',
         component: InternalOrderComponent,

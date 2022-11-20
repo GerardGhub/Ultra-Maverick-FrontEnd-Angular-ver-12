@@ -52,7 +52,6 @@
   <!-- menu starts -->
   <mat-menu #topmenu="matMenu">
 
-    <a [routerLink]=" [ '/about' ] " mat-menu-item>About</a>
     <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'">
 
       <button mat-menu-item [matMenuTriggerFor]="user">User</button>
@@ -60,9 +59,10 @@
 
   </mat-menu>
 
+  <!-- Collection for Navigation Bugok -->
   <mat-menu #user="matMenu">
     
-
+    <a [routerLink]=" [ '/about' ] " mat-menu-item>About</a>
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
 
   </mat-menu>

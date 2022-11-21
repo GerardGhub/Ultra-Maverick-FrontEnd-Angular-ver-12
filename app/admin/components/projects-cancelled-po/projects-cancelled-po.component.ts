@@ -4,19 +4,19 @@ import { ClientLocation } from '../../../models/client-location';
 import { ClientLocationsService } from '../../../services/client-locations.service';
 import { NgForm } from '@angular/forms';
 import * as $ from "jquery";
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { FilterPipe } from '../../../../app/pipes/filter.pipe';
 import { Observable } from 'rxjs';
-import { Project } from 'src/app/models/project';
+import { Project } from '../../../../app/models/project';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import { LoginService } from 'src/app/services/login.service';
-import { RejectedStatus } from 'src/app/models/rejected-status';
-import { RejectedStatusService } from 'src/app/services/rejected-status.service';
-import { AllowablePercentage } from 'src/app/models/allowable-percentage';
-import { AllowablePercentageService } from 'src/app/services/allowable-percentage.service';
-import { CancelledPOTransactionStatus } from 'src/app/models/cancelled-potransaction-status';
-import { ReturnedPOTransactionStatusService } from 'src/app/services/returned-potransaction-status.service';
+import { LoginService } from '../../../../app/services/login.service';
+import { RejectedStatus } from '../../../../app/models/rejected-status';
+import { RejectedStatusService } from '../../../../app/services/rejected-status.service';
+import { AllowablePercentage } from '../../../../app/models/allowable-percentage';
+import { AllowablePercentageService } from '../../../../app/services/allowable-percentage.service';
+import { CancelledPOTransactionStatus } from '../../../../app/models/cancelled-potransaction-status';
+import { ReturnedPOTransactionStatusService } from '../../../../app/services/returned-potransaction-status.service';
 import { ProjectComponent } from '../project/project.component';
 
 

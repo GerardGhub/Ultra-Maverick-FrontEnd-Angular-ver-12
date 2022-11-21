@@ -249,8 +249,6 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   any(event: any) {
     this.ChildForm = "22434";
-
-
   }
   any2(event: any) {
     this.important();

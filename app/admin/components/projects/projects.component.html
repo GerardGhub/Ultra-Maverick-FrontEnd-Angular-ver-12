@@ -222,7 +222,8 @@
               <div class="form-group col-md-3">
                 <mat-form-field floatLabel="auto" appearance="outline" color="primary">
                   <input type="text" class="text-green" matInput id="txtEditProjectID" placeholder="Checklist ID"
-                    name="ProjectID" disabled="disabled" [(ngModel)]="editProject.projectID" required="required"
+                   
+                  name="ProjectID" disabled="disabled" [(ngModel)]="editProject.projectID" required="required"
                     pattern="^[0-9]*$" appProjectIDUniqueValidator #editProjectID="ngModel" [ngClass]="{
                       'is-invalid':
                         editProjectID.invalid &&

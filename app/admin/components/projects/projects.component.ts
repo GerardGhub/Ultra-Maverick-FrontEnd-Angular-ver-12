@@ -943,6 +943,18 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   // Inserting of checklist data
   onRecieveButtonClick(ProjectID: any) {
+const ExpectedDeliveryValidate = this.ExpectedDeliveryActual.nativeElement.value;
+const ActualDeliveredValidate = this.ExpectedDeliveryActual.nativeElement.value;
+
+if (ExpectedDeliveryValidate == 0 && ActualDeliveredValidate)
+{
+  this.errorMessage = 'Invalid Quantity';
+  this.errorMessageToster();
+  return;
+  alert("Vbobong bata");
+}
+
+
     this.data = [];
 
     this.qcchecklist.map((parent) => {
@@ -2337,6 +2349,12 @@ export class ProjectsComponent implements OnInit, OnChanges {
         $('#actual_delivery_output').val('');
       }
     }
+
+    if (ActualDelivered == 0)
+    {
+      this.errorMessage = 'Invalid Quantity';
+      this.errorMessageToster();
+    }
   }
 
   AllowablePercentageComputation(event: any) {
@@ -2378,7 +2396,14 @@ export class ProjectsComponent implements OnInit, OnChanges {
         // this.GreatherThanTheOrder(); //Be Carefull
       }
     }
+
+    if (ExpectedDelivery == 0) {
+      this.errorMessage = 'Invalid Quantity';
+      this.errorMessageToster();
+    }
   }
+
+
 
   InitialComputation() {
     const a = this.rejectNo1.nativeElement.value;

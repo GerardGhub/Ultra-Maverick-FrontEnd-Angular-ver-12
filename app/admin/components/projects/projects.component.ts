@@ -690,15 +690,30 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
 
 
-      this.projectsService
-        .SearchProjects('Po_number', this.searchText)
+
+
+      if (this.searchBy == "po_number") {
+        this.projectsService
+          .SearchProjects('Po_number', this.searchText)
+          .subscribe((response: Project[]) => {
+            this.projects = response;
+            this.showLoading = false;
+            this.calculateNoOfPages();
+            this.totalPoRowCount = response.length;
+          });
+      }
+      else
+      {
+
+        this.projectsService
+        .SearchProjects('item_code', this.searchText)
         .subscribe((response: Project[]) => {
           this.projects = response;
           this.showLoading = false;
           this.calculateNoOfPages();
           this.totalPoRowCount = response.length;
         });
-
+      }
 
 
     }///

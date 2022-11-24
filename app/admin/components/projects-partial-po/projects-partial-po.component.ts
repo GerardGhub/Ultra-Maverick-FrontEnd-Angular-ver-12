@@ -55,7 +55,7 @@ export class ProjectsPartialPoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private partialPOService: PartialPoService,
     public appComponent: AppComponent
-  ) {}
+  ) { }
 
   WHReceivingList: number = 0;
 
@@ -418,7 +418,7 @@ export class ProjectsPartialPoComponent implements OnInit {
 
 
   // REACTIVE FORMS **************************************************************************************************************
-  reactiveForms(){
+  reactiveForms() {
     this.cancelForm = this.formBuilder.group({
       po_number: this.formBuilder.control(null, [Validators.required]),
       item_description: this.formBuilder.control(null, [Validators.required]),
@@ -428,7 +428,7 @@ export class ProjectsPartialPoComponent implements OnInit {
 
 
   // POPULATE FIELDS *************************************************************************************************************
-  onViewClick(item: any){}
+  onViewClick(item: any) { }
 
 
 
@@ -603,7 +603,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   //Item Description
   @ViewChild('ItemDesc') ItemDesc: ElementRef;
 
-  onNewClick(event:any) {
+  onNewClick(event: any) {
     this.newForm.resetForm();
     setTimeout(() => {
       this.received_by.nativeElement.value = this.loginService.currentUserName;
@@ -688,7 +688,7 @@ export class ProjectsPartialPoComponent implements OnInit {
           this.newProject.a_remarks = "";
 
           $('#newFormCancel').trigger('click');
-        
+
           this.calculateNoOfPages();
         },
         (error) => {
@@ -724,11 +724,11 @@ export class ProjectsPartialPoComponent implements OnInit {
     //To display the final no. of days (result)
     document.write(
       'Total number of days between dates  <br>' +
-        date1 +
-        '<br> and <br>' +
-        date2 +
-        ' is: <br> ' +
-        Difference_In_Days
+      date1 +
+      '<br> and <br>' +
+      date2 +
+      ' is: <br> ' +
+      Difference_In_Days
     );
 
     return;
@@ -807,112 +807,113 @@ export class ProjectsPartialPoComponent implements OnInit {
   }
 
   UpdateClickDetails() {
-   
+
     // if (this.editForm.valid) {
 
- 
-      // console.log(this.editProject.projectID);
 
-      this.ComputeRemainingQty();
-      this.editProject.actual_remaining_receiving = this.ActualRemaining;
-      this.editProject.is_activated = this.Deactivator;
-   this.editProject.canceled_by = this.activeUser;
-      this.projectsPartialPoService.cancelProject(this.editProject).subscribe(
-        (response: Project) => {
-          var p: Project = new Project();
-          p.projectID = response.projectID;
+    // console.log(this.editProject.projectID);
 
-     
-          p.projectName = response.projectName;
-          p.dateOfStart = response.dateOfStart;
-          p.teamSize = response.teamSize;
-          // p.clientLocation = response.clientLocation;
-          p.active = response.active;
-          p.is_activated = response.is_activated;
-          // p.clientLocationID = response.clientLocationID;
-          p.status = response.status;
-          p.supplier = response.supplier;
-          p.item_code = response.item_code;
-          p.item_description = response.item_description;
-          p.po_number = response.po_number;
-          p.po_date = response.po_date;
-          p.pr_number = response.pr_number;
-          p.pr_date = response.pr_date;
-          p.qty_order = response.qty_order;
-          p.qty_uom = response.qty_uom;
-          p.mfg_date = response.mfg_date;
-          p.expiration_date = response.expiration_date;
-          p.expected_delivery = response.expected_delivery;
-          p.actual_delivery = response.actual_delivery;
-          p.expected_delivery = response.expected_delivery;
-          p.status_of_reject_one = response.status_of_reject_one;
-          p.status_of_reject_two = response.status_of_reject_two;
-          p.status_of_reject_three = response.status_of_reject_three;
-          p.count_of_reject_one = response.count_of_reject_one;
-          p.count_of_reject_two = response.count_of_reject_two;
-          p.count_of_reject_three = response.count_of_reject_three;
-          p.total_of_reject_mat = response.total_of_reject_mat;
-          // Section 1
-          // A
-        
-          //Adds On
-          p.cancelled_date = response.cancelled_date;
-          p.canceled_by = response.canceled_by;
-          p.cancelled_reason = response.cancelled_reason;
+    this.ComputeRemainingQty();
+    this.editProject.actual_remaining_receiving = this.ActualRemaining;
+    this.editProject.is_activated = this.Deactivator;
+    this.editProject.canceled_by = this.activeUser;
+    this.projectsPartialPoService.cancelProject(this.editProject).subscribe(
+      (response: Project) => {
+        var p: Project = new Project();
+        p.projectID = response.projectID;
 
-          // this.received_by.nativeElement.value = this.loginService.currentUserName;
-          this.projects[this.editIndex] = p;
-          this.UpdateMasterTransactionsActualReceivingofCancel();
-          // this.InsertANewPartialReceiving();
-          this.editProject.projectID = 0;
-          this.editProject.projectName = "";
-          this.editProject.dateOfStart = "";
-          this.editProject.teamSize = 0;
-          this.editProject.supplier = "";
-          this.editProject.active = false;
-          this.editProject.status = "";
-          this.editProject.item_code = "";
-          this.editProject.item_description = "";
-          this.editProject.po_number = "";
-          this.editProject.po_date = "";
-          this.editProject.pr_number = "";
-          this.editProject.pr_date = "";
-          this.editProject.qty_order = "";
-          this.editProject.qty_uom = "";
-          this.editProject.mfg_date = "";
-          this.editProject.expiration_date = "";
-          this.editProject.expected_delivery = "";
-          this.editProject.actual_delivery = "";
-          this.editProject.actual_remaining_receiving = 0;
-          this.editProject.received_by_QA = "";
-          this.editProject.status_of_reject_one = "";
-          this.editProject.status_of_reject_two = "";
-          this.editProject.status_of_reject_three = "";
-          this.editProject.count_of_reject_one = "";
-          this.editProject.count_of_reject_two = "";
-          this.editProject.count_of_reject_three = "";
-          this.editProject.total_of_reject_mat = "";
-          //Section A
-          //A
-   
-          //Add
-          this.editProject.cancelled_date = null;
-          this.editProject.canceled_by = "";
-          this.editProject.cancelled_reason = "";
 
-          this.showCancelledSuccess();
-          this.ngOnInit();
-          $('#editFormCancel').trigger('click');
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        p.projectName = response.projectName;
+        p.dateOfStart = response.dateOfStart;
+        p.teamSize = response.teamSize;
+        // p.clientLocation = response.clientLocation;
+        p.active = response.active;
+        p.is_activated = response.is_activated;
+        // p.clientLocationID = response.clientLocationID;
+        p.status = response.status;
+        p.supplier = response.supplier;
+        p.item_code = response.item_code;
+        p.item_description = response.item_description;
+        p.po_number = response.po_number;
+        p.po_date = response.po_date;
+        p.pr_number = response.pr_number;
+        p.pr_date = response.pr_date;
+        p.qty_order = response.qty_order;
+        p.qty_uom = response.qty_uom;
+        p.mfg_date = response.mfg_date;
+        p.expiration_date = response.expiration_date;
+        p.expected_delivery = response.expected_delivery;
+        p.actual_delivery = response.actual_delivery;
+        p.expected_delivery = response.expected_delivery;
+        p.status_of_reject_one = response.status_of_reject_one;
+        p.status_of_reject_two = response.status_of_reject_two;
+        p.status_of_reject_three = response.status_of_reject_three;
+        p.count_of_reject_one = response.count_of_reject_one;
+        p.count_of_reject_two = response.count_of_reject_two;
+        p.count_of_reject_three = response.count_of_reject_three;
+        p.total_of_reject_mat = response.total_of_reject_mat;
+        // Section 1
+        // A
+
+        //Adds On
+        p.cancelled_date = response.cancelled_date;
+        p.canceled_by = response.canceled_by;
+        p.cancelled_reason = response.cancelled_reason;
+
+        // this.received_by.nativeElement.value = this.loginService.currentUserName;
+        this.projects[this.editIndex] = p;
+        this.UpdateMasterTransactionsActualReceivingofCancel();
+        // this.InsertANewPartialReceiving();
+        this.editProject.projectID = 0;
+        this.editProject.projectName = "";
+        this.editProject.dateOfStart = "";
+        this.editProject.teamSize = 0;
+        this.editProject.supplier = "";
+        this.editProject.active = false;
+        this.editProject.status = "";
+        this.editProject.item_code = "";
+        this.editProject.item_description = "";
+        this.editProject.po_number = "";
+        this.editProject.po_date = "";
+        this.editProject.pr_number = "";
+        this.editProject.pr_date = "";
+        this.editProject.qty_order = "";
+        this.editProject.qty_uom = "";
+        this.editProject.mfg_date = "";
+        this.editProject.expiration_date = "";
+        this.editProject.expected_delivery = "";
+        this.editProject.actual_delivery = "";
+        this.editProject.actual_remaining_receiving = 0;
+        this.editProject.received_by_QA = "";
+        this.editProject.status_of_reject_one = "";
+        this.editProject.status_of_reject_two = "";
+        this.editProject.status_of_reject_three = "";
+        this.editProject.count_of_reject_one = "";
+        this.editProject.count_of_reject_two = "";
+        this.editProject.count_of_reject_three = "";
+        this.editProject.total_of_reject_mat = "";
+        //Section A
+        //A
+
+        //Add
+        this.editProject.cancelled_date = null;
+        this.editProject.canceled_by = "";
+        this.editProject.cancelled_reason = "";
+
+        this.showCancelledSuccess();
+        this.ngOnInit();
+        $('#editFormCancel').trigger('click');
+
+        setTimeout(() => {
+          this.getList();
+        }, 400);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // }
 
-    setTimeout(() => {
-      this.getList();
-    }, 100);
   }
 
   //Insert as Partials
@@ -1294,7 +1295,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       if (result.isConfirmed) {
         // alert('una no!')
         this.UpdateClickDetails();
-   
+
       }
     });
   }
@@ -1312,7 +1313,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       .getAllProjects()
       .subscribe((response: Project[]) => {
         // debugger;
-console.warn(response);
+        console.warn(response);
         this.projects = response;
       });
     //Last
@@ -1341,12 +1342,12 @@ console.warn(response);
       this.editProject.actual_remaining_receiving = this.projects[index].actual_remaining_receiving;
       // this.editProject.received_by_QA = this.activeUser;
       this.editProject.is_activated = this.Activator;
-      this.editProject.returned_date =this.ToDay;
+      this.editProject.returned_date = this.ToDay;
       this.editProject.returned_by = this.activeUser;
       this.editProject.received_by_QA = this.projects[index].received_by_QA;
-this.editProject.cancelled_date = this.projects[index].cancelled_date;
-this.editProject.canceled_by = this.projects[index].canceled_by;
-this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
+      this.editProject.cancelled_date = this.projects[index].cancelled_date;
+      this.editProject.canceled_by = this.projects[index].canceled_by;
+      this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
 
       this.editProject.status_of_reject_one = this.projects[index].status_of_reject_one;
       this.editProject.status_of_reject_two = this.projects[index].status_of_reject_two;
@@ -1395,7 +1396,7 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
       this.editProject.d_compliance_dos = this.projects[index].d_compliance_dos;
       this.editProject.d_remarks_dos = this.projects[index].d_remarks_dos;
       //E
-      this.editProject.e_no_accessories_dos = this.projects[index].e_no_accessories_dos ;
+      this.editProject.e_no_accessories_dos = this.projects[index].e_no_accessories_dos;
       this.editProject.e_compliance_dos = this.projects[index].e_compliance_dos;
       this.editProject.e_remarks_dos = this.projects[index].e_remarks_dos;
       //F
@@ -1428,11 +1429,11 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
       //B
       this.editProject.b_po_kwatro_desc = this.projects[index].b_po_kwatro_desc;
       this.editProject.b_compliance_kwatro = this.projects[index].b_compliance_kwatro;
-      this.editProject.b_remarks_kwatro= this.projects[index].b_remarks_kwatro;
+      this.editProject.b_remarks_kwatro = this.projects[index].b_remarks_kwatro;
       //C
       this.editProject.c_msds_kwatro_desc = this.projects[index].c_msds_kwatro_desc;
       this.editProject.c_compliance_kwatro = this.projects[index].c_compliance_kwatro;
-      this.editProject.c_remarks_kwatro= this.projects[index].c_remarks_kwatro;
+      this.editProject.c_remarks_kwatro = this.projects[index].c_remarks_kwatro;
       //D
       this.editProject.d_food_grade_desc = this.projects[index].d_food_grade_desc;
       this.editProject.d_compliance_kwatro = this.projects[index].d_compliance_kwatro;
@@ -1451,34 +1452,34 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
       this.editProject.c_expirydate_desc_singko = this.projects[index].c_expirydate_desc_singko;
       this.editProject.c_compliance_singko = this.projects[index].c_compliance_singko;
       this.editProject.c_remarks_singko = this.projects[index].c_remarks_singko;
-     //D
-     this.editProject.d_packaging_desc_singko = this.projects[index].d_packaging_desc_singko;
-     this.editProject.d_compliance_singko = this.projects[index].d_compliance_singko;
-     this.editProject.d_remarks_singko = this.projects[index].d_remarks_singko;
-     //E
-     this.editProject.e_no_contaminants_desc_singko = this.projects[index].e_no_contaminants_desc_singko;
-     this.editProject.e_compliance_singko = this.projects[index].e_compliance_singko;
-     this.editProject.e_remarks_singko = this.projects[index].e_remarks_singko;
-     //F
-     this.editProject.f_qtyrejected_desc_singko = this.projects[index].f_qtyrejected_desc_singko;
-     this.editProject.f_compliance_singko = this.projects[index].f_compliance_singko;
-     this.editProject.f_remarks_singko = this.projects[index].f_remarks_singko;
-     //G
-     this.editProject.g_rejected_reason_desc_singko = this.projects[index].g_rejected_reason_desc_singko;
-     this.editProject.g_compliance_singko = this.projects[index].g_compliance_singko;
-     this.editProject.g_remarks_singko = this.projects[index].g_remarks_singko;
-     //H
-     this.editProject.h_lab_sample_desc_singko = this.projects[index].h_lab_sample_desc_singko;
-     this.editProject.h_compliance_singko = this.projects[index].h_compliance_singko;
-     this.editProject.h_remarks_singko = this.projects[index].h_remarks_singko;
-    // $("txtexpected_delivery").val("");
-  
+      //D
+      this.editProject.d_packaging_desc_singko = this.projects[index].d_packaging_desc_singko;
+      this.editProject.d_compliance_singko = this.projects[index].d_compliance_singko;
+      this.editProject.d_remarks_singko = this.projects[index].d_remarks_singko;
+      //E
+      this.editProject.e_no_contaminants_desc_singko = this.projects[index].e_no_contaminants_desc_singko;
+      this.editProject.e_compliance_singko = this.projects[index].e_compliance_singko;
+      this.editProject.e_remarks_singko = this.projects[index].e_remarks_singko;
+      //F
+      this.editProject.f_qtyrejected_desc_singko = this.projects[index].f_qtyrejected_desc_singko;
+      this.editProject.f_compliance_singko = this.projects[index].f_compliance_singko;
+      this.editProject.f_remarks_singko = this.projects[index].f_remarks_singko;
+      //G
+      this.editProject.g_rejected_reason_desc_singko = this.projects[index].g_rejected_reason_desc_singko;
+      this.editProject.g_compliance_singko = this.projects[index].g_compliance_singko;
+      this.editProject.g_remarks_singko = this.projects[index].g_remarks_singko;
+      //H
+      this.editProject.h_lab_sample_desc_singko = this.projects[index].h_lab_sample_desc_singko;
+      this.editProject.h_compliance_singko = this.projects[index].h_compliance_singko;
+      this.editProject.h_remarks_singko = this.projects[index].h_remarks_singko;
+      // $("txtexpected_delivery").val("");
+
       //A
       //Calling The Projects for Qty Binding Servo IT Solutions
       this.PoNumberBinding = this.projects[index].po_number;
       // this.PoNumberChild.nativeElement.value;
-// alert(this.PoNumberBinding);
-      
+      // alert(this.PoNumberBinding);
+
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
         'Po_number',
         this.PoNumberBinding
@@ -1486,7 +1487,7 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
 
 
       this.editIndex = index;
-  
+
     }, 100);
   }
 
@@ -1789,12 +1790,10 @@ this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
         if (result.isConfirmed) {
           this.ExpiryDateChild.nativeElement.value = '';
           this.ExpiryDateChild.nativeElement.focus();
-          if (this.editForm.valid)
-          {
+          if (this.editForm.valid) {
             this.UpdateClickDetails();
           }
-          else
-          {
+          else {
             this.FieldOutRequiredField();
           }
 

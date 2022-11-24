@@ -712,6 +712,14 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.RandomNumber = Math.floor(Math.random() * 1000000 + 1);
 
     setTimeout(() => {
+
+
+
+
+      var PoDate = new Date(this.projects[index].po_date).toISOString().slice(0, 10);
+      var PrDate = new Date(this.projects[index].pr_date).toISOString().slice(0, 10);
+
+
       this.editProject.projectID = this.projects[index].projectID;
       // this.editProject.projectID = Math.floor((Math.random() * 1000000) + 1);
       this.editProject.projectName = this.projects[index].projectName;
@@ -734,9 +742,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
       this.expirable_material = this.projects[index].is_expirable;
       this.editProject.item_description = this.projects[index].item_description;
       this.editProject.po_number = this.projects[index].po_number;
-      this.editProject.po_date = this.projects[index].po_date;
+      this.editProject.po_date = PoDate;
+      // this.projects[index].po_date;
       this.editProject.pr_number = this.projects[index].pr_number;
-      this.editProject.pr_date = this.projects[index].pr_date;
+      this.editProject.pr_date = PrDate;
+      //  this.projects[index].pr_date;
       this.editProject.qty_order = this.projects[index].qty_order;
       this.editProject.qty_uom = this.projects[index].qty_uom;
       this.editProject.is_activated = this.Activator;
@@ -943,16 +953,14 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   // Inserting of checklist data
   onRecieveButtonClick(ProjectID: any) {
-const ExpectedDeliveryValidate = this.ExpectedDeliveryActual.nativeElement.value;
-const ActualDeliveredValidate = this.ExpectedDeliveryActual.nativeElement.value;
+    const ExpectedDeliveryValidate = this.ExpectedDeliveryActual.nativeElement.value;
+    const ActualDeliveredValidate = this.ExpectedDeliveryActual.nativeElement.value;
 
-if (ExpectedDeliveryValidate == 0 && ActualDeliveredValidate)
-{
-  this.errorMessage = 'Invalid Quantity';
-  this.errorMessageToster();
-  return;
-  alert("Vbobong bata");
-}
+    if (ExpectedDeliveryValidate == 0 && ActualDeliveredValidate) {
+      this.errorMessage = 'Invalid Quantity';
+      this.errorMessageToster();
+      return;
+    }
 
 
     this.data = [];
@@ -2350,8 +2358,7 @@ if (ExpectedDeliveryValidate == 0 && ActualDeliveredValidate)
       }
     }
 
-    if (ActualDelivered == 0)
-    {
+    if (ActualDelivered == 0) {
       this.errorMessage = 'Invalid Quantity';
       this.errorMessageToster();
     }

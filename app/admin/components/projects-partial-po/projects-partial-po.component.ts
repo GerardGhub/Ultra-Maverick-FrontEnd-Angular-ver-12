@@ -241,7 +241,7 @@ export class ProjectsPartialPoComponent implements OnInit {
 
       $('txtexpected_delivery').val('');
       //Calling The Projects for Qty Binding Servo IT Solutions
-      alert(this.searchBy);
+     
       this.PoNumberBinding = this.projects[index].po_number;
       if (this.searchBy =='po_number')
       {

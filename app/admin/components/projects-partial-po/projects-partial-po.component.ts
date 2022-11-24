@@ -69,7 +69,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   editIndex: number = 0;
   deleteProject: Project = new Project();
   deleteIndex: number = 0;
-  searchBy: string = 'ProjectName';
+  searchBy: string = 'po_number';
   searchText: string = '';
   ToDay: Date;
   ToDayforMaxDate: Date;
@@ -231,162 +231,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.editProject.total_of_reject_mat =
         this.projects[index].total_of_reject_mat;
       //Section 1
-      //A
-      this.editProject.a_delivery_van_desc =
-        this.projects[index].a_delivery_van_desc;
-      this.editProject.a_compliance = this.projects[index].a_compliance;
-      this.editProject.a_remarks = this.projects[index].a_remarks;
-      //B
-      this.editProject.b_cooling_system_desc =
-        this.projects[index].b_cooling_system_desc;
-      this.editProject.b_compliance = this.projects[index].b_compliance;
-      this.editProject.b_remarks = this.projects[index].b_remarks;
-      //C
-      this.editProject.c_inner_walls_desc =
-        this.projects[index].c_inner_walls_desc;
-      this.editProject.c_compliance = this.projects[index].c_compliance;
-      this.editProject.c_remarks = this.projects[index].c_remarks;
-      //D
-      this.editProject.d_plastic_curtains_desc =
-        this.projects[index].d_plastic_curtains_desc;
-      this.editProject.d_compliance = this.projects[index].d_compliance;
-      this.editProject.d_remarks = this.projects[index].d_remarks;
-      //E
-      this.editProject.e_thereno_pest_desc =
-        this.projects[index].e_thereno_pest_desc;
-      this.editProject.e_compliance = this.projects[index].e_compliance;
-      this.editProject.e_remarks = this.projects[index].e_remarks;
-      //Section 2
-      //A
-      this.editProject.a_clean_company_dos =
-        this.projects[index].a_clean_company_dos;
-      this.editProject.a_compliance_dos = this.projects[index].a_compliance_dos;
-      this.editProject.a_remarks_dos = this.projects[index].a_remarks_dos;
-      //B
-      this.editProject.b_delivery_staff_symptoms_dos =
-        this.projects[index].b_delivery_staff_symptoms_dos;
-      this.editProject.b_compliance_dos = this.projects[index].b_compliance_dos;
-      this.editProject.b_remarks_dos = this.projects[index].b_remarks_dos;
-      //C
-      this.editProject.c_inner_walls_clean_dos =
-        this.projects[index].c_inner_walls_clean_dos;
-      this.editProject.c_compliance_dos = this.projects[index].c_compliance_dos;
-      this.editProject.c_remarks_dos = this.projects[index].c_remarks_dos;
-      //D
-      this.editProject.d_plastic_curtains_dos =
-        this.projects[index].d_plastic_curtains_dos;
-      this.editProject.d_compliance_dos = this.projects[index].d_compliance_dos;
-      this.editProject.d_remarks_dos = this.projects[index].d_remarks_dos;
-      //E
-      this.editProject.e_no_accessories_dos =
-        this.projects[index].e_no_accessories_dos;
-      this.editProject.e_compliance_dos = this.projects[index].e_compliance_dos;
-      this.editProject.e_remarks_dos = this.projects[index].e_remarks_dos;
-      //F
 
-      this.editProject.f_no_pests_sightings_dos =
-        this.projects[index].f_no_pests_sightings_dos;
-      this.editProject.f_compliance_dos = this.projects[index].f_compliance_dos;
-      this.editProject.f_remarks_dos = this.projects[index].f_remarks_dos;
-      //Section 3
-      //A
-      this.editProject.a_pallet_crates_tres =
-        this.projects[index].a_pallet_crates_tres;
-      this.editProject.a_compliance_tres =
-        this.projects[index].a_compliance_tres;
-      this.editProject.a_remarks_tres = this.projects[index].a_remarks_tres;
-      //B
-      this.editProject.b_product_contamination_tres =
-        this.projects[index].b_product_contamination_tres;
-      this.editProject.b_compliance_tres =
-        this.projects[index].b_compliance_tres;
-      this.editProject.b_remarks_tres = this.projects[index].b_remarks_tres;
-      //C
-      this.editProject.c_uncessary_items_tres =
-        this.projects[index].c_uncessary_items_tres;
-      this.editProject.c_compliance_tres =
-        this.projects[index].c_compliance_tres;
-      this.editProject.c_remarks_tres = this.projects[index].c_remarks_tres;
-      //D
-      this.editProject.d_products_cover_tres =
-        this.projects[index].d_products_cover_tres;
-      this.editProject.d_compliance_tres =
-        this.projects[index].d_compliance_tres;
-      this.editProject.d_remarks_tres = this.projects[index].d_remarks_tres;
-      //Serction 4
-      //A
-      this.editProject.a_certificate_coa_kwatro_desc =
-        this.projects[index].a_certificate_coa_kwatro_desc;
-      this.editProject.a_compliance_kwatro =
-        this.projects[index].a_compliance_kwatro;
-      this.editProject.a_remarks_kwatro = this.projects[index].a_remarks_kwatro;
-      //B
-      this.editProject.b_po_kwatro_desc = this.projects[index].b_po_kwatro_desc;
-      this.editProject.b_compliance_kwatro =
-        this.projects[index].b_compliance_kwatro;
-      this.editProject.b_remarks_kwatro = this.projects[index].b_remarks_kwatro;
-      //C
-      this.editProject.c_msds_kwatro_desc =
-        this.projects[index].c_msds_kwatro_desc;
-      this.editProject.c_compliance_kwatro =
-        this.projects[index].c_compliance_kwatro;
-      this.editProject.c_remarks_kwatro = this.projects[index].c_remarks_kwatro;
-      //D
-      this.editProject.d_food_grade_desc =
-        this.projects[index].d_food_grade_desc;
-      this.editProject.d_compliance_kwatro =
-        this.projects[index].d_compliance_kwatro;
-      this.editProject.d_remarks_kwatro = this.projects[index].d_remarks_kwatro;
-
-      //Section 5
-      //A
-      this.editProject.a_qty_received_singko_singko =
-        this.projects[index].a_qty_received_singko_singko;
-      this.editProject.a_compliance_singko =
-        this.projects[index].a_compliance_singko;
-      this.editProject.a_remarks_singko = this.projects[index].a_remarks_singko;
-      //B
-      this.editProject.b_mfg_date_desc_singko =
-        this.projects[index].b_mfg_date_desc_singko;
-      this.editProject.b_compliance_singko =
-        this.projects[index].b_compliance_singko;
-      this.editProject.b_remarks_singko = this.projects[index].b_remarks_singko;
-      //C
-      this.editProject.c_expirydate_desc_singko =
-        this.projects[index].c_expirydate_desc_singko;
-      this.editProject.c_compliance_singko =
-        this.projects[index].c_compliance_singko;
-      this.editProject.c_remarks_singko = this.projects[index].c_remarks_singko;
-      //D
-      this.editProject.d_packaging_desc_singko =
-        this.projects[index].d_packaging_desc_singko;
-      this.editProject.d_compliance_singko =
-        this.projects[index].d_compliance_singko;
-      this.editProject.d_remarks_singko = this.projects[index].d_remarks_singko;
-      //E
-      this.editProject.e_no_contaminants_desc_singko =
-        this.projects[index].e_no_contaminants_desc_singko;
-      this.editProject.e_compliance_singko =
-        this.projects[index].e_compliance_singko;
-      this.editProject.e_remarks_singko = this.projects[index].e_remarks_singko;
-      //F
-      this.editProject.f_qtyrejected_desc_singko =
-        this.projects[index].f_qtyrejected_desc_singko;
-      this.editProject.f_compliance_singko =
-        this.projects[index].f_compliance_singko;
-      this.editProject.f_remarks_singko = this.projects[index].f_remarks_singko;
-      //G
-      this.editProject.g_rejected_reason_desc_singko =
-        this.projects[index].g_rejected_reason_desc_singko;
-      this.editProject.g_compliance_singko =
-        this.projects[index].g_compliance_singko;
-      this.editProject.g_remarks_singko = this.projects[index].g_remarks_singko;
-      //H
-      this.editProject.h_lab_sample_desc_singko =
-        this.projects[index].h_lab_sample_desc_singko;
-      this.editProject.h_compliance_singko =
-        this.projects[index].h_compliance_singko;
-      this.editProject.h_remarks_singko = this.projects[index].h_remarks_singko;
       //Cancel
       this.editProject.cancelled_date = this.ToDay;
       this.editProject.canceled_by = this.activeUser;
@@ -396,12 +241,20 @@ export class ProjectsPartialPoComponent implements OnInit {
 
       $('txtexpected_delivery').val('');
       //Calling The Projects for Qty Binding Servo IT Solutions
+      alert(this.searchBy);
       this.PoNumberBinding = this.projects[index].po_number;
-      // this.PoNumberChild.nativeElement.value;
+      if (this.searchBy =='po_number')
+      {
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
-        'Po_number',
+        'po_number',
         this.PoNumberBinding
       );
+      }
+      if (this.searchBy =='item_code')
+      {
+        this.ProjectsAllowableQty = this.projectsService.SearchProjects('item_code', this.PoNumberBinding);
+      }
+
       this.totalRejectMaterial = this.projects[index].total_of_reject_mat;
       this.editIndex = index;
     }, 100);

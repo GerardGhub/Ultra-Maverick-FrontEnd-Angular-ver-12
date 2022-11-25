@@ -1370,6 +1370,15 @@
             <mat-icon matPrefix>info<span class="material-icons-outlined"> </span>
             </mat-icon>
           </mat-form-field>
+    
+          <mat-form-field class="w-100" floatLabel="auto" appearance="standard" color="primary">
+            <input type="text" matInput id="txtTotalRejecttoReturn" placeholder="Total Qty Reject"
+              name="total_of_reject_mat" [(ngModel)]="editProject.total_of_reject_mat" disabled="disabled"
+              #TotalOfRejectMatToReturnQty />
+              <mat-label>Total Reject Qty.</mat-label>
+              <mat-icon matPrefix>sync<span class="material-icons-outlined"></span></mat-icon>
+          </mat-form-field>
+
           <br />
           <mat-form-field appearance="fill" class="w-100">
             <mat-label><span class="required-field"> Reason *</span></mat-label>

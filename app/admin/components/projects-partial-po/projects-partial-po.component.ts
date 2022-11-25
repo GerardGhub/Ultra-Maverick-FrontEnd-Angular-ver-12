@@ -164,6 +164,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   onClickView(item: any, index: number) {
     this.editForm.resetForm();
     this.received_by.nativeElement.value = this.loginService.fullName;
+    var totalQtyReject = parseInt(this.projects[index].total_of_reject_mat) * 1;
     this.resetValueS();
     //first
     this.projectsPartialPoService
@@ -208,9 +209,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.editProject.actual_remaining_receiving =
         this.projects[index].actual_remaining_receiving;
       this.editProject.received_by_QA = this.projects[index].received_by_QA;
-      // this.editProject.total_of_reject_mat = this.totalofReject.nativeElement.
 
-      // this.editProject.received_by_QA = this.projects[index].received_by_QA;
 
       this.editProject.status_of_reject_one =
         this.projects[index].status_of_reject_one;
@@ -226,7 +225,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.editProject.count_of_reject_three =
         this.projects[index].count_of_reject_three;
       this.editProject.total_of_reject_mat =
-        this.projects[index].total_of_reject_mat;
+      totalQtyReject.toString();
       //Section 1
 
       //Cancel
@@ -453,6 +452,7 @@ export class ProjectsPartialPoComponent implements OnInit {
   //Item Description
   @ViewChild('ItemDesc') ItemDesc: ElementRef;
 
+  @ViewChild('TotalOfRejectMatToReturnQty') TotalOfRejectMatToReturnQty: ElementRef;
   onNewClick(event: any) {
     this.newForm.resetForm();
     setTimeout(() => {
@@ -652,8 +652,9 @@ export class ProjectsPartialPoComponent implements OnInit {
   ComputeRemainingQty() {
     const ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
     const QtyOrder = this.QtyOrdered.nativeElement.value;
+    var TotalOfRejectMat = this.TotalOfRejectMatToReturnQty.nativeElement.value;
+    this.ActualRemaining = QtyOrder - ActualDelivered + parseInt(TotalOfRejectMat);
 
-    this.ActualRemaining = QtyOrder - ActualDelivered;
   }
 
   UpdateClickDetails() {
@@ -664,6 +665,8 @@ export class ProjectsPartialPoComponent implements OnInit {
     // console.log(this.editProject.projectID);
 
     this.ComputeRemainingQty();
+
+
     this.editProject.actual_remaining_receiving = this.ActualRemaining;
     this.editProject.is_activated = this.Deactivator;
     this.editProject.canceled_by = this.activeUser;
@@ -1155,6 +1158,8 @@ export class ProjectsPartialPoComponent implements OnInit {
     event,
     index: number // Implementing indexes method
   ) {
+    var qtyTotalReject =  parseInt(this.projects[index].total_of_reject_mat) * 1;
+
     this.editForm.resetForm(); //form group reset
     this.received_by.nativeElement.value = this.loginService.currentUserName;
     //Resetting the Rejection Information into zero
@@ -1167,6 +1172,7 @@ export class ProjectsPartialPoComponent implements OnInit {
         console.warn(response);
       });
     //Last
+
     setTimeout(() => {
       this.editProject.projectID = this.projects[index].projectID;
       this.editProject.projectName = this.projects[index].projectName;
@@ -1190,7 +1196,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.editProject.expected_delivery = this.projects[index].expected_delivery;
       this.editProject.actual_delivery = this.projects[index].actual_delivery;
       this.editProject.actual_remaining_receiving = this.projects[index].actual_remaining_receiving;
-      // this.editProject.received_by_QA = this.activeUser;
+
       this.editProject.is_activated = this.Activator;
       this.editProject.returned_date = this.ToDay;
       this.editProject.returned_by = this.activeUser;
@@ -1206,12 +1212,8 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.editProject.count_of_reject_one = this.projects[index].count_of_reject_one;
       this.editProject.count_of_reject_two = this.projects[index].count_of_reject_two;
       this.editProject.count_of_reject_three = this.projects[index].count_of_reject_three;
-      this.editProject.total_of_reject_mat = this.projects[index].total_of_reject_mat;
-      //Section 1
+      this.editProject.total_of_reject_mat = qtyTotalReject.toString();
 
-      // $("txtexpected_delivery").val("");
-
-      //A
       //Calling The Projects for Qty Binding Servo IT Solutions
       this.PoNumberBinding = this.projects[index].po_number;
       // this.PoNumberChild.nativeElement.value;

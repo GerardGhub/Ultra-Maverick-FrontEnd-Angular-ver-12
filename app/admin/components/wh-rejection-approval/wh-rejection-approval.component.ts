@@ -800,7 +800,7 @@ export class WhRejectionApprovalComponent implements OnInit {
     // if (this.editForm.valid) {
 
     this.editProject.is_wh_reject_approval_by = this.activeUser;
-    this.whRejectionApprovalService.updateProject(this.editProject).subscribe(
+    this.whRejectionApprovalService.updateProjectReturnChecklist(this.editProject).subscribe(
       (response: Project) => {
         var p: Project = new Project();
         p.projectID = response.projectID;
@@ -809,6 +809,9 @@ export class WhRejectionApprovalComponent implements OnInit {
         this.UpdateMasterTransactionsActualReceivingofCancel();
         this.showApprovedSuccess();
         // this.ngOnInit();
+        setTimeout(() => {
+          this.getList();
+        }, 400);
         $('#editFormCancel').trigger('click');
       },
       (error) => {
@@ -816,9 +819,7 @@ export class WhRejectionApprovalComponent implements OnInit {
       }
     );
     // }
-    setTimeout(() => {
-      this.getList();
-    }, 400);
+
   }
 
   ApprovedClickDetails() {
@@ -1598,6 +1599,8 @@ export class WhRejectionApprovalComponent implements OnInit {
 
     this.editProject.actual_remaining_receiving =
       +ActualRemainingReceiving + +ActualDelivered;
+
+
 
     //
     this.projectsService.updateProjectReturn(this.editProject).subscribe(

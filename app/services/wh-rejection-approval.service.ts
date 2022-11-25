@@ -75,6 +75,10 @@ updateProject(existingProject: Project): Observable<Project>
   return this.httpClient.put<Project>("/api/ProjectsPartialPo/WhReject/Approval", existingProject, { responseType: "json" }); 
 }
 
+updateProjectReturnChecklist(existingProject: Project): Observable<Project>
+{
+  return this.httpClient.put<Project>("/api/ProjectsPartialPo/WhReject/Approval/Return", existingProject, { responseType: "json" }); 
+}
 
 
 }

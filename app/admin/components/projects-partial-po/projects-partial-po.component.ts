@@ -667,6 +667,7 @@ export class ProjectsPartialPoComponent implements OnInit {
     this.ComputeRemainingQty();
 
 
+
     this.editProject.actual_remaining_receiving = this.ActualRemaining;
     this.editProject.is_activated = this.Deactivator;
     this.editProject.canceled_by = this.activeUser;
@@ -1240,13 +1241,19 @@ export class ProjectsPartialPoComponent implements OnInit {
 
     const ActualRemainingReceiving =
       this.ActualRemainingReceiving.nativeElement.value;
+      var TotalOfRejectMat = this.TotalOfRejectMatToReturnQty.nativeElement.value;
 
     //  this.ActualRemaining = +ActualRemainingReceiving + +ActualDelivered;
     // this.ActualRemaining = parseInt(ActualRemainingReceiving) + parseInt(ActualDelivered);
     this.editProject.is_activated = this.Activator;
 
     this.editProject.actual_remaining_receiving =
-      +ActualRemainingReceiving + +ActualDelivered;
+      +ActualRemainingReceiving + +ActualDelivered - parseInt(TotalOfRejectMat) ;
+
+      // alert(ActualRemainingReceiving);
+      // alert(ActualDelivered);
+      // alert(this.editProject.actual_remaining_receiving);
+      // return;
 
     //
     this.projectsService.updateProjectReturn(this.editProject).subscribe(
@@ -1276,8 +1283,6 @@ export class ProjectsPartialPoComponent implements OnInit {
         p.actual_delivery = response.actual_delivery;
         p.expected_delivery = response.expected_delivery;
         p.actual_remaining_receiving = response.actual_remaining_receiving;
-        // p.received_by_QA = response.received_by_QA;
-        // // this.activeUser = response.received_by_QA;
         p.status_of_reject_one = response.status_of_reject_one;
         p.status_of_reject_two = response.status_of_reject_two;
         p.status_of_reject_three = response.status_of_reject_three;
@@ -1285,9 +1290,7 @@ export class ProjectsPartialPoComponent implements OnInit {
         p.count_of_reject_two = response.count_of_reject_two;
         p.count_of_reject_three = response.count_of_reject_three;
         p.total_of_reject_mat = response.total_of_reject_mat;
-        //Section 1
 
-        // this.received_by.nativeElement.value = this.loginService.currentUserName;
         this.projects[this.editIndex] = p;
       },
       (error) => {
@@ -1409,28 +1412,28 @@ export class ProjectsPartialPoComponent implements OnInit {
 
   onRemoveAdditionalRejectRow(event: any) {
     if ($('#rejectionrow3').is(':visible')) {
-      // alert("The paragraph  is visible.");
+
       $('#rejectionrow3').hide();
       $('#rejectionrow32').hide();
     } else {
-      // alert("The paragraph  is hidden.");
+
 
       if ($('#rejectionrow2').is(':visible')) {
-        // alert("The paragraph  is visible.");
+
         $('#rejectionrow2').hide();
         $('#rejectionrow22').hide();
         $('#remove-remarks-button').show();
       } else {
         // alert("The paragraph  is hidden.");
         if ($('#rejectionrow1').is(':visible')) {
-          // alert("The paragraph  is visible.");
+
           $('#rejectionrow1').hide();
           $('#rejectionrow12').hide();
           $('#remove-remarks-button').hide();
           $('#total-reject').hide();
           $('#total-confirm-reject').hide();
         } else {
-          // alert("The paragraph  is hidden.");
+
         }
       }
     }
@@ -1457,11 +1460,11 @@ export class ProjectsPartialPoComponent implements OnInit {
     const summary = +a + +b + +c;
     // console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 1");
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1483,11 +1486,11 @@ export class ProjectsPartialPoComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 2");
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1562,11 +1565,11 @@ export class ProjectsPartialPoComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-    // alert("You change a value 3");
+
 
     // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
-      // alert("A");
+
     } else {
       this.RejectionGreaterThanReceiving();
     }
@@ -1622,7 +1625,7 @@ export class ProjectsPartialPoComponent implements OnInit {
     if (ActualDelivered > TotalAllowablePercentage) {
       this.AllowablePercentageExceed();
     } else {
-      // alert("FEMALE");
+
     }
   }
 

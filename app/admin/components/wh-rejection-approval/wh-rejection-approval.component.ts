@@ -923,6 +923,10 @@ export class WhRejectionApprovalComponent implements OnInit {
         this.showRejectedSuccess();
         // this.ngOnInit();
         $('#editFormCancel').trigger('click');
+
+        setTimeout(() => {
+          this.getList();
+        }, 400);
       },
       (error) => {
         console.log(error);
@@ -930,9 +934,6 @@ export class WhRejectionApprovalComponent implements OnInit {
     );
     // }
 
-    setTimeout(() => {
-      this.getList();
-    }, 400);
   }
 
   //Insert as Partial
@@ -1581,7 +1582,7 @@ export class WhRejectionApprovalComponent implements OnInit {
 
   UpdateDeactivatedTransactions() {
     this.UpdateClickDetails();
- 
+
   }
 
   UpdateMasterTransactionsActualReceivingofCancel() {

@@ -78,7 +78,7 @@ export class PreparedStoreOrderComponent implements OnInit {
     private preparedOrdersService: PreparedOrdersService,
     private dispatchingService: DispatchingService,
     private cancelledOrderService: CancelledOrderService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getPreparedOrderList();
@@ -377,7 +377,11 @@ export class PreparedStoreOrderComponent implements OnInit {
             .cancelOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
               // this.getPreparedOrderList();
-              this.tabRefresh();
+
+              setTimeout(() => {
+                this.tabRefresh();
+              }, 400);
+
 
               this.successMessage = 'Item Cancel Successfully!';
 
@@ -391,6 +395,8 @@ export class PreparedStoreOrderComponent implements OnInit {
       });
     }
   }
+
+
 
   CancelOrderClick() {
     if (this.cancelOrderForm.valid) {

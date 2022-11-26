@@ -245,6 +245,7 @@
                   <tr>
                     <!-- <th>Parent</th> -->
                     <th>ID</th>
+                    <th>Item Code</th>
                     <th>Description</th>
                     <th>Uom</th>
                     <th>Serve</th>
@@ -257,6 +258,7 @@
                   <tr *ngFor="let item of itemList">
                     <!-- <td>{{item.fK_dry_wh_orders_parent_id}}</td> -->
                     <td>{{item.primary_id}}</td>
+                    <td>{{item.item_code}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>

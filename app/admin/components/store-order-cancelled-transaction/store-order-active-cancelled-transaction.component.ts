@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { DryWhStoreOrders } from 'src/app/models/dry-wh-store-orders';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { LoginService } from 'src/app/services/login.service';
+import { DryWhStoreOrders } from '../../../models/dry-wh-store-orders';
+import { FilterPipe } from '../../../pipes/filter.pipe';
+import { LoginService } from '../../../services/login.service';
 import * as $ from 'jquery';
 import Swal from 'sweetalert2';
 import { CancelledOrderService } from './services/cancelled-order.service';
@@ -43,8 +43,8 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   searchByItems: string = 'store_name';
   searchText: string = '';
 
-  currentPageIndex: number = 0;
-  pages: any[] = [];
+  currentPageIndexCancelledTransaction: number = 0;
+  pagesCancelledTransaction: any[] = [];
   pageSize: number = 7;
 
   pageSizeItemList: number = 2;
@@ -92,10 +92,9 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   }
 
   onPageIndexClicked(pageIndex: number) {
-    // this.currentPageIndex = pageIndex;
     //Set currentPageIndex
-    if (pageIndex >= 0 && pageIndex < this.pages.length) {
-      this.currentPageIndex = pageIndex;
+    if (pageIndex >= 0 && pageIndex < this.pagesCancelledTransaction.length) {
+      this.currentPageIndexCancelledTransaction = pageIndex;
     }
   }
 
@@ -113,20 +112,20 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   calculateNoOfPages() {
     let filterPipe = new FilterPipe();
     var resultProjects = filterPipe.transform(
-      this.projects,
+      this.cancelledOrderList,
       this.searchBy,
       this.searchText
     );
     var noOfPages = Math.ceil(resultProjects.length / this.pageSize);
 
     // var noOfPages = Math.ceil(filterPipe.transform(this.projects, this.searchBy, this.searchText).length / this.pageSize);
-    this.pages = [];
+    this.pagesCancelledTransaction = [];
 
     //Generate Pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesCancelledTransaction.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexCancelledTransaction = 0;
   }
 
   successToaster() {

@@ -376,8 +376,7 @@ export class PreparedStoreOrderComponent implements OnInit {
           this.preparedOrdersService
             .cancelOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
-              // this.getPreparedOrderList();
-
+ 
               setTimeout(() => {
                 this.tabRefresh();
               }, 400);

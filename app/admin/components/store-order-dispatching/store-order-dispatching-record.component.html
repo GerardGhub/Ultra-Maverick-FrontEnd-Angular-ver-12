@@ -186,6 +186,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
+                    <th>Item Code</th>
                     <th>Description</th>
                     <th>Uom</th>
                     <th>Order</th>
@@ -196,6 +197,7 @@
                 <tbody>
                   <tr *ngFor="let item of dispatchingItems">
                     <td>{{item.primary_id}}</td>
+                    <td>{{item.item_code</td>
                     <td>{{item.description}}</td>
                     <td>{{item.uom}}</td>
                     <td>{{item.qty | number}}</td>

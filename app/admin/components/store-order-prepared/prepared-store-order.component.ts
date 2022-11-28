@@ -16,6 +16,7 @@ import { PreparedOrdersService } from './services/prepared-order.service';
 import { DispatchingService } from '../store-order-dispatching/services/dispaching-order.service';
 import { CancelledOrderService } from '../store-order-cancelled-transaction/services/cancelled-order.service';
 import { StoreOrderService } from '../store-order/services/store-order.service';
+import { OnlineOrderService } from '../../../components/internal-preparation/services/internal-order.service';
 
 @Component({
   selector: 'app-prepared-store-order',
@@ -30,6 +31,7 @@ export class PreparedStoreOrderComponent implements OnInit {
   cancelledOrders: any = [];
 
   storedispatchingrecords: DryWhStoreOrders[] = [];
+  internaldispatchingrecords: any[] = [];
   CancelPoSummary: Observable<CancelledPOTransactionStatus[]>;
 
   showLoading: boolean = true;
@@ -47,6 +49,7 @@ export class PreparedStoreOrderComponent implements OnInit {
 
   totalPreparedOrderRowCount: number;
   totalStoreOrderDispatching: number = 0;
+  totalInternalDispatchingCount: number = 0;
 
   dateToday = moment(new Date()).format('MM-DD-YYYY');
   preparation_date = moment(new Date()).format('MM-DD-YYYY');
@@ -77,12 +80,14 @@ export class PreparedStoreOrderComponent implements OnInit {
     private storeOrderService: StoreOrderService,
     private preparedOrdersService: PreparedOrdersService,
     private dispatchingService: DispatchingService,
-    private cancelledOrderService: CancelledOrderService
+    private cancelledOrderService: CancelledOrderService,
+    public onlineOrderService: OnlineOrderService
   ) { }
 
   ngOnInit() {
     this.getPreparedOrderList();
     this.reactiveForms();
+    this.getCountInternalOrderDispatching();
     this.getCountOrderDispatching();
     this.CancelPoSummary =
       this.cancelledPOTransactionStatusService.getListOfStatusOfData();
@@ -143,12 +148,22 @@ export class PreparedStoreOrderComponent implements OnInit {
     this.currentPageIndexItem = 0;
   }
 
+  getCountInternalOrderDispatching() {
+
+    this.onlineOrderService.getOrderForDispatchingList().subscribe((response) => {
+      if (response) {
+        this.internaldispatchingrecords = response;
+        this.totalInternalDispatchingCount = response.length;
+      }
+    });
+  }
+
   getCountOrderDispatching() {
     this.whCheckerDashboardService
       .getAllDispatchingStoreOrders()
       .subscribe((response) => {
         this.storedispatchingrecords = response;
-        this.totalStoreOrderDispatching = response.length + 1;
+        this.totalStoreOrderDispatching = response.length + 1 + this.totalInternalDispatchingCount;
       });
   }
 
@@ -376,7 +391,7 @@ export class PreparedStoreOrderComponent implements OnInit {
           this.preparedOrdersService
             .cancelOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
- 
+
               setTimeout(() => {
                 this.tabRefresh();
               }, 400);

@@ -255,7 +255,11 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
               (response) => {
                 // this.getCancelledOrderList();
     
-                this.tabRefresh();
+                setTimeout(() => {
+                  this.tabRefresh();
+                  this.getDistinctCancelledOrderList();
+                }, 400);
+  
 
                 this.successMessage = 'Returned Successfully!';
                 this.returnCancelledOrderForm.reset();

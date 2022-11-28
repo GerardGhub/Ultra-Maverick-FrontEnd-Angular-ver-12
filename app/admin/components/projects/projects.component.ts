@@ -702,17 +702,16 @@ export class ProjectsComponent implements OnInit, OnChanges {
             this.totalPoRowCount = response.length;
           });
       }
-      else
-      {
+      else {
 
         this.projectsService
-        .SearchProjects('item_code', this.searchText)
-        .subscribe((response: Project[]) => {
-          this.projects = response;
-          this.showLoading = false;
-          this.calculateNoOfPages();
-          this.totalPoRowCount = response.length;
-        });
+          .SearchProjects('item_code', this.searchText)
+          .subscribe((response: Project[]) => {
+            this.projects = response;
+            this.showLoading = false;
+            this.calculateNoOfPages();
+            this.totalPoRowCount = response.length;
+          });
       }
 
 
@@ -729,14 +728,22 @@ export class ProjectsComponent implements OnInit, OnChanges {
     setTimeout(() => {
 
 
+      //Po Date Make Resuable pag may time
+      var podate = new Date(this.projects[index].po_date);
+      var month = podate.getMonth() + 1;//months (0-11)
+      var day = podate.getDate();//day (1-31)
+      var year = podate.getFullYear();
+      var PoDate = month + "/" + day + "/" + year;
 
-
-      var PoDate = new Date(this.projects[index].po_date).toISOString().slice(0, 10);
-      var PrDate = new Date(this.projects[index].pr_date).toISOString().slice(0, 10);
+      //Pr Date
+      var prdate = new Date(this.projects[index].pr_date);
+      var month = prdate.getMonth() + 1;//months (0-11)
+      var day = prdate.getDate();//day (1-31)
+      var year = prdate.getFullYear();
+      var PrDate = month + "/" + day + "/" + year;
 
 
       this.editProject.projectID = this.projects[index].projectID;
-      // this.editProject.projectID = Math.floor((Math.random() * 1000000) + 1);
       this.editProject.projectName = this.projects[index].projectName;
       this.editProject.dateOfStart = this.projects[index].dateOfStart
         .split('/')

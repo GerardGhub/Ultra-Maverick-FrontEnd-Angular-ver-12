@@ -107,13 +107,6 @@ export class PreparedStoreOrderComponent implements OnInit {
   calculateNoOfPages() {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
-    // var resultProjects = filterPipe.transform(
-    //   this.preparedOrderList,
-    //   this.searchBy,
-    //   this.searchText
-    // );
-    // var noOfPages = Math.ceil(resultProjects.length / this.pageSize);
-
     var noOfPages = Math.ceil(
       filterPipe.transform(
         this.preparedOrderList,

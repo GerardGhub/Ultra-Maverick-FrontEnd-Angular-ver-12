@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { DryWhStoreOrders } from 'src/app/models/dry-wh-store-orders';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
-import { LoginService } from 'src/app/services/login.service';
+import { DryWhStoreOrders } from '../../../../app/models/dry-wh-store-orders';
+import { FilterPipe } from '../../../../app/pipes/filter.pipe';
+import { LoginService } from '../../../../app/services/login.service';
 import * as $ from 'jquery';
 import { DispatchingService } from './services/dispaching-order.service';
 import { StoreOrderService } from '../store-order/services/store-order.service';
@@ -16,7 +16,7 @@ import { CancelledOrderService } from '../store-order-cancelled-transaction/serv
   styleUrls: ['./store-order-dispatching-record.component.scss'],
 })
 export class StoreOrderDispatchingRecordComponent implements OnInit {
-  projects: DryWhStoreOrders[] = [];
+  // projects: DryWhStoreOrders[] = [];
 
   dispatchingList: any = [];
   dispatchingItems: any = [];
@@ -26,17 +26,17 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
   cancelledOrders: any = [];
 
   showLoading: boolean = true;
-  searchBy: string = 'po_number';
-  searchByItems: string = 'store_name';
-  searchText: string = '';
+  searchByDispatching: string = 'store_code';
+  searchByItemsDispatching: string = 'store_name';
+  searchTextDispatching: string = '';
 
-  currentPageIndex: number = 0;
-  pages: any[] = [];
+  currentPageIndexDispatching: number = 0;
+  pagesDispatching: any[] = [];
   pageSize: number = 7;
 
   pageSizeItemList: number = 2;
   pagesItemList: any[] = [];
-  currentPageIndexItem: number = 0;
+  // currentPageIndexItemDispatching: number = 0;
 
   sortBy: string = 'po_number';
   sortOrder: string = 'ASC'; //ASC | DESC
@@ -76,20 +76,19 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
     //Get no. of Pages
     let filterPipe = new FilterPipe();
     var resultProjects = filterPipe.transform(
-      this.projects,
-      this.searchBy,
-      this.searchText
+      this.dispatchingList,
+      this.searchByDispatching,
+      this.searchTextDispatching
     );
     var noOfPages = Math.ceil(resultProjects.length / this.pageSize);
 
-    // var noOfPages = Math.ceil(filterPipe.transform(this.projects, this.searchBy, this.searchText).length / this.pageSize);
-    this.pages = [];
+    this.pagesDispatching = [];
 
     //Generate Pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesDispatching.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexDispatching = 0;
   }
 
   calculateNoOfPagesItems() {
@@ -107,7 +106,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
     for (let a = 0; a < noOfPagesItem; a++) {
       this.pagesItemList.push({ pageIndexItem: a });
     }
-    this.currentPageIndexItem = 0;
+    this.currentPageIndexDispatching = 0;
   }
 
   onSearchTextKeyup(event) {
@@ -122,10 +121,9 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
   }
 
   onPageIndexClicked(pageIndex: number) {
-    // this.currentPageIndex = pageIndex;
     //Set currentPageIndex
-    if (pageIndex >= 0 && pageIndex < this.pages.length) {
-      this.currentPageIndex = pageIndex;
+    if (pageIndex >= 0 && pageIndex < this.pagesDispatching.length) {
+      this.currentPageIndexDispatching = pageIndex;
     }
   }
 

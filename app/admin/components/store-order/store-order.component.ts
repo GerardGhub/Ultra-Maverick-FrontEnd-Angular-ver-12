@@ -35,10 +35,10 @@ export class StoreOrderComponent implements OnInit {
   cancelledOrders: any = [];
   showLoading: boolean = true;
 
-  totalStoreOrderRowCount: number = null;
-  totalPreparedOrdersCount: number = null;
-  totalDispatchingRowCount: number = null;
-  totalCancelledCount: number = null;
+  totalStoreOrderRowCount: number = 0;
+  totalPreparedOrdersCount: number = 0;
+  totalDispatchingRowCount: number = 0;
+  totalCancelledCount: number = 0;
 
   //Properties for Searching
   searchBy: string = 'reject_status_name';

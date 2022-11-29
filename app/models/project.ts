@@ -219,118 +219,7 @@ export class Project
         this.total_of_reject_mat = null;
         //Section 11
         //A
-        this.a_delivery_van_desc = null;
-        this.a_compliance = null;
-        this.a_remarks = null;
-        //B
-        this.b_cooling_system_desc = null;
-        this.b_compliance = null;
-        this.b_remarks = null;
-        //C
-        this.c_inner_walls_desc = null;
-        this.c_compliance = null;
-        this.c_remarks = null;
-        //D
-        this.d_plastic_curtains_desc = null;
-        this.d_compliance = null;
-        this.d_remarks = null;
-        //E
-        this.e_thereno_pest_desc = null;
-        this.e_compliance = null;
-        this.e_remarks = null;
-        //SECTION 2
-        //A
-        this.a_clean_company_dos = null;
-        this.a_compliance_dos = null;
-        this.a_remarks_dos = null;
-        //B
-        this.b_delivery_staff_symptoms_dos = null;
-        this.b_compliance_dos = null;
-        this.b_remarks_dos = null;
-        //C
-        this.c_inner_walls_clean_dos = null;
-        this.c_compliance_dos = null;
-        this.c_remarks_dos = null;
-        //D
-        this.d_plastic_curtains_dos = null;
-        this.d_compliance_dos = null;
-        this.d_remarks_dos = null;
-        //E
-        this.e_no_accessories_dos = null;
-        this.e_compliance_dos = null;
-        this.e_remarks_dos = null;
-        //F
-        this.f_compliance_dos =null;
-        this.f_no_pests_sightings_dos =null;
-        this.f_remarks_dos = null;
-        //SECTION 3
-        //A
-        this.a_pallet_crates_tres = null;
-        this.a_compliance_tres= null;
-        this.a_remarks_tres= null;
-        //B
-        this.b_product_contamination_tres= null;
-        this.b_compliance_tres= null;
-        this.b_remarks_tres= null;
-        //C
-        this.c_uncessary_items_tres = null;
-        this.c_compliance_tres = null;
-        this.c_remarks_tres = null;
-        //D
-        this.d_products_cover_tres = null;
-        this.d_compliance_tres = null;
-        this.d_remarks_tres = null;
-        //Section 4
-        //A
-        this.a_certificate_coa_kwatro_desc=null;
-        this.a_compliance_kwatro = null;
-        this.a_remarks_kwatro = null;
-        //B
-        this.b_po_kwatro_desc = null;
-        this.b_compliance_kwatro =null;
-        this.b_remarks_kwatro = null;
-        //C
-        this.c_msds_kwatro_desc=null;
-        this.c_compliance_kwatro = null;
-        this.c_remarks_kwatro = null;
-        //D
-        this.d_food_grade_desc = null;
-        this.d_compliance_kwatro = null;
-        this.d_remarks_kwatro = null;
-        //Section 5
-        //A
-        this.a_qty_received_singko_singko = null;
-        this.a_compliance_singko = null;
-        this.a_remarks_singko = null;
-        //B
-        this.b_mfg_date_desc_singko = null;
-        this.b_compliance_singko = null;
-        this.b_remarks_singko =null;
-        //C
-        this.c_expirydate_desc_singko = null;
-        this.c_compliance_singko = null;
-        this.c_remarks_singko =null;
-        //D
-        this.d_packaging_desc_singko = null;
-        this.d_compliance_singko = null;
-        this.d_remarks_singko = null;
-        //E
-        this.e_no_contaminants_desc_singko = null;
-        this.e_compliance_singko =null;
-        this.e_remarks_singko = null;
-        //F
-        this.f_qtyrejected_desc_singko = null;
-        this.f_compliance_singko = null;
-        this.f_remarks_singko = null;
-        //G
-        this.g_rejected_reason_desc_singko = null;
-        this.g_compliance_singko
-        this.g_remarks_singko
-
-        //H
-        this.h_lab_sample_desc_singko = null;
-        this.h_compliance_singko = null;
-        this.h_remarks_singko = null;
+  
         //Cancelled
         this.cancelled_date  = null;
         this.canceled_by  = null;
@@ -356,13 +245,13 @@ export class Project
         this.sub_category = null;
         this.is_expirable = null;
         //Rejection Approval of QCV Supervisor
-        this.is_wh_reject_approval = null;
-        this.is_wh_reject_approval_by = null;
+        this.is_wh_reject_approval = "";
+        this.is_wh_reject_approval_by = "";
         this.is_wh_reject_approval_date = null;
         //Addtitional reject
-        this.is_wh_reject = null;
+        this.is_wh_reject = "";
 
-        this.unit_price = null;
+        this.unit_price = "";
 
     }
 }

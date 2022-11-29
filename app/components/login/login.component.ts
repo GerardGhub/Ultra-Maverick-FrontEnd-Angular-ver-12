@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  @ViewChild('myAutoFocus') myAutoFocus: ElementRef;
 
   loginViewModel: LoginViewModel = new LoginViewModel();
   loginError: string = '';
@@ -48,12 +49,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
-    this.UsernameFocus();
+    // this.UsernameFocus();
     $('#eyeball').hide();
   }
 
-  @ViewChild('myAutoFocus') myAutoFocus: ElementRef;
+
 
   UsernameFocus() {
     setTimeout(() => {

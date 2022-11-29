@@ -131,34 +131,38 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-
-    this.detectAlreadyLogin();
-    this.totalPreparationCount();
-
-
-    this.getPreparedOrdersCount();
-    this.getCancelledTransactionCount();
-    this.getDispatchingCount();
-    this.getStoreOrderList();
-
-    this.DashboardPoSummary();
-    this.DashboardPoSummaryCancelled();
-    this.DashboardPoSummaryPartialReceiving();
-    this.DashboardPoSummaryPartialReceivingNearlyExpiryApproval();
-    this.DashboardPoSummaryPartialReceivingRejectionWH();
-
-    this.getForLabTest();
-    this.getForApproval();
-    this.totalForLabtestForApproval();
-    this.activeUserRoleId = this.loginService.currentUserRoleSession;
-
-    this.getMRSOrderList();
-    this.getUserRoleModules();
+    console.log("Make Perfect");
+    if (this.loginService.currentUserName != null) {
 
 
-    //Internal Preparation Badge
-    this.getInternalOrderList();
 
+      this.detectAlreadyLogin();
+      this.totalPreparationCount();
+
+
+      this.getPreparedOrdersCount();
+      this.getCancelledTransactionCount();
+      this.getDispatchingCount();
+      this.getStoreOrderList();
+
+      this.DashboardPoSummary();
+      this.DashboardPoSummaryCancelled();
+      this.DashboardPoSummaryPartialReceiving();
+      this.DashboardPoSummaryPartialReceivingNearlyExpiryApproval();
+      this.DashboardPoSummaryPartialReceivingRejectionWH();
+
+      this.getForLabTest();
+      this.getForApproval();
+      this.totalForLabtestForApproval();
+      this.activeUserRoleId = this.loginService.currentUserRoleSession;
+
+      this.getMRSOrderList();
+      this.getUserRoleModules();
+
+
+      //Internal Preparation Badge
+      this.getInternalOrderList();
+    }
   }
 
 

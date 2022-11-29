@@ -500,7 +500,7 @@
             <div class="form-group col-md-4">
               <div class="input-group searchBtnStyle">
                 <input type="text" id="txtSearchTextID" class="form-control text-required-color" placeholder="Item code"
-                  [(ngModel)]="mrs_item_code" [ngModelOptions]="{standalone: true}" />
+                  [(ngModel)]="mrs_item_code" [ngModelOptions]="{standalone: true}" autocomplete="off" />
                 <div class="input-group-append ">
                   <button (click)="onSearchItemCode()" [disabled]="!requestOrderDescForm.valid" class="btn-search"
                     type="button"><span class="fa fa-search"></span> Search</button>

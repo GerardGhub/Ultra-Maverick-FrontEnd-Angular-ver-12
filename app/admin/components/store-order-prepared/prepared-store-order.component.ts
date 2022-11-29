@@ -285,7 +285,8 @@ export class PreparedStoreOrderComponent implements OnInit {
     if (item.totalRejectItems > 0) {
       this.hideApproveButton = 1;
     } else {
-      this.hideApproveButton = null;
+      this.hideApproveButton = 0;
+      // this.hideApproveButton = null;
     }
 
     this.getCountOrderDispatching();

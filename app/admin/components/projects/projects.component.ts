@@ -1856,127 +1856,25 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.projectsService.deleteProject(this.deleteProject.projectID).subscribe(
       (response) => {
         this.projects.splice(this.deleteIndex, 1);
-        this.deleteProject.projectID = null;
-        this.deleteProject.projectName = null;
-        this.deleteProject.teamSize = null;
-        this.deleteProject.dateOfStart = null;
-        this.deleteProject.supplier = null;
-        this.deleteProject.item_code = null;
-        this.deleteProject.item_description = null;
-        this.deleteProject.po_number = null;
-        this.deleteProject.po_date = null;
-        this.deleteProject.pr_number = null;
-        this.deleteProject.pr_date = null;
-        this.deleteProject.qty_order = null;
-        this.deleteProject.qty_uom = null;
-        this.deleteProject.mfg_date = null;
-        this.deleteProject.expiration_date = null;
-        this.deleteProject.expected_delivery = null;
-        this.deleteProject.actual_delivery = null;
-        this.deleteProject.actual_remaining_receiving = null;
-        this.deleteProject.received_by_QA = null;
-        this.deleteProject.c_inner_walls_desc = null;
-        this.deleteProject.c_compliance = null;
-        this.deleteProject.c_remarks = null;
-        this.deleteProject.d_plastic_curtains_desc = null;
-        this.deleteProject.d_compliance = null;
-        this.deleteProject.d_remarks = null;
-        this.deleteProject.e_thereno_pest_desc = null;
-        this.deleteProject.e_compliance = null;
-        this.deleteProject.e_remarks = null;
-        //Section 2
-        //A
-        this.deleteProject.a_clean_company_dos = null;
-        this.deleteProject.a_compliance_dos = null;
-        this.deleteProject.a_remarks_dos = null;
-        //B
-        this.deleteProject.b_delivery_staff_symptoms_dos = null;
-        this.deleteProject.b_compliance_dos = null;
-        this.deleteProject.b_remarks_dos = null;
-        //C
-        this.deleteProject.c_inner_walls_clean_dos = null;
-        this.deleteProject.c_compliance_dos = null;
-        this.deleteProject.c_remarks_dos = null;
-        //D
-        this.deleteProject.d_plastic_curtains_dos = null;
-        this.deleteProject.d_compliance_dos = null;
-        this.deleteProject.d_remarks_dos = null;
-        //E
-        this.deleteProject.e_no_accessories_dos = null;
-        this.deleteProject.e_compliance_dos = null;
-        this.deleteProject.e_remarks_dos = null;
-        //F
-        this.deleteProject.f_compliance_dos = null;
-        this.deleteProject.f_no_pests_sightings_dos = null;
-        this.deleteProject.f_remarks_dos = null;
-        //Section 3
-        //A
-        this.deleteProject.a_pallet_crates_tres = null;
-        this.deleteProject.a_compliance_tres = null;
-        this.deleteProject.a_remarks_tres = null;
-        //B
-        this.deleteProject.b_product_contamination_tres = null;
-        this.deleteProject.b_compliance_tres = null;
-        this.deleteProject.b_remarks_tres = null;
-        //C
-        this.deleteProject.c_uncessary_items_tres = null;
-        this.deleteProject.c_compliance_tres = null;
-        this.deleteProject.c_remarks_tres = null;
-        //D
-        this.deleteProject.d_products_cover_tres = null;
-        this.deleteProject.d_compliance_tres = null;
-        this.deleteProject.d_remarks_tres = null;
-
-        //Section 4
-        //A
-        this.deleteProject.a_certificate_coa_kwatro_desc = null;
-        this.deleteProject.a_compliance_kwatro = null;
-        this.deleteProject.a_remarks_kwatro = null;
-        //B
-        this.deleteProject.b_po_kwatro_desc = null;
-        this.deleteProject.b_compliance_kwatro = null;
-        this.deleteProject.b_remarks_kwatro = null;
-        //C
-        this.deleteProject.c_msds_kwatro_desc = null;
-        this.deleteProject.c_compliance_kwatro = null;
-        this.deleteProject.c_remarks_kwatro = null;
-        //D
-        this.deleteProject.d_food_grade_desc = null;
-        this.deleteProject.d_compliance_kwatro = null;
-        this.deleteProject.d_remarks_kwatro = null;
-        //Section 5
-        //A
-        this.deleteProject.a_qty_received_singko_singko = null;
-        this.deleteProject.a_compliance_singko = null;
-        this.deleteProject.a_remarks_singko = null;
-        //B
-        this.deleteProject.b_mfg_date_desc_singko = null;
-        this.deleteProject.b_compliance_singko = null;
-        this.deleteProject.b_remarks_singko = null;
-        //C
-        this.deleteProject.c_expirydate_desc_singko = null;
-        this.deleteProject.c_compliance_singko = null;
-        this.deleteProject.c_remarks_singko = null;
-        //D
-        this.deleteProject.d_packaging_desc_singko = null;
-        this.deleteProject.d_compliance_singko = null;
-        this.deleteProject.d_remarks_singko = null;
-        //E
-        this.deleteProject.e_no_contaminants_desc_singko = null;
-        this.deleteProject.e_compliance_singko = null;
-        this.deleteProject.e_remarks_singko = null;
-        //F
-        this.deleteProject.f_qtyrejected_desc_singko = null;
-        this.deleteProject.f_compliance_singko = null;
-        this.deleteProject.f_remarks_singko = null;
-        //G
-        this.deleteProject.g_rejected_reason_desc_singko = null;
-        this.deleteProject.g_compliance_singko = null;
-        this.deleteProject.g_remarks_singko = null;
-        //H
-        this.deleteProject.h_lab_sample_desc_singko = null;
-        this.deleteProject.h_compliance_singko = null;
-        this.deleteProject.h_remarks_singko = null;
+        this.deleteProject.projectID = 0;
+        this.deleteProject.projectName = "";
+        this.deleteProject.teamSize = 0;
+        this.deleteProject.dateOfStart = "";
+        this.deleteProject.supplier = "";
+        this.deleteProject.item_code = "";
+        this.deleteProject.item_description = "";
+        this.deleteProject.po_number = "";
+        this.deleteProject.po_date = "";
+        this.deleteProject.pr_number = "";
+        this.deleteProject.pr_date = "";
+        this.deleteProject.qty_order = "";
+        this.deleteProject.qty_uom = "";
+        this.deleteProject.mfg_date = "";
+        this.deleteProject.expiration_date = "";
+        this.deleteProject.expected_delivery = "";
+        this.deleteProject.actual_delivery = "";
+        this.deleteProject.actual_remaining_receiving = 0;
+        this.deleteProject.received_by_QA = "";
 
         this.calculateNoOfPages();
       },

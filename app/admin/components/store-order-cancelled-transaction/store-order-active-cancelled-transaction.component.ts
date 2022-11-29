@@ -57,10 +57,10 @@ export class StoreOrderActiveCancelledTransactionComponent implements OnInit {
   sortBy: string = 'po_number';
   sortOrder: string = 'ASC'; //ASC | DESC
 
-  totalStoreOrderRowCount: number = null;
-  totalPreparedOrdersCount: number = null;
-  totalDispatchingRowCount: number = null;
-  totalCancelledCount: number = null;
+ 
+  totalPreparedOrdersCount: number = 0;
+  totalDispatchingRowCount: number = 0;
+  totalCancelledCount: number = 0;
 
   cancelledViewForm: FormGroup;
   returnCancelledOrderForm: FormGroup;

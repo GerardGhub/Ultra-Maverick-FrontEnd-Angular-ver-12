@@ -40,13 +40,10 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
 
   sortBy: string = 'po_number';
   sortOrder: string = 'ASC'; //ASC | DESC
-
   dateToday = moment(new Date()).format('MM-DD-YYYY');
-
-  totalStoreOrderRowCount: number = null;
-  totalPreparedOrdersCount: number = null;
-  totalDispatchingRowCount: number = null;
-  totalCancelledCount: number = null;
+  totalCancelledCount: number = 0;
+  totalDispatchingRowCount: number = 0;
+  totalPreparedOrdersCount: number = 0;
 
   viewingForm: FormGroup;
 

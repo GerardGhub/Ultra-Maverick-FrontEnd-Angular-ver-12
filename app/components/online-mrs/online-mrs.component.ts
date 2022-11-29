@@ -268,16 +268,18 @@ export class OnlineMRSComponent implements OnInit {
           this.cancelledOrderList = response;
           if (response) {
             this.cancelledOrderCount = response.length;
+            this.calculateNoOfPagesDynamic();
           }
 
           this.showLoading = false;
-          this.calculateNoOfPagesDynamic();
-          // this.calculateNoOfPages();
+
+
         },
         (error) => {
           console.log(error.error.message);
         }
       );
+   
   }
 
   getCancelReasonList() {
@@ -310,8 +312,8 @@ export class OnlineMRSComponent implements OnInit {
     this.requestorRole = this.loginService.requestorRole;
     this.approverRole = this.loginService.approverRole;
 
-    console.log(this.approverRole);
-    console.log(this.requestorRole);
+    // console.log(this.approverRole);
+    // console.log(this.requestorRole);
   }
 
   onPageIndexClicked(pageIndex: number) {
@@ -345,9 +347,7 @@ export class OnlineMRSComponent implements OnInit {
 
   calculateNoOfPagesDynamic() {
     let filterPipe = new FilterPipe();
-    var noOfPages = Math.ceil(
-      filterPipe.transform(this.cancelledOrderList, this.searchBy, this.searchText)
-        .length / this.pageSize
+    var noOfPages = Math.ceil(filterPipe.transform(this.cancelledOrderList, this.searchBy, this.searchText).length / this.pageSize
     );
     this.pagesCancelled = [];
 

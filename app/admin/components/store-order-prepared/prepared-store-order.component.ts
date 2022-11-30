@@ -282,11 +282,12 @@ export class PreparedStoreOrderComponent implements OnInit {
 
   // POPULATE VALUE *********************************************************************************
   onApproveClick(item: any) {
-    if (item.totalRejectItems > 0) {
-      this.hideApproveButton = 1;
-    } else {
+    console.log(item);
+    if (item.totalPreparedItems == item.total_state_repack) {
       this.hideApproveButton = 0;
-      // this.hideApproveButton = null;
+
+    } else {
+      this.hideApproveButton = 1;
     }
 
     this.getCountOrderDispatching();

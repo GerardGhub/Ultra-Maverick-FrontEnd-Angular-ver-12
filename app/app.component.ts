@@ -131,20 +131,19 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    console.log("Make Perfect");
-    if (this.loginService.currentUserName != null) {
 
+    if (sessionStorage.currentUser != null)
+    {
 
+    // if (this.loginService.currentUserName != null) {
 
       this.detectAlreadyLogin();
       this.totalPreparationCount();
-
-
       this.getPreparedOrdersCount();
       this.getCancelledTransactionCount();
       this.getDispatchingCount();
       this.getStoreOrderList();
-
+      //Dashboard
       this.DashboardPoSummary();
       this.DashboardPoSummaryCancelled();
       this.DashboardPoSummaryPartialReceiving();

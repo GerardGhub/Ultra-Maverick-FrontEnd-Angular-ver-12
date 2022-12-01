@@ -161,10 +161,10 @@ export class ProjectsPartialPoComponent implements OnInit {
     return date && date.getDay() !== 0 && date.getDay() !== 6;
   }
 
-  onClickView(item: any, index: number) {
+  onClickView(event, index: Project) {
     this.editForm.resetForm();
     this.received_by.nativeElement.value = this.loginService.fullName;
-    var totalQtyReject = parseInt(this.projects[index].total_of_reject_mat) * 1;
+    var totalQtyReject = parseInt(index.total_of_reject_mat) * 1;
     this.resetValueS();
     //first
     this.projectsPartialPoService
@@ -174,56 +174,51 @@ export class ProjectsPartialPoComponent implements OnInit {
         this.projects = response;
       });
     setTimeout(() => {
-      this.editProject.projectID = this.projects[index].projectID;
-      this.editProject.projectName = this.projects[index].projectName;
-      this.editProject.dateOfStart = this.projects[index].dateOfStart
+      this.editProject.projectID = index.projectID;
+      this.editProject.projectName = index.projectName;
+      this.editProject.dateOfStart = index.dateOfStart
         .split('/')
         .reverse()
         .join('-'); //yyyy-MM-dd
 
-      this.editProject.teamSize = this.projects[index].teamSize;
-      this.editProject.active = this.projects[index].active;
-      this.editProject.status = this.projects[index].status;
-      this.editProject.supplier = this.projects[index].supplier;
+      this.editProject.teamSize = index.teamSize;
+      this.editProject.active = index.active;
+      this.editProject.status = index.status;
+      this.editProject.supplier = index.supplier;
 
-      this.editProject.item_code = this.projects[index].item_code;
-      this.editProject.item_description = this.projects[index].item_description;
-      this.editProject.po_number = this.projects[index].po_number;
+      this.editProject.item_code = index.item_code;
+      this.editProject.item_description = index.item_description;
+      this.editProject.po_number = index.po_number;
 
-      this.editProject.po_date = this.projects[index].po_date;
-      this.editProject.pr_number = this.projects[index].pr_number;
-      this.editProject.pr_date = this.projects[index].pr_date;
+      this.editProject.po_date = index.po_date;
+      this.editProject.pr_number = index.pr_number;
+      this.editProject.pr_date = index.pr_date;
 
-      this.editProject.qty_order = this.projects[index].qty_order;
-      this.editProject.qty_uom = this.projects[index].qty_uom;
+      this.editProject.qty_order = index.qty_order;
+      this.editProject.qty_uom = index.qty_uom;
       this.editProject.is_activated = this.Activator;
 
-      this.editProject.mfg_date = this.projects[index].mfg_date;
-      this.editProject.expiration_date = this.projects[index].expiration_date;
-      this.editProject.expected_delivery =
-        this.projects[index].expected_delivery;
-
-      this.editProject.actual_delivery = this.projects[index].actual_delivery;
-
-      // this.editProject.actual_remaining_receiving = this.ActualRemaining;
-      this.editProject.actual_remaining_receiving =
-        this.projects[index].actual_remaining_receiving;
-      this.editProject.received_by_QA = this.projects[index].received_by_QA;
+      this.editProject.mfg_date = index.mfg_date;
+      this.editProject.expiration_date = index.expiration_date;
+      this.editProject.expected_delivery = index.expected_delivery;
+      this.editProject.actual_delivery = index.actual_delivery;
+      this.editProject.actual_remaining_receiving = index.actual_remaining_receiving;
+      this.editProject.received_by_QA = index.received_by_QA;
 
 
       this.editProject.status_of_reject_one =
-        this.projects[index].status_of_reject_one;
+        index.status_of_reject_one;
       this.editProject.status_of_reject_two =
-        this.projects[index].status_of_reject_two;
+        index.status_of_reject_two;
       this.editProject.status_of_reject_three =
-        this.projects[index].status_of_reject_three;
+        index.status_of_reject_three;
 
       this.editProject.count_of_reject_one =
-        this.projects[index].count_of_reject_one;
+      index.count_of_reject_one;
       this.editProject.count_of_reject_two =
-        this.projects[index].count_of_reject_two;
+      index.count_of_reject_two;
       this.editProject.count_of_reject_three =
-        this.projects[index].count_of_reject_three;
+        index.count_of_reject_three;
       this.editProject.total_of_reject_mat =
       totalQtyReject.toString();
       //Section 1
@@ -231,14 +226,14 @@ export class ProjectsPartialPoComponent implements OnInit {
       //Cancel
       this.editProject.cancelled_date = this.ToDay;
       this.editProject.canceled_by = this.activeUser;
-      this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
+      this.editProject.cancelled_reason = index.cancelled_reason;
       //QC Receiving Date
-      this.editProject.qcReceivingDate = this.projects[index].qcReceivingDate;
+      this.editProject.qcReceivingDate = index.qcReceivingDate;
 
       $('txtexpected_delivery').val('');
       //Calling The Projects for Qty Binding Servo IT Solutions
      
-      this.PoNumberBinding = this.projects[index].po_number;
+      this.PoNumberBinding = index.po_number;
       if (this.searchBy =='po_number')
       {
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
@@ -251,13 +246,13 @@ export class ProjectsPartialPoComponent implements OnInit {
         this.ProjectsAllowableQty = this.projectsService.SearchProjects('item_code', this.PoNumberBinding);
       }
 
-      this.totalRejectMaterial = this.projects[index].total_of_reject_mat;
-      this.editIndex = index;
+      this.totalRejectMaterial = index.total_of_reject_mat;
+      // this.editIndex = index;
     }, 100);
 
     // viewing of checklist
     this.partialPOService
-      .viewPartialPoChecklist(item.projectID)
+      .viewPartialPoChecklist(index.projectID)
       .subscribe((response) => {
         this.ChecklistViewing = response;
       });
@@ -1155,11 +1150,8 @@ export class ProjectsPartialPoComponent implements OnInit {
   }
 
 
-  onCancelClick(
-    event,
-    index: number // Implementing indexes method
-  ) {
-    var qtyTotalReject =  parseInt(this.projects[index].total_of_reject_mat) * 1;
+  onCancelClick(event, index: Project) {
+    var qtyTotalReject =  parseInt(index.total_of_reject_mat) * 1;
 
     this.editForm.resetForm(); //form group reset
     this.received_by.nativeElement.value = this.loginService.currentUserName;
@@ -1170,55 +1162,53 @@ export class ProjectsPartialPoComponent implements OnInit {
       .getAllProjects()
       .subscribe((response: Project[]) => {
         this.projects = response;
-        console.warn(response);
       });
     //Last
 
     setTimeout(() => {
-      this.editProject.projectID = this.projects[index].projectID;
-      this.editProject.projectName = this.projects[index].projectName;
-      this.editProject.dateOfStart = this.projects[index].dateOfStart.split("/").reverse().join("-"); //yyyy-MM-dd
-      this.editProject.teamSize = this.projects[index].teamSize;
-      this.editProject.active = this.projects[index].active;
-      this.editProject.clientLocationID = this.projects[index].clientLocationID;
-      this.editProject.clientLocation = this.projects[index].clientLocation;
-      this.editProject.status = this.projects[index].status;
-      this.editProject.supplier = this.projects[index].supplier;
-      this.editProject.item_code = this.projects[index].item_code;
-      this.editProject.item_description = this.projects[index].item_description;
-      this.editProject.po_number = this.projects[index].po_number;
-      this.editProject.po_date = this.projects[index].po_date;
-      this.editProject.pr_number = this.projects[index].pr_number;
-      this.editProject.pr_date = this.projects[index].pr_date;
-      this.editProject.qty_order = this.projects[index].qty_order;
-      this.editProject.qty_uom = this.projects[index].qty_uom;
-      this.editProject.mfg_date = this.projects[index].mfg_date;
-      this.editProject.expiration_date = this.projects[index].expiration_date;
-      this.editProject.expected_delivery = this.projects[index].expected_delivery;
-      this.editProject.actual_delivery = this.projects[index].actual_delivery;
-      this.editProject.actual_remaining_receiving = this.projects[index].actual_remaining_receiving;
+      this.editProject.projectID = index.projectID;
+      this.editProject.projectName = index.projectName;
+      this.editProject.dateOfStart = index.dateOfStart.split("/").reverse().join("-"); //yyyy-MM-dd
+      this.editProject.teamSize = index.teamSize;
+      this.editProject.active = index.active;
+      this.editProject.clientLocationID = index.clientLocationID;
+      this.editProject.clientLocation = index.clientLocation;
+      this.editProject.status = index.status;
+      this.editProject.supplier = index.supplier;
+      this.editProject.item_code = index.item_code;
+      this.editProject.item_description = index.item_description;
+      this.editProject.po_number = index.po_number;
+      this.editProject.po_date = index.po_date;
+      this.editProject.pr_number = index.pr_number;
+      this.editProject.pr_date = index.pr_date;
+      this.editProject.qty_order = index.qty_order;
+      this.editProject.qty_uom = index.qty_uom;
+      this.editProject.mfg_date = index.mfg_date;
+      this.editProject.expiration_date = index.expiration_date;
+      this.editProject.expected_delivery = index.expected_delivery;
+      this.editProject.actual_delivery = index.actual_delivery;
+      this.editProject.actual_remaining_receiving = index.actual_remaining_receiving;
 
       this.editProject.is_activated = this.Activator;
       this.editProject.returned_date = this.ToDay;
       this.editProject.returned_by = this.activeUser;
-      this.editProject.received_by_QA = this.projects[index].received_by_QA;
-      this.editProject.cancelled_date = this.projects[index].cancelled_date;
-      this.editProject.canceled_by = this.projects[index].canceled_by;
-      this.editProject.cancelled_reason = this.projects[index].cancelled_reason;
+      this.editProject.received_by_QA = index.received_by_QA;
+      this.editProject.cancelled_date = index.cancelled_date;
+      this.editProject.canceled_by = index.canceled_by;
+      this.editProject.cancelled_reason = index.cancelled_reason;
 
-      this.editProject.status_of_reject_one = this.projects[index].status_of_reject_one;
-      this.editProject.status_of_reject_two = this.projects[index].status_of_reject_two;
-      this.editProject.status_of_reject_three = this.projects[index].status_of_reject_three;
+      this.editProject.status_of_reject_one = index.status_of_reject_one;
+      this.editProject.status_of_reject_two = index.status_of_reject_two;
+      this.editProject.status_of_reject_three = index.status_of_reject_three;
 
-      this.editProject.count_of_reject_one = this.projects[index].count_of_reject_one;
-      this.editProject.count_of_reject_two = this.projects[index].count_of_reject_two;
-      this.editProject.count_of_reject_three = this.projects[index].count_of_reject_three;
+      this.editProject.count_of_reject_one = index.count_of_reject_one;
+      this.editProject.count_of_reject_two = index.count_of_reject_two;
+      this.editProject.count_of_reject_three = index.count_of_reject_three;
       this.editProject.total_of_reject_mat = qtyTotalReject.toString();
 
       //Calling The Projects for Qty Binding Servo IT Solutions
-      this.PoNumberBinding = this.projects[index].po_number;
-      // this.PoNumberChild.nativeElement.value;
-      // alert(this.PoNumberBinding);
+      this.PoNumberBinding = index.po_number;
+
 
       this.ProjectsAllowableQty = this.projectsService.SearchProjects(
         'Po_number',
@@ -1226,7 +1216,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       );
 
 
-      this.editIndex = index;
+      // this.editIndex = index;
 
     }, 100);
   }

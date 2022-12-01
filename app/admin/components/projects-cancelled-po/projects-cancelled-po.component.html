@@ -131,12 +131,12 @@
             </td>
             <td>{{ project.canceled_by | uppercase }}</td>
             <td class="text-center">
-              <!-- <button class="btn btn-info" (click)="onEditClick($event, country)" data-toggle="modal" data-target="#editCountryModal">Edit</button>&nbsp; -->
+
               <button
                 mat-stroked-button
                 class="editbtnStyle"
                 color="black"
-                (click)="onEditClick($event, i)"
+                (click)="onEditClick($event, project)"
                 data-toggle="modal"
                 data-target="#editModal"
                 data-backdrop="false"

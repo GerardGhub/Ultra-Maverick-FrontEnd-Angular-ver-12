@@ -579,111 +579,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   onEditClick(event, index: Project) {
-
     // onEditClick(event, index: number) {
-    //Additional Binding of Searching
     if ($('#txtSearchText').val().length == 0) {
 
-
-      //Alana
-      //Show Visibilit
-      //START
-      // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
-      //   this.projects = response;
-      // });
-//ENd alan
-
-      // if (this.currentPageIndex == 1) {
-      //   if (index == 0) {
-      //     index = 7;
-      //   }
-      //   if (index == 1) {
-      //     index = 8;
-      //   }
-      //   if (index == 2) {
-      //     index = 9;
-      //   }
-      //   if (index == 3) {
-      //     index = 10;
-      //   }
-      //   if (index == 4) {
-      //     index = 11;
-      //   }
-      //   if (index == 5) {
-      //     index = 12;
-      //   }
-      //   if (index == 6) {
-      //     index = 13;
-      //   }
-      // } else if (this.currentPageIndex == 2) {
-      //   if (index == 0) {
-      //     index = 14;
-      //   }
-      //   if (index == 1) {
-      //     index = 15;
-      //   }
-      //   if (index == 2) {
-      //     index = 16;
-      //   }
-      //   if (index == 3) {
-      //     index = 17;
-      //   }
-      //   if (index == 4) {
-      //     index = 18;
-      //   }
-      //   if (index == 5) {
-      //     index = 19;
-      //   }
-      //   if (index == 6) {
-      //     index = 20;
-      //   }
-      // } else if (this.currentPageIndex == 3) {
-      //   if (index == 0) {
-      //     index = 21;
-      //   }
-      //   if (index == 1) {
-      //     index = 22;
-      //   }
-      //   if (index == 2) {
-      //     index = 23;
-      //   }
-      //   if (index == 3) {
-      //     index = 24;
-      //   }
-      //   if (index == 4) {
-      //     index = 25;
-      //   }
-      //   if (index == 5) {
-      //     index = 26;
-      //   }
-      //   if (index == 6) {
-      //     index = 27;
-      //   }
-      // } else if (this.currentPageIndex == 4) {
-      //   if (index == 0) {
-      //     index = 28;
-      //   }
-      //   if (index == 1) {
-      //     index = 29;
-      //   }
-      //   if (index == 2) {
-      //     index = 30;
-      //   }
-      //   if (index == 3) {
-      //     index = 31;
-      //   }
-      //   if (index == 4) {
-      //     index = 32;
-      //   }
-      //   if (index == 5) {
-      //     index = 33;
-      //   }
-      //   if (index == 6) {
-      //     index = 34;
-      //   }
-      // } else {
-      // }
-      //END
 
     }
     else {
@@ -691,10 +589,6 @@ export class ProjectsComponent implements OnInit, OnChanges {
       // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
       //   this.projects = response;
       // });
-
-
-
-
 
       if (this.searchBy == "po_number") {
         this.projectsService

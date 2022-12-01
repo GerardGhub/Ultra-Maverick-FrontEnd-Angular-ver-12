@@ -1483,44 +1483,41 @@ export class ProjectsComponent implements OnInit, OnChanges {
         p.total_of_reject_mat = response.total_of_reject_mat;
 
         this.projects[this.editIndex] = p;
-        this.editProject.projectID = null;
-        this.editProject.projectName = null;
+        this.editProject.projectID = 0;
+        this.editProject.projectName = "";
         this.editProject.dateOfStart = null;
-        this.editProject.teamSize = null;
-        this.editProject.supplier = null;
-        this.editProject.teamSize = null;
-        this.editProject.unit_price = null;
+        this.editProject.teamSize = 0;
+        this.editProject.supplier = "";
+        this.editProject.teamSize = 0;
+        this.editProject.unit_price = "";
         this.editProject.active = false;
-        this.editProject.clientLocationID = null;
-        this.editProject.status = null;
-        this.editProject.item_code = null;
-        this.editProject.item_description = null;
-        this.editProject.po_number = null;
+        this.editProject.clientLocationID = 0;
+        this.editProject.status = "";
+        this.editProject.item_code = "";
+        this.editProject.item_description = "";
+        this.editProject.po_number = "";
         this.editProject.po_date = moment(new Date()).format('MM/DD/YYYY');
-        this.editProject.pr_number = null;
-        this.editProject.pr_date = null;
-        this.editProject.qty_order = null;
-        this.editProject.qty_uom = null;
-        this.editProject.mfg_date = null;
-        this.editProject.expiration_date = null;
-        this.editProject.expected_delivery = null;
-        this.editProject.actual_delivery = null;
-        this.editProject.actual_remaining_receiving = null;
-        this.editProject.received_by_QA = null;
-        this.editProject.is_activated = null;
-        this.editProject.status_of_reject_one = null;
-        this.editProject.status_of_reject_two = null;
-        this.editProject.status_of_reject_three = null;
-        this.editProject.count_of_reject_one = null;
-        this.editProject.count_of_reject_two = null;
-        this.editProject.count_of_reject_three = null;
-        this.editProject.total_of_reject_mat = null;
-
+        this.editProject.pr_number = "";
+        this.editProject.pr_date = "";
+        this.editProject.qty_order = "";
+        this.editProject.qty_uom = "";
+        this.editProject.mfg_date = "";
+        this.editProject.expiration_date = "";
+        this.editProject.expected_delivery = "";
+        this.editProject.actual_delivery = "";
+        this.editProject.actual_remaining_receiving = 0;
+        this.editProject.received_by_QA = "";
+        this.editProject.is_activated = "";
+        this.editProject.status_of_reject_one = "";
+        this.editProject.status_of_reject_two = "";
+        this.editProject.status_of_reject_three = "";
+        this.editProject.count_of_reject_one = "";
+        this.editProject.count_of_reject_two = "";
+        this.editProject.count_of_reject_three = "";
+        this.editProject.total_of_reject_mat = "";
         this.showCancelledPOSuccess();
         this.getPOcancelledList();
-
         this.ngOnInit();
-
         $('#editFormCancel').trigger('click');
       },
       (error) => {

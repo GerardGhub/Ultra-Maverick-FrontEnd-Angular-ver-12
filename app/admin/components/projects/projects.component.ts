@@ -1348,14 +1348,13 @@ export class ProjectsComponent implements OnInit, OnChanges {
     });
   }
 
-  onCancelClick(event, index: number) {
+  onCancelClick(event, index: Project) {
     this.editForm.resetForm();
     this.received_by.nativeElement.value = this.loginService.fullName;
     this.resetValueS();
     //first
 
-
-    if ($('#txtSearchText').is(':visible')) {
+    if ($('#txtSearchText').val().length != 0) {
       this.projectsService
         .SearchProjects('Po_Number', this.searchText)
         .subscribe((response: Project[]) => {
@@ -1369,149 +1368,56 @@ export class ProjectsComponent implements OnInit, OnChanges {
         this.projects = response;
       });
 
-      if (this.currentPageIndex == 1) {
-        if (index == 0) {
-          index = 7;
-        }
-        if (index == 1) {
-          index = 8;
-        }
-        if (index == 2) {
-          index = 9;
-        }
-        if (index == 3) {
-          index = 10;
-        }
-        if (index == 4) {
-          index = 11;
-        }
-        if (index == 5) {
-          index = 12;
-        }
-        if (index == 6) {
-          index = 13;
-        }
-      } else if (this.currentPageIndex == 2) {
-        if (index == 0) {
-          index = 14;
-        }
-        if (index == 1) {
-          index = 15;
-        }
-        if (index == 2) {
-          index = 16;
-        }
-        if (index == 3) {
-          index = 17;
-        }
-        if (index == 4) {
-          index = 18;
-        }
-        if (index == 5) {
-          index = 19;
-        }
-        if (index == 6) {
-          index = 20;
-        }
-      } else if (this.currentPageIndex == 3) {
-        if (index == 0) {
-          index = 21;
-        }
-        if (index == 1) {
-          index = 22;
-        }
-        if (index == 2) {
-          index = 23;
-        }
-        if (index == 3) {
-          index = 24;
-        }
-        if (index == 4) {
-          index = 25;
-        }
-        if (index == 5) {
-          index = 26;
-        }
-        if (index == 6) {
-          index = 27;
-        }
-      } else if (this.currentPageIndex == 4) {
-        if (index == 0) {
-          index = 28;
-        }
-        if (index == 1) {
-          index = 29;
-        }
-        if (index == 2) {
-          index = 30;
-        }
-        if (index == 3) {
-          index = 31;
-        }
-        if (index == 4) {
-          index = 32;
-        }
-        if (index == 5) {
-          index = 33;
-        }
-        if (index == 6) {
-          index = 34;
-        }
-      } else {
-      }
+
     }
 
     //Last
     setTimeout(() => {
-      this.editProject.projectID = this.projects[index].projectID;
-      this.editProject.projectName = this.projects[index].projectName;
-      this.editProject.dateOfStart = this.projects[index].dateOfStart
+      this.editProject.projectID = index.projectID;
+      this.editProject.projectName = index.projectName;
+      this.editProject.dateOfStart = index.dateOfStart
         .split('/')
         .reverse()
         .join('-'); //yyyy-MM-dd
-      this.editProject.teamSize = this.projects[index].teamSize;
-      this.editProject.active = this.projects[index].active;
-      this.editProject.clientLocationID = this.projects[index].clientLocationID;
-      this.editProject.clientLocation = this.projects[index].clientLocation;
-      this.editProject.status = this.projects[index].status;
-      this.editProject.supplier = this.projects[index].supplier;
-      this.editProject.item_code = this.projects[index].item_code;
-      this.editProject.item_description = this.projects[index].item_description;
-      this.editProject.po_number = this.projects[index].po_number;
-      this.editProject.po_date = this.projects[index].po_date;
-      this.editProject.pr_number = this.projects[index].pr_number;
-      this.editProject.pr_date = this.projects[index].pr_date;
-      this.editProject.qty_order = this.projects[index].qty_order;
-      this.editProject.qty_uom = this.projects[index].qty_uom;
-      this.editProject.mfg_date = this.projects[index].mfg_date;
-      this.editProject.expiration_date = this.projects[index].expiration_date;
-      this.editProject.expected_delivery =
-        this.projects[index].expected_delivery;
-      this.editProject.actual_delivery = this.projects[index].actual_delivery;
-      this.editProject.actual_remaining_receiving =
-        this.projects[index].actual_remaining_receiving;
-      // this.editProject.received_by_QA = this.activeUser;
+      this.editProject.teamSize = index.teamSize;
+      this.editProject.active = index.active;
+      this.editProject.clientLocationID = index.clientLocationID;
+      this.editProject.clientLocation = index.clientLocation;
+      this.editProject.status = index.status;
+      this.editProject.supplier = index.supplier;
+      this.editProject.item_code = index.item_code;
+      this.editProject.item_description = index.item_description;
+      this.editProject.po_number = index.po_number;
+      this.editProject.po_date = index.po_date;
+      this.editProject.pr_number = index.pr_number;
+      this.editProject.pr_date = index.pr_date;
+      this.editProject.qty_order = index.qty_order;
+      this.editProject.qty_uom = index.qty_uom;
+      this.editProject.mfg_date = index.mfg_date;
+      this.editProject.expiration_date = index.expiration_date;
+      this.editProject.expected_delivery = index.expected_delivery;
+      this.editProject.actual_delivery = index.actual_delivery;
+      this.editProject.actual_remaining_receiving = index.actual_remaining_receiving;
       this.editProject.is_activated = this.Deactivator;
       this.editProject.cancelled_date = this.ToDay;
       this.editProject.canceled_by = this.activeUser;
-      this.editProject.received_by_QA = this.projects[index].received_by_QA;
-      this.editProject.unit_price = this.projects[index].unit_price;
-
+      this.editProject.received_by_QA = index.received_by_QA;
+      this.editProject.unit_price = index.unit_price;
       this.editProject.status_of_reject_one =
-        this.projects[index].status_of_reject_one;
+        index.status_of_reject_one;
       this.editProject.status_of_reject_two =
-        this.projects[index].status_of_reject_two;
+        index.status_of_reject_two;
       this.editProject.status_of_reject_three =
-        this.projects[index].status_of_reject_three;
+        index.status_of_reject_three;
 
       this.editProject.count_of_reject_one =
-        this.projects[index].count_of_reject_one;
+        index.count_of_reject_one;
       this.editProject.count_of_reject_two =
-        this.projects[index].count_of_reject_two;
+        index.count_of_reject_two;                
       this.editProject.count_of_reject_three =
-        this.projects[index].count_of_reject_three;
+        index.count_of_reject_three;
       this.editProject.total_of_reject_mat =
-        this.projects[index].total_of_reject_mat;
+        index.total_of_reject_mat;
       //Section 1
       //A
       //Bluk Payload Remove
@@ -1520,7 +1426,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
       //Addition Set Point for Validation of Partial Data
       // this.ActivePartialReceiving.nativeElement.value = "0";
 
-      this.PoNumberBinding = this.projects[index].po_number;
+      this.PoNumberBinding = index.po_number;
       // this.PoNumberChild.nativeElement.value;
       this.ProjectsAllowableQty = this.projectsPartialPoService.SearchProjects(
         'Po_number',
@@ -1528,7 +1434,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
       );
       this.ProjectsAllowableQty.subscribe.toString;
 
-      this.editIndex = index;
+      // this.editIndex = index;
 
       setTimeout(() => {
         if ($('#ActivePartialReceiving').is(':visible')) {

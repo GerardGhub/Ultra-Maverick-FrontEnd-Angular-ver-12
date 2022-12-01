@@ -578,107 +578,111 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.jqueryClearanceTextBox();
   }
 
-  onEditClick(event, index: number) {
+  onEditClick(event, index: Project) {
 
+    // onEditClick(event, index: number) {
     //Additional Binding of Searching
     if ($('#txtSearchText').val().length == 0) {
 
+
+      //Alana
       //Show Visibilit
       //START
       // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
       //   this.projects = response;
       // });
+//ENd alan
 
-      if (this.currentPageIndex == 1) {
-        if (index == 0) {
-          index = 7;
-        }
-        if (index == 1) {
-          index = 8;
-        }
-        if (index == 2) {
-          index = 9;
-        }
-        if (index == 3) {
-          index = 10;
-        }
-        if (index == 4) {
-          index = 11;
-        }
-        if (index == 5) {
-          index = 12;
-        }
-        if (index == 6) {
-          index = 13;
-        }
-      } else if (this.currentPageIndex == 2) {
-        if (index == 0) {
-          index = 14;
-        }
-        if (index == 1) {
-          index = 15;
-        }
-        if (index == 2) {
-          index = 16;
-        }
-        if (index == 3) {
-          index = 17;
-        }
-        if (index == 4) {
-          index = 18;
-        }
-        if (index == 5) {
-          index = 19;
-        }
-        if (index == 6) {
-          index = 20;
-        }
-      } else if (this.currentPageIndex == 3) {
-        if (index == 0) {
-          index = 21;
-        }
-        if (index == 1) {
-          index = 22;
-        }
-        if (index == 2) {
-          index = 23;
-        }
-        if (index == 3) {
-          index = 24;
-        }
-        if (index == 4) {
-          index = 25;
-        }
-        if (index == 5) {
-          index = 26;
-        }
-        if (index == 6) {
-          index = 27;
-        }
-      } else if (this.currentPageIndex == 4) {
-        if (index == 0) {
-          index = 28;
-        }
-        if (index == 1) {
-          index = 29;
-        }
-        if (index == 2) {
-          index = 30;
-        }
-        if (index == 3) {
-          index = 31;
-        }
-        if (index == 4) {
-          index = 32;
-        }
-        if (index == 5) {
-          index = 33;
-        }
-        if (index == 6) {
-          index = 34;
-        }
-      } else {
-      }
+      // if (this.currentPageIndex == 1) {
+      //   if (index == 0) {
+      //     index = 7;
+      //   }
+      //   if (index == 1) {
+      //     index = 8;
+      //   }
+      //   if (index == 2) {
+      //     index = 9;
+      //   }
+      //   if (index == 3) {
+      //     index = 10;
+      //   }
+      //   if (index == 4) {
+      //     index = 11;
+      //   }
+      //   if (index == 5) {
+      //     index = 12;
+      //   }
+      //   if (index == 6) {
+      //     index = 13;
+      //   }
+      // } else if (this.currentPageIndex == 2) {
+      //   if (index == 0) {
+      //     index = 14;
+      //   }
+      //   if (index == 1) {
+      //     index = 15;
+      //   }
+      //   if (index == 2) {
+      //     index = 16;
+      //   }
+      //   if (index == 3) {
+      //     index = 17;
+      //   }
+      //   if (index == 4) {
+      //     index = 18;
+      //   }
+      //   if (index == 5) {
+      //     index = 19;
+      //   }
+      //   if (index == 6) {
+      //     index = 20;
+      //   }
+      // } else if (this.currentPageIndex == 3) {
+      //   if (index == 0) {
+      //     index = 21;
+      //   }
+      //   if (index == 1) {
+      //     index = 22;
+      //   }
+      //   if (index == 2) {
+      //     index = 23;
+      //   }
+      //   if (index == 3) {
+      //     index = 24;
+      //   }
+      //   if (index == 4) {
+      //     index = 25;
+      //   }
+      //   if (index == 5) {
+      //     index = 26;
+      //   }
+      //   if (index == 6) {
+      //     index = 27;
+      //   }
+      // } else if (this.currentPageIndex == 4) {
+      //   if (index == 0) {
+      //     index = 28;
+      //   }
+      //   if (index == 1) {
+      //     index = 29;
+      //   }
+      //   if (index == 2) {
+      //     index = 30;
+      //   }
+      //   if (index == 3) {
+      //     index = 31;
+      //   }
+      //   if (index == 4) {
+      //     index = 32;
+      //   }
+      //   if (index == 5) {
+      //     index = 33;
+      //   }
+      //   if (index == 6) {
+      //     index = 34;
+      //   }
+      // } else {
+      // }
       //END
 
     }
@@ -729,54 +733,52 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
 
       //Po Date Make Resuable pag may time
-      var podate = new Date(this.projects[index].po_date);
+      var podate = new Date(index.po_date);
       var month = podate.getMonth() + 1;//months (0-11)
       var day = podate.getDate();//day (1-31)
       var year = podate.getFullYear();
       var PoDate = month + "/" + day + "/" + year;
 
       //Pr Date
-      var prdate = new Date(this.projects[index].pr_date);
+      var prdate = new Date(index.pr_date);
       var month = prdate.getMonth() + 1;//months (0-11)
       var day = prdate.getDate();//day (1-31)
       var year = prdate.getFullYear();
       var PrDate = month + "/" + day + "/" + year;
 
 
-      this.editProject.projectID = this.projects[index].projectID;
-      this.editProject.projectName = this.projects[index].projectName;
-      this.editProject.dateOfStart = this.projects[index].dateOfStart
+      this.editProject.projectID = index.projectID;
+      this.editProject.projectName = index.projectName;
+      this.editProject.dateOfStart = index.dateOfStart
         .split('/')
         .reverse()
         .join('-'); //yyyy-MM-dd
       this.editProject.teamSize = 40;
-      this.editProject.active = this.projects[index].active;
-      this.editProject.clientLocationID = this.projects[index].clientLocationID;
-      this.editProject.clientLocation = this.projects[index].clientLocation;
+      this.editProject.active = index.active;
+      this.editProject.clientLocationID = index.clientLocationID;
+      this.editProject.clientLocation = index.clientLocation;
       this.editProject.status = 'In Force';
-      this.editProject.supplier = this.projects[index].supplier;
-      this.editProject.item_code = this.projects[index].item_code;
-      this.editProject.item_class = this.projects[index].item_class;
-      this.editProject.item_type = this.projects[index].item_type;
-      this.editProject.major_category = this.projects[index].major_category;
-      this.editProject.sub_category = this.projects[index].sub_category;
-      this.editProject.is_expirable = this.projects[index].is_expirable;
-      this.expirable_material = this.projects[index].is_expirable;
-      this.editProject.item_description = this.projects[index].item_description;
-      this.editProject.po_number = this.projects[index].po_number;
+      this.editProject.supplier = index.supplier;
+      this.editProject.item_code = index.item_code;
+      this.editProject.item_class = index.item_class;
+      this.editProject.item_type = index.item_type;
+      this.editProject.major_category = index.major_category;
+      this.editProject.sub_category = index.sub_category;
+      this.editProject.is_expirable = index.is_expirable;
+      this.expirable_material = index.is_expirable;
+      this.editProject.item_description = index.item_description;
+      this.editProject.po_number = index.po_number;
       this.editProject.po_date = PoDate;
-      // this.projects[index].po_date;
-      this.editProject.pr_number = this.projects[index].pr_number;
+      this.editProject.pr_number = index.pr_number;
       this.editProject.pr_date = PrDate;
-      //  this.projects[index].pr_date;
-      this.editProject.qty_order = this.projects[index].qty_order;
-      this.editProject.qty_uom = this.projects[index].qty_uom;
+      this.editProject.qty_order = index.qty_order;
+      this.editProject.qty_uom = index.qty_uom;
       this.editProject.is_activated = this.Activator;
 
-      this.editProject.unit_price = this.projects[index].unit_price;
+      this.editProject.unit_price = index.unit_price;
 
       this.editProject.actual_remaining_receiving =
-        this.projects[index].actual_remaining_receiving;
+        index.actual_remaining_receiving;
       this.editProject.received_by_QA = this.activeUser;
 
       this.editProject.qcReceivingDate = this.ToDay;
@@ -803,7 +805,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
         $('#txtEditexpiration_date').show();
       }
 
-      this.editIndex = index;
+      // this.editIndex = index;
     }, 100);
   }
 

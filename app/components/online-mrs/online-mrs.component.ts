@@ -26,6 +26,7 @@ export class OnlineMRSComponent implements OnInit {
   RoleModule: RoleModules[] = [];
   MainMenu: Observable<MainMenus[]>;
   requestorFound: number = 0;
+  totalMrsOrder: number = 0;
 
   approvedOrderList: any = [];
   cancelledOrderList: any = [];
@@ -137,9 +138,9 @@ export class OnlineMRSComponent implements OnInit {
         if (response) {
           this.requestOrderCount = response.length;
         }
-        
 
- 
+
+
 
         const userRole = this.loginService.currentUserRoleSession;
         this.Role = userRole;
@@ -279,7 +280,7 @@ export class OnlineMRSComponent implements OnInit {
           console.log(error.error.message);
         }
       );
-   
+
   }
 
   getCancelReasonList() {
@@ -607,7 +608,7 @@ export class OnlineMRSComponent implements OnInit {
     });
   }
 
-  
+
   cancelItemFromList(item: any) {
     this.cancelItemFormPartial.patchValue({
       id: item.id,
@@ -615,7 +616,7 @@ export class OnlineMRSComponent implements OnInit {
       mrs_item_code: item.mrs_item_code,
       mrs_uom: item.mrs_uom,
       deactivated_by: this.loginService.currentUserName,
-       mrs_id: item.mrs_id,
+      mrs_id: item.mrs_id,
     });
   }
 
@@ -676,18 +677,21 @@ export class OnlineMRSComponent implements OnInit {
     this.addedItemList.splice(index, 1);
   }
 
-getOrderList( mrs_id: number)
-{
-  const res = this.parentData.filter((list) => list.mrs_id === mrs_id);
-  this.viewAddedItemList = res;
-
-}
+  getOrderList(mrs_id: number) {
+    const res = this.parentData.filter((list) => list.mrs_id === mrs_id);
+    this.viewAddedItemList = res;
+    this.totalMrsOrder = res.length;
+  }
 
   // view order list ***********************************************************
   viewOrderClickParent(item: any) {
     const res = this.parentData.filter((list) => list.mrs_id === item.mrs_id);
     this.viewAddedItemList = res;
     this.parentTitle = item.mrs_req_desc;
+
+
+    const totalMrsItems = this.viewAddedItemList.reduce((count, current) => count + current.material_request_logs.length, 0);
+    this.totalMrsOrder = totalMrsItems;
 
     //Validate Yung Requestor Lang dapat makakapagedit ng request
     if (this.userId == item.user_id) {
@@ -934,7 +938,7 @@ getOrderList( mrs_id: number)
     }
   }
 
-  
+
   cancelItemListSubmit() {
     //Cancel partial Item
     // console.error(this.cancelItemFormPartial.value);
@@ -956,21 +960,14 @@ getOrderList( mrs_id: number)
             .subscribe(
               (response) => {
                 this.getParentList();
-//breakpoint
-
-      
-  
-
+                //breakpoint
                 $('#cancelItemModalpartialClose').trigger('click');
-       
-
-
                 this.successToaster();
-    
+
                 this.successMessage = 'Cancelled Successfully!';
-        setTimeout(() => {
-          this.getOrderList(this.mrs_id_order_list);
-        },500);
+                setTimeout(() => {
+                  this.getOrderList(this.mrs_id_order_list);
+                }, 500);
 
                 this.cancelItemFormPartial.reset();
               },

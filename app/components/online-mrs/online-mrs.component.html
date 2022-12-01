@@ -60,7 +60,7 @@
           <div class="col-lg-12">
             <div class="d-flex">
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-                <table class="" style="width: 100%" class="text-center">
+                <table class="table table-striped table-bordered nowrap table-responsive-sm">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
                       <th>No.</th>
@@ -207,7 +207,7 @@
           <div class="col-lg-12">
             <div class="d-flex">
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-                <table class="" style="width: 100%" class="text-center">
+                  <table class="table table-striped table-bordered nowrap table-responsive-sm">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
                       <th>No.</th>
@@ -265,21 +265,25 @@
                   <a class="page-link" href="#" onclick="return false">2</a>
                 </li>
 
-                <li *ngIf="currentPageIndexApproved > 1 && currentPageIndexApproved < pagesApproved.length - 2">&nbsp;...&nbsp;</li>
+                <li *ngIf="currentPageIndexApproved > 1 && currentPageIndexApproved < pagesApproved.length - 2">
+                  &nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClickedApproved(currentPageIndexApproved)"
+                <li class="page-item" [ngClass]=" 'link-active-paging' "
+                  (click)="onPageIndexClickedApproved(currentPageIndexApproved)"
                   *ngIf="currentPageIndexApproved > 1 && currentPageIndexApproved < pagesApproved.length - 2">
                   <a class="page-link" href="#" onclick="return false">{{currentPageIndexApproved + 1}}</a>
                 </li>
 
                 <li>&nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexApproved == pagesApproved.length - 2}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexApproved == pagesApproved.length - 2}"
                   (click)="onPageIndexClickedApproved(pagesApproved.length - 2)">
                   <a class="page-link" href="#" onclick="return false">{{pagesApproved.length - 1}}</a>
                 </li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexApproved == pagesApproved.length - 1}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexApproved == pagesApproved.length - 1}"
                   (click)="onPageIndexClickedApproved(pagesApproved.length - 1)">
                   <a class="page-link" href="#" onclick="return false">{{pagesApproved.length}}</a>
                 </li>
@@ -293,7 +297,7 @@
           </div>
         </mat-tab>
       </ng-template>
-      
+
       <ng-template [ngIf]="CancelledOrders === 1">
         <mat-tab>
           <ng-template mat-tab-label>
@@ -334,8 +338,7 @@
           <div class="col-lg-12">
             <div class="d-flex">
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-                <!-- table table-striped table-bordered nowrap table-responsive-sm -->
-                <table class="" style="width: 100%" class="text-center">
+                <table class="table table-striped table-bordered nowrap table-responsive-sm">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
                       <th>No.</th>
@@ -406,21 +409,25 @@
                   <a class="page-link" href="#" onclick="return false">2</a>
                 </li>
 
-                <li *ngIf="currentPageIndexCancelled > 1 && currentPageIndexCancelled < pagesCancelled.length - 2">&nbsp;...&nbsp;</li>
+                <li *ngIf="currentPageIndexCancelled > 1 && currentPageIndexCancelled < pagesCancelled.length - 2">
+                  &nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClickedCancelled(currentPageIndexCancelled)"
+                <li class="page-item" [ngClass]=" 'link-active-paging' "
+                  (click)="onPageIndexClickedCancelled(currentPageIndexCancelled)"
                   *ngIf="currentPageIndexCancelled > 1 && currentPageIndexCancelled < pagesCancelled.length - 2">
                   <a class="page-link" href="#" onclick="return false">{{currentPageIndexCancelled + 1}}</a>
                 </li>
 
                 <li>&nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelled == pagesCancelled.length - 2}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexCancelled == pagesCancelled.length - 2}"
                   (click)="onPageIndexClickedCancelled(pagesCancelled.length - 2)">
                   <a class="page-link" href="#" onclick="return false">{{pagesCancelled.length - 1}}</a>
                 </li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelled == pagesCancelled.length - 1}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexCancelled == pagesCancelled.length - 1}"
                   (click)="onPageIndexClickedCancelled(pagesCancelled.length - 1)">
                   <a class="page-link" href="#" onclick="return false">{{pagesCancelled.length}}</a>
                 </li>
@@ -652,18 +659,21 @@
         </div>
         <div class="col-lg-12 items-div">
           <table class="table table-bordered table-sm">
-            <thead>
-              <th class="th-bold">Code</th>
-              <th>Item Description</th>
-              <th>Order</th>
-              <th>UOM</th>
-              <th>Serve</th>
-              <th class="display-none">Remarks</th>
-              <ng-template [ngIf]="requestorFound === 1">
-                <th>Action</th>
-              </ng-template>
 
+            <thead>
+              <tr class="text-light header-bg-color-um system-name">
+                <th class="th-bold">Code</th>
+                <th>Item Description</th>
+                <th>Order</th>
+                <th>UOM</th>
+                <th>Serve</th>
+                <th class="display-none">Remarks</th>
+                <ng-template [ngIf]="requestorFound === 1">
+                  <th>Action</th>
+                </ng-template>
+              </tr>
             </thead>
+
             <tbody *ngFor="let parent of viewAddedItemList">
               <tr *ngFor="let item of parent.material_request_logs">
                 <td>{{item.mrs_item_code}}</td>
@@ -678,14 +688,15 @@
                 </td>
                 <ng-template [ngIf]="requestorFound === 1">
                   <td>
-               
+
                     <button mat-stroked-button color="primary" class="editbtnStyle" data-toggle="modal"
                       data-target="#editItemFromList" data-backdrop="false" data-keyboard="false"
                       (click)="editItemFromList(item)"><span class="fa fa-pencil"></span> Edit </button>
-
+                    <ng-container *ngIf="totalMrsOrder != 1">
                       <button mat-stroked-button color="warn" class="editbtnStyle" data-toggle="modal"
-                      data-target="#cancelItemFromList" data-backdrop="false" data-keyboard="false"
-                      (click)="cancelItemFromList(item)"><span class="fa fa-trash"></span> Cancel </button>
+                        data-target="#cancelItemFromList" data-backdrop="false" data-keyboard="false"
+                        (click)="cancelItemFromList(item)"><span class="fa fa-trash"></span> Cancel </button>
+                    </ng-container>
                   </td>
                 </ng-template>
               </tr>
@@ -1054,8 +1065,7 @@
                         <a class="page-link" href="#" onclick="return false">2</a>
                       </li>
 
-                      <li
-                        *ngIf="currentPageIndexRM > 1 && currentPageIndexRM < pagesRawMats.length - 2">
+                      <li *ngIf="currentPageIndexRM > 1 && currentPageIndexRM < pagesRawMats.length - 2">
                         &nbsp;...&nbsp;</li>
 
                       <li class="page-item" [ngClass]=" 'link-active-paging' "

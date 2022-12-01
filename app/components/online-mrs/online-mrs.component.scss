@@ -15,9 +15,9 @@
   }
 }
 
-th {
-  font-weight: bold !important;
-}
+// th {
+//   font-weight: bold !important;
+// }
 
 input {
   outline: 0;
@@ -109,4 +109,9 @@ select:focus {
 
 .visibility-hidden{
   display: none;
+}
+
+td {
+  font: 12px Roboto, 'Helvetica Neue', san-serif;
+  vertical-align: middle;
 }

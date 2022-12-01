@@ -390,8 +390,6 @@ export class PreparedStoreOrderComponent implements OnInit {
               setTimeout(() => {
                 this.tabRefresh();
               }, 400);
-
-
               this.successMessage = 'Item Cancel Successfully!';
 
               this.cancelOrderItemForm.reset();

@@ -26,8 +26,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
   cancelledOrders: any = [];
 
   showLoading: boolean = true;
-  searchByDispatching: string = 'store_code';
-  searchByItemsDispatching: string = 'store_name';
+  searchByDispatching: string = '';
   searchTextDispatching: string = '';
 
   currentPageIndexDispatching: number = 0;

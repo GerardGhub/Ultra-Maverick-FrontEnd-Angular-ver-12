@@ -1559,11 +1559,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   onSearchTextKeyup(event) {
-    //Recall the calculateNoOfPages
-    if ($('#txtSearchText').is(':empty')) {
-      // this.ngOnInit();
+    if ($('#txtSearchText').val().length == 0) {
+      this.ngOnInit();
     }
-
     this.calculateNoOfPages();
   }
 

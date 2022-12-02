@@ -257,7 +257,7 @@ export class InternalOrderComponent implements OnInit {
     let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
       'MM-DD-YYYY'
     );
-
+    console.log(item);
 
     this.approvalForm.patchValue({
       id: item.id,
@@ -273,6 +273,12 @@ export class InternalOrderComponent implements OnInit {
       Wh_checker_move_order_no: this.totalStoreOrderDispatching,
     });
 
+    //If dispatching is done update move order no
+    if (item.is_wh_checker_approval == true) {
+      this.approvalForm.patchValue({
+        Wh_checker_move_order_no: item.wh_checker_move_order_no
+      });
+    }
     this.onlineOrderService.searchItems(item.id).subscribe((response) => {
       this.itemList = response;
 
@@ -282,12 +288,10 @@ export class InternalOrderComponent implements OnInit {
   onViewCancelledClick(item: any) {
 
     this.MRSId = item.id;
-    if(item.is_wh_checker_cancel === undefined)
-    {
+    if (item.is_wh_checker_cancel === undefined) {
       this.checkifPreparedisCancel = 0;
     }
-    else
-    {
+    else {
       this.checkifPreparedisCancel = 1;
     }
 
@@ -550,7 +554,7 @@ export class InternalOrderComponent implements OnInit {
                 this.getInternalOrderList();
                 this.getInternalPreparedOrderList();
                 this.getDispatchingOrderList();
- 
+
               }, 400);
 
               //stampede

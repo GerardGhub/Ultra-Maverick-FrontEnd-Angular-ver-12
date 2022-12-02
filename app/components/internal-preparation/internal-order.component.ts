@@ -85,6 +85,7 @@ export class InternalOrderComponent implements OnInit {
   sortOrder: string = 'ASC';
   totalOrderRowCount: number = 0;
   totalPreparedOrderRowCount: number = 0;
+  checkifPreparedisCancel: number = 0;
 
   ngOnInit() {
     this.reactiveForms();
@@ -120,7 +121,7 @@ export class InternalOrderComponent implements OnInit {
       }
     });
 
-   
+
   }
 
 
@@ -213,8 +214,7 @@ export class InternalOrderComponent implements OnInit {
 
         this.calculateNoOfPagesPreparedOrders();
       }
-      if (response.status == 204)
-      {
+      if (response.status == 204) {
         this.ngOnInit();
       }
     });
@@ -275,14 +275,21 @@ export class InternalOrderComponent implements OnInit {
 
     this.onlineOrderService.searchItems(item.id).subscribe((response) => {
       this.itemList = response;
-  
+
     });
   }
 
   onViewCancelledClick(item: any) {
 
-
     this.MRSId = item.id;
+    if(item.is_wh_checker_cancel === undefined)
+    {
+      this.checkifPreparedisCancel = 0;
+    }
+    else
+    {
+      this.checkifPreparedisCancel = 1;
+    }
 
     this.getCountOrderDispatching();
     let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
@@ -413,14 +420,14 @@ export class InternalOrderComponent implements OnInit {
             this.successMessage = 'Order Return Successfully!';
             this.successToaster();
 
-         
-          });
-          setTimeout(() => {
 
-            this.getDispatchingOrderList();
-            this.getInternalPreparedOrderList();
-          }, 900);
-    
+          });
+        setTimeout(() => {
+
+          this.getDispatchingOrderList();
+          this.getInternalPreparedOrderList();
+        }, 900);
+
       }
     });
 
@@ -483,7 +490,7 @@ export class InternalOrderComponent implements OnInit {
 
   returnOrderItemPartial() {
 
-    
+
     if (this.cancelOrderItemForm.valid) {
       Swal.fire({
         title: 'Are you sure you want to return the item?',
@@ -498,12 +505,12 @@ export class InternalOrderComponent implements OnInit {
           this.onlineOrderService
             .returnOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
-           
+
               this.MRSId = response.mrs_id;
               this.onlineOrderService.searchItemsInactive(this.MRSId).subscribe((response) => {
                 this.itemList = response;
               });
-           
+
               // //Modifier if you cancel some fucking orders
               this.totalPreparedItems = 1;
               $('#returnOrderCloseModal').trigger('click');
@@ -538,17 +545,18 @@ export class InternalOrderComponent implements OnInit {
           this.onlineOrderService
             .cancelParentPreparationOrder(this.cancelOrderForm.value)
             .subscribe((response) => {
-      
+
+              setTimeout(() => {
                 this.getInternalOrderList();
                 this.getInternalPreparedOrderList();
-   
                 this.getDispatchingOrderList();
-           
-          
+ 
+              }, 400);
+
               //stampede
               this.successMessage = 'Order Cancelled Successfully!';
               this.successToaster();
-   
+
             });
         }
       });

@@ -853,29 +853,30 @@
                     <th>Uom</th>
                     <th>Serve</th>
                     <th class="hideObject">Total Items</th>
+                    <ng-container *ngIf="checkifPreparedisCancel === 0">
                     <th class="text-center">Action</th>
+                    </ng-container>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr *ngFor="let item of itemList">
-
                     <td>{{item.id}}</td>
                     <td>{{item.mrs_item_code}}</td>
                     <td>{{item.mrs_item_description}}</td>
                     <td>{{item.mrs_uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>
                     <td class="hideObject">{{c | number}}</td>
-                    <td class="text-center">
-
-
+                    <ng-container *ngIf="checkifPreparedisCancel === 0">
+                    <td class="text-center">                               
                       <button (click)="onReturnItemClick(item)" data-toggle="modal" data-target="#returnOrderItemModal"
                         data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
                         mat-stroked-button>
                         <span class="fa fa-ban"></span> return
                       </button>&nbsp;
-
+      
                     </td>
+                  </ng-container>
                   </tr>
                 </tbody>
               </table>

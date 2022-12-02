@@ -3,11 +3,11 @@
     <nav aria-label="breadcrumb textStyle">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a [routerLink]="['/admin', 'dashboard']"
-            ><p class="dashboardStyle">
+          <a [routerLink]="['/admin', 'dashboard']"></a>
+            <p class="dashboardStyle">
               <i class="fa fa-home" aria-hidden="true"></i> Dashboard
-            </p></a
-          >
+            </p>
+       
         </li>
         <li class="breadcrumb-item dashboardActive" aria-current="page">
           Internal Orders Preparation
@@ -28,18 +28,11 @@
             <div class="p-2">
               <div class="input-group searchBtnStyle">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"
-                    ><span class="fa fa-filter"></span
-                  ></span>
+                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
                 </div>
-                <select
-                  class="form-control"
-                  id="drpSearchBy"
-                  name="SearchBy"
-                  [(ngModel)]="searchBy"
-                >
+                <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
                   <option value="department_name">DEPARTMENT</option>
-                  <option value="mrs_req_desc">DESCRIPTION</option>       
+                  <option value="mrs_req_desc">DESCRIPTION</option>
                 </select>
               </div>
             </div>
@@ -47,20 +40,11 @@
             <div class="p-2">
               <div class="input-group searchBtnStyle">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"
-                    ><span class="fa fa-search"></span
-                  ></span>
+                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input
-                  type="search"
-                  class="form-control"
-                  placeholder="Find here...."
-                  id="txtSearchText"
-                  autocomplete="off"
-                  name="SearchText"
-                  [(ngModel)]="searchText"
-                  (keyup)="onSearchInternalOrder($event)"
-                />
+                <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                  autocomplete="off" name="SearchText" [(ngModel)]="searchText"
+                  (keyup)="onSearchInternalOrder($event)" />
               </div>
             </div>
           </div>
@@ -69,40 +53,41 @@
           <div class="col-lg-12">
             <div class="d-flex">
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain">
-                <table class="table table-striped table-bordered nowrap table-responsive-sm">
-                  <tr class="text-light header-bg-color-um system-name">
-                    <th>ID</th>
+                <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
+                  <thead>
+                    <tr class="text-light header-bg-color-um system-name">
+                      <th>ID</th>
                       <th>
-                          Preparation Date
-                          <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'is_approved_prepa_date' "
-                              (click)="sortBy = 'is_approved_prepa_date'; sortOrder = 'ASC' "></i>
+                        Preparation Date
+                        <i class="fa fa-sort hand-icon" *ngIf="sortBy != 'is_approved_prepa_date' "
+                          (click)="sortBy = 'is_approved_prepa_date'; sortOrder = 'ASC' "></i>
 
-                          <i class="fa fa-sort-up hand-icon text-primary"
-                              *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'ASC' "
-                              (click)="sortOrder = 'DESC' "></i>
+                        <i class="fa fa-sort-up hand-icon text-primary"
+                          *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'ASC' "
+                          (click)="sortOrder = 'DESC' "></i>
 
-                          <i class="fa fa-sort-down hand-icon text-primary"
-                              *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'DESC' "
-                              (click)="sortOrder = 'ASC' "></i>
+                        <i class="fa fa-sort-down hand-icon text-primary"
+                          *ngIf="sortBy == 'is_approved_prepa_date' && sortOrder == 'DESC' "
+                          (click)="sortOrder = 'ASC' "></i>
                       </th>
                       <th>Department</th>
                       <th>Description</th>
                       <th>Requested By</th>
                       <th>Total Item/s</th>
                       <th>Prepared Item/s</th>
-                  </tr>
-
+                    </tr>
+                  </thead>
                   <tr
-                      *ngFor="let item of InternalOrderList | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
-                   <td>{{item.mrs_id}}</td>
-                      <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
-                      <td>{{item.department_name}}</td>
-                      <td>{{item.mrs_req_desc}}</td>
-                      <td>{{item.mrs_requested_by}}</td>
-                      <td>{{item.totalItems}}</td>
-                      <td>{{item.totalPreparedItems}}</td>
+                    *ngFor="let item of InternalOrderList | filter: searchBy : searchText | sort : sortBy : sortOrder | paging : currentPageIndex : pageSize; let i = index">
+                    <td>{{item.mrs_id}}</td>
+                    <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
+                    <td>{{item.department_name}}</td>
+                    <td>{{item.mrs_req_desc}}</td>
+                    <td>{{item.mrs_requested_by}}</td>
+                    <td>{{item.totalItems}}</td>
+                    <td>{{item.totalPreparedItems}}</td>
                   </tr>
-              </table>
+                </table>
               </div>
             </div>
           </div>
@@ -111,50 +96,50 @@
           <div class="col-lg-12">
             <ul class="pagination paginationStyle justify-content-center mt-1">
               <li class="page-item" (click)="onPageIndexClicked(currentPageIndex - 1)">
-                  <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
-                      onclick="return false">Prev</a>
+                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
+                  onclick="return false">Prev</a>
               </li>
 
               <ng-container *ngIf="pages.length <= 10">
-                  <li class="page-item" *ngFor="let page of pages"
-                      [ngClass]="{ 'active': page.pageIndex == currentPageIndex}"
-                      (click)="onPageIndexClicked(page.pageIndex)">
-                      <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
-                  </li>
+                <li class="page-item" *ngFor="let page of pages"
+                  [ngClass]="{ 'active': page.pageIndex == currentPageIndex}"
+                  (click)="onPageIndexClicked(page.pageIndex)">
+                  <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
+                </li>
               </ng-container>
 
               <ng-container *ngIf="pages.length > 10">
-                  <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 0}" (click)="onPageIndexClicked(0)">
-                      <a class="page-link" href="#" onclick="return false">1</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 0}" (click)="onPageIndexClicked(0)">
+                  <a class="page-link" href="#" onclick="return false">1</a>
+                </li>
 
-                  <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 1}" (click)="onPageIndexClicked(1)">
-                      <a class="page-link" href="#" onclick="return false">2</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'active': currentPageIndex == 1}" (click)="onPageIndexClicked(1)">
+                  <a class="page-link" href="#" onclick="return false">2</a>
+                </li>
 
-                  <li *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">&nbsp;...&nbsp;</li>
+                <li *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">&nbsp;...&nbsp;</li>
 
-                  <li class="page-item" [ngClass]=" 'active' " (click)="onPageIndexClicked(currentPageIndex)"
-                      *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">
-                      <a class="page-link" href="#" onclick="return false">{{currentPageIndex + 1}}</a>
-                  </li>
+                <li class="page-item" [ngClass]=" 'active' " (click)="onPageIndexClicked(currentPageIndex)"
+                  *ngIf="currentPageIndex > 1 && currentPageIndex < pages.length - 2">
+                  <a class="page-link" href="#" onclick="return false">{{currentPageIndex + 1}}</a>
+                </li>
 
-                  <li>&nbsp;...&nbsp;</li>
+                <li>&nbsp;...&nbsp;</li>
 
-                  <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 2}"
-                      (click)="onPageIndexClicked(pages.length - 2)">
-                      <a class="page-link" href="#" onclick="return false">{{pages.length - 1}}</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 2}"
+                  (click)="onPageIndexClicked(pages.length - 2)">
+                  <a class="page-link" href="#" onclick="return false">{{pages.length - 1}}</a>
+                </li>
 
-                  <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 1}"
-                      (click)="onPageIndexClicked(pages.length - 1)">
-                      <a class="page-link" href="#" onclick="return false">{{pages.length}}</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'active': currentPageIndex == pages.length - 1}"
+                  (click)="onPageIndexClicked(pages.length - 1)">
+                  <a class="page-link" href="#" onclick="return false">{{pages.length}}</a>
+                </li>
               </ng-container>
 
               <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
-                  <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
-                      onclick="return false">Next</a>
+                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
+                  onclick="return false">Next</a>
               </li>
             </ul>
           </div>
@@ -165,7 +150,8 @@
       <mat-tab>
         <ng-template mat-tab-label>
           Prepared Orders
-          &nbsp; <span class="badge badge-danger zerobadge{{ totalPreparedOrderRowCount }}">{{ totalPreparedOrderRowCount }}</span>
+          &nbsp; <span class="badge badge-danger zerobadge{{ totalPreparedOrderRowCount }}">{{
+            totalPreparedOrderRowCount }}</span>
         </ng-template>
 
         <div class="col-sm-12" style="padding-top: 2em;">
@@ -177,7 +163,7 @@
                 </div>
                 <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
                   <option value="department_name">DEPARTMENT</option>
-                  <option value="mrs_req_desc">DESCRIPTION</option>               
+                  <option value="mrs_req_desc">DESCRIPTION</option>
                 </select>
               </div>
             </div>
@@ -187,10 +173,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="search"
-                autocomplete="off"
-                class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
-                  [(ngModel)]="searchText" (keyup)="onSearchPreparedOrder($event)" />
+                <input type="search" autocomplete="off" class="form-control" placeholder="Find here...."
+                  id="txtSearchText" name="SearchText" [(ngModel)]="searchText"
+                  (keyup)="onSearchPreparedOrder($event)" />
               </div>
             </div>
           </div>
@@ -209,7 +194,7 @@
                       <th>Requested By</th>
                       <th>Total Item/s</th>
                       <th>Prepared Item/s</th>
-          
+
                       <th class="text-center">Actions</th>
                     </tr>
                   </thead>
@@ -224,28 +209,26 @@
                       <td>{{item.total_state_repack | number:'1.0':'en-US'}}
                       </td>
                       <td>{{item.totalPreparedItems | number:'1.0':'en-US'}}</td>
-                
+
                       <td class="text-center">
-                        <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
-                        data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="success"
-                        mat-stroked-button>
-                        <span class="fa fa-eye"></span> View
-                      </button>
-        
-        
-        
-                        <button (click)="approvedOrder(item)"                                                                  
-                          class="editbtnStyle" color="primary"
-                          mat-stroked-button>
+                        <button (click)="onApproveClick(item)" data-toggle="modal"
+                          data-target="#preparedOrderApprovalModal" data-backdrop="false" title="Edit"
+                          data-keyboard="false" class="editbtnStyle" color="success" mat-stroked-button>
+                          <span class="fa fa-eye"></span> View
+                        </button>
+
+
+
+                        <button (click)="approvedOrder(item)" class="editbtnStyle" color="primary" mat-stroked-button>
                           <span class="fa fa-check-circle"></span> Approve
                         </button>
-        
+
                         <button (click)="onCancelOrderClick(item)" data-toggle="modal" data-target="#cancelOrderModal"
                           data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="warn"
                           mat-stroked-button>
                           <span class="fa fa-ban"></span> Cancel
                         </button>
-        
+
                       </td>
                     </tr>
                   </tbody>
@@ -258,7 +241,8 @@
           <div class="col-md-12">
             <ul class="pagination paginationStyle justify-content-center mt-1">
               <li class="page-item" (click)="onPageIndexClickedPreparedOrders(currentPageIndexPreparedOrders - 1)">
-                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#" onclick="return false">Prev</a>
+                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
+                  onclick="return false">Prev</a>
               </li>
 
               <ng-container *ngIf="pagesPreparedOrders.length <= 10">
@@ -280,28 +264,34 @@
                   <a class="page-link" href="#" onclick="return false">2</a>
                 </li>
 
-                <li *ngIf="currentPageIndexPreparedOrders > 1 && currentPageIndexPreparedOrders < pagesPreparedOrders.length - 2">&nbsp;...&nbsp;</li>
+                <li
+                  *ngIf="currentPageIndexPreparedOrders > 1 && currentPageIndexPreparedOrders < pagesPreparedOrders.length - 2">
+                  &nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClickedPreparedOrders(currentPageIndexPreparedOrders)"
+                <li class="page-item" [ngClass]=" 'link-active-paging' "
+                  (click)="onPageIndexClickedPreparedOrders(currentPageIndexPreparedOrders)"
                   *ngIf="currentPageIndexPreparedOrders > 1 && currentPageIndexPreparedOrders < pagesPreparedOrders.length - 2">
                   <a class="page-link" href="#" onclick="return false">{{currentPageIndexPreparedOrders + 1}}</a>
                 </li>
 
                 <li>&nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexPreparedOrders == pagesPreparedOrders.length - 2}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexPreparedOrders == pagesPreparedOrders.length - 2}"
                   (click)="onPageIndexClicked(pagesPreparedOrders.length - 2)">
                   <a class="page-link" href="#" onclick="return false">{{pagesPreparedOrders.length - 1}}</a>
                 </li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexPreparedOrders == pagesPreparedOrders.length - 1}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexPreparedOrders == pagesPreparedOrders.length - 1}"
                   (click)="onPageIndexClicked(pagesPreparedOrders.length - 1)">
                   <a class="page-link" href="#" onclick="return false">{{pagesPreparedOrders.length}}</a>
                 </li>
               </ng-container>
 
               <li class="page-item" (click)="onPageIndexClickedPreparedOrders(currentPageIndexPreparedOrders + 1)">
-                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#" onclick="return false">Next</a>
+                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
+                  onclick="return false">Next</a>
               </li>
             </ul>
           </div>
@@ -323,7 +313,7 @@
                 </div>
                 <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
                   <option value="department_name">DEPARTMENT</option>
-                  <option value="mrs_req_desc">DESCRIPTION</option> 
+                  <option value="mrs_req_desc">DESCRIPTION</option>
                 </select>
               </div>
             </div>
@@ -333,10 +323,9 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="search"
-                autocomplete="off"
-                class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
-                  [(ngModel)]="searchText" (keyup)="onSearchDispatchOrders($event)" />
+                <input type="search" autocomplete="off" class="form-control" placeholder="Find here...."
+                  id="txtSearchText" name="SearchText" [(ngModel)]="searchText"
+                  (keyup)="onSearchDispatchOrders($event)" />
               </div>
             </div>
           </div>
@@ -361,7 +350,7 @@
                   <tbody>
                     <tr
                       *ngFor="let item of DispatchOrderList | filter: searchBy : searchText | paging : currentPageIndexDispatching : pageSize; let i = index">
-                     <td>{{item.id}}</td>
+                      <td>{{item.id}}</td>
                       <td>{{item.wh_checker_move_order_no | number:'1.0':'en-US'}}</td>
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy"}}</td>
                       <td>{{item.department_name}}</td>
@@ -369,19 +358,11 @@
                       <td>{{item.mrs_requested_by}}</td>
                       <td>{{item.total_state_repack | number:'1.0':'en-US'}}</td>
                       <td class="text-center">
-                        <button
-                        (click)="onApproveClick(item)"
-                          data-toggle="modal"
-                          data-target="#DispatchingModal"
-                          data-backdrop="false"
-                          title="View"
-                          data-keyboard="false"
-                          class="editbtnStyle"
-                          color="primary"
-                          mat-stroked-button
-                        >
+                        <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#DispatchingModal"
+                          data-backdrop="false" title="View" data-keyboard="false" class="editbtnStyle" color="primary"
+                          mat-stroked-button>
 
-                  
+
                           <span class="fa fa-eye"></span> View
                         </button>&nbsp;
                       </td>
@@ -396,7 +377,8 @@
           <div class="col-md-12">
             <ul class="pagination paginationStyle justify-content-center mt-1">
               <li class="page-item" (click)="onPageIndexClickedDispatching(currentPageIndexDispatching - 1)">
-                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#" onclick="return false">Prev</a>
+                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
+                  onclick="return false">Prev</a>
               </li>
 
               <ng-container *ngIf="pagesDispatching.length <= 10">
@@ -418,28 +400,34 @@
                   <a class="page-link" href="#" onclick="return false">2</a>
                 </li>
 
-                <li *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">&nbsp;...&nbsp;</li>
+                <li
+                  *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">
+                  &nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClickedDispatching(currentPageIndexDispatching)"
+                <li class="page-item" [ngClass]=" 'link-active-paging' "
+                  (click)="onPageIndexClickedDispatching(currentPageIndexDispatching)"
                   *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">
                   <a class="page-link" href="#" onclick="return false">{{currentPageIndexDispatching + 1}}</a>
                 </li>
 
                 <li>&nbsp;...&nbsp;</li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 2}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 2}"
                   (click)="onPageIndexClickedDispatching(pagesDispatching.length - 2)">
                   <a class="page-link" href="#" onclick="return false">{{pagesDispatching.length - 1}}</a>
                 </li>
 
-                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 1}"
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 1}"
                   (click)="onPageIndexClickedDispatching(pagesDispatching.length - 1)">
                   <a class="page-link" href="#" onclick="return false">{{pagesDispatching.length}}</a>
                 </li>
               </ng-container>
 
               <li class="page-item" (click)="onPageIndexClickedDispatching(currentPageIndexDispatching + 1)">
-                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#" onclick="return false">Next</a>
+                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
+                  onclick="return false">Next</a>
               </li>
             </ul>
           </div>
@@ -449,7 +437,8 @@
       <mat-tab>
         <ng-template mat-tab-label>
           Cancelled Transactions
-          &nbsp; <span class="badge badge-danger zerobadge{{ totalCancelledOrderParent }}">{{ totalCancelledOrderParent }}</span>
+          &nbsp; <span class="badge badge-danger zerobadge{{ totalCancelledOrderParent }}">{{ totalCancelledOrderParent
+            }}</span>
         </ng-template>
 
         <div class="col-sm-12" style="padding-top: 2em;">
@@ -458,17 +447,11 @@
             <div class="p-2">
               <div class="input-group searchBtnStyle">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"
-                    ><span class="fa fa-filter"></span
-                  ></span>
+                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
                 </div>
-                <select
-                  class="form-control"
-                  id="drpSearchBy"
-                  name="SearchBy"
-                  [(ngModel)]="searchBy">
+                <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
                   <option value="department_name">DEPARTMENT</option>
-                  <option value="mrs_req_desc">DESCRIPTION</option> 
+                  <option value="mrs_req_desc">DESCRIPTION</option>
                 </select>
               </div>
             </div>
@@ -476,20 +459,11 @@
             <div class="p-2">
               <div class="input-group searchBtnStyle">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"
-                    ><span class="fa fa-search"></span
-                  ></span>
+                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input
-                  type="search"
-                  autocomplete="off"
-                  class="form-control"
-                  placeholder="Find here...."
-                  id="txtSearchText"
-                  name="SearchText"
-                  [(ngModel)]="searchText"
-                  (keyup)="onSearchCancelledOrders($event)"
-                />
+                <input type="search" autocomplete="off" class="form-control" placeholder="Find here...."
+                  id="txtSearchText" name="SearchText" [(ngModel)]="searchText"
+                  (keyup)="onSearchCancelledOrders($event)" />
               </div>
             </div>
 
@@ -501,44 +475,44 @@
               <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain">
                 <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
                   <thead>
-                      <tr class="text-light header-bg-color-um system-name">
-                          <th>ID</th>
-                          <th>Preparation Date</th>
-                          <th>Department</th>
-                          <th>Description</th>
-                          <th>Requested By</th>
-                          <th>Total Prepared Item(s)</th>
-                          <th>Total Reject Item(s)</th>
-                          <th class="text-center">Action</th>
-                      </tr>
+                    <tr class="text-light header-bg-color-um system-name">
+                      <th>ID</th>
+                      <th>Preparation Date</th>
+                      <th>Department</th>
+                      <th>Description</th>
+                      <th>Requested By</th>
+                      <th>Total Prepared Item(s)</th>
+                      <th>Total Reject Item(s)</th>
+                      <th class="text-center">Action</th>
+                    </tr>
                   </thead>
                   <tbody>
-                      <tr
-                          *ngFor="let item of CancelledOrderList | filter: searchBy : searchText | paging : currentPageIndexCancelledOrder : pageSize; let i = index">
-                         <td>{{item.mrs_id}}</td>
-                          <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
-                          <td>{{item.department_name}}</td>
-                          <td>{{item.mrs_req_desc}}</td>
-                          <td>{{item.mrs_requested_by}}</td>
-                          <td>{{item.totalPreparedItems | number}}</td>
-                          <td>{{item.totalRejectItems | number}}</td>
-                          <td class="text-center">
-              
-                            <button (click)="onViewCancelledClick(item)" data-toggle="modal" data-target="#preparedOrderCancelModal"
-                            data-backdrop="false" title="View" data-keyboard="false" class="editbtnStyle" color="success"
-                            mat-stroked-button>
-                            <span class="fa fa-eye"></span> View
-                          </button>
-                          <ng-container *ngIf="item.is_wh_checker_cancel == 1">
-                          <button (click)="onReturnParentPreparationOrderClick(item)"  title="Return" data-keyboard="false" class="editbtnStyle" color="success"
-                          mat-stroked-button>
-                          <span class="fa fa-undo"></span> Return
+                    <tr
+                      *ngFor="let item of CancelledOrderList | filter: searchBy : searchText | paging : currentPageIndexCancelledOrder : pageSize; let i = index">
+                      <td>{{item.mrs_id}}</td>
+                      <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
+                      <td>{{item.department_name}}</td>
+                      <td>{{item.mrs_req_desc}}</td>
+                      <td>{{item.mrs_requested_by}}</td>
+                      <td>{{item.totalPreparedItems | number}}</td>
+                      <td>{{item.totalRejectItems | number}}</td>
+                      <td class="text-center">
+
+                        <button (click)="onViewCancelledClick(item)" data-toggle="modal"
+                          data-target="#preparedOrderCancelModal" data-backdrop="false" title="View"
+                          data-keyboard="false" class="editbtnStyle" color="success" mat-stroked-button>
+                          <span class="fa fa-eye"></span> View
                         </button>
-</ng-container>
-                          </td>
-                      </tr>
+                        <ng-container *ngIf="item.is_wh_checker_cancel == 1">
+                          <button (click)="onReturnParentPreparationOrderClick(item)" title="Return"
+                            data-keyboard="false" class="editbtnStyle" color="success" mat-stroked-button>
+                            <span class="fa fa-undo"></span> Return
+                          </button>
+                        </ng-container>
+                      </td>
+                    </tr>
                   </tbody>
-              </table>
+                </table>
               </div>
             </div>
           </div>
@@ -547,52 +521,57 @@
           <div class="col-md-12">
             <ul class="pagination paginationStyle justify-content-center mt-1">
               <li class="page-item" (click)="onPageIndexClickedCancelledOrder(currentPageIndexCancelledOrder - 1)">
-                  <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
-                      onclick="return false">Prev</a>
+                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
+                  onclick="return false">Prev</a>
               </li>
 
               <ng-container *ngIf="pagesCancelledTransaction.length <= 10">
-                  <li class="page-item" *ngFor="let page of pagesCancelledTransaction"
-                      [ngClass]="{ 'link-active-paging': page.pageIndex == currentPageIndexCancelledOrder}"
-                      (click)="onPageIndexClickedCancelledOrder(page.pageIndex)">
-                      <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
-                  </li>
+                <li class="page-item" *ngFor="let page of pagesCancelledTransaction"
+                  [ngClass]="{ 'link-active-paging': page.pageIndex == currentPageIndexCancelledOrder}"
+                  (click)="onPageIndexClickedCancelledOrder(page.pageIndex)">
+                  <a class="page-link" href="#" onclick="return false">{{page.pageIndex + 1}}</a>
+                </li>
               </ng-container>
 
               <ng-container *ngIf="pagesCancelledTransaction.length > 10">
-                  <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == 0}"
-                      (click)="onPageIndexClickedCancelledOrder(0)">
-                      <a class="page-link" href="#" onclick="return false">1</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == 0}"
+                  (click)="onPageIndexClickedCancelledOrder(0)">
+                  <a class="page-link" href="#" onclick="return false">1</a>
+                </li>
 
-                  <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == 1}"
-                      (click)="onPageIndexClickedCancelledOrder(1)">
-                      <a class="page-link" href="#" onclick="return false">2</a>
-                  </li>
+                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == 1}"
+                  (click)="onPageIndexClickedCancelledOrder(1)">
+                  <a class="page-link" href="#" onclick="return false">2</a>
+                </li>
 
-                  <li *ngIf="currentPageIndexCancelledOrder > 1 && currentPageIndexCancelledOrder < pagesCancelledTransaction.length - 2">&nbsp;...&nbsp;</li>
+                <li
+                  *ngIf="currentPageIndexCancelledOrder > 1 && currentPageIndexCancelledOrder < pagesCancelledTransaction.length - 2">
+                  &nbsp;...&nbsp;</li>
 
-                  <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClickedCancelledOrder(currentPageIndexCancelledOrder)"
-                      *ngIf="currentPageIndexCancelledOrder > 1 && currentPageIndexCancelledOrder < pagesCancelledTransaction.length - 2">
-                      <a class="page-link" href="#" onclick="return false">{{currentPageIndexCancelledOrder + 1}}</a>
-                  </li>
+                <li class="page-item" [ngClass]=" 'link-active-paging' "
+                  (click)="onPageIndexClickedCancelledOrder(currentPageIndexCancelledOrder)"
+                  *ngIf="currentPageIndexCancelledOrder > 1 && currentPageIndexCancelledOrder < pagesCancelledTransaction.length - 2">
+                  <a class="page-link" href="#" onclick="return false">{{currentPageIndexCancelledOrder + 1}}</a>
+                </li>
 
-                  <li>&nbsp;...&nbsp;</li>
+                <li>&nbsp;...&nbsp;</li>
 
-                  <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == pagesCancelledTransaction.length - 2}"
-                      (click)="onPageIndexClickedCancelledOrder(pagesCancelledTransaction.length - 2)">
-                      <a class="page-link" href="#" onclick="return false">{{pagesCancelledTransaction.length - 1}}</a>
-                  </li>
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == pagesCancelledTransaction.length - 2}"
+                  (click)="onPageIndexClickedCancelledOrder(pagesCancelledTransaction.length - 2)">
+                  <a class="page-link" href="#" onclick="return false">{{pagesCancelledTransaction.length - 1}}</a>
+                </li>
 
-                  <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == pagesCancelledTransaction.length - 1}"
-                      (click)="onPageIndexClickedCancelledOrder(pagesCancelledTransaction.length - 1)">
-                      <a class="page-link" href="#" onclick="return false">{{pagesCancelledTransaction.length}}</a>
-                  </li>
+                <li class="page-item"
+                  [ngClass]="{ 'link-active-paging': currentPageIndexCancelledOrder == pagesCancelledTransaction.length - 1}"
+                  (click)="onPageIndexClickedCancelledOrder(pagesCancelledTransaction.length - 1)">
+                  <a class="page-link" href="#" onclick="return false">{{pagesCancelledTransaction.length}}</a>
+                </li>
               </ng-container>
 
               <li class="page-item" (click)="onPageIndexClickedCancelledOrder(currentPageIndexCancelledOrder + 1)">
-                  <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
-                      onclick="return false">Next</a>
+                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
+                  onclick="return false">Next</a>
               </li>
             </ul>
           </div>
@@ -613,7 +592,8 @@
       <div class="modal-content" style="width: auto;">
         <div class="modal-header bg-all">
           <div class="modal-title white-color">Prepared Orders Approval</div>
-          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"  #closeAddExpenseModal><span>&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"
+            #closeAddExpenseModal><span>&times;</span></button>
         </div>
         <div class="modal-body">
           <mat-card class="text-bold">Internal Information
@@ -643,7 +623,8 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
-                <input type="text" matInput class="text-color" readonly="readonly" name="route" formControlName="mrs_requested_by">
+                <input type="text" matInput class="text-color" readonly="readonly" name="route"
+                  formControlName="mrs_requested_by">
                 <mat-label>Requested By</mat-label>
               </mat-form-field>
             </div>
@@ -706,6 +687,7 @@
                   <tr>
                     <!-- <th>Parent</th> -->
                     <th>ID</th>
+                    <th>Item Code</th>
                     <th>Description</th>
                     <th>Uom</th>
                     <th>Serve</th>
@@ -718,18 +700,19 @@
                   <tr *ngFor="let item of itemList">
                     <!-- <td>{{item.fK_dry_wh_orders_parent_id}}</td> -->
                     <td>{{item.id}}</td>
+                    <td>{{item.mrs_item_code}}</td>
                     <td>{{item.mrs_item_description}}</td>
                     <td>{{item.mrs_uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>
                     <td class="hideObject">{{c | number}}</td>
                     <td class="text-center">
-                
+
 
                       <button (click)="onCancelItemClick(item)" data-toggle="modal" data-target="#cancelOrderItemModal"
-                      data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
-                      mat-stroked-button>
-                      <span class="fa fa-ban"></span> cancel
-                    </button>&nbsp;
+                        data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
+                        mat-stroked-button>
+                        <span class="fa fa-ban"></span> cancel
+                      </button>&nbsp;
 
                     </td>
                   </tr>
@@ -770,7 +753,8 @@
       <div class="modal-content" style="width: auto;">
         <div class="modal-header bg-all">
           <div class="modal-title white-color">Prepared Orders Cancelled</div>
-          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"  #closeAddExpenseModal><span>&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"
+            #closeAddExpenseModal><span>&times;</span></button>
         </div>
         <div class="modal-body">
           <mat-card class="text-bold">Internal Information
@@ -800,7 +784,8 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
-                <input type="text" matInput class="text-color" readonly="readonly" name="route" formControlName="mrs_requested_by">
+                <input type="text" matInput class="text-color" readonly="readonly" name="route"
+                  formControlName="mrs_requested_by">
                 <mat-label>Requested By</mat-label>
               </mat-form-field>
             </div>
@@ -863,6 +848,7 @@
                   <tr>
 
                     <th>ID</th>
+                    <th>Item Code</th>
                     <th>Description</th>
                     <th>Uom</th>
                     <th>Serve</th>
@@ -873,20 +859,21 @@
 
                 <tbody>
                   <tr *ngFor="let item of itemList">
-      
+
                     <td>{{item.id}}</td>
+                    <td>{{item.mrs_item_code}}</td>
                     <td>{{item.mrs_item_description}}</td>
                     <td>{{item.mrs_uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>
                     <td class="hideObject">{{c | number}}</td>
                     <td class="text-center">
-                
+
 
                       <button (click)="onReturnItemClick(item)" data-toggle="modal" data-target="#returnOrderItemModal"
-                      data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
-                      mat-stroked-button>
-                      <span class="fa fa-ban"></span> return
-                    </button>&nbsp;
+                        data-backdrop="false" data-keyboard="false" class="editbtnStyle" color="warn"
+                        mat-stroked-button>
+                        <span class="fa fa-ban"></span> return
+                      </button>&nbsp;
 
                     </td>
                   </tr>
@@ -1020,7 +1007,8 @@
       <div class="modal-content" style="width: auto;">
         <div class="modal-header bg-all">
           <div class="modal-title white-color">Dispatching</div>
-          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"  #closeAddExpenseModal><span>&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" (click)="CloseViewOrderRedirectToInternalOrder()"
+            #closeAddExpenseModal><span>&times;</span></button>
         </div>
         <div class="modal-body">
           <mat-card class="text-bold">Internal Information
@@ -1050,7 +1038,8 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <mat-form-field floatLabel="auto" class="w-100" appearance="outline" color="primary">
-                <input type="text" matInput class="text-color" readonly="readonly" name="route" formControlName="mrs_requested_by">
+                <input type="text" matInput class="text-color" readonly="readonly" name="route"
+                  formControlName="mrs_requested_by">
                 <mat-label>Requested By</mat-label>
               </mat-form-field>
             </div>
@@ -1101,7 +1090,8 @@
               <mat-card class="text-bold">Recieving Information </mat-card>
             </div>
             <div class="box-2">
-              <mat-card class="text-bold">Move Order No. <input class="input-transparent" formControlName="Wh_checker_move_order_no" readonly/></mat-card>
+              <mat-card class="text-bold">Move Order No. <input class="input-transparent"
+                  formControlName="Wh_checker_move_order_no" readonly /></mat-card>
             </div>
           </div>
 
@@ -1117,19 +1107,19 @@
                     <th>Uom</th>
                     <th>Serve</th>
                     <th class="hideObject">Total Items</th>
-           
+
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr *ngFor="let item of itemList">
-     
+
                     <td>{{item.id}}</td>
                     <td>{{item.mrs_item_description}}</td>
                     <td>{{item.mrs_uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>
                     <td class="hideObject">{{c | number}}</td>
-              
+
                   </tr>
                 </tbody>
               </table>

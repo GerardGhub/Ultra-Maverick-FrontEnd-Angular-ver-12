@@ -461,10 +461,7 @@ export class InternalOrderComponent implements OnInit {
 
               this.onlineOrderService.searchItems(this.MRSId).subscribe((response) => {
                 this.itemList = response;
-
               });
-
-
               //Modifier if you cancel some fucking orders
               this.totalPreparedItems = 1;
               $('#cancelOrderCloseModal').trigger('click');
@@ -485,6 +482,8 @@ export class InternalOrderComponent implements OnInit {
   }
 
   returnOrderItemPartial() {
+
+    
     if (this.cancelOrderItemForm.valid) {
       Swal.fire({
         title: 'Are you sure you want to return the item?',
@@ -499,10 +498,13 @@ export class InternalOrderComponent implements OnInit {
           this.onlineOrderService
             .returnOrderItem(this.cancelOrderItemForm.value)
             .subscribe((response) => {
+           
+              this.MRSId = response.mrs_id;
               this.onlineOrderService.searchItemsInactive(this.MRSId).subscribe((response) => {
                 this.itemList = response;
               });
-              //Modifier if you cancel some fucking orders
+           
+              // //Modifier if you cancel some fucking orders
               this.totalPreparedItems = 1;
               $('#returnOrderCloseModal').trigger('click');
               // $('#closeApprovalModal').trigger('click');

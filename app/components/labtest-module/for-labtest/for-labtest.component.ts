@@ -68,6 +68,7 @@ export class ForLabtestComponent implements OnInit {
 
   currentPageIndex: number = 0;
   pages: any[] = [];
+  pagesForApproval: any[] = [];
   pageSize: number = 7;
   totalPoRowCount: number = null;
 
@@ -202,7 +203,7 @@ export class ForLabtestComponent implements OnInit {
       .subscribe((response) => {
         // debugger;
         this.labtestApproval = response;
-        console.log(response)
+        // console.log(response)
         this.showLoading = false;
         this.calculateNoOfPagesLabRecords();
 
@@ -319,11 +320,11 @@ export class ForLabtestComponent implements OnInit {
     );
     var noOfPages = Math.ceil(resultLabtestRecords.length / this.pageSize);
 
-    this.pages = [];
+    this.pagesForApproval = [];
 
     //Generate Pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pages.push({ pageIndex: i });
+      this.pagesForApproval.push({ pageIndex: i });
     }
     this.currentPageIndex = 0;
   }

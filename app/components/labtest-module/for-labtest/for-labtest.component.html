@@ -688,7 +688,7 @@
           <div class="titledivider">RAW MATERIAL INFORMATION</div>
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Item Code :</label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtitem_code" class="form-control lbltext"
                 name="item_code" formControlName="item_code" maxlength="30" />
             </div>
@@ -718,7 +718,7 @@
           <div class="titledivider">LAB INFORMATION</div>
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO NO. :</label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtpo_number" class="form-control" name="po_number"
                 formControlName="po_number" maxlength="30" />
             </div>
@@ -733,7 +733,7 @@
           <div class="form-row lbltext">
             <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR No. :
             </label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtpr_number " class="form-control" name="pr_number"
                 formControlName="pr_no" maxlength="30" />
             </div>
@@ -747,7 +747,7 @@
 
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Quantity :</label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtquantity" class="form-control" name="qty_received"
                 formControlName="qty_received" maxlength="30" />
             </div>
@@ -762,7 +762,7 @@
           <div class="form-row lbltext">
             <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date Submitted :
             </label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtdate_submitted"
                 class="form-control" name="date_submitted" formControlName="date_submitted" maxlength="30" />
             </div>
@@ -776,7 +776,7 @@
 
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Requested By :</label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtreq_by" class="form-control" name="lab_request_by"
                 formControlName="lab_request_by" maxlength="30" />
             </div>
@@ -1446,6 +1446,7 @@
           <!-- </div>
           </div> -->
         </div>
+        <!-- {{cancelForm.value | json}}  -->
         <div class="modal-footer">
           <button mat-stroked-button [hidden]="true" color="accent" class="mr-1" id="CancelledCancelModal"
             data-dismiss="modal" type="button">
@@ -1762,7 +1763,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="titledivider">RAW MATERIAL INFORMATIONs</div>
+          <div class="titledivider">RAW MATERIAL INFORMATION</div>
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Item Code :</label>
             <div class="col-sm-4 mb-2">

@@ -1,22 +1,22 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ForLabtest } from '../models/for-labtest';
 import * as $ from 'jquery';
-import { FilterPipe } from 'src/app/pipes/filter.pipe';
+import { FilterPipe } from '../../../pipes/filter.pipe';
 import { ForLabtestService } from '../services/for-labtest.service';
 import { LabtestRecords } from '../models/labtest-records';
 import { LabtestRecordsService } from '../services/labtest-records.service';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from '../../../services/login.service';
 import * as moment from 'moment';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { dateFormat } from 'highcharts';
-import { LabaratoryProcedure } from 'src/app/models/laboratory-procedures/labaratory-procedure';
-import { LabTestProcedureService } from 'src/app/services/labtest-procedures-service/lab-test-procedure.service';
-import { LabTestRemarks } from 'src/app/models/labtest-remarks/lab-test-remarks';
-import { LabtestRemarksService } from 'src/app/services/labtest-remarks-service/labtest-remarks.service';
-import { LabtestSubRemarksService } from 'src/app/services/labtest-sub-remarks-service/labtest-sub-remarks-service.service';
-import { LabtestSubRemarks } from 'src/app/models/labtest-sub-remarks/labtest-sub-remarks';
+import { LabaratoryProcedure } from '../../../models/laboratory-procedures/labaratory-procedure';
+import { LabTestProcedureService } from '../../../services/labtest-procedures-service/lab-test-procedure.service';
+import { LabTestRemarks } from '../../../models/labtest-remarks/lab-test-remarks';
+import { LabtestRemarksService } from '../../../services/labtest-remarks-service/labtest-remarks.service';
+import { LabtestSubRemarksService } from '../../../services/labtest-sub-remarks-service/labtest-sub-remarks-service.service';
+import { LabtestSubRemarks } from '../../../models/labtest-sub-remarks/labtest-sub-remarks';
 import { LabtestApproval } from '../models/labtest-approval';
 import { LabtestForApprovalService } from '../services/labtest-forapproval.service';
 import { NgxPrintDirective } from 'ngx-print';
@@ -535,16 +535,14 @@ export class ForLabtestComponent implements OnInit {
 
   }
 
-  cancelLabtestClick(forLabtestParam: ForLabtest) {
+  cancelLabtestClick(event,forLabtestParam: ForLabtest) {
+    console.log(forLabtestParam);
     this.cancelForm.reset();
 
     setTimeout(() => {
       //Set data into approveForm
       this.cancelForm.patchValue(forLabtestParam);
       this.editIndex = this.forlabtest.indexOf(forLabtestParam);
-      // this.approved_by.nativeElement.value = this.loginService.currentUserName;
-      // this.approved_status.nativeElement.value = "1";
-      // this.lab_status.nativeElement.value = "LAB APPROVED";
       this.qa_approval_status = '3';
       this.lab_cancel_remarks = 'CANCELLED';
       this.activeUser = this.loginService.currentUserName;

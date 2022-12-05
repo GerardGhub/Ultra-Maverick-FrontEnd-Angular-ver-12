@@ -237,18 +237,20 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
+                <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
+                autocomplete="off"
                   [(ngModel)]="searchText" (keyup)="onSearchTextKeyupLabRecords($event)" />
               </div>
             </div>
           </div>
         </div>
 
+
         <div class="col-lg-12">
           <div class="d-flex">
             <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-              <!-- table table-striped table-bordered nowrap table-responsive-sm -->
-              <table class="" style="width: 100%">
+   
+              <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width: 100%">
                 <thead>
                   <tr class="text-light header-bg-color-um system-name">
                     <th>Ref. No.</th>
@@ -429,7 +431,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
+                <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText" name="SearchText"
+                autocomplete="off"
                   [(ngModel)]="searchText" (keyup)="onSearchTextKeyupLabRecords($event)" />
               </div>
             </div>
@@ -450,8 +453,7 @@
         <div class="col-lg-12">
           <div class="d-flex">
             <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-              <!-- table table-striped table-bordered nowrap table-responsive-sm -->
-              <table class="" style="width: 100%">
+              <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width: 100%">
                 <thead>
                   <tr class="text-light header-bg-color-um system-name">
                     <th></th>

@@ -580,6 +580,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   onEditClick(event, index: Project) {
     // onEditClick(event, index: number) {
+
     if ($('#txtSearchText').val().length == 0) {
 
 

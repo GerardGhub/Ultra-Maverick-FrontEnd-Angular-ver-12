@@ -21,6 +21,7 @@ import { LabtestApproval } from '../models/labtest-approval';
 import { LabtestForApprovalService } from '../services/labtest-forapproval.service';
 import { NgxPrintDirective } from 'ngx-print';
 import { UpperCasePipe } from '@angular/common';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-for-labtest',
@@ -39,8 +40,9 @@ export class ForLabtestComponent implements OnInit {
     private labtestSubRemarksService: LabtestSubRemarksService,
     private labtestForApprovalService: LabtestForApprovalService,
     private printDirective: NgxPrintDirective,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    public appComponent: AppComponent 
+  ) { }
 
   forlabtest: ForLabtest[] = [];
   labtestRecords: LabtestRecords[] = [];
@@ -123,7 +125,11 @@ export class ForLabtestComponent implements OnInit {
   qa_supervisor: string = '';
 
   isGenerate = true;
-
+  //Records Count Header Tagging for user Rights
+  ForLabTest: number = 0;
+  ForApproval: number = 0;
+  LaboratoryTestRecords: number = 0;
+  RecordsWithAccessCode: number = 0;
 
   @ViewChild('approved_by') approved_by: ElementRef;
   @ViewChild('approved_status') approved_status: ElementRef;
@@ -138,6 +144,7 @@ export class ForLabtestComponent implements OnInit {
     this.getForApprovalList();
     this.getRejectRemarks();
     this.reactiveForm();
+    this.ForLabTest = this.appComponent.ForLabTest;
   }
 
   getLists() {
@@ -330,7 +337,7 @@ export class ForLabtestComponent implements OnInit {
   }
 
   // Reactive Forms *********************************************************************************************************************
-  reactiveForm(){
+  reactiveForm() {
     this.resultForm = this.formBuilder.group({
       id: this.formBuilder.control(null),
       item_code: this.formBuilder.control(null, [Validators.required]),
@@ -388,7 +395,7 @@ export class ForLabtestComponent implements OnInit {
       qa_approval_status: this.formBuilder.control(null),
       files: this.formBuilder.control(null),
 
-      lab_req_id:  this.formBuilder.control(null, [Validators.required]),
+      lab_req_id: this.formBuilder.control(null, [Validators.required]),
       qa_supervisor_is_approve_by: this.formBuilder.control(null, [Validators.required]),
       lab_result_remarks: this.formBuilder.control(null, [Validators.required]),
       lab_sub_remarks: this.formBuilder.control(null, [Validators.required]),
@@ -396,7 +403,7 @@ export class ForLabtestComponent implements OnInit {
     });
 
     this.superVisorRejectForm = this.formBuilder.group({
-      id:  this.formBuilder.control(null, [Validators.required]),
+      id: this.formBuilder.control(null, [Validators.required]),
       LabTest_CancelledReason: this.formBuilder.control(null, [Validators.required])
     });
 
@@ -430,7 +437,7 @@ export class ForLabtestComponent implements OnInit {
       qa_approval_status: this.formBuilder.control(null),
       files: this.formBuilder.control(null),
 
-      lab_req_id:  this.formBuilder.control(null, [Validators.required]),
+      lab_req_id: this.formBuilder.control(null, [Validators.required]),
       qa_supervisor_is_approve_by: this.formBuilder.control(null, [Validators.required]),
       lab_result_remarks: this.formBuilder.control(null, [Validators.required]),
       lab_sub_remarks: this.formBuilder.control(null, [Validators.required]),
@@ -439,21 +446,21 @@ export class ForLabtestComponent implements OnInit {
     });
 
     this.managerRejectForm = this.formBuilder.group({
-      id:  this.formBuilder.control(null, [Validators.required]),
+      id: this.formBuilder.control(null, [Validators.required]),
       LabTest_CancelledReason: this.formBuilder.control(null, [Validators.required])
     });
 
     this.internalMemoForm = this.formBuilder.group({
-      department:  this.formBuilder.control(null, [Validators.required]),
-      samples:  this.formBuilder.control(null, [Validators.required]),
-      source_of_samples:  this.formBuilder.control(null, [Validators.required]),
-      lab_procedure:  this.formBuilder.control(null, [Validators.required]),
+      department: this.formBuilder.control(null, [Validators.required]),
+      samples: this.formBuilder.control(null, [Validators.required]),
+      source_of_samples: this.formBuilder.control(null, [Validators.required]),
+      lab_procedure: this.formBuilder.control(null, [Validators.required]),
 
-      lab_access_code:  this.formBuilder.control(null, [Validators.required]),
-      date_submitted:  this.formBuilder.control(null, [Validators.required]),
-      date_analyzed:  this.formBuilder.control(null, [Validators.required]),
-      date_relaeased:  this.formBuilder.control(null, [Validators.required]),
-      request_by:  this.formBuilder.control(null, [Validators.required]),
+      lab_access_code: this.formBuilder.control(null, [Validators.required]),
+      date_submitted: this.formBuilder.control(null, [Validators.required]),
+      date_analyzed: this.formBuilder.control(null, [Validators.required]),
+      date_relaeased: this.formBuilder.control(null, [Validators.required]),
+      request_by: this.formBuilder.control(null, [Validators.required]),
 
     });
   }
@@ -527,7 +534,7 @@ export class ForLabtestComponent implements OnInit {
     });
   }
 
-  OnAttachedImage(file: any){
+  OnAttachedImage(file: any) {
     this.fileToUpload = file.item(0).name;
     console.log(this.fileToUpload)
     // this.resultForm.patchValue({
@@ -536,7 +543,7 @@ export class ForLabtestComponent implements OnInit {
 
   }
 
-  cancelLabtestClick(event,forLabtestParam: ForLabtest) {
+  cancelLabtestClick(event, forLabtestParam: ForLabtest) {
     console.log(forLabtestParam);
     this.cancelForm.reset();
 
@@ -573,7 +580,7 @@ export class ForLabtestComponent implements OnInit {
     });
   }
 
-  onManagerApproveDetailsClick(item: any){
+  onManagerApproveDetailsClick(item: any) {
     this.managerApprovalForm.reset();
     this.managerApprovalForm.patchValue(item);
 
@@ -583,7 +590,7 @@ export class ForLabtestComponent implements OnInit {
     })
   }
 
-  onManagerRejectDetailsClick(item: any){
+  onManagerRejectDetailsClick(item: any) {
     this.managerRejectForm.reset();
 
     this.managerRejectForm.patchValue({
@@ -785,7 +792,7 @@ export class ForLabtestComponent implements OnInit {
       );
   }
 
-  onApproveByQAManager(){
+  onApproveByQAManager() {
     if (this.managerApprovalForm.valid) {
       Swal.fire({
         title: 'Are you sure, you want to Approve the Laboratory Test Result?',
@@ -817,7 +824,7 @@ export class ForLabtestComponent implements OnInit {
     }
   }
 
-  onManagereject(){
+  onManagereject() {
     if (this.managerRejectForm.valid) {
       Swal.fire({
         title: 'Are you sure, you want to reject the Laboratory Test Result?',
@@ -852,29 +859,29 @@ export class ForLabtestComponent implements OnInit {
   }
 
   // Generate Lab Access Code ************************************************************************************************************
-  getRowItem(item: any, isChecked: boolean){
+  getRowItem(item: any, isChecked: boolean) {
     const req_id = item.lab_req_id;
 
-    if(isChecked === true){
+    if (isChecked === true) {
       const checkDuplicate = this.forLabAccessCodeList.filter((res: any) => res.lab_req_id === req_id);
-      if(checkDuplicate.length == 0)
+      if (checkDuplicate.length == 0)
         this.forLabAccessCodeList.push(item);
     }
-    else{
+    else {
       const index = this.forLabAccessCodeList.findIndex((res: any) => res.lab_req_id === req_id);
       this.forLabAccessCodeList.splice(index, 1);
     }
 
     console.log(this.forLabAccessCodeList);
 
-    if(this.forLabAccessCodeList.length == 0){
+    if (this.forLabAccessCodeList.length == 0) {
       this.isGenerate = true;
-    }else{
+    } else {
       this.isGenerate = false;
     }
   }
 
-  generateLabAcessCode(){
+  generateLabAcessCode() {
     this.internalMemoForm.reset();
     this.internalMemoForm.patchValue({
       department: 'DRY',
@@ -882,14 +889,14 @@ export class ForLabtestComponent implements OnInit {
     })
   }
 
-  saveGeneratedItem(){
+  saveGeneratedItem() {
     alert('ediwow!')
-    if(this.internalMemoForm.valid){
+    if (this.internalMemoForm.valid) {
       // services here
     }
   }
 
-  duplicateLabAccessCodeTrapping(code: string){
+  duplicateLabAccessCodeTrapping(code: string) {
     alert(code);
     // dito need e compare ung labaccesscode sa dab vs sa inputed
   }

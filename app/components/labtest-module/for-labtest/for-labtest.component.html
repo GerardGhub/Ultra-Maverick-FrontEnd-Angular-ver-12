@@ -18,8 +18,9 @@
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="labTestTabforRefresh($event)"
       (selectedTabChange)="labTestTabRecordsForRefresh($event)">
       <!-- Lab Test -->
-      <mat-tab>
-        <ng-template mat-tab-label>
+      <mat-tab *ngIf="ForLabTest === 1">
+
+        <ng-template mat-tab-label *ngIf="ForLabTest === 1">
           For Laboratory Test
           &nbsp; <span *ngIf="totalPoRowCount" class="badge badge-danger zerobadge{{ totalPoRowCount }}">{{
             totalPoRowCount }}</span>
@@ -207,6 +208,7 @@
             </li>
           </ul>
         </div>
+
       </mat-tab>
 
       <!-- For Approval -->

@@ -169,7 +169,7 @@
           <!-- Approval Module -->
         </ng-container>
 
-        <ng-container *ngIf="LabTest === 1 ">
+        <ng-container *ngIf="LabTest === 1 || ForLabTest === 1 ">
           <!-- Lab Test Module -->
           <a [routerLink]=" ['/admin', 'forlabtest'] " mat-list-item routerLinkActive="link-active">
             <mat-icon>hourglass_empty</mat-icon>&nbsp;Lab Test &nbsp;&nbsp;

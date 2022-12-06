@@ -94,6 +94,14 @@ export class AppComponent {
 
 
   LabTest: number = 0;
+  // Array Setup {
+  ForLabTest: number = 0;
+  ForApproval: number = 0;
+  LaboratoryTestRecords: number = 0;
+  RecordsWithAccessCode: number = 0;
+  //}
+
+
   Preparation: number = 0;
   OnlineMrs: number = 0;
   // Array of Online MRs
@@ -132,10 +140,9 @@ export class AppComponent {
 
   ngOnInit() {
 
-    if (sessionStorage.currentUser != null)
-    {
+    if (sessionStorage.currentUser != null) {
 
-    // if (this.loginService.currentUserName != null) {
+      // if (this.loginService.currentUserName != null) {
 
       this.detectAlreadyLogin();
       this.totalPreparationCount();
@@ -362,6 +369,21 @@ export class AppComponent {
           else if (status.modulename === 'labtest-route') {
             this.LabTest = 1;
           }
+          else if (status.modulename === 'for-lab-test-route') {
+            this.ForLabTest = 1;
+          }
+
+          else if (status.modulename === 'lab-test-for-approval-route') {
+            this.ForApproval = 1;
+          }
+          else if (status.modulename === 'lab-test-records-route') {
+            this.LaboratoryTestRecords = 1;
+          }
+          else if (status.modulename === 'records-with-access-code-route') {
+            this.RecordsWithAccessCode = 1;
+          }
+
+
           else if (status.modulename === 'preparation-route') {
             this.Preparation = 1;
 

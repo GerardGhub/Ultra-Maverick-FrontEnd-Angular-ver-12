@@ -5,6 +5,7 @@ export class Project
 {
     projectID: number;
     primaryID: number;
+    is_return_in_qc: number;
     projectName: string;
     dateOfStart: string;
     teamSize: number;

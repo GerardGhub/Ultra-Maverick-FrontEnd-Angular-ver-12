@@ -790,6 +790,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
             p.is_approved_XP = response.is_approved_XP;
             p.is_approved_by = response.is_approved_by;
             p.is_approved_date = response.is_approved_date;
+            p.is_return_in_qc = response.is_return_in_qc = 1;
             this.projects[this.editIndex] = p;
 
             this.editProject.projectID = null;
@@ -957,7 +958,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       confirmButtonText: 'Yes',
     }).then((result) => {
       if (result.isConfirmed) {
-
         this.ApprovedClickDetails();
       }
     });

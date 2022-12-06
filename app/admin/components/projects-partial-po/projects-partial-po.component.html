@@ -237,7 +237,7 @@
                 ">Duplicate Project ID</span>
             </div>
           </div>
-
+          Cancel PO QC Receiving
           <div class="form-group row">
             <label for="txtNewProjectID" class="col-sm-4 col-form-label">Is Activated</label>
             <div class="col-sm-8">
@@ -379,8 +379,8 @@
                 <input type="radio" id="rbNewStatusSupport" value="Support" class="form-check-input" name="Status"
                   [(ngModel)]="newProject.status" required="required" #newStatusSupport="ngModel" />
                 <label for="rbNewStatusSupport" class="form-check-label">Support</label>
-              </div>
-
+              </div
+              >
               <span class="text-danger" *ngIf="
                   newStatusInForce.invalid &&
                   (newStatusInForce.dirty ||
@@ -390,14 +390,11 @@
                 ">Please select status</span>
             </div>
           </div>
-
-
         </div>
         <div class="modal-footer">
           <button class="btn btn-warning" data-dismiss="modal" id="newFormCancel">
             Cancel
           </button>
-          <!-- <button class="btn btn-success" (click)="onSaveClick()">Save</button> -->
         </div>
       </div>
     </div>

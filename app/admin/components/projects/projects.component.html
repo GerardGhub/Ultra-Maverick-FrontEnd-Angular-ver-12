@@ -1261,7 +1261,7 @@
           <br>
 
         </div>
-
+        <!-- {{editForm.value | json}} -->
         <!-- Footer -->
         <div class="modal-footer">
           <button mat-stroked-button [disabled]="!editForm.valid" color="primary" class="mr-2"
@@ -1342,10 +1342,6 @@
             <input type="text" matInput id="txtDeleteProjectID" placeholder="Project ID" name="ProjectID"
               [(ngModel)]="editProject.po_number" disabled="disabled" #PONumber />
             <mat-label>PO Number</mat-label>
-            <!-- <mat-hint align="end">Purchased Order</mat-hint> -->
-            <!-- <mat-icon matPrefix>inventory<span class="material-icons-outlined">
-          </span>
-          </mat-icon> -->
           </mat-form-field>
 
           <mat-form-field class="w-100" floatLabel="auto" appearance="standard" color="primary">
@@ -1367,7 +1363,7 @@
           </mat-form-field>
 
           <p *ngFor="let status of ProjectsAllowableQty | async" [value]="status.actual_delivery">
-            <emp class="system-name">List of Item for Receiving {{ totalPartialReceivingCancel }}</emp>
+            <!-- <emp class="system-name">List of Item for Receiving {{ totalPartialReceivingCancel }}</emp> -->
             <mat-form-field class="w-100" floatLabel="auto" appearance="standard" color="primary">
               <input type="text" matInput value="{{ status.actual_delivery }}" id="ActivePartialReceiving"
                 #ActivePartialReceiving disabled="disabled" />

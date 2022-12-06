@@ -760,6 +760,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   // Inserting of checklist data
   onRecieveButtonClick(ProjectID: any) {
+
+    
+
     const ExpectedDeliveryValidate = this.ExpectedDeliveryActual.nativeElement.value;
     const ActualDeliveredValidate = this.ExpectedDeliveryActual.nativeElement.value;
 
@@ -959,8 +962,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
             });
           } else {
             //Start
+ //Buje
             Swal.fire({
-              title: 'Are you sure you want to receive the item ?',
+              title: 'Are you sure you want to receive the item?',
               text: ItemDesc,
               icon: 'info',
               showCancelButton: true,

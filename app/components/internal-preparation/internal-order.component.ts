@@ -14,6 +14,7 @@ import { RawMaterials } from "../../models/raw-material";
 import { Observable } from "rxjs";
 import { CancelledPOTransactionStatus } from "../../models/cancelled-potransaction-status";
 import { CancelledPOTransactionStatusService } from "../../services/cancelled-potransaction-status.service";
+import { AppComponent } from "../../app.component";
 
 @Component({
   selector: "app-internal-order",
@@ -28,7 +29,8 @@ export class InternalOrderComponent implements OnInit {
     private toastr: ToastrService,
     public loginService: LoginService,
     private whCheckerDashboardService: WhCheckerDashboardService,
-    private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService
+    private cancelledPOTransactionStatusService: CancelledPOTransactionStatusService,
+    public appComponent : AppComponent
   ) { }
 
   InternalOrderList: MaterialRequestMaster[] = [];
@@ -87,6 +89,12 @@ export class InternalOrderComponent implements OnInit {
   totalPreparedOrderRowCount: number = 0;
   checkifPreparedisCancel: number = 0;
 
+  IOrders: number = 0;
+  IPreparedOrders: number = 0;
+  IDispatching: number = 0;
+  ICancelledTransactions: number = 0;
+
+
   ngOnInit() {
     this.reactiveForms();
     this.getInternalOrderList();
@@ -96,6 +104,11 @@ export class InternalOrderComponent implements OnInit {
     this.getDispatchingOrderList();
     this.getCancelledParentOrder();
     $('#mens').trigger('click');
+
+    this.IOrders = this.appComponent.IOrders;
+    this.IPreparedOrders = this.appComponent.IPreparedOrders;
+    this.IDispatching = this.appComponent.IDispatching;
+    this.ICancelledTransactions = this.appComponent.ICancelledTransactions;
   }
 
   getDispatchingOrderList() {

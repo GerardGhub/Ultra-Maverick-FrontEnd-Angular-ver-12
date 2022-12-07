@@ -43,6 +43,8 @@ export class OnlineMRSComponent implements OnInit {
   sortBy: string = 'mrs_req_desc';
   sortOrder: string = 'ASC';
 
+
+
   //Properties for Paging
   currentPageIndex: number = 0;
   currentPageIndexCancelled: number = 0;

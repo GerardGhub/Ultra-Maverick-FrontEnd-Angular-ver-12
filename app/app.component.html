@@ -188,7 +188,8 @@
               totalSumofPreparation | number }}</span>
           </a>
           <mat-menu #menu_prep="matMenu">
-            <ng-container *ngIf="StoreOrders === 1 || SOrders === 1">
+            <ng-container *ngIf="StoreOrders === 1 || SOrders === 1  || SPreparedOrders === 1 || SDispatching === 1
+            || SCancelledTransactions === 1">
               <button mat-menu-item>
       
                 <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s
@@ -199,7 +200,8 @@
               </button>
             </ng-container>
 
-            <ng-container *ngIf="InternalOrders  || InternalOrderList === 1">
+            <ng-container *ngIf="InternalOrders  || IOrders === 1 || IPreparedOrders === 1 || IDispatching === 1
+            || ICancelledTransactions === 1">
             <button mat-menu-item>
 
               <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s

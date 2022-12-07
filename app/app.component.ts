@@ -429,10 +429,10 @@ export class AppComponent {
           else if (status.modulename === 'internal-prepared-orders-route') {
             this.IPreparedOrders = 1;
           }
-          else if (status.modulename === 'internal-dispatching-orders-route') {
+          else if (status.modulename === 'internal-dispatching-orders') {
             this.IDispatching = 1;
           }
-          else if (status.modulename === 'internal-cancelled-transactions-route') {
+          else if (status.modulename === 'internal-cancelled-transaction') {
             this.ICancelledTransactions = 1;
           }
 

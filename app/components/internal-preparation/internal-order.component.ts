@@ -106,6 +106,7 @@ export class InternalOrderComponent implements OnInit {
     $('#mens').trigger('click');
 
     this.IOrders = this.appComponent.IOrders;
+
     this.IPreparedOrders = this.appComponent.IPreparedOrders;
     this.IDispatching = this.appComponent.IDispatching;
     this.ICancelledTransactions = this.appComponent.ICancelledTransactions;

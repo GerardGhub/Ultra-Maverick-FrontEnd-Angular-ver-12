@@ -15,55 +15,55 @@
       </ol>
     </nav>
 
-    <mat-tab-group mat-align-tabs="start"
-     (selectedTabChange)="tabRefresh()">
+    <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabRefresh()">
 
       <!-- Store Order -->
-      <mat-tab>
-        <ng-template mat-tab-label>
-          Store Orders
-          &nbsp; <span
-            class="badge badge-danger zerobadge{{ totalStoreOrderRowCount }}">{{ totalStoreOrderRowCount }}</span>
-        </ng-template>
+      <ng-template [ngIf]="SOrders == 1">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Store Orders
+            &nbsp; <span class="badge badge-danger zerobadge{{ totalStoreOrderRowCount }}">{{ totalStoreOrderRowCount
+              }}</span>
+          </ng-template>
 
-     
-         <!-- filter -->
-         <div class="col-sm-12" style="padding-top: 2em">
-          <div class="d-flex">
-            <div class="p-2">
-              <div class="input-group searchBtnStyle">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
+
+          <!-- filter -->
+          <div class="col-sm-12" style="padding-top: 2em">
+            <div class="d-flex">
+              <div class="p-2">
+                <div class="input-group searchBtnStyle">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-filter"></span></span>
+                  </div>
+                  <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy">
+                    <option value="store_code">STORE CODE</option>
+                    <option value="category">CATEGORY</option>
+                  </select>
                 </div>
-                <select class="form-control" id="drpSearchBy" name="SearchBy" [(ngModel)]="searchBy"
-                 >
-                 <option value="store_code">STORE CODE</option>
-                 <option value="category">CATEGORY</option>
-                </select>
               </div>
-            </div>
 
-            <div class="p-2">
-              <div class="input-group searchBtnStyle">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+              <div class="p-2">
+                <div class="input-group searchBtnStyle">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+                  </div>
+                  <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                    name="SearchText" autocomplete="off" [(ngModel)]="searchText"
+                    (keyup)="onSearchTextChange($event)" />
                 </div>
-                <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
-                  name="SearchText" autocomplete="off" [(ngModel)]="searchText" (keyup)="onSearchTextChange($event)" />
               </div>
             </div>
           </div>
-        </div>
 
 
-        <div class="col-lg-12">
-          <div class="d-flex">
-            <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
-              <table class="table table-striped table-bordered nowrap table-responsive-sm">
+          <div class="col-lg-12">
+            <div class="d-flex">
+              <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
+                <table class="table table-striped table-bordered nowrap table-responsive-sm">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
                       <th style="width:14%">
-                      Preparation Date
+                        Preparation Date
                       </th>
                       <th style="width:14%">Category</th>
                       <th style="width:14%">Store</th>
@@ -142,31 +142,34 @@
             </ul>
           </div>
 
-    
 
-      </mat-tab>
 
+        </mat-tab>
+      </ng-template>
       <!-- Prepared Orders -->
-      <mat-tab>
-        <ng-template mat-tab-label>
-          Prepared Orders
-          &nbsp; <span *ngIf="totalPreparedOrdersCount"
-            class="badge badge-danger zerobadge{{ totalPreparedOrdersCount }}">{{ totalPreparedOrdersCount }}</span>
-        </ng-template>
-        <app-prepared-store-order></app-prepared-store-order>
-      </mat-tab>
-
+      <ng-template [ngIf]="SPreparedOrders == 1">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Prepared Orders
+            &nbsp; <span *ngIf="totalPreparedOrdersCount"
+              class="badge badge-danger zerobadge{{ totalPreparedOrdersCount }}">{{ totalPreparedOrdersCount }}</span>
+          </ng-template>
+          <app-prepared-store-order></app-prepared-store-order>
+        </mat-tab>
+      </ng-template>
       <!-- Dispatching -->
-      <mat-tab>
-        <ng-template mat-tab-label>
-          Dispatching
-          <!-- &nbsp; <span *ngIf="totalDispatchingRowCount"
+      <ng-template [ngIf]="SDispatching == 1">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Dispatching
+            <!-- &nbsp; <span *ngIf="totalDispatchingRowCount"
             class="badge badge-danger zerobadge{{ totalDispatchingRowCount }}">{{ totalDispatchingRowCount }}</span> -->
-        </ng-template>
-        <app-store-order-dispatching-record></app-store-order-dispatching-record>
-      </mat-tab>
-
+          </ng-template>
+          <app-store-order-dispatching-record></app-store-order-dispatching-record>
+        </mat-tab>
+      </ng-template>
       <!-- Cancelled Transactions -->
+      <ng-template [ngIf]="SCancelledTransactions == 1">
       <mat-tab>
         <ng-template mat-tab-label>
           Cancelled Transactions
@@ -177,7 +180,7 @@
         <app-store-order-active-cancelled-transaction>
         </app-store-order-active-cancelled-transaction>
       </mat-tab>
-
+</ng-template>
     </mat-tab-group>
   </div>
 </div>

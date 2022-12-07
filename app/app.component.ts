@@ -103,6 +103,22 @@ export class AppComponent {
 
 
   Preparation: number = 0;
+  //Array {
+  StoreOrders: number = 0;
+  //[
+  SOrders: number = 0;
+  SPreparedOrders: number = 0;
+  SDispatching: number = 0;
+  SCancelledTransactions: number = 0;
+  //]
+  InternalOrders: number = 0;
+  //[
+    IOrders: number = 0;
+    IPreparedOrders: number = 0;
+    IDispatching: number = 0;
+    ICancelledTransactions: number = 0;
+  //]
+  //End of Array}
   OnlineMrs: number = 0;
   // Array of Online MRs
   OrderList: number = 0;
@@ -386,8 +402,41 @@ export class AppComponent {
 
           else if (status.modulename === 'preparation-route') {
             this.Preparation = 1;
-
           }
+
+          else if (status.modulename === 'store-orders-route') {
+            this.StoreOrders = 1;
+          }
+          else if (status.modulename === 'store-order-lists-route') {
+            this.SOrders = 1;
+          }
+          else if (status.modulename === 'store-prepared-orders-route') {
+            this.SPreparedOrders = 1;
+          }
+          else if (status.modulename === 'store-dispatching-orders-route') {
+            this.SDispatching = 1;
+          }
+          else if (status.modulename === 'store-cancelled-transact-route') {
+            this.SCancelledTransactions = 1;
+          }
+
+          else if (status.modulename === 'internal-orders-route') {
+            this.InternalOrders = 1;
+          }
+          else if (status.modulename === 'internal-order-lists-route') {
+            this.IOrders = 1;
+          }
+          else if (status.modulename === 'internal-prepared-orders-route') {
+            this.IPreparedOrders = 1;
+          }
+          else if (status.modulename === 'internal-dispatching-orders-route') {
+            this.IDispatching = 1;
+          }
+          else if (status.modulename === 'internal-cancelled-transactions-route') {
+            this.ICancelledTransactions = 1;
+          }
+
+
           else if (status.modulename === 'onlinemrs-route') {
             this.OnlineMrs = 1;
           }

@@ -80,9 +80,6 @@
                     <td>{{ item.qty_order | number: "1.0":"en-US" }}</td>
                     <td>
                       {{ item.actual_delivery | number: "1.0":"en-US" }}
-                      <!-- <mat-icon class="zerobadge{{ item.total_of_reject_mat | number }}"
-                        matBadge="{{ item.total_of_reject_mat | number }}" matBadgeColor="warn">
-                      </mat-icon> -->
                     </td>
 
                     <td class="text-center">
@@ -91,6 +88,10 @@
                         data-toggle="modal" data-target="#viewModal" data-backdrop="false" data-keyboard="false"
                         title="View">
                         <span class="fa fa-eye"></span> View
+                        <mat-icon class="zerobadge{{ item.total_of_reject_mat | number }}"
+                          matBadge="{{ item.total_of_reject_mat | number }}" [matBadgeHidden]="hidden"
+                          matBadgeColor="warn" [matBadgeHidden]="hidden">
+                        </mat-icon>
                       </button>
 
                       <ng-container *ngIf="
@@ -98,9 +99,9 @@
                           loginService.currentUserRoleSession == 'Admin') ||
                         loginService.currentUserRoleSession == 'QCSupervisor'
                       ">
-                        <button mat-stroked-button class="editbtnStyle" color="warn" (click)="onCancelClick($event, item)"
-                          data-toggle="modal" data-target="#CancelledTransactionModal" data-backdrop="false"
-                          data-keyboard="false">
+                        <button mat-stroked-button class="editbtnStyle" color="warn"
+                          (click)="onCancelClick($event, item)" data-toggle="modal"
+                          data-target="#CancelledTransactionModal" data-backdrop="false" data-keyboard="false">
                           <span class="fa fa-ban"></span> Cancel
                         </button>&nbsp;
                       </ng-container>
@@ -379,8 +380,7 @@
                 <input type="radio" id="rbNewStatusSupport" value="Support" class="form-check-input" name="Status"
                   [(ngModel)]="newProject.status" required="required" #newStatusSupport="ngModel" />
                 <label for="rbNewStatusSupport" class="form-check-label">Support</label>
-              </div
-              >
+              </div>
               <span class="text-danger" *ngIf="
                   newStatusInForce.invalid &&
                   (newStatusInForce.dirty ||
@@ -1367,13 +1367,13 @@
             <mat-icon matPrefix>info<span class="material-icons-outlined"> </span>
             </mat-icon>
           </mat-form-field>
-    
+
           <mat-form-field class="w-100" floatLabel="auto" appearance="standard" color="primary">
             <input type="text" matInput id="txtTotalRejecttoReturn" placeholder="Total Qty Reject"
               name="total_of_reject_mat" [(ngModel)]="editProject.total_of_reject_mat" disabled="disabled"
               #TotalOfRejectMatToReturnQty />
-              <mat-label>Total Reject Qty.</mat-label>
-              <mat-icon matPrefix>sync<span class="material-icons-outlined"></span></mat-icon>
+            <mat-label>Total Reject Qty.</mat-label>
+            <mat-icon matPrefix>sync<span class="material-icons-outlined"></span></mat-icon>
           </mat-form-field>
 
           <br />

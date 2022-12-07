@@ -10,6 +10,7 @@ import { CancelledOrderService } from '../store-order-cancelled-transaction/serv
 import { PreparedOrdersService } from '../store-order-prepared/services/prepared-order.service';
 import { DispatchingService } from '../store-order-dispatching/services/dispaching-order.service';
 import { StoreOrderService } from './services/store-order.service';
+import { AppComponent } from '../../../app.component';
 
 @Component({
   selector: 'app-store-order',
@@ -25,7 +26,8 @@ export class StoreOrderComponent implements OnInit {
     private storeOrderService: StoreOrderService,
     private preparedOrdersService: PreparedOrdersService,
     private dispatchingService: DispatchingService,
-    private cancelledOrderService: CancelledOrderService
+    private cancelledOrderService: CancelledOrderService,
+    public appComponent: AppComponent
   ) {}
 
   //Objects for Holding Model Data
@@ -39,6 +41,11 @@ export class StoreOrderComponent implements OnInit {
   totalPreparedOrdersCount: number = 0;
   totalDispatchingRowCount: number = 0;
   totalCancelledCount: number = 0;
+
+  SOrders: number = 0;
+  SPreparedOrders: number = 0;
+  SDispatching: number = 0;
+  SCancelledTransactions: number = 0;
 
   //Properties for Searching
   searchBy: string = 'reject_status_name';
@@ -70,6 +77,11 @@ export class StoreOrderComponent implements OnInit {
     // Here
     this.samples =
       this.systemCapabilityStatusService.getSystemCapabilityStatus();
+
+      this.SOrders = this.appComponent.SOrders;
+      this.SPreparedOrders = this.appComponent.SPreparedOrders;
+      this.SDispatching = this.appComponent.SDispatching;
+      this.SCancelledTransactions = this.appComponent.SCancelledTransactions;
   }
 
   reactiveForms() {

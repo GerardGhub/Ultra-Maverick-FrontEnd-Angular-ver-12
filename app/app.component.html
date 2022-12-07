@@ -33,7 +33,7 @@
   <div>
     <ng-container *ngIf="loginService.currentUserName != null">
       <button class="system-name" type="button" mat-stroked-button class="mr" fxHide.lt-md="true"
-        [matMenuTriggerFor]="user" matTooltip="User" matTooltipClass="yellow-back" (click)="detectAlreadyLogin()"> 
+        [matMenuTriggerFor]="user" matTooltip="User" matTooltipClass="yellow-back" (click)="detectAlreadyLogin()">
         <mat-icon>account_circle</mat-icon> {{loginService.currentUserName | uppercase}}
       </button>
 
@@ -62,7 +62,7 @@
 
   <!-- Collection for Navigation Bugok -->
   <mat-menu #user="matMenu">
-    
+
     <a [routerLink]=" [ '/about' ] " mat-menu-item>About</a>
     <a class="nav-link" href="#" (click)="loginService.Logout()">Logout</a>
 
@@ -106,7 +106,7 @@
 
     <!-- ADMIN ******************************************************************************************************************** -->
     <!-- <ng-container *ngIf="loginService.currentUserName != null && loginService.currentUserRoleSession == 'Admin'"> -->
-      <ng-container *ngIf="loginService.currentUserName != null">
+    <ng-container *ngIf="loginService.currentUserName != null">
       <mat-nav-list class="sidebar-navlist">
         <a class="system-name" [routerLink]="[  '/admin', 'dashboard'  ]" mat-list-item routerLinkActive="link-active">
           <mat-icon>dashboard_customize</mat-icon>
@@ -188,26 +188,29 @@
               totalSumofPreparation | number }}</span>
           </a>
           <mat-menu #menu_prep="matMenu">
+            <ng-container *ngIf="StoreOrders === 1 || SOrders === 1">
+              <button mat-menu-item>
+      
+                <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s
+                  <span class="badge badge-pill badge-danger zerobadge{{totalStoreOrderRowCount | number }}">
+                    {{totalStoreOrderRowCount}}
+                  </span>
+                </span>
+              </button>
+            </ng-container>
 
+            <ng-container *ngIf="InternalOrders  || InternalOrderList === 1">
             <button mat-menu-item>
-              <!-- <mat-icon>add_shopping_cart</mat-icon> -->
-              <span [routerLink]=" [ '/admin', 'store-order' ] ">Store Order/s 
-                <span class="badge badge-pill badge-danger zerobadge{{totalStoreOrderRowCount | number }}">
-                  {{totalStoreOrderRowCount}}
-                </span>     
-              </span>
-            </button>
 
-            <button mat-menu-item>
-              <!-- <mat-icon>add_shopping_cart</mat-icon> -->
               <span [routerLink]=" [ '/admin', 'internal-order' ] ">Internal Order/s
 
                 <span class="badge badge-pill badge-danger zerobadge{{totalInternalOrderPreparation | number }}">
                   {{totalInternalOrderPreparation}}
                 </span>
               </span>
-               
+
             </button>
+            </ng-container>
           </mat-menu>
         </ng-container>
 

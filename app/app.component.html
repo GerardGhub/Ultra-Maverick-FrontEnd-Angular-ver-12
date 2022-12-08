@@ -185,7 +185,7 @@
             <span class="badge badge-pill badge-danger zerobadge{{ totalSumofPreparation | number }}">{{
               totalSumofPreparation | number }}</span>
           </a>
-          <ng-container *ngIf="StoreOrders === 1 || InternalOrders === 1">
+
           <mat-menu #menu_prep="matMenu">
             <ng-container *ngIf="StoreOrders === 1 || SOrders === 1  || SPreparedOrders === 1 || SDispatching === 1
             || SCancelledTransactions === 1">
@@ -213,7 +213,6 @@
             </button>
             </ng-container>
           </mat-menu>
-</ng-container>
 
         </ng-container>
 

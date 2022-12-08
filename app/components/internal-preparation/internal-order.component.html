@@ -697,9 +697,9 @@
                     <th>Uom</th>
                     <th>Serve</th>
                     <th class="hideObject">Total Items</th>
-                    <ng-template [ngIf]="item.totalPreparedItems != 1">
+   
                       <th class="text-center">Action</th>
-                    </ng-template>
+            
                   </tr>
                 </thead>
 
@@ -713,13 +713,13 @@
                     <td class="hideObject">{{c | number}}</td>
                     <td class="text-center">
 
-                      <ng-template [ngIf]="item.totalPreparedItems != 1">
+    
                         <button (click)="onCancelItemClick(item)" data-toggle="modal"
                           data-target="#cancelOrderItemModal" data-backdrop="false" data-keyboard="false"
                           class="editbtnStyle" color="warn" mat-stroked-button>
                           <span class="fa fa-ban"></span> cancel
                         </button>&nbsp;
-                      </ng-template>
+            
                     </td>
                   </tr>
                 </tbody>
@@ -858,9 +858,7 @@
                     <th>Uom</th>
                     <th>Serve</th>
                     <th class="hideObject">Total Items</th>
-                    <ng-container *ngIf="checkifPreparedisCancel === 0">
                       <th class="text-center">Action</th>
-                    </ng-container>
                   </tr>
                 </thead>
 
@@ -872,7 +870,7 @@
                     <td>{{item.mrs_uom}}</td>
                     <td>{{item.prepared_allocated_qty | number}}</td>
                     <td class="hideObject">{{c | number}}</td>
-                    <ng-container *ngIf="checkifPreparedisCancel === 0">
+        
                       <td class="text-center">
                         <button (click)="onReturnItemClick(item)" data-toggle="modal"
                           data-target="#returnOrderItemModal" data-backdrop="false" data-keyboard="false"
@@ -881,7 +879,7 @@
                         </button>&nbsp;
 
                       </td>
-                    </ng-container>
+     
                   </tr>
                 </tbody>
               </table>

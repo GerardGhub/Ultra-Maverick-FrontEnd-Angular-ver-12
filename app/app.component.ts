@@ -192,7 +192,7 @@ export class AppComponent {
 
 
   getInternalOrderList() {
-    this.onlineOrderService.getOrderList().subscribe((response) => {
+    this.onlineOrderService.getPreparedDistinctOrder().subscribe((response) => {
       if (response) {
         this.InternalOrderList = response;
         this.totalInternalOrderPreparation = response.length;

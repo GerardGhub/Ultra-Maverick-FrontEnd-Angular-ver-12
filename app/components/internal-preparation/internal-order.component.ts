@@ -258,6 +258,7 @@ export class InternalOrderComponent implements OnInit {
 
 
   onApproveClick(item: any) {
+    console.log(item);
     if (item.totalRejectItems > 0) {
       this.hideApproveButton = 1;
     } else {
@@ -270,7 +271,7 @@ export class InternalOrderComponent implements OnInit {
     let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
       'MM-DD-YYYY'
     );
-    console.log(item);
+
 
     this.approvalForm.patchValue({
       id: item.id,

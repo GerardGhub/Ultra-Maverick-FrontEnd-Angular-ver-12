@@ -139,6 +139,7 @@ export class AspNetRolesComponent implements OnInit {
 
       (response: RoleModules[]) => {
         if (response) {
+          console.warn(response);
           this.RoleModule = response;
           this.getModulesUntagged();
         }

@@ -697,7 +697,7 @@
                     <th>Uom</th>
                     <th>Serve</th>
                     <th class="hideObject">Total Items</th>
-                    <ng-template *ngIf="item.totalPreparedItems != 1">
+                    <ng-template [ngIf]="item.totalPreparedItems != 1">
                       <th class="text-center">Action</th>
                     </ng-template>
                   </tr>
@@ -713,7 +713,7 @@
                     <td class="hideObject">{{c | number}}</td>
                     <td class="text-center">
 
-                      <ng-template *ngIf="item.totalPreparedItems != 1">
+                      <ng-template [ngIf]="item.totalPreparedItems != 1">
                         <button (click)="onCancelItemClick(item)" data-toggle="modal"
                           data-target="#cancelOrderItemModal" data-backdrop="false" data-keyboard="false"
                           class="editbtnStyle" color="warn" mat-stroked-button>

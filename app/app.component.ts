@@ -184,6 +184,7 @@ export class AppComponent {
 
       //Internal Preparation Badge
       this.getInternalOrderList();
+
     }
   }
 
@@ -356,9 +357,8 @@ export class AppComponent {
         this.roleModulesSummary = response;
         this.totalRoleModulesRowCount = response.length;
 
-
+// console.error(this.roleModulesSummary);
         this.roleModulesSummary.forEach((status) => {
-          // console.log(status);
           // alert(status.moduleName);
           if (status.modulename === 'qc-receiving-route') {
             this.QCReceiving = 1;
@@ -402,6 +402,7 @@ export class AppComponent {
 
           else if (status.modulename === 'preparation-route') {
             this.Preparation = 1;
+         
           }
 
           else if (status.modulename === 'store-orders-route') {
@@ -487,6 +488,8 @@ export class AppComponent {
 
       }
     });
+
+
   }
 
 

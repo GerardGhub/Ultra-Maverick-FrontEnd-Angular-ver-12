@@ -112,9 +112,7 @@
           <mat-icon>dashboard_customize</mat-icon>
           &nbsp;Dashboard
         </a>
-        <!-- PO Dashboard Module -->
 
-        <!-- PO Recieving Module -->
         <!-- <ng-container *ngIf="QCReceiving === 1 "> -->
         <ng-container *ngIf="PoReceiving === 1 || CancelledPo === 1">
           <a class="system-name" [routerLink]=" [ '/admin', 'qc-recieving' ] " mat-list-item

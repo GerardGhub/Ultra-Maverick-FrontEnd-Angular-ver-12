@@ -1433,32 +1433,17 @@
                 class="form-control" placeholder="" name="lab_cancel_remarks" formControlName="lab_cancel_remarks" />
             </div>
           </div>
-          <!--
-          <div class="form-group row">
-            <label for="txtid" class="col-sm-4 col-form-label">ID</label>
-            <div class="col-sm-8"> -->
+
           <input type="text" autocomplete="off" [hidden]="true" id="txtid" class="form-control" placeholder="" name="id"
             formControlName="id" />
-          <!-- <span class="text-danger" *ngIf="approveForm.get('id').invalid && (approveForm.get('id').dirty || approveForm.get('id').touched || approveForm.valid) && approveForm.get('id').errors?.required">Status can't be blank</span> -->
-          <!-- </div>
-          </div> -->
 
-          <!-- <div class="form-group row">
-            <label for="txtid" class="col-sm-4 col-form-label">Approved By</label>
-            <div class="col-sm-8"> -->
           <input type="text" [hidden]="true" [(ngModel)]="activeUser" autocomplete="off" id="txtlab_cancel_by"
             class="form-control" placeholder="" name="lab_cancel_by" formControlName="lab_cancel_by" />
-          <!-- </div>
-          </div> -->
 
-          <!-- <div class="form-group row">
-            <label for="txtid" class="col-sm-4 col-form-label">Approved Status</label>
-            <div class="col-sm-8"> -->
           <input type="text" [hidden]="true" [(ngModel)]="qa_approval_status" autocomplete="off"
             id="txtqa_approval_status" class="form-control" placeholder="" name="qa_approval_status"
             formControlName="qa_approval_status" />
-          <!-- </div>
-          </div> -->
+
         </div>
         <!-- {{cancelForm.value | json}}  -->
         <div class="modal-footer">
@@ -1467,7 +1452,7 @@
             Cancel
           </button>
           <button id="approveClick" mat-stroked-button color="primary" (click)="onContinueCancel()">
-            Continue
+            Submit
           </button>
         </div>
       </div>

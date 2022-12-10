@@ -42,6 +42,7 @@ import { ParametersComponent } from './components/qc-masterlist/paramenters/para
 import { InternalOrderComponent } from './components/internal-preparation/internal-order.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProjectComponent } from './admin/components/project/project.component';
+import { NearlyExpiryItemsComponent } from './components/labtest-module/nearly-expiry-items/nearly-expiry-items.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ProjectComponent } from './admin/components/project/project.component';
     DescriptionComponent,
     ParametersComponent,
     InternalOrderComponent,
+    NearlyExpiryItemsComponent,
   ],
   imports: [
     BrowserModule,

@@ -212,7 +212,7 @@
       </mat-tab>
 
       <!-- For Approval -->
-      <mat-tab>
+      <mat-tab *ngIf="ForApproval === 1">
         <ng-template mat-tab-label>
           For Approval
           &nbsp; <span *ngIf="totalForApprovalCount" class="badge badge-danger zerobadge{{ totalForApprovalCount }}">{{
@@ -406,7 +406,7 @@
       </mat-tab>
 
       <!-- Lab records -->
-      <mat-tab>
+      <mat-tab *ngIf="LaboratoryTestRecords === 1">
         <ng-template mat-tab-label>
           Laboratory Test Records
           &nbsp;
@@ -585,7 +585,7 @@
       </mat-tab>
 
       <!-- Records with Access code -->
-      <mat-tab>
+      <mat-tab *ngIf="RecordsWithAccessCode  === 1">
         <ng-template mat-tab-label>
           Records with Access Code
           &nbsp;

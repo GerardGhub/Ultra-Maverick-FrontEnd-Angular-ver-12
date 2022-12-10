@@ -145,6 +145,9 @@ export class ForLabtestComponent implements OnInit {
     this.getRejectRemarks();
     this.reactiveForm();
     this.ForLabTest = this.appComponent.ForLabTest;
+    this.ForApproval = this.appComponent.ForApproval;
+    this.LaboratoryTestRecords = this.appComponent.LaboratoryTestRecords;
+    this.RecordsWithAccessCode = this.appComponent.RecordsWithAccessCode;
   }
 
   getLists() {

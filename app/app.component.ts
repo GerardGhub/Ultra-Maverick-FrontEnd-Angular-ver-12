@@ -173,9 +173,9 @@ export class AppComponent {
       this.DashboardPoSummaryPartialReceivingNearlyExpiryApproval();
       this.DashboardPoSummaryPartialReceivingRejectionWH();
 
-      this.getForLabTest();
+
       this.getForApproval();
-      this.totalForLabtestForApproval();
+  
       this.activeUserRoleId = this.loginService.currentUserRoleSession;
 
       this.getMRSOrderList();
@@ -185,6 +185,8 @@ export class AppComponent {
       //Internal Preparation Badge
       this.getInternalOrderList();
 
+      this.getForLabTest();
+      this.totalForLabtestForApproval();
     }
   }
 

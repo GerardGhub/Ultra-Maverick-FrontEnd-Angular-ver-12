@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NearlyExpiryItems } from '../models/nearly-expiry-items';
 import { TblNearlyExpiryMgmt } from '../models/tbl-nearly-expiry-mgmt';
 
 @Injectable({
@@ -8,26 +9,25 @@ import { TblNearlyExpiryMgmt } from '../models/tbl-nearly-expiry-mgmt';
 })
 export class TblNearlyExpiryMgmtService {
 
-  constructor(private httpClient : HttpClient) 
-  {
+  constructor(private httpClient: HttpClient) {
 
   }
-  getAllExpiryDaysData(): Observable<TblNearlyExpiryMgmt[]>
-  {
+  getAllExpiryDaysData(): Observable<TblNearlyExpiryMgmt[]> {
     return this.httpClient.get<TblNearlyExpiryMgmt[]>("/api/tblNearlyExpiryMgmt", { responseType: "json" });
   }
 
-  insertExpiryDaysData(newXpirylevel: TblNearlyExpiryMgmt): Observable<TblNearlyExpiryMgmt>
-  {
+  getAllItemsNearlyExpiry(): Observable<NearlyExpiryItems[]> {
+    return this.httpClient.get<NearlyExpiryItems[]>("/api/DryWareHouseReceivingForLabTest/NearlyExpiry", { responseType: "json" });
+  }
+
+  insertExpiryDaysData(newXpirylevel: TblNearlyExpiryMgmt): Observable<TblNearlyExpiryMgmt> {
     return this.httpClient.post<TblNearlyExpiryMgmt>("/api/tblNearlyExpiryMgmt", newXpirylevel, { responseType: "json" });
   }
 
-  updateExpiryDaysData(existingAllowablePercentage: TblNearlyExpiryMgmt): Observable<TblNearlyExpiryMgmt>
-  {
+  updateExpiryDaysData(existingAllowablePercentage: TblNearlyExpiryMgmt): Observable<TblNearlyExpiryMgmt> {
     return this.httpClient.put<TblNearlyExpiryMgmt>("/api/tblNearlyExpiryMgmt", existingAllowablePercentage, { responseType: "json" });
   }
-  deleteExpiryDaysData(id: number): Observable<string>
-   {
-     return this.httpClient.delete<string>("/api/tblNearlyExpiryMgmt?id=" + id);
-   }
+  deleteExpiryDaysData(id: number): Observable<string> {
+    return this.httpClient.delete<string>("/api/tblNearlyExpiryMgmt?id=" + id);
+  }
 }

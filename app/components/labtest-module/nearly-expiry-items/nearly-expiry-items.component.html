@@ -1,1 +1,123 @@
-<p>nearly-expiry-items works!</p>
+
+        <div class="col-sm-12" style="padding-top: 2em">
+            <div class="d-flex">
+            
+  
+              <div class="p-2">
+                <div class="input-group searchBtnStyle">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="fa fa-search"></span></span>
+                  </div>
+                  <input type="search" class="form-control" placeholder="Find here...." id="txtSearchText"
+                    name="SearchText" autocomplete="off" [(ngModel)]="searchTextNE" (keyup)="onSearchTextKeyup($event)" />
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-lg-12">
+            <div class="d-flex">
+              <div class="col-xl-12 col-lg-9 mx-auto scrollableTableMain tbl-text">
+                <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width: 100%">
+                  <thead>
+                    <tr class="text-light header-bg-color-um system-name">
+                      <th>Barcode ID</th>
+                      <th>Item Code</th>
+                      <th>Description</th>
+                      <th>Qty. Received</th>
+                      <th>Expiry Days</th>
+                      <th>Standard Days</th>
+                      <th>Expiration Date</th>
+                      <th>Remaining Quantity</th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="
+                      let item of NearlyExpiryList
+                        | filter: searchByNE:searchTextNE
+                        | sort: sortByNE:sortOrderNE
+                        | paging: currentPageIndexNE:pageSize;
+                      let i = index
+                    ">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.item_code }}</td>
+                    <td>{{ item.item_description }}</td>
+                    <td>{{ item.qty_received }}</td>
+                    <td>{{ item.expiry_days_aging }}</td>
+                    <td>{{ item.standard_Expiry_Days }}</td>
+                    <td>{{ item.lab_exp_date_extension | date: "MM/dd/yyyy" }}</td>
+                    <td>{{ item.remainingQty }}</td>
+                  
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-sm-12">
+            <ul class="pagination paginationStyle justify-content-center mt-1">
+              <li class="page-item" (click)="onPageIndexClickedNE(currentPageIndexNE - 1)">
+                <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
+                  onclick="return false">Prev</a>
+              </li>
+  
+              <ng-container *ngIf="pagesNE.length <= 10">
+                <li class="page-item" *ngFor="let page of pagesNE" [ngClass]="{
+                    'link-active-paging': page.pageIndex == currentPageIndexNE
+                  }" (click)="onPageIndexClickedNE(page.pageIndex)">
+                  <a class="page-link" href="#" onclick="return false">{{
+                    page.pageIndex + 1
+                    }}</a>
+                </li>
+              </ng-container>
+  
+              <ng-container *ngIf="pagesNE.length > 10">
+                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexNE == 0 }"
+                  (click)="onPageIndexClickedNE(0)">
+                  <a class="page-link" href="#" onclick="return false">1</a>
+                </li>
+  
+                <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexNE == 1 }"
+                  (click)="onPageIndexClickedNE(1)">
+                  <a class="page-link" href="#" onclick="return false">2</a>
+                </li>
+  
+                <li *ngIf="
+                    currentPageIndexNE > 1 && currentPageIndexNE < pagesNE.length - 2
+                  ">
+                  &nbsp;...&nbsp;
+                </li>
+  
+                <li class="page-item" [ngClass]="'link-active-paging'" (click)="onPageIndexClickedNE(currentPageIndexNE)"
+                  *ngIf="
+                    currentPageIndexNE > 1 && currentPageIndexNE < pagesNE.length - 2
+                  ">
+                  <a class="page-link" href="#" onclick="return false">{{
+                    currentPageIndexNE + 1
+                    }}</a>
+                </li>
+  
+                <li>&nbsp;...&nbsp;</li>
+  
+                <li class="page-item" [ngClass]="{
+                    'link-active-paging': currentPageIndexNE == pagesNE.length - 2
+                  }" (click)="onPageIndexClickedNE(pagesNE.length - 2)">
+                  <a class="page-link" href="#" onclick="return false">{{
+                    pagesNE.length - 1
+                    }}</a>
+                </li>
+  
+                <li class="page-item" [ngClass]="{
+                    'link-active-paging': currentPageIndexNE == pagesNE.length - 1
+                  }" (click)="onPageIndexClickedNE(pagesNE.length - 1)">
+                  <a class="page-link" href="#" onclick="return false">{{
+                    pagesNE.length
+                    }}</a>
+                </li>
+              </ng-container>
+  
+              <li class="page-item" (click)="onPageIndexClickedNE(currentPageIndexNE + 1)">
+                <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
+                  onclick="return false">Next</a>
+              </li>
+            </ul>
+          </div>

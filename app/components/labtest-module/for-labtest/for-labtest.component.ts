@@ -41,7 +41,7 @@ export class ForLabtestComponent implements OnInit {
     private labtestForApprovalService: LabtestForApprovalService,
     private printDirective: NgxPrintDirective,
     private toastr: ToastrService,
-    public appComponent: AppComponent 
+    public appComponent: AppComponent
   ) { }
 
   forlabtest: ForLabtest[] = [];
@@ -76,6 +76,8 @@ export class ForLabtestComponent implements OnInit {
 
   totalForApprovalCount: number = null;
   totalLabtestRecords: number = null;
+
+  ShelfLifeExtension: number = 0;
 
   //Reactive Forms
   resultForm: FormGroup;
@@ -148,6 +150,25 @@ export class ForLabtestComponent implements OnInit {
     this.ForApproval = this.appComponent.ForApproval;
     this.LaboratoryTestRecords = this.appComponent.LaboratoryTestRecords;
     this.RecordsWithAccessCode = this.appComponent.RecordsWithAccessCode;
+  }
+
+
+  selectExpiryDate(event: any) {
+    // JavaScript program to illustrate
+    // calculation of no. of days between two date
+
+    // To set two dates to two variables
+    var date1 = new Date($('#txtbbd_actual').val());
+    var date2 = new Date($('#txtrshelf_ext').val());
+
+    // To calculate the time difference of two dates
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+
+    // To calculate the no. of days between two dates
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+    this.ShelfLifeExtension = parseInt(Difference_In_Days.toFixed());
+    alert(Difference_In_Days.toFixed());
   }
 
   getLists() {
@@ -656,11 +677,11 @@ export class ForLabtestComponent implements OnInit {
 
     // const formData = new FormData();
     // formData.append('resultForm', this.resultForm.value);
-
+var ExtensionDays = this.ShelfLifeExtension + 'Day(s) Extenstion';
     if (this.resultForm.valid) {
       Swal.fire({
         title: 'Are you sure, you want to submit the Laboratory Test Result?',
-        text: '',
+        text: ExtensionDays.toString(),
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

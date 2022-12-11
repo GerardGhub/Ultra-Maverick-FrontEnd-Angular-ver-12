@@ -427,7 +427,8 @@ export class ForLabtestComponent implements OnInit {
       qa_approval_status: this.formBuilder.control(null, [Validators.required]),
       files: this.formBuilder.control(null),
       filename: this.formBuilder.control(null),
-      filepath: this.formBuilder.control(null)
+      filepath: this.formBuilder.control(null),
+      bbd: this.formBuilder.control(null)
     });
 
     this.approveForm = this.formBuilder.group({

@@ -1091,7 +1091,7 @@
             <div class="col-sm lbltext">
               <label for="" class="">Expiry Date:</label>
               <input type="text" readonly autocomplete="off" id="txtbbd_actual" class="form-control" name="bbd"
-                formControlName="lab_exp_date_extension" maxlength="30" txtExpiryDateActual />
+                formControlName="bbd" maxlength="30" txtExpiryDateActual />
             </div>
             <div class="col-sm lbltext">
               <label for="" class="">Shelf Life Extension</label>
@@ -1113,8 +1113,8 @@
               </select>
             </div>
           </div>
-
-          <div class="form-group lbltext">
+{{resultForm.value | json}}
+          <div class="form-group lbltext" [hidden]="true">
             <label for="">Attachment:</label>
     
             <div class="row">

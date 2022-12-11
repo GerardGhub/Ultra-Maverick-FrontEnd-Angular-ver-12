@@ -168,7 +168,16 @@ export class ForLabtestComponent implements OnInit {
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
     this.ShelfLifeExtension = parseInt(Difference_In_Days.toFixed());
-    alert(Difference_In_Days.toFixed());
+    // alert(Difference_In_Days.toFixed());
+
+    this.ChekTheShelfLifeExtensionIFValid();
+  }
+
+  ChekTheShelfLifeExtensionIFValid() {
+    if (this.ShelfLifeExtension < 0) {
+      this.InvalidExtensionToaster();
+      return;
+    }
   }
 
   getLists() {
@@ -312,6 +321,10 @@ export class ForLabtestComponent implements OnInit {
 
   successCancelToaster() {
     this.toastr.success('Successfully Cancelled!', 'Message');
+  }
+
+  InvalidExtensionToaster() {
+    this.toastr.warning('Invalid Date Extension!', 'Message');
   }
 
   successRejectedToaster() {
@@ -675,9 +688,15 @@ export class ForLabtestComponent implements OnInit {
 
   onLabResultSubmit() {
 
+    if (this.ShelfLifeExtension === 0)
+    {
+      this.InvalidExtensionToaster();
+      return;
+    }
+    this.ChekTheShelfLifeExtensionIFValid();
     // const formData = new FormData();
     // formData.append('resultForm', this.resultForm.value);
-var ExtensionDays = this.ShelfLifeExtension + 'Day(s) Extenstion';
+    var ExtensionDays = this.ShelfLifeExtension + 'Day(s) Extenstion';
     if (this.resultForm.valid) {
       Swal.fire({
         title: 'Are you sure, you want to submit the Laboratory Test Result?',

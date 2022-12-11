@@ -863,15 +863,15 @@
 
           <div class="form-group lbltext">
             <label for="">Attachment:</label>
-            <input type="file" formControlName="files" class="form-control-file"
-              (change)="OnAttachedImage($event.target.files)">
+            <!-- <input type="file" formControlName="files" class="form-control-file"
+              (change)="OnAttachedImage($event.target.files)"> -->
 
-
+              {{resultForm.value | json}}
               <!-- start -->
 <div class="row">
   <div class="col-md-3">
     <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none">
-    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    <button type="button" class="btn btn-success btn-sm" (click)="file.click()">Upload File</button>
   </div>
   <div class="col-md-4">
     <span class="upload" *ngIf="message">
@@ -880,6 +880,7 @@
   </div>
 </div>
 <!-- end -->
+
           </div>
 
           <div class="row" style="margin-top: 10px" *ngIf="showhideSubRemDiv">

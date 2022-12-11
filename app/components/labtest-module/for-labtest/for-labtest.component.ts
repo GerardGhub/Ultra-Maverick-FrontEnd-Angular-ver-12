@@ -51,7 +51,7 @@ export class ForLabtestComponent implements OnInit {
   public progress: number;
   @Output() public onUploadFinished = new EventEmitter();
 
-
+  formData = new FormData();
   forlabtest: ForLabtest[] = [];
   labtestRecords: LabtestRecords[] = [];
   labTestProcedures: LabaratoryProcedure[] = [];
@@ -165,21 +165,27 @@ export class ForLabtestComponent implements OnInit {
       return;
 
     let fileToUpload = <File>files[0];
-    const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('https://localhost:5000/api/upload', formData, { reportProgress: true, observe: 'events' })
+    this.formData.append('file', fileToUpload, fileToUpload.name);
+
+    this.resultForm.patchValue({
+      filename: fileToUpload.name,
+      filepath: fileToUpload.type
+    });
+
+  }
+
+  ExecuteImportingFileLocation() {
+    this.http.post('https://localhost:5000/api/upload', this.formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
         }
         else if (event.type === HttpEventType.Response) {
-          this.message = 'Upload succcess';
+          // this.message = 'Upload succcess';
           this.onUploadFinished.emit(event.body);
         }
       })
-
-
   }
 
 
@@ -419,7 +425,9 @@ export class ForLabtestComponent implements OnInit {
       samples: this.formBuilder.control(null, [Validators.required]),
       laboratory_status: this.formBuilder.control(null, [Validators.required]),
       qa_approval_status: this.formBuilder.control(null, [Validators.required]),
-      files: this.formBuilder.control(null)
+      files: this.formBuilder.control(null),
+      filename: this.formBuilder.control(null),
+      filepath: this.formBuilder.control(null)
     });
 
     this.approveForm = this.formBuilder.group({
@@ -734,9 +742,13 @@ export class ForLabtestComponent implements OnInit {
             .proceedApprovedForLabtestDetails(this.resultForm.value)
             .subscribe(
               (response) => {
-                this.getLists();
-                this.successLabResultToaster();
-                this.resultForm.reset();
+                setTimeout(() => {
+                  this.ExecuteImportingFileLocation();
+                  this.getLists();
+                  this.successLabResultToaster();
+                  this.resultForm.reset();
+                }, 400);
+
                 $('#proceedAndApproveFormCancelModal').trigger('click');
               },
               (error) => {

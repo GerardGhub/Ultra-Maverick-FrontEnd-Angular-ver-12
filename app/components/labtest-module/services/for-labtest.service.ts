@@ -44,4 +44,8 @@ export class ForLabtestService {
    {
      return this.httpClient.put<ForLabtest>("/api/DryWareHouseReceivingForLabTest/CancelledQASupervisorReleasingLabResult", qaRejectedByIdDetails, { responseType: "json" });
    }
+
+   
+
+   
 }

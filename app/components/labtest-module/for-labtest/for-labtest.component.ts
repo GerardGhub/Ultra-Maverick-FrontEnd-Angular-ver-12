@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { ForLabtest } from '../models/for-labtest';
 import * as $ from 'jquery';
 import { FilterPipe } from '../../../pipes/filter.pipe';
@@ -22,6 +22,8 @@ import { LabtestForApprovalService } from '../services/labtest-forapproval.servi
 import { NgxPrintDirective } from 'ngx-print';
 import { UpperCasePipe } from '@angular/common';
 import { AppComponent } from '../../../app.component';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-for-labtest',
@@ -41,8 +43,14 @@ export class ForLabtestComponent implements OnInit {
     private labtestForApprovalService: LabtestForApprovalService,
     private printDirective: NgxPrintDirective,
     private toastr: ToastrService,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
+    private http: HttpClient
   ) { }
+
+  public message: string;
+  public progress: number;
+  @Output() public onUploadFinished = new EventEmitter();
+
 
   forlabtest: ForLabtest[] = [];
   labtestRecords: LabtestRecords[] = [];
@@ -152,33 +160,45 @@ export class ForLabtestComponent implements OnInit {
     this.RecordsWithAccessCode = this.appComponent.RecordsWithAccessCode;
   }
 
+  public uploadFile = (files) => {
+    if (files.length === 0)
+      return;
 
-  selectExpiryDate(event: any) {
-    // JavaScript program to illustrate
-    // calculation of no. of days between two date
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
 
-    // To set two dates to two variables
-    var date1 = new Date($('#txtbbd_actual').val());
-    var date2 = new Date($('#txtrshelf_ext').val());
+    this.http.post('https://localhost:5000/api/upload', formData, { reportProgress: true, observe: 'events' })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+        }
+        else if (event.type === HttpEventType.Response) {
+          this.message = 'Upload succcess';
+          this.onUploadFinished.emit(event.body);
+        }
+      })
 
-    // To calculate the time difference of two dates
-    var Difference_In_Time = date2.getTime() - date1.getTime();
 
-    // To calculate the no. of days between two dates
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-    this.ShelfLifeExtension = parseInt(Difference_In_Days.toFixed());
-    // alert(Difference_In_Days.toFixed());
-
-    this.ChekTheShelfLifeExtensionIFValid();
   }
 
-  ChekTheShelfLifeExtensionIFValid() {
+
+  selectExpiryDate(event: any) {
+    var date1 = new Date($('#txtbbd_actual').val());
+    var date2 = new Date($('#txtrshelf_ext').val());
+    // To calculate the time difference of two dates
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    // To calculate the no. of days between two dates
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    this.ShelfLifeExtension = parseInt(Difference_In_Days.toFixed());
+    // alert(Difference_In_Days.toFixed());
     if (this.ShelfLifeExtension < 0) {
       this.InvalidExtensionToaster();
       return;
     }
   }
+
+
 
   getLists() {
     this.forLabtestService
@@ -688,12 +708,14 @@ export class ForLabtestComponent implements OnInit {
 
   onLabResultSubmit() {
 
-    if (this.ShelfLifeExtension === 0)
-    {
+    if (this.ShelfLifeExtension === 0) {
       this.InvalidExtensionToaster();
       return;
     }
-    this.ChekTheShelfLifeExtensionIFValid();
+    if (this.ShelfLifeExtension < 0) {
+      this.InvalidExtensionToaster();
+      return;
+    }
     // const formData = new FormData();
     // formData.append('resultForm', this.resultForm.value);
     var ExtensionDays = this.ShelfLifeExtension + 'Day(s) Extenstion';

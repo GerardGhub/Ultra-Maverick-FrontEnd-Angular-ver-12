@@ -121,11 +121,19 @@
                       <span class="fa fa-check-circle"></span> Recieve
                     </button>
 
+                    <!-- <ng-container *ngIf="
+                    (loginService.currentUserName != null &&
+                      loginService.currentUserRoleSession == 'Admin') ||
+                    loginService.currentUserRoleSession == 'QASupervisor' ||
+                    loginService.currentUserRoleSession == 'QA MANAGER'
+                  "> -->
                     <button mat-stroked-button class="editbtnStyle" color="primary"
                       [hidden]="item.qa_approval_status !== '1'" (click)="onResultClick(item)" data-toggle="modal"
                       data-target="#proceedModal" data-backdrop="false" data-keyboard="false" title="For Lab Result">
                       <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> Result
                     </button>
+
+                    <!-- </ng-container> -->
 
                     <button mat-stroked-button class="editbtnStyle" color="warn"
                       (click)="cancelLabtestClick($event, item)" data-toggle="modal" data-target="#cancelLabtestModal"
@@ -831,15 +839,14 @@
             <div class="col-sm lbltext">
               <label for="" class="">Expiry Date:</label>
               <input type="text" readonly autocomplete="off" id="txtbbd_actual" class="form-control" name="bbd"
-                formControlName="lab_exp_date_extension" maxlength="30" txtExpiryDateActual/>
+                formControlName="lab_exp_date_extension" maxlength="30" txtExpiryDateActual />
             </div>
             <div class="col-sm lbltext">
               <label for="" class="">Shelf Life Extension : {{ShelfLifeExtension}}</label>
               <input type="date" [disabled]="true" value="{{ bbDate | date: 'yyyy-MM-dd'}}"
                 min="{{ bbDate | date: 'yyyy-MM-dd' }}" autocomplete="off" id="txtrshelf_ext"
-                class="form-control req-field" formControlName="lab_exp_date_extension"
-                 maxlength="30" 
-                 (change)="selectExpiryDate($event)" />
+                class="form-control req-field" formControlName="lab_exp_date_extension" maxlength="30"
+                (change)="selectExpiryDate($event)" />
             </div>
 
             <div class="col-sm lbltext" [hidden]="true">
@@ -858,6 +865,21 @@
             <label for="">Attachment:</label>
             <input type="file" formControlName="files" class="form-control-file"
               (change)="OnAttachedImage($event.target.files)">
+
+
+              <!-- start -->
+<div class="row">
+  <div class="col-md-3">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <div class="col-md-4">
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>
+<!-- end -->
           </div>
 
           <div class="row" style="margin-top: 10px" *ngIf="showhideSubRemDiv">
@@ -894,10 +916,13 @@
           <button mat-stroked-button color="primary" [disabled]="!resultForm.valid" (click)="onLabResultSubmit()">
             Submit
           </button>
+
         </div>
       </div>
     </div>
   </div>
+
+
 </form>
 
 

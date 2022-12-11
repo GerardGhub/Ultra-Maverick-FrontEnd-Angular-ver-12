@@ -306,20 +306,29 @@
                   <td>{{ item.lab_approval_aging_days }}</td>
                   <td class="text-center">
 
-                    <div [hidden]="item.qa_supervisor_is_approve_date">
-                      <button mat-stroked-button class="editbtnStyle" color="primary"
-                        (click)="onQAvisorApproveDetailsClick(item)" data-toggle="modal" data-target="#QAapprovalModal"
-                        data-backdrop="false" data-keyboard="false" title="Approve">
-                        <span class="fa fa-check-circle"></span> Approve
-                      </button>
 
-                      <button mat-stroked-button class="editbtnStyle" color="warn"
-                        (click)="onQARejectDetailsClick(item)" data-toggle="modal" data-target="#QARejectModal"
-                        data-backdrop="false" data-keyboard="false" title="Reject">
-                        <span class="fa fa-times-circle"></span> Reject
-                      </button>
-                    </div>
+                    <ng-container *ngIf="
+                    (loginService.currentUserName != null &&
+                      loginService.currentUserRoleSession == 'Admin') ||
+                    loginService.currentUserRoleSession == 'QASupervisor' ||
+                    loginService.currentUserRoleSession == 'QA MANAGER'
+                  ">
 
+                      <div [hidden]="item.qa_supervisor_is_approve_date">
+                        <button mat-stroked-button class="editbtnStyle" color="primary"
+                          (click)="onQAvisorApproveDetailsClick(item)" data-toggle="modal"
+                          data-target="#QAapprovalModal" data-backdrop="false" data-keyboard="false" title="Approve">
+                          <span class="fa fa-check-circle"></span> Approve
+                        </button>
+
+                        <button mat-stroked-button class="editbtnStyle" color="warn"
+                          (click)="onQARejectDetailsClick(item)" data-toggle="modal" data-target="#QARejectModal"
+                          data-backdrop="false" data-keyboard="false" title="Reject">
+                          <span class="fa fa-times-circle"></span> Reject
+                        </button>
+                      </div>
+                    </ng-container>
+                    
                     <div [hidden]="item.tsqa_Approval_Date">
                       <button mat-stroked-button class="editbtnStyle" color="primary"
                         (click)="onManagerApproveDetailsClick(item)" data-toggle="modal"
@@ -866,20 +875,21 @@
             <!-- <input type="file" formControlName="files" class="form-control-file"
               (change)="OnAttachedImage($event.target.files)"> -->
 
-              {{resultForm.value | json}}
-              <!-- start -->
-<div class="row">
-  <div class="col-md-3">
-    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none">
-    <button type="button" class="btn btn-success btn-sm" (click)="file.click()">Upload File</button>
-  </div>
-  <div class="col-md-4">
-    <span class="upload" *ngIf="message">
-      {{message}}
-    </span>
-  </div>
-</div>
-<!-- end -->
+            {{resultForm.value | json}}
+            <!-- start -->
+            <div class="row">
+              <div class="col-md-3">
+                <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
+                  style="display:none">
+                <button type="button" class="btn btn-success btn-sm" (click)="file.click()">Upload File</button>
+              </div>
+              <div class="col-md-4">
+                <span class="upload" *ngIf="message">
+                  {{message}}
+                </span>
+              </div>
+            </div>
+            <!-- end -->
 
           </div>
 

@@ -105,6 +105,9 @@ export class ForLabtestComponent implements OnInit {
 
   newSubRemarksList: any[] = [];
 
+  FileName: string = '';
+  FilePath: string ='';
+
   activeUser: string = '';
   qa_approval_status: string = '';
   qa_lab_status: string = '';
@@ -205,9 +208,7 @@ export class ForLabtestComponent implements OnInit {
       return;
     }
   }
-
-
-
+  
   getLists() {
     this.forLabtestService
       .getForLabtestDetails()
@@ -489,7 +490,9 @@ export class ForLabtestComponent implements OnInit {
       lab_result_remarks: this.formBuilder.control(null, [Validators.required]),
       lab_sub_remarks: this.formBuilder.control(null, [Validators.required]),
       laboratory_procedure: this.formBuilder.control(null, [Validators.required]),
-      bbd: this.formBuilder.control(null)
+      bbd: this.formBuilder.control(null),
+      filename: this.formBuilder.control(null),
+      filepath: this.formBuilder.control(null)
     });
 
     this.superVisorRejectForm = this.formBuilder.group({
@@ -649,6 +652,9 @@ export class ForLabtestComponent implements OnInit {
   }
 
   onQAvisorApproveDetailsClick(item: any) {
+
+    this.FileName = item.filename;
+    this.FilePath = item.filepath;
     this.superVisorApprovalForm.reset();
     this.superVisorApprovalForm.patchValue(item);
 
@@ -866,9 +872,10 @@ export class ForLabtestComponent implements OnInit {
               (response) => {
                 //Reset the editForm
                 // this.onQARejectById();
-                this.getForApprovalList();
-                this.successRejectedToaster();
-
+                setTimeout(() => {
+                  this.getForApprovalList();
+                  this.successRejectedToaster();
+                }, 400);
                 this.superVisorRejectForm.reset();
                 $('#qaRejectModal').trigger('click');
               },

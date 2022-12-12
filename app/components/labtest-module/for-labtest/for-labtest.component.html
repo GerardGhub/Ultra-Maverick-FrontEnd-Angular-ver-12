@@ -350,12 +350,23 @@
                         </button>
                       </div>
                     </ng-container>
+                    <div [hidden]="item.qa_supervisor_is_approve_date">
+                      <button mat-stroked-button class="editbtnStyle" color="primary" (click)="onResultClick(item)"
+                        data-toggle="modal" data-target="#resultModal" data-backdrop="false" data-keyboard="false"
+                        title="Viewing Lab Result">
+                        <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> View
+                      </button>
+                    </div>
 
-                    <button mat-stroked-button class="editbtnStyle" color="primary"
-                    (click)="onResultClick(item)" data-toggle="modal"
-                    data-target="#resultModal" data-backdrop="false" data-keyboard="false" title="Viewing Lab Result">
-                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> View
-                  </button>
+                    <div *ngIf="item.qa_supervisor_is_approve_date">
+                      <button mat-stroked-button class="editbtnStyle" color="primary"
+                        (click)="onQAvisorApproveDetailsClick(item)" data-toggle="modal" data-target="#QASupResult"
+                        data-backdrop="false" data-keyboard="false" title="View Result">
+                        <span class="fa fa-check-circle"></span> View Result
+                      </button>
+                    </div>
+
+
                   </td>
                 </tr>
               </table>
@@ -397,8 +408,8 @@
                 &nbsp;...&nbsp;
               </li>
 
-              <li class="page-item" [ngClass]="'link-active-paging'" (click)="onPageIndexClickedForApproval(currentPageIndexForApproval)"
-                *ngIf="
+              <li class="page-item" [ngClass]="'link-active-paging'"
+                (click)="onPageIndexClickedForApproval(currentPageIndexForApproval)" *ngIf="
                   currentPageIndexForApproval > 1 && currentPageIndexForApproval < pagesForApproval.length - 2
                 ">
                 <a class="page-link" href="#" onclick="return false">{{
@@ -1074,8 +1085,8 @@
 
             <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Lab. Procedure :</label>
             <div class="col-sm-4">
-              <input type="text" readonly autocomplete="off" id="txtsamples" class="form-control" name="laboratory_procedure"
-              formControlName="laboratory_procedure" maxlength="30" /> 
+              <input type="text" readonly autocomplete="off" id="txtsamples" class="form-control"
+                name="laboratory_procedure" formControlName="laboratory_procedure" maxlength="30" />
             </div>
           </div>
 
@@ -1084,8 +1095,8 @@
             <div class="col-sm lbltext">
               <label for="" class="">Date Released:</label>
 
-              <input type="text" readonly autocomplete="off" id="txtdate_released" class="form-control" name="lab_result_released_date"
-              formControlName="lab_result_released_date" maxlength="30" /> 
+              <input type="text" readonly autocomplete="off" id="txtdate_released" class="form-control"
+                name="lab_result_released_date" formControlName="lab_result_released_date" maxlength="30" />
             </div>
             <div class="col-sm lbltext">
               <label for="" class="">Expiry Date:</label>
@@ -1095,10 +1106,9 @@
             <div class="col-sm lbltext">
               <label for="" class="">Shelf Life Extension</label>
 
-              <input type="text" readonly autocomplete="off" id="txtrshelf_ext" 
-              class="form-control" name="lab_exp_date_extension"
-              formControlName="lab_exp_date_extension" maxlength="30" /> 
-              
+              <input type="text" readonly autocomplete="off" id="txtrshelf_ext" class="form-control"
+                name="lab_exp_date_extension" formControlName="lab_exp_date_extension" maxlength="30" />
+
             </div>
 
             <div class="col-sm lbltext" [hidden]="true">
@@ -1112,15 +1122,16 @@
               </select>
             </div>
           </div>
-<!-- {{resultForm.value | json}} -->
+          <!-- {{resultForm.value | json}} -->
           <div class="form-group lbltext" [hidden]="true">
             <label for="">Attachment:</label>
-    
+
             <div class="row">
               <div class="col-md-3">
                 <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)"
                   style="display:none">
-                <button disabled type="button" class="btn btn-success btn-sm" (click)="file.click()">Upload File</button>
+                <button disabled type="button" class="btn btn-success btn-sm" (click)="file.click()">Upload
+                  File</button>
               </div>
               <div class="col-md-4">
                 <span class="upload" *ngIf="message">
@@ -1163,7 +1174,8 @@
             data-dismiss="modal" type="button">
             Cancel
           </button>
-          <button mat-stroked-button [hidden]="true" color="primary" [disabled]="!resultForm.valid" (click)="onLabResultSubmit()">
+          <button mat-stroked-button [hidden]="true" color="primary" [disabled]="!resultForm.valid"
+            (click)="onLabResultSubmit()">
             Submit
           </button>
 
@@ -1388,6 +1400,231 @@
   </div>
 </form>
 
+
+<!-- VISOR labtest result approval ********************************************************************************** -->
+<form novalidate="novalidate" [formGroup]="superVisorApprovalForm">
+  <div class="modal" role="dialog" id="QASupResult">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">QA Approval Details</div>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="titledivider">RAW MATERIAL INFORMATION</div>
+          <div class="form-row lbltext mb-2">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Item Code :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtitem_code" class="form-control lbltext"
+                name="item_code" formControlName="item_code" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Description :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtitem_description" class="form-control lbltext"
+                name="item_description" formControlName="item_description" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Supplier :
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtsupplier " class="form-control" name="supplier"
+                formControlName="supplier" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date Analyzed :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtapproval_date" class="form-control"
+                name="qa_approval_date" formControlName="qa_approval_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="titledivider">LAB INFORMATION</div>
+          <div class="form-row lbltext mb-2">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO NO. :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtpo_number" class="form-control" name="po_number"
+                formControlName="po_number" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO Date :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtpo_date" class="form-control lbltext" name="po_date"
+                formControlName="po_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext mb-2">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR No. :
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtpr_number " class="form-control" name="pr_number"
+                formControlName="pr_no" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR Date :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtpr_date" class="form-control" name="pr_date"
+                formControlName="pr_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext mb-2">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Quantity :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtquantity" class="form-control" name="qty_received"
+                formControlName="qty_received" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">UOM :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtitem_uom" class="form-control" name="uom"
+                formControlName="uom" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext mb-2">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date Submitted :
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtdate_submitted" class="form-control"
+                name="date_submitted" formControlName="date_submitted" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date of Expiry :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtdate_expiry" class="form-control lbltext"
+                name="lab_exp_date_extension" formControlName="lab_exp_date_extension" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext mb-2">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Requested By :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtreq_by" class="form-control" name="lab_request_by"
+                formControlName="lab_request_by" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Client :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtclient" class="form-control" name="client_requestor"
+                formControlName="client_requestor" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Samples :
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtsamples" class="form-control" name="samples"
+                formControlName="samples" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Lab. Procedure :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtsamples" class="form-control"
+                name="laboratory_procedure" formControlName="laboratory_procedure" maxlength="30" />
+            </div>
+          </div>
+<!-- 
+          {{superVisorApprovalForm.value | json}} -->
+          <div class="titledivider">ADJUSTMENT</div>
+          <div class="row">
+            <div class="col-sm lbltext">
+              <label for="" class="">Date Released:</label>
+              <input type="text" class="form-control" formControlName="lab_result_released_date" readonly />
+
+            </div>
+
+            <div class="col-sm lbltext">
+              <label for="" class="">Expiry Date:</label>
+              <input type="text" class="form-control" readonly autocomplete="off" id="txtbbd" class="form-control"
+                name="bbd" formControlName="bbd" maxlength="30" />
+            </div>
+            <div class="col-sm lbltext">
+              <label for="" class="">Shelf Life Extension:</label>
+              <input type="text" class="form-control" formControlName="lab_exp_date_extension" readonly />
+            </div>
+            <div class="col-sm lbltext">
+              <label for="" class="">Remarks</label>
+              <input type="text" class="form-control" readonly autocomplete="off" id="txt_lab_result_remarks"
+                class="form-control" name="lab_result_remarks" formControlName="lab_result_remarks" maxlength="30" />
+            </div>
+          </div>
+
+
+          <div class="row" style="margin-top: 10px">
+      
+            <div style="margin-left: 18px;">
+              <ng-container *ngIf="FilePath == 'image/jpeg'">
+                <a download="LabResult.jpg" href="assets/{{FileName}}" title="Download">
+                  <div class="btn btn-success">Download</div>
+                  <!-- <img alt="ImageName" src="assets/xx.JPG"> -->
+                </a>
+              </ng-container>
+
+              <ng-template *ngIf="FilePath === 'pdf'">
+                <a download="LabResult.pdf" href="assets/hello.PDF" title="Download">
+                  <div class="btn btn-success">Download</div>      
+                </a>
+              </ng-template>
+
+            </div>
+            <div class="col-sm">
+              <label for="drpEditClientLocation" class="col-sm-12 col-form-label lbltext text-right">Sub Remarks
+              </label>
+            </div>
+            <div class="col-sm">
+              <div class="col-sm-12">
+                <input type="text" class="form-control" readonly autocomplete="off" id="txt_lab_sub_remarks"
+                  class="form-control" name="lab_sub_remarks" formControlName="lab_sub_remarks" maxlength="30" />
+              </div>
+            </div>
+          </div>
+
+          <input type="text" readonly [hidden]="true" autocomplete="off" id="txtlaboratory_status" class="form-control"
+            name="laboratory_status" formControlName="laboratory_status" />
+
+          <input type="text" readonly [hidden]="true" autocomplete="off" id="txtsamples" class="form-control"
+            name="lab_result_released_by" formControlName="lab_result_released_by" />
+
+          <input type="text" readonly [hidden]="true" autocomplete="off" id="txtsamples" class="form-control"
+            name="qa_approval_status" formControlName="qa_approval_status" />
+
+          <input type="text" readonly [hidden]="true" autocomplete="off" id="lab_req_id" class="form-control"
+            name="lab_req_id" formControlName="lab_req_id" />
+
+          <input type="text" readonly [hidden]="true" autocomplete="off" class="form-control"
+            formControlName="qa_supervisor_is_approve_by" />
+
+
+        </div>
+
+
+
+        <div class="modal-footer" [hidden]="true">
+          <button mat-stroked-button color="accent" class="mr-1" id="QAVisorApprovalCancelModal" data-dismiss="modal"
+            type="button">
+            Cancel
+          </button>
+
+
+          <button id="approveClick" mat-stroked-button [disabled]="!superVisorApprovalForm.valid" color="primary"
+            (click)="onApproveByQAVisor()">
+            Approve
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
 <!-- reject labtest -->
 <form novalidate="novalidate" [formGroup]="superVisorRejectForm">
   <div class="modal" role="dialog" id="QARejectModal">
@@ -1449,7 +1686,7 @@
           <div class="titledivider">RAW MATERIAL INFORMATION</div>
           <div class="form-row lbltext">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Item Code :</label>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-2">
               <input type="text" readonly autocomplete="off" id="txtitem_code" class="form-control lbltext"
                 name="item_code" formControlName="item_code" maxlength="30" />
             </div>
@@ -1477,7 +1714,7 @@
           </div>
 
           <div class="titledivider">LAB INFORMATION</div>
-          <div class="form-row lbltext">
+          <div class="form-row lbltext mb-2">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO NO. :</label>
             <div class="col-sm-4">
               <input type="text" readonly autocomplete="off" id="txtpo_number" class="form-control" name="po_number"
@@ -1491,7 +1728,7 @@
             </div>
           </div>
 
-          <div class="form-row lbltext">
+          <div class="form-row lbltext mb-2">
             <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR No. :
             </label>
             <div class="col-sm-4">
@@ -1506,7 +1743,7 @@
             </div>
           </div>
 
-          <div class="form-row lbltext">
+          <div class="form-row lbltext mb-2">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Quantity :</label>
             <div class="col-sm-4">
               <input type="text" readonly autocomplete="off" id="txtquantity" class="form-control" name="qty_received"
@@ -1520,7 +1757,7 @@
             </div>
           </div>
 
-          <div class="form-row lbltext">
+          <div class="form-row lbltext mb-2">
             <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date Submitted :
             </label>
             <div class="col-sm-4">
@@ -1535,7 +1772,7 @@
             </div>
           </div>
 
-          <div class="form-row lbltext">
+          <div class="form-row lbltext mb-2">
             <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Requested By :</label>
             <div class="col-sm-4">
               <input type="text" readonly autocomplete="off" id="txtreq_by" class="form-control" name="lab_request_by"

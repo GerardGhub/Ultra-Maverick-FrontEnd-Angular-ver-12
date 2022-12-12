@@ -284,7 +284,7 @@
                     let item of labtestApproval
                       | filter: searchBy:searchText
                       | sort: sortBy:sortOrder
-                      | paging: currentPageIndex:pageSize;
+                      | paging: currentPageIndexForApproval:pageSize;
                     let i = index
                   ">
                   <td>{{ item.lab_req_id }}</td>
@@ -354,9 +354,8 @@
                     <button mat-stroked-button class="editbtnStyle" color="primary"
                     (click)="onResultClick(item)" data-toggle="modal"
                     data-target="#resultModal" data-backdrop="false" data-keyboard="false" title="Viewing Lab Result">
-                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> Result
+                    <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> View
                   </button>
-
                   </td>
                 </tr>
               </table>
@@ -366,15 +365,15 @@
 
         <div class="col-sm-12">
           <ul class="pagination paginationStyle justify-content-center mt-1">
-            <li class="page-item" (click)="onPageIndexClicked(currentPageIndex - 1)">
+            <li class="page-item" (click)="onPageIndexClickedForApproval(currentPageIndexForApproval - 1)">
               <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
                 onclick="return false">Prev</a>
             </li>
 
             <ng-container *ngIf="pagesForApproval.length <= 10">
               <li class="page-item" *ngFor="let page of pagesForApproval" [ngClass]="{
-                  'link-active-paging': page.pageIndex == currentPageIndex
-                }" (click)="onPageIndexClicked(page.pageIndex)">
+                  'link-active-paging': page.pageIndex == currentPageIndexForApproval
+                }" (click)="onPageIndexClickedForApproval(page.pageIndex)">
                 <a class="page-link" href="#" onclick="return false">{{
                   page.pageIndex + 1
                   }}</a>
@@ -382,51 +381,51 @@
             </ng-container>
 
             <ng-container *ngIf="pagesForApproval.length > 10">
-              <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == 0 }"
-                (click)="onPageIndexClicked(0)">
+              <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexForApproval == 0 }"
+                (click)="onPageIndexClickedForApproval(0)">
                 <a class="page-link" href="#" onclick="return false">1</a>
               </li>
 
-              <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndex == 1 }"
-                (click)="onPageIndexClicked(1)">
+              <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexForApproval == 1 }"
+                (click)="onPageIndexClickedForApproval(1)">
                 <a class="page-link" href="#" onclick="return false">2</a>
               </li>
 
               <li *ngIf="
-                  currentPageIndex > 1 && currentPageIndex < pagesForApprovalength - 2
+                  currentPageIndexForApproval > 1 && currentPageIndexForApproval < pagesForApprovalength - 2
                 ">
                 &nbsp;...&nbsp;
               </li>
 
-              <li class="page-item" [ngClass]="'link-active-paging'" (click)="onPageIndexClicked(currentPageIndex)"
+              <li class="page-item" [ngClass]="'link-active-paging'" (click)="onPageIndexClickedForApproval(currentPageIndexForApproval)"
                 *ngIf="
-                  currentPageIndex > 1 && currentPageIndex < pagesForApproval.length - 2
+                  currentPageIndexForApproval > 1 && currentPageIndexForApproval < pagesForApproval.length - 2
                 ">
                 <a class="page-link" href="#" onclick="return false">{{
-                  currentPageIndex + 1
+                  currentPageIndexForApproval + 1
                   }}</a>
               </li>
 
               <li>&nbsp;...&nbsp;</li>
 
               <li class="page-item" [ngClass]="{
-                  'link-active-paging': currentPageIndex == pagesForApprovallength - 2
-                }" (click)="onPageIndexClicked(pagesForApproval.length - 2)">
+                  'link-active-paging': currentPageIndexForApproval == pagesForApprovallength - 2
+                }" (click)="onPageIndexClickedForApproval(pagesForApproval.length - 2)">
                 <a class="page-link" href="#" onclick="return false">{{
                   pagesForApproval.length - 1
                   }}</a>
               </li>
 
               <li class="page-item" [ngClass]="{
-                  'link-active-paging': currentPageIndex == pagesForApproval.length - 1
-                }" (click)="onPageIndexClicked(pagesForApproval.length - 1)">
+                  'link-active-paging': currentPageIndexForApproval == pagesForApproval.length - 1
+                }" (click)="onPageIndexClickedForApproval(pagesForApproval.length - 1)">
                 <a class="page-link" href="#" onclick="return false">{{
                   pagesForApproval.length
                   }}</a>
               </li>
             </ng-container>
 
-            <li class="page-item" (click)="onPageIndexClicked(currentPageIndex + 1)">
+            <li class="page-item" (click)="onPageIndexClickedForApproval(currentPageIndexForApproval + 1)">
               <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
                 onclick="return false">Next</a>
             </li>
@@ -1113,7 +1112,7 @@
               </select>
             </div>
           </div>
-{{resultForm.value | json}}
+<!-- {{resultForm.value | json}} -->
           <div class="form-group lbltext" [hidden]="true">
             <label for="">Attachment:</label>
     

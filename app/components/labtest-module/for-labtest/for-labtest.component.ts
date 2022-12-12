@@ -78,6 +78,8 @@ export class ForLabtestComponent implements OnInit {
 
   currentPageIndex: number = 0;
   pages: any[] = [];
+
+  currentPageIndexForApproval: number = 0;
   pagesForApproval: any[] = [];
   pageSize: number = 7;
   totalPoRowCount: number = null;
@@ -267,12 +269,9 @@ export class ForLabtestComponent implements OnInit {
     this.labtestForApprovalService
       .getApprovalDetails()
       .subscribe((response) => {
-        // debugger;
         this.labtestApproval = response;
-        // console.log(response)
         this.showLoading = false;
-        this.calculateNoOfPagesLabRecords();
-
+        this.CalculateNoOfPagesLabRecordsForApproval();
         if (response) {
           this.totalForApprovalCount = response.length;
         }
@@ -293,6 +292,11 @@ export class ForLabtestComponent implements OnInit {
 
   onPageIndexClicked(pageIndex: number) {
     this.currentPageIndex = pageIndex;
+  }
+
+
+  onPageIndexClickedForApproval(pageIndex: number) {
+    this.currentPageIndexForApproval = pageIndex;
   }
 
   onFilterCategory(val: any) {
@@ -385,6 +389,25 @@ export class ForLabtestComponent implements OnInit {
     let filterPipe = new FilterPipe();
     var resultLabtestRecords = filterPipe.transform(
       this.labtestRecords,
+      this.searchBy,
+      this.searchText
+    );
+    var noOfPages = Math.ceil(resultLabtestRecords.length / this.pageSize);
+
+    this.pagesForApproval = [];
+
+    //Generate Pages
+    for (let i = 0; i < noOfPages; i++) {
+      this.pagesForApproval.push({ pageIndex: i });
+    }
+    this.currentPageIndex = 0;
+  }
+
+  CalculateNoOfPagesLabRecordsForApproval() {
+    //Get no. of Pages
+    let filterPipe = new FilterPipe();
+    var resultLabtestRecords = filterPipe.transform(
+      this.labtestApproval,
       this.searchBy,
       this.searchText
     );

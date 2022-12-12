@@ -489,6 +489,7 @@ export class ForLabtestComponent implements OnInit {
       lab_result_remarks: this.formBuilder.control(null, [Validators.required]),
       lab_sub_remarks: this.formBuilder.control(null, [Validators.required]),
       laboratory_procedure: this.formBuilder.control(null, [Validators.required]),
+      bbd: this.formBuilder.control(null)
     });
 
     this.superVisorRejectForm = this.formBuilder.group({

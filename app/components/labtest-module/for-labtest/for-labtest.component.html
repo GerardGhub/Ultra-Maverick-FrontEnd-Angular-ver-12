@@ -1595,11 +1595,11 @@
                 </a>
               </ng-container>
 
-              <ng-template *ngIf="FilePath === 'application/pdf'">
+              <ng-container *ngIf="FilePath === 'application/pdf'">
                 <a download="LabResult.pdf" href="assets/{{FileName}}" title="Download">
                   <div class="btn btn-success">Download</div>
                 </a>
-              </ng-template>
+              </ng-container>
 
             </div>
             <div class="col-sm">
@@ -1856,6 +1856,24 @@
           </div>
 
           <div class="row" style="margin-top: 10px">
+
+            <div style="margin-left: 18px;">
+              <ng-container *ngIf="FilePath == 'image/jpeg'">
+                <a download="LabResult.jpg" href="assets/{{FileName}}" title="Download">
+                  <div class="btn btn-success">Download</div>
+                  <!-- <img alt="ImageName" src="assets/xx.JPG"> -->
+                </a>
+              </ng-container>
+
+              <ng-container *ngIf="FilePath === 'application/pdf'">
+                <a download="LabResult.pdf" href="assets/{{FileName}}" title="Download">
+                  <div class="btn btn-success">Download</div>
+                </a>
+              </ng-container>
+
+            </div>
+
+            
             <div class="col-sm">
               <label for="drpEditClientLocation" class="col-sm-12 col-form-label lbltext text-right">Sub Remarks
               </label>
@@ -2562,8 +2580,8 @@
                   <tr>
                     <td>{{i + 1}}</td>
                     <td>{{item.item_desc}}</td>
-                    <td>22-Feb-2022</td>
-                    <td>23-Feb-2022</td>
+                    <td>{{item.bbd}}</td>
+                    <td>{{item.lab_exp_date_extension}}</td>
                     <td>Passed</td>
                     <td>-</td>
                   </tr>

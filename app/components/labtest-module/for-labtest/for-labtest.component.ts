@@ -674,8 +674,7 @@ export class ForLabtestComponent implements OnInit {
     });
     this.FileName = item.filename;
     this.FilePath = item.filepath;
-    alert(this.FileName);
-    alert(this.FilePath);
+ 
   }
 
   onQARejectDetailsClick(item: any) {
@@ -694,6 +693,9 @@ export class ForLabtestComponent implements OnInit {
       tsqa_approval_by: this.loginService.fullName,
       laboratory_procedure: item.laboratory_procedure
     })
+    this.FileName = item.filename;
+    this.FilePath = item.filepath;
+
   }
 
   onManagerRejectDetailsClick(item: any) {
@@ -927,12 +929,14 @@ export class ForLabtestComponent implements OnInit {
           this.labtestForApprovalService
             .managerApproval(this.managerApprovalForm.value)
             .subscribe(
-              (response: LabtestApproval) => {
-
-                this.getForApprovalList();
-                this.successApprovalToaster();
-                this.managerApprovalForm.reset();
+              (response: LabtestApproval) => {   
                 $('#QAManagerApprovalCancelModal').trigger('click');
+                setTimeout(() => {
+                  this.getForApprovalList();
+                  this.successApprovalToaster();
+                  this.managerApprovalForm.reset();
+                  this.ngOnInit();
+                }, 400);
               },
               (error) => {
                 console.log(error);

@@ -23,7 +23,7 @@ import { NgxPrintDirective } from 'ngx-print';
 import { UpperCasePipe } from '@angular/common';
 import { AppComponent } from '../../../app.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-for-labtest',
@@ -44,7 +44,8 @@ export class ForLabtestComponent implements OnInit {
     private printDirective: NgxPrintDirective,
     private toastr: ToastrService,
     public appComponent: AppComponent,
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer:DomSanitizer
   ) { }
 
   public message: string;
@@ -80,7 +81,9 @@ export class ForLabtestComponent implements OnInit {
   pages: any[] = [];
 
   currentPageIndexForApproval: number = 0;
+  currentPageIndexLabRecords: number = 0;
   pagesForApproval: any[] = [];
+  pagesForLabRecords: any[] = [];
   pageSize: number = 7;
   totalPoRowCount: number = null;
 
@@ -224,7 +227,6 @@ export class ForLabtestComponent implements OnInit {
     this.labtestRecordsService
       .getForLabtestDetails()
       .subscribe((response: LabtestRecords[]) => {
-        // debugger;
         this.labtestRecords = response;
         this.showLoading = false;
         this.calculateNoOfPagesLabRecords();
@@ -293,6 +295,9 @@ export class ForLabtestComponent implements OnInit {
 
   onPageIndexClicked(pageIndex: number) {
     this.currentPageIndex = pageIndex;
+  }
+  onPageIndexClickedForLabRecords(pageIndex: number) {
+    this.currentPageIndexLabRecords = pageIndex;
   }
 
 
@@ -395,13 +400,13 @@ export class ForLabtestComponent implements OnInit {
     );
     var noOfPages = Math.ceil(resultLabtestRecords.length / this.pageSize);
 
-    this.pagesForApproval = [];
+    this.pagesForLabRecords = [];
 
     //Generate Pages
     for (let i = 0; i < noOfPages; i++) {
-      this.pagesForApproval.push({ pageIndex: i });
+      this.pagesForLabRecords.push({ pageIndex: i });
     }
-    this.currentPageIndex = 0;
+    this.currentPageIndexLabRecords = 0;
   }
 
   CalculateNoOfPagesLabRecordsForApproval() {
@@ -492,7 +497,8 @@ export class ForLabtestComponent implements OnInit {
       laboratory_procedure: this.formBuilder.control(null, [Validators.required]),
       bbd: this.formBuilder.control(null),
       filename: this.formBuilder.control(null),
-      filepath: this.formBuilder.control(null)
+      filepath: this.formBuilder.control(null),
+      lab_request_date: this.formBuilder.control(null)
     });
 
     this.superVisorRejectForm = this.formBuilder.group({
@@ -511,7 +517,7 @@ export class ForLabtestComponent implements OnInit {
     this.managerApprovalForm = this.formBuilder.group({
       id: this.formBuilder.control(null),
       item_code: this.formBuilder.control(null),
-      item_description: this.formBuilder.control(null),
+      item_desc: this.formBuilder.control(null),
       supplier: this.formBuilder.control(null),
       qa_approval_date: this.formBuilder.control(null),
       po_number: this.formBuilder.control(null),
@@ -529,7 +535,7 @@ export class ForLabtestComponent implements OnInit {
       laboratory_status: this.formBuilder.control(null),
       qa_approval_status: this.formBuilder.control(null),
       files: this.formBuilder.control(null),
-
+      lab_request_date: this.formBuilder.control(null),
       lab_req_id: this.formBuilder.control(null, [Validators.required]),
       qa_supervisor_is_approve_by: this.formBuilder.control(null, [Validators.required]),
       lab_result_remarks: this.formBuilder.control(null, [Validators.required]),
@@ -653,8 +659,8 @@ export class ForLabtestComponent implements OnInit {
 
   onQAvisorApproveDetailsClick(item: any) {
 
-    this.FileName = item.filename;
-    this.FilePath = item.filepath;
+
+  
     this.superVisorApprovalForm.reset();
     this.superVisorApprovalForm.patchValue(item);
 
@@ -666,6 +672,10 @@ export class ForLabtestComponent implements OnInit {
       pr_date: moment(new Date(item.pr_date)).format('MM/DD/YYYY'),
       po_date: moment(new Date(item.po_date)).format('MM/DD/YYYY'),
     });
+    this.FileName = item.filename;
+    this.FilePath = item.filepath;
+    alert(this.FileName);
+    alert(this.FilePath);
   }
 
   onQARejectDetailsClick(item: any) {

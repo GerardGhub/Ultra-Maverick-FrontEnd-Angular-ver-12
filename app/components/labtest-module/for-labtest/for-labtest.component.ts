@@ -1033,6 +1033,11 @@ export class ForLabtestComponent implements OnInit {
 
   saveGeneratedItem() {
 
+
+
+
+    if (this.internalMemoForm.valid) {
+      // services here
       Swal.fire({
         title: 'Are you sure, you want to save the Laboratory Access Code?',
         text: '',
@@ -1053,6 +1058,7 @@ export class ForLabtestComponent implements OnInit {
                 setTimeout(() => {
                   this.successApprovalToaster();
                   this.ngOnInit();
+                  $('#internalMemoFormCancelModal').trigger('click');
                 }, 400);
               },
               (error) => {
@@ -1061,19 +1067,14 @@ export class ForLabtestComponent implements OnInit {
             );
         }
       });
-    
-
-    if (this.internalMemoForm.valid) {
-      // services here
-      alert("Valid");
     }
   }
 
   duplicateLabAccessCodeTrapping(code: string) {
-    
+
     this.forLabAccessCodeList.forEach(element => element.lab_access_code = code);
-      console.log(this.forLabAccessCodeList);
-    
+    console.log(this.forLabAccessCodeList);
+
 
     // alert(code);
     // dito need e compare ung labaccesscode sa dab vs sa inputed

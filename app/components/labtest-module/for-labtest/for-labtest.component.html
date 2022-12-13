@@ -544,7 +544,7 @@
                       <span class="fa fa-print"></span> Print
                     </button>
                     <button mat-stroked-button class="editbtnStyle" color="primary" data-toggle="modal"
-                      data-target="#viewPrintModal" data-backdrop="false" data-keyboard="false" title="View">
+                      data-target="#viewPrintModal" data-backdrop="false" (click)="printpreview(item)"  data-keyboard="false" title="View">
                       <span class="fa fa-eye"></span> View
                     </button>
                   </td>
@@ -2616,10 +2616,11 @@
             </div>
           </div>
         </div>
+        <!-- {{internalMemoForm.value | json}} -->
         <div class="modal-footer">
           <button mat-stroked-button color="accent" class="mr-1" id="internalMemoFormCancelModal" data-dismiss="modal"
             type="button">Close</button>
-          <button id="generateMemoClick" mat-stroked-button color="primary"
+          <button id="generateMemoClick" mat-stroked-button color="primary"  [disabled]="!internalMemoForm.valid"
             (click)="saveGeneratedItem()">Generate</button>
         </div>
       </div>

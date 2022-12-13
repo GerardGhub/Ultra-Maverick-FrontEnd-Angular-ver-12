@@ -23,7 +23,7 @@ import { NgxPrintDirective } from 'ngx-print';
 import { UpperCasePipe } from '@angular/common';
 import { AppComponent } from '../../../app.component';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-for-labtest',
@@ -45,7 +45,7 @@ export class ForLabtestComponent implements OnInit {
     private toastr: ToastrService,
     public appComponent: AppComponent,
     private http: HttpClient,
-    private sanitizer:DomSanitizer
+    private sanitizer: DomSanitizer
   ) { }
 
   public message: string;
@@ -109,7 +109,7 @@ export class ForLabtestComponent implements OnInit {
   newSubRemarksList: any[] = [];
 
   FileName: string = '';
-  FilePath: string ='';
+  FilePath: string = '';
 
   activeUser: string = '';
   qa_approval_status: string = '';
@@ -211,7 +211,7 @@ export class ForLabtestComponent implements OnInit {
       return;
     }
   }
-  
+
   getLists() {
     this.forLabtestService
       .getForLabtestDetails()
@@ -553,13 +553,12 @@ export class ForLabtestComponent implements OnInit {
       department: this.formBuilder.control(null, [Validators.required]),
       samples: this.formBuilder.control(null, [Validators.required]),
       source_of_samples: this.formBuilder.control(null, [Validators.required]),
-      lab_procedure: this.formBuilder.control(null, [Validators.required]),
-
+      lab_procedure: this.formBuilder.control(null),
       lab_access_code: this.formBuilder.control(null, [Validators.required]),
-      date_submitted: this.formBuilder.control(null, [Validators.required]),
-      date_analyzed: this.formBuilder.control(null, [Validators.required]),
-      date_relaeased: this.formBuilder.control(null, [Validators.required]),
-      request_by: this.formBuilder.control(null, [Validators.required]),
+      date_submitted: this.formBuilder.control(null),
+      date_analyzed: this.formBuilder.control(null),
+      date_relaeased: this.formBuilder.control(null),
+      request_by: this.formBuilder.control(null),
 
     });
   }
@@ -660,7 +659,7 @@ export class ForLabtestComponent implements OnInit {
   onQAvisorApproveDetailsClick(item: any) {
 
 
-  
+
     this.superVisorApprovalForm.reset();
     this.superVisorApprovalForm.patchValue(item);
 
@@ -674,7 +673,7 @@ export class ForLabtestComponent implements OnInit {
     });
     this.FileName = item.filename;
     this.FilePath = item.filepath;
- 
+
   }
 
   onQARejectDetailsClick(item: any) {
@@ -724,6 +723,25 @@ export class ForLabtestComponent implements OnInit {
     this.printDirective.printSectionId = 'print-section';
     this.printDirective.useExistingCss = true;
     this.printDirective.print();
+  }
+
+  printpreview(item: any) {
+    this.department = item.client_requestor;
+    this._samples = 'RAW MATS';
+    this.source_samples = item.client_requestor;
+    this.lab_procedure = item.laboratory_procedure;
+    this.lab_access_code = item.lab_access_code;
+    this.date_submitted = item.date_added;
+    this.date_analyzed = item.qa_approval_date;
+    this.date_released = item.lab_result_released_date;
+    this.item_desc = item.item_desc;
+    this.bbd_date = item.bbd;
+    this.shelf_life_ext = item.lab_exp_date_extension;
+    this.qa_approval_by = item.qa_approval_by;
+    this.qa_supervisor = item.qa_supervisor_is_approve_by;
+
+    this.printDirective.printSectionId = 'print-section';
+    this.printDirective.useExistingCss = true;
   }
 
   // CRUD *******************************************************************************************************************************
@@ -929,7 +947,7 @@ export class ForLabtestComponent implements OnInit {
           this.labtestForApprovalService
             .managerApproval(this.managerApprovalForm.value)
             .subscribe(
-              (response: LabtestApproval) => {   
+              (response: LabtestApproval) => {
                 $('#QAManagerApprovalCancelModal').trigger('click');
                 setTimeout(() => {
                   this.getForApprovalList();
@@ -995,7 +1013,7 @@ export class ForLabtestComponent implements OnInit {
       this.forLabAccessCodeList.splice(index, 1);
     }
 
-    console.log(this.forLabAccessCodeList);
+    console.warn(this.forLabAccessCodeList);
 
     if (this.forLabAccessCodeList.length == 0) {
       this.isGenerate = true;
@@ -1008,19 +1026,56 @@ export class ForLabtestComponent implements OnInit {
     this.internalMemoForm.reset();
     this.internalMemoForm.patchValue({
       department: 'DRY',
-      samples: 'samples'
+      samples: 'samples',
+      source_of_samples: 'RAW MATS'
     })
   }
 
   saveGeneratedItem() {
-    alert('ediwow!')
+
+      Swal.fire({
+        title: 'Are you sure, you want to save the Laboratory Access Code?',
+        text: '',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          //Invoke the REST-API call
+          this.labtestForApprovalService
+            .setLabAccessCode(this.forLabAccessCodeList)
+            .subscribe(
+              (response) => {
+                //Reset the editForm
+                // this.onQARejectById();
+                setTimeout(() => {
+                  this.successApprovalToaster();
+                  this.ngOnInit();
+                }, 400);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+        }
+      });
+    
+
     if (this.internalMemoForm.valid) {
       // services here
+      alert("Valid");
     }
   }
 
   duplicateLabAccessCodeTrapping(code: string) {
-    alert(code);
+    
+    this.forLabAccessCodeList.forEach(element => element.lab_access_code = code);
+      console.log(this.forLabAccessCodeList);
+    
+
+    // alert(code);
     // dito need e compare ung labaccesscode sa dab vs sa inputed
   }
 

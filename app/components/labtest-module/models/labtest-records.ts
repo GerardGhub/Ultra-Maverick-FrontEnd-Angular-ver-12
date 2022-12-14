@@ -38,11 +38,11 @@ export class LabtestRecords {
   pr_number:number;
   po_date:string;
   pr_date:string;
-
+  add_access_code_by:string;
 
   constructor () {
-    this.lab_req_id = null;
-    this.item_code = null;
+    this.lab_req_id = 0;
+    this.item_code = '';
     this.item_desc = null;
     this.category = null;
     this.item_description = null;
@@ -77,9 +77,9 @@ export class LabtestRecords {
     this.lab_request_by = null;
     this.is_received_status = null;
     this.po_number = null;
-    this.pr_number = null;
-    this.po_date = null;
-    this.pr_date = null;
-
+    this.pr_number = 0;
+    this.po_date = '';
+    this.pr_date = '';
+    this.add_access_code_by = '';
   }
 }

@@ -8,10 +8,14 @@ import { LabtestRecords } from '../models/labtest-records';
 })
 export class LabtestRecordsService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getForLabtestDetails(): Observable<LabtestRecords[]>
-  {
+  getForLabtestDetails(): Observable<LabtestRecords[]> {
     return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/LabResult", { responseType: "json" });
   }
+
+  getLabTestRecordsWithAccessCode(): Observable<LabtestRecords[]> {
+    return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/LabResultWithAccessCode", { responseType: "json" });
+  }
+
 }

@@ -55,6 +55,7 @@ export class ForLabtestComponent implements OnInit {
   formData = new FormData();
   forlabtest: ForLabtest[] = [];
   labtestRecords: LabtestRecords[] = [];
+  labtestRecordsWithCode: LabtestRecords[] = [];
   labTestProcedures: LabaratoryProcedure[] = [];
   labTestRemarks: LabTestRemarks[] = [];
   labtestSubRemarks: LabtestSubRemarks[] = [];
@@ -82,13 +83,16 @@ export class ForLabtestComponent implements OnInit {
 
   currentPageIndexForApproval: number = 0;
   currentPageIndexLabRecords: number = 0;
+  currentPageIndexLabRecordsWithAccessCode: number = 0;
   pagesForApproval: any[] = [];
   pagesForLabRecords: any[] = [];
+  pagesForLabRecordsAccessCode: any[] = [];
   pageSize: number = 7;
   totalPoRowCount: number = null;
 
   totalForApprovalCount: number = null;
   totalLabtestRecords: number = null;
+  totalLabtestRecordsWithCode: number 0;
 
   ShelfLifeExtension: number = 0;
 
@@ -166,7 +170,45 @@ export class ForLabtestComponent implements OnInit {
     this.ForApproval = this.appComponent.ForApproval;
     this.LaboratoryTestRecords = this.appComponent.LaboratoryTestRecords;
     this.RecordsWithAccessCode = this.appComponent.RecordsWithAccessCode;
+    this.getLabRecordsListWithCode();
   }
+
+
+
+  getLabRecordsListWithCode() {
+    this.labtestRecordsService
+      .getLabTestRecordsWithAccessCode()
+      .subscribe((response: LabtestRecords[]) => {
+        this.labtestRecordsWithCode = response;
+        this.showLoading = false;
+        this.calculateNoOfPagesLabRecordWithAccessCode();
+        if (response) {
+          this.totalLabtestRecordsWithCode = response.length;
+        }
+      });
+  }
+
+
+
+  calculateNoOfPagesLabRecordWithAccessCode() {
+    //Get no. of Pages
+    let filterPipe = new FilterPipe();
+    var resultLabtestRecordWithCodes = filterPipe.transform(
+      this.labtestRecordsWithCode,
+      this.searchBy,
+      this.searchText
+    );
+    var noOfPages = Math.ceil(resultLabtestRecordWithCodes.length / this.pageSize);
+
+    this.pagesForLabRecordsAccessCode = [];
+
+    //Generate Pages
+    for (let i = 0; i < noOfPages; i++) {
+      this.pagesForLabRecordsAccessCode.push({ pageIndex: i });
+    }
+    this.currentPageIndexLabRecordsWithAccessCode = 0;
+  }
+
 
   public uploadFile = (files) => {
     if (files.length === 0)
@@ -298,6 +340,9 @@ export class ForLabtestComponent implements OnInit {
   }
   onPageIndexClickedForLabRecords(pageIndex: number) {
     this.currentPageIndexLabRecords = pageIndex;
+  }
+  onPageIndexClickedForLabRecordsWithAccessCode(pageIndex: number) {
+    this.currentPageIndexLabRecordsWithAccessCode = pageIndex;
   }
 
 
@@ -1055,10 +1100,10 @@ export class ForLabtestComponent implements OnInit {
               (response) => {
                 //Reset the editForm
                 // this.onQARejectById();
+                this.successApprovalToaster();
+                $('#internalMemoFormCancelModal').trigger('click');
                 setTimeout(() => {
-                  this.successApprovalToaster();
                   this.ngOnInit();
-                  $('#internalMemoFormCancelModal').trigger('click');
                 }, 400);
               },
               (error) => {
@@ -1073,9 +1118,7 @@ export class ForLabtestComponent implements OnInit {
   duplicateLabAccessCodeTrapping(code: string) {
 
     this.forLabAccessCodeList.forEach(element => element.lab_access_code = code);
-    console.log(this.forLabAccessCodeList);
-
-
+    this.forLabAccessCodeList.forEach(element => element.add_access_code_by = this.loginService.currentUserName);
     // alert(code);
     // dito need e compare ung labaccesscode sa dab vs sa inputed
   }

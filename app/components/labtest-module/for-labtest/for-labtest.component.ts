@@ -56,6 +56,7 @@ export class ForLabtestComponent implements OnInit {
   forlabtest: ForLabtest[] = [];
   labtestRecords: LabtestRecords[] = [];
   labtestRecordsWithCode: LabtestRecords[] = [];
+  labtestRecordsItemsWithCode: LabtestRecords[] = [];
   labTestProcedures: LabaratoryProcedure[] = [];
   labTestRemarks: LabTestRemarks[] = [];
   labtestSubRemarks: LabtestSubRemarks[] = [];
@@ -92,7 +93,7 @@ export class ForLabtestComponent implements OnInit {
 
   totalForApprovalCount: number = null;
   totalLabtestRecords: number = null;
-  totalLabtestRecordsWithCode: number 0;
+  totalLabtestRecordsWithCode: number = 0;
 
   ShelfLifeExtension: number = 0;
 
@@ -186,6 +187,14 @@ export class ForLabtestComponent implements OnInit {
           this.totalLabtestRecordsWithCode = response.length;
         }
       });
+  }
+  searchLabRecorditemsWithCode(AccessCode: number){
+    this.labtestRecordsService
+    .SearchtItemsPerAccessCode(AccessCode)
+    .subscribe((response: LabtestRecords[]) => {
+      this.labtestRecordsItemsWithCode = response;
+      this.showLoading = false;
+    });
   }
 
 
@@ -744,11 +753,15 @@ export class ForLabtestComponent implements OnInit {
 
   onManagerRejectDetailsClick(item: any) {
     this.managerRejectForm.reset();
-
     this.managerRejectForm.patchValue({
       id: item.fk_receiving_id
     });
   }
+
+viewItems(item: any)
+{
+  this.searchLabRecorditemsWithCode(item.lab_access_code);
+}
 
   print(item: any) {
     this.department = item.client_requestor;

@@ -544,7 +544,8 @@
                       <span class="fa fa-print"></span> Print
                     </button>
                     <button mat-stroked-button class="editbtnStyle" color="primary" data-toggle="modal"
-                      data-target="#viewPrintModal" data-backdrop="false" (click)="printpreview(item)"  data-keyboard="false" title="View">
+                      data-target="#viewPrintModal" data-backdrop="false" (click)="printpreview(item)"
+                      data-keyboard="false" title="View">
                       <span class="fa fa-eye"></span> View
                     </button>
                   </td>
@@ -657,7 +658,7 @@
                   name="SearchText" autocomplete="off" [(ngModel)]="searchText"
                   (keyup)="onSearchTextKeyupLabRecords($event)" />
               </div>
-            </div>      
+            </div>
           </div>
         </div>
 
@@ -669,20 +670,10 @@
                 <thead>
                   <tr class="text-light header-bg-color-um system-name">
                     <th></th>
-                    <th>Ref. No.</th>
-                    <th>PO No.</th>
-                    <th>Client</th>
-                    <th>Item Code</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Supplier</th>
-                    <th>Quantity</th>
-                    <th>Date Analyzed</th>
-                    <th>BBD</th>
-                    <th>Extension Date</th>
-                    <th>History</th>
-                    <th>Extended Days</th>
-                    <th>Aging</th>
+                    <th>Lab Access Code</th>
+                    <th>Released By</th>
+                    <th>Released Date</th>
+                    <th>Total Items</th>
                     <th class="text-center">Actions</th>
                   </tr>
                 </thead>
@@ -694,27 +685,18 @@
                     let i = index
                   ">
                   <td><input type="checkbox" [id]="i" ngModel (ngModelChange)="getRowItem(item, $event)"></td>
-                  <td>{{ item.lab_req_id }}</td>
-                  <td>{{ item.po_number }}</td>
-                  <td>{{ item.client_requestor }}</td>
-                  <td>{{ item.item_code }}</td>
-                  <td>{{ item.item_desc }}</td>
-                  <td>{{ item.category }}</td>
-                  <td>{{ item.supplier }}</td>
-                  <td>{{ item.qty_received }}</td>
-                  <td>{{ item.qa_approval_date | date: "MM/dd/yyyy" }}</td>
-                  <td>{{ item.bbd | date: "MM/dd/yyyy" }}</td>
-                  <td>{{ item.lab_exp_date_extension | date: "MM/dd/yyyy" }}</td>
-                  <td>{{ item.historical }}</td>
-                  <td>{{ item.days_to_expired }}</td>
-                  <td>{{ item.lab_approval_aging_days }}</td>
+                  <td>{{ item.lab_access_code }}</td>
+                  <td>{{ item.add_access_code_by }}</td>
+                  <td>{{ item.add_access_code_date | date: "MM/dd/yyyy"}}</td>
+                  <td>{{ item.totalItems }}</td>
                   <td>
                     <button mat-stroked-button class="editbtnStyle" color="black" data-toggle="modal" data-target="#"
                       data-backdrop="false" data-keyboard="false" title="To Print" (click)="print(item)">
                       <span class="fa fa-print"></span> Print
                     </button>
                     <button mat-stroked-button class="editbtnStyle" color="primary" data-toggle="modal"
-                      data-target="#viewPrintModal" data-backdrop="false" (click)="printpreview(item)"  data-keyboard="false" title="View">
+                      data-target="#viewAccessCodeModal" data-backdrop="false"  (click)="viewItems(item)"
+                      data-keyboard="false" title="View">
                       <span class="fa fa-eye"></span> View
                     </button>
                   </td>
@@ -726,7 +708,8 @@
 
         <div class="col-sm-12">
           <ul class="pagination paginationStyle justify-content-center mt-1">
-            <li class="page-item" (click)="onPageIndexClickedForLabRecordsWithAccessCode(currentPageIndexLabRecordsWithAccessCode - 1)">
+            <li class="page-item"
+              (click)="onPageIndexClickedForLabRecordsWithAccessCode(currentPageIndexLabRecordsWithAccessCode - 1)">
               <a mat-stroked-button color="primary" class="mr-1 font-color-black" href="#"
                 onclick="return false">Prev</a>
             </li>
@@ -786,7 +769,8 @@
               </li>
             </ng-container>
 
-            <li class="page-item" (click)="onPageIndexClickedForLabRecordsWithAccessCode(currentPageIndexLabRecordsWithAccessCode + 1)">
+            <li class="page-item"
+              (click)="onPageIndexClickedForLabRecordsWithAccessCode(currentPageIndexLabRecordsWithAccessCode + 1)">
               <a mat-stroked-button color="primary" class="ml-1 font-color-black" href="#"
                 onclick="return false">Next</a>
             </li>
@@ -1498,7 +1482,7 @@
                 name="bbd" formControlName="bbd" maxlength="30" />
 
 
-                
+
             </div>
             <div class="col-sm lbltext">
               <label for="" class="">Shelf Life Extension:</label>
@@ -1518,25 +1502,25 @@
 
 
 
-       
+
           <div class="row" style="margin-top: 10px">
 
             <div style="margin-left: 18px;">
-            <ng-container *ngIf="FilePath == 'image/jpeg'">
-              <a download="LabResult.jpg" href="assets/{{FileName}}" title="Download">
-                <div class="btn btn-success">Download</div>
-                <!-- <img alt="ImageName" src="assets/xx.JPG"> -->
-              </a>
-            </ng-container>
-  
-            <ng-container *ngIf="FilePath === 'application/pdf'">
-              <a download="LabResult.pdf" href="assets/{{FileName}}" title="Download">
-                <div class="btn btn-success">Download</div>
-              </a>
-            </ng-container>
+              <ng-container *ngIf="FilePath == 'image/jpeg'">
+                <a download="LabResult.jpg" href="assets/{{FileName}}" title="Download">
+                  <div class="btn btn-success">Download</div>
+                  <!-- <img alt="ImageName" src="assets/xx.JPG"> -->
+                </a>
+              </ng-container>
+
+              <ng-container *ngIf="FilePath === 'application/pdf'">
+                <a download="LabResult.pdf" href="assets/{{FileName}}" title="Download">
+                  <div class="btn btn-success">Download</div>
+                </a>
+              </ng-container>
+            </div>
           </div>
-          </div>
-    
+
 
 
           <div class="row" style="margin-top: 10px" *ngIf="showhideSubRemDiv">
@@ -1573,7 +1557,7 @@
 
         </div>
 
-  
+
 
         <div class="modal-footer">
           <button mat-stroked-button color="accent" class="mr-1" id="QAVisorApprovalCancelModal" data-dismiss="modal"
@@ -2036,7 +2020,7 @@
 
             </div>
 
-            
+
             <div class="col-sm">
               <label for="drpEditClientLocation" class="col-sm-12 col-form-label lbltext text-right">Sub Remarks
               </label>
@@ -2471,7 +2455,159 @@
   </div>
 </div>
 
+<!-- view modal accessCode Modal -->
+<div class="modal" role="dialog" id="viewAccessCodeModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-all text-white">
+        <div class="modal-title">View Item Details</div>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="print-section-view">
+          <div class="printing-logo">
+            <img src="../../../../assets/rdf-logo.png" alt="logo">
+          </div>
+          <div class="d-flex justify-content-between">
+            <div class="header-style">
+              <div class="title-header">
+                <label>Technical Services and Quality Assurance </label><br>
+                <label>Food Laboratory</label><br>
+                <label class="color-red">Laboratory Results</label>
+              </div>
+            </div>
+          </div>
 
+          <div class="details">
+            <div class="element-details">
+              <div class="input-group mb-sm-0 sm-col-1">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Clent/Department : </label>
+                <div class="col-sm-3 ">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="department">
+                </div>
+
+                <label for="staticEmail" class="col-sm-3 col-form-label">Lab Access Code : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="lab_access_code">
+                </div>
+              </div>
+
+              <div class="input-group mb-sm-0 sm-col-1">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Samples : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size" [(ngModel)]="_samples">
+                </div>
+
+                <label for="staticEmail" class="col-sm-3 col-form-label">Date Submitted : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="date_submitted">
+                </div>
+              </div>
+
+              <div class="input-group mb-sm-0">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Source Samples : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="source_samples">
+                </div>
+
+                <label for="staticEmail" class="col-sm-3 col-form-label">Date Analyzed : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="date_analyzed">
+                </div>
+              </div>
+
+              <div class="input-group mb-sm-0">
+                <label for="staticEmail" class="col-sm-3 col-form-label">Laboratory Procedure : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border color-green modal-txt-size"
+                    [(ngModel)]="lab_procedure">
+                </div>
+
+                <label for="staticEmail" class="col-sm-3 col-form-label">Date Released : </label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control-plaintext input-border modal-txt-size"
+                    [(ngModel)]="date_released">
+                </div>
+              </div>
+            </div>
+          </div><br>
+
+          <div class="items-div">
+            <table width="100%" class="table-style">
+              <tr>
+                <th style="text-align: center;">Sample Names</th>
+                <th style="text-align: center;">BBD</th>
+                <th style="text-align: center;">Shelf Life Extension</th>
+              </tr>
+              <tbody>
+                <tr *ngFor="let item of labtestRecordsItemsWithCode" style="text-align:center;">
+                  <td>{{ item.item_desc }}</td>
+                  <td>{{ item.bbd }}</td>
+                  <td>{{ item.lab_exp_date_extension }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="description">
+            <label>*Method of Analysis based on procedures From Clinical Microbiology</label><br>
+            <label>by P.J Quinn, et.al, 1994</label>
+          </div>
+
+          <br><br><br>
+          <br>
+
+          <div class="div-footer">
+            <table width="100%" class="table-style">
+              <tr>
+
+                <th style="text-align: center;">Prepared By:</th>
+                <th style="text-align: center;">Noted By:</th>
+
+
+              </tr>
+              <tbody>
+                <tr style="text-align: center;">
+                  <td>
+                    <br>
+                    Liezel Anne B. Loyola <br>
+                    QAIP-Lab Analyst
+                  </td>
+                  <td>
+                    <br>
+                    Jennyfferlyn Q. Rosete <br>
+                    QAIP VAM Supervisor
+                  </td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="font-weight: bold;">
+                    <br>
+                    <br>
+                    <br>
+
+                    Recieved By:
+                    <br><br>
+                    _______________________
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- for approval Viewing-->
 <form novalidate="novalidate" [formGroup]="resultForm">
@@ -2783,7 +2919,7 @@
         <div class="modal-footer">
           <button mat-stroked-button color="accent" class="mr-1" id="internalMemoFormCancelModal" data-dismiss="modal"
             type="button">Close</button>
-          <button id="generateMemoClick" mat-stroked-button color="primary"  [disabled]="!internalMemoForm.valid"
+          <button id="generateMemoClick" mat-stroked-button color="primary" [disabled]="!internalMemoForm.valid"
             (click)="saveGeneratedItem()">Generate</button>
         </div>
       </div>

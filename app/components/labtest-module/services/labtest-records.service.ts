@@ -18,4 +18,8 @@ export class LabtestRecordsService {
     return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/LabResultWithAccessCode", { responseType: "json" });
   }
 
+  SearchtItemsPerAccessCode(AccessCode: number): Observable<LabtestRecords[]> {
+    return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/SearchLabResultWithAccessCode/" + AccessCode, { responseType: "json" });
+  }
+
 }

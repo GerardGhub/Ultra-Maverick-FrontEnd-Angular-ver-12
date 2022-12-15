@@ -22,4 +22,10 @@ export class LabtestRecordsService {
     return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/SearchLabResultWithAccessCode/" + AccessCode, { responseType: "json" });
   }
 
+  SearchLabtestHistory(ReceiveID: number): Observable<LabtestRecords[]> {
+    return this.httpClient.get<LabtestRecords[]>("/api/DryWareHouseReceivingForLabTest/searchreceivedidentity/" + ReceiveID, { responseType: "json" });
+  }
+
+
+
 }

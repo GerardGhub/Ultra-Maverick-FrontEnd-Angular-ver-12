@@ -99,7 +99,14 @@
                     : (item.qa_approval_date | date: "MM/dd/yyyy")
                     }}
                   </td>
-                  <td>{{ item.historical_lab_transact_count }}</td>
+                  <td>
+                    <button mat-stroked-button class="editbtnStyle" color="basic" (click)="viewHistory(item)"
+                      data-toggle="modal" data-target="#forlabtestHistoricalViewModal" data-backdrop="false"
+                      data-keyboard="false">
+                      <span class="fa fa-eye">{{ item.historical_lab_transact_count }}</span>
+                    </button>
+
+                  </td>
                   <td>{{ item.expiry_days_aging }}</td>
                   <td>
                     {{
@@ -694,7 +701,7 @@
                       <span class="fa fa-print"></span> Print
                     </button>
                     <button mat-stroked-button class="editbtnStyle" color="primary" data-toggle="modal"
-                      data-target="#viewAccessCodeModal" data-backdrop="false"  (click)="viewItems(item)"
+                      data-target="#viewAccessCodeModal" data-backdrop="false" (click)="viewItems(item)"
                       data-keyboard="false" title="View">
                       <span class="fa fa-eye"></span> View
                     </button>
@@ -2812,7 +2819,134 @@
 </form>
 
 
+<!-- for Lab Historical Viewing-->
+<form novalidate="novalidate" [formGroup]="resultForm">
+  <div class="modal" role="dialog" id="forlabtestHistoricalViewModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-all text-white">
+          <div class="modal-title">View Information</div>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="titledivider">RAW MATERIAL INFORMATION</div>
+          <div class="form-row lbltext">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Item Code :</label>
+            <div class="col-sm-4 mb-2">
+              <input type="text" readonly autocomplete="off" id="txtitem_code" class="form-control lbltext"
+                name="item_code" formControlName="item_code" maxlength="30" />
+            </div>
 
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Description :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtitem_description" class="form-control lbltext"
+                name="item_description" formControlName="item_description" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Supplier :
+            </label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtsupplier " class="form-control" name="supplier"
+                formControlName="supplier" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">Date Analyzed :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtapproval_date" class="form-control"
+                name="qa_approval_date" formControlName="qa_approval_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="titledivider">LAB INFORMATION</div>
+          <div class="form-row lbltext">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO NO. :</label>
+            <div class="col-sm-4 mb-2">
+              <input type="text" readonly autocomplete="off" id="txtpo_number" class="form-control" name="po_number"
+                formControlName="po_number" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">PO Date :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtpo_date" class="form-control lbltext" name="po_date"
+                formControlName="po_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext">
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR No. :
+            </label>
+            <div class="col-sm-4 mb-2">
+              <input type="text" readonly autocomplete="off" id="txtpr_number " class="form-control" name="pr_number"
+                formControlName="pr_no" maxlength="30" />
+            </div>
+
+            <label for="drpEditClientLocation" class="col-sm-2 col-form-label lbltext">PR Date :</label>
+            <div class="col-sm-4">
+              <input type="text" readonly autocomplete="off" id="txtpr_date" class="form-control" name="pr_date"
+                formControlName="pr_date" maxlength="30" />
+            </div>
+          </div>
+
+          <div class="form-row lbltext">
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">Quantity :</label>
+            <div class="col-sm-4 mb-2">
+              <input type="text" readonly autocomplete="off" id="txtquantity" class="form-control" name="qty_received"
+                formControlName="qty_received" maxlength="30" />
+            </div>
+
+            <label for="txtEditClientLocationName" class="col-sm-2 col-form-label lbltext">UOM :</label>
+            <div class="col-md-4">
+              <input type="text" readonly autocomplete="off" id="txtitem_uom" class="form-control" name="uom"
+                formControlName="uom" maxlength="30" />
+            </div>
+          </div>
+
+
+<div>
+  <table class="table table-striped table-bordered nowrap table-responsive-sm" style="width:100%">
+    <thead>
+    <tr class="text-light header-bg-color-um system-name">
+      <th style="text-align: center;">Sample Names</th>
+      <th style="text-align: center;">Sample Qty.</th>
+      <th style="text-align: center;">BBD</th>
+      <th style="text-align: center;">Shelf Life Extension</th>
+      <th style="text-align: center;">Procedure</th>
+      <th style="text-align: center;">Remarks</th>
+      <th style="text-align: center;">Sub Remarks</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of labtestHistorical" style="text-align:center;">
+        <td>{{ item.item_desc }}</td>
+        <td>{{ item.sample_Qty }}</td>
+        <td>{{ item.bbd }}</td>
+        <td>{{ item.lab_exp_date_extension | date:'MM-dd-yyyy' }}</td>
+        <td>{{ item.laboratory_procedure}}</td>
+        <td>{{ item.lab_result_remarks}}</td>
+        <td>{{ item.lab_sub_remarks}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+   
+
+    
+        </div>
+        <div class="modal-footer">
+          <button mat-stroked-button color="accent" class="mr-1" id="proceedAndApproveFormCancelModal"
+            data-dismiss="modal" type="button">
+            Close
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 
 <!-- INTERNAL MEMO ****************************************************************************************************** -->
 <form novalidate="novalidate">

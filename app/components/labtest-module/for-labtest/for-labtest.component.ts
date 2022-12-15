@@ -57,6 +57,7 @@ export class ForLabtestComponent implements OnInit {
   labtestRecords: LabtestRecords[] = [];
   labtestRecordsWithCode: LabtestRecords[] = [];
   labtestRecordsItemsWithCode: LabtestRecords[] = [];
+  labtestHistorical: LabtestRecords[] = [];
   labTestProcedures: LabaratoryProcedure[] = [];
   labTestRemarks: LabTestRemarks[] = [];
   labtestSubRemarks: LabtestSubRemarks[] = [];
@@ -188,6 +189,8 @@ export class ForLabtestComponent implements OnInit {
         }
       });
   }
+
+  
   searchLabRecorditemsWithCode(AccessCode: number){
     this.labtestRecordsService
     .SearchtItemsPerAccessCode(AccessCode)
@@ -195,6 +198,14 @@ export class ForLabtestComponent implements OnInit {
       this.labtestRecordsItemsWithCode = response;
       this.showLoading = false;
     });
+  }
+
+  searchLabRecordHistorical(ReceiveID: number) {
+    this.labtestRecordsService.SearchLabtestHistory(ReceiveID)
+    .subscribe((response: LabtestRecords[]) => {
+      this.labtestHistorical = response;
+      this.showLoading = false;
+    })
   }
 
 
@@ -763,6 +774,12 @@ viewItems(item: any)
   this.searchLabRecorditemsWithCode(item.lab_access_code);
 }
 
+viewHistory(item: any)
+{
+  this.searchLabRecordHistorical(item.id);
+  this.onResultClick(item);
+  console.error(item);
+}
   print(item: any) {
     this.department = item.client_requestor;
     this._samples = 'RAW MATS';

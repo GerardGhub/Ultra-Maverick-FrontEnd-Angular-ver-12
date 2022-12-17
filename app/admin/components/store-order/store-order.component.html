@@ -146,7 +146,7 @@
 
         </mat-tab>
       </ng-template>
-      <!-- Prepared Orders -->
+
       <ng-template [ngIf]="SPreparedOrders == 1">
         <mat-tab>
           <ng-template mat-tab-label>
@@ -170,17 +170,17 @@
       </ng-template>
       <!-- Cancelled Transactions -->
       <ng-template [ngIf]="SCancelledTransactions == 1">
-      <mat-tab>
-        <ng-template mat-tab-label>
-          Cancelled Transactions
-          &nbsp; <span *ngIf="totalCancelledCount" class="badge badge-danger zerobadge{{ totalCancelledCount }}">{{
-            totalCancelledCount }}</span>
-        </ng-template>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            Cancelled Transactions
+            &nbsp; <span *ngIf="totalCancelledCount" class="badge badge-danger zerobadge{{ totalCancelledCount }}">{{
+              totalCancelledCount }}</span>
+          </ng-template>
 
-        <app-store-order-active-cancelled-transaction>
-        </app-store-order-active-cancelled-transaction>
-      </mat-tab>
-</ng-template>
+          <app-store-order-active-cancelled-transaction>
+          </app-store-order-active-cancelled-transaction>
+        </mat-tab>
+      </ng-template>
     </mat-tab-group>
   </div>
 </div>

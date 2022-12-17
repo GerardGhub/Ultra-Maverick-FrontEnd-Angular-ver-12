@@ -61,13 +61,12 @@
                   <span class="fa fa-eye"></span> View
                 </button>
 
-<!-- 
 
-                <button (click)="onApproveClick(item)" data-toggle="modal" data-target="#preparedOrderApprovalModal"
-                  data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="primary"
+
+                <button (click)="onApprovalClick(item)"  title="Edit" data-keyboard="false" class="editbtnStyle" color="primary"
                   mat-stroked-button>
                   <span class="fa fa-check-circle"></span> Approve
-                </button> -->
+                </button>
 
                 <button (click)="onCancelOrderClick(item)" data-toggle="modal" data-target="#cancelOrderModal"
                   data-backdrop="false" title="Edit" data-keyboard="false" class="editbtnStyle" color="warn"
@@ -273,8 +272,8 @@
         </div>
 
         <div class="modal-footer">
-          <button mat-stroked-button color="primary" id="ApproveButton" [hidden]="hideApproveButton == 1" class="mr-2"
-            (click)="approvedOrder()" [disabled]="!approvalForm.valid">Approve</button>
+          <!-- <button [hidden]="true" mat-stroked-button color="primary" id="ApproveButton" [hidden]="hideApproveButton == 1" class="mr-2"
+            (click)="approvedOrder()" [disabled]="!approvalForm.valid">Approve</button> -->
           <button [hidden]="true" mat-stroked-button color="warn" data-dismiss="modal"
             id="closeApprovalModal">Cancel</button>
           <!-- {{approvalForm.value | json}} -->

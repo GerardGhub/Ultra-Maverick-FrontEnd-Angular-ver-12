@@ -315,6 +315,43 @@ export class PreparedStoreOrderComponent implements OnInit {
     });
   }
 
+
+  onApprovalClick(item: any) {
+
+    if (item.totalPreparedItems == item.total_state_repack) {
+      this.hideApproveButton = 0;
+
+    } else {
+      this.hideApproveButton = 1;
+    }
+
+    this.getCountOrderDispatching();
+    let shortDate = moment(new Date(item.is_approved_prepa_date)).format(
+      'MM-DD-YYYY'
+    );
+
+    this.approvalForm.patchValue({
+      id: item.id,
+      prep_date: shortDate,
+      recieving_date: this.dateToday,
+      category: item.category,
+      store_name: item.store_name,
+      route: item.route,
+      area: item.area,
+      Is_wh_approved: 1,
+      Is_wh_approved_by: this.loginService.fullName,
+      Is_wh_approved_date: this.dateToday,
+      Wh_checker_move_order_no: this.totalStoreOrderDispatching,
+    });
+
+    this.preparedOrdersService.searchItems(item.id).subscribe((response) => {
+      this.itemList = response;
+
+    });
+    this.approvedOrder();
+
+  }
+
   onCancelItemClick(item: any) {
     this.cancelOrderItemForm.patchValue({
       item_code: item.item_code,

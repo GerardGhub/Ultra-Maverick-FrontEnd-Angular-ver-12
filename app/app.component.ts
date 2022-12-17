@@ -280,7 +280,7 @@ export class AppComponent {
 
   getStoreOrderList() {
     this.whCheckerDashboardService
-      .getStoreOrders()
+      .getDistinctPreparedStoreOrders()
       .subscribe((response: DryWhStoreOrders[]) => {
         if (response) {
           this.storeOrders = response;

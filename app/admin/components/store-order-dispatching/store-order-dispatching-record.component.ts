@@ -43,6 +43,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
   totalCancelledCount: number = 0;
   totalDispatchingRowCount: number = 0;
   totalPreparedOrdersCount: number = 0;
+  totalStoreOrderDispatching:number = 0;
 
   viewingForm: FormGroup;
 
@@ -137,6 +138,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
 
   // POPULATE VALUE*******************************************************************************************
   onViewClick(item) {
+    this.totalStoreOrderDispatching = item.wh_checker_move_order_no;
     this.dispatchingService.searchItems(item.id).subscribe((response) => {
       this.dispatchingItems = response;
     });

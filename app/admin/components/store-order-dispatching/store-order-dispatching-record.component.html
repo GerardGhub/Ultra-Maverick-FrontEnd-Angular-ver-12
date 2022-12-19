@@ -94,21 +94,25 @@
           <a class="page-link" href="#" onclick="return false">2</a>
         </li>
 
-        <li *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">&nbsp;...&nbsp;</li>
+        <li *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">
+          &nbsp;...&nbsp;</li>
 
-        <li class="page-item" [ngClass]=" 'link-active-paging' " (click)="onPageIndexClicked(currentPageIndexDispatching)"
+        <li class="page-item" [ngClass]=" 'link-active-paging' "
+          (click)="onPageIndexClicked(currentPageIndexDispatching)"
           *ngIf="currentPageIndexDispatching > 1 && currentPageIndexDispatching < pagesDispatching.length - 2">
           <a class="page-link" href="#" onclick="return false">{{currentPageIndexDispatching + 1}}</a>
         </li>
 
         <li>&nbsp;...&nbsp;</li>
 
-        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 2}"
+        <li class="page-item"
+          [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 2}"
           (click)="onPageIndexClicked(pagesDispatching.length - 2)">
           <a class="page-link" href="#" onclick="return false">{{pagesDispatching.length - 1}}</a>
         </li>
 
-        <li class="page-item" [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 1}"
+        <li class="page-item"
+          [ngClass]="{ 'link-active-paging': currentPageIndexDispatching == pagesDispatching.length - 1}"
           (click)="onPageIndexClicked(pagesDispatching.length - 1)">
           <a class="page-link" href="#" onclick="return false">{{pagesDispatching.length}}</a>
         </li>
@@ -175,7 +179,15 @@
             </div>
           </div>
 
-          <mat-card style="font-weight: bold ;">Recieving Information </mat-card>
+
+          <div class="flex">
+            <div class="box-1">
+            <mat-card style="font-weight: bold ;">Recieving Information </mat-card>
+            </div>
+            <div class="box-2">
+              <mat-card class="text-bold">Move Order No. {{totalStoreOrderDispatching}}</mat-card>
+            </div>
+          </div>
           <div class="flex">
             <div class="box-1">
               <table class="table table-striped table-bordered nowrap table-responsive-sm" id="GridView2"

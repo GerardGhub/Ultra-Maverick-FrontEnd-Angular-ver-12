@@ -202,7 +202,14 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       uom: this.formBuilder.control(null, [Validators.required]),
       expiry_date: this.formBuilder.control(null, [Validators.required]),
       actual_delivered: this.formBuilder.control(null, [Validators.required]),
-      total_reject: this.formBuilder.control(null, [Validators.required])
+      total_reject: this.formBuilder.control(null, [Validators.required]),
+
+      count_of_reject_one: this.formBuilder.control(null),
+      count_of_reject_two: this.formBuilder.control(null),
+      count_of_reject_three: this.formBuilder.control(null),
+      status_of_reject_three: this.formBuilder.control(null),
+      status_of_reject_two: this.formBuilder.control(null),
+      status_of_reject_one: this.formBuilder.control(null)
     });
   }
 
@@ -210,6 +217,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   // POPULATE FIELDS ***********************************************************************************************************
   onViewClick(item: any, index: number) {
 
+    console.log(item);
     this.totalRejectMaterial = item.total_of_reject_mat;
 
     this.viewForm.patchValue({
@@ -232,7 +240,13 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       uom: item.qty_uom,
       expiry_date: moment(new Date(item.expiration_date)).format('MM/DD/YYYY'),
       actual_delivered: item.actual_delivery,
-      total_reject: item.total_of_reject_mat
+      total_reject: item.total_of_reject_mat,
+      count_of_reject_one: item.count_of_reject_one,
+      count_of_reject_two: item.count_of_reject_two,
+      count_of_reject_three: item.count_of_reject_three,
+      status_of_reject_one : item.status_of_reject_one,
+      status_of_reject_two : item.status_of_reject_two,
+      status_of_reject_three : item.status_of_reject_three
     })
 
     this.partialPOService
@@ -670,12 +684,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   UpdateClickDetails() {
-    // if (this.editForm.valid) {
-    //Additional Parse Data Master
-    // this.ActualRemaining = 450;
-    // this.ComputeRemainingQty();
-    // this.editProject.actual_remaining_receiving = this.ActualRemaining;
-    // .updateProject(this.editProject)
+
     this.projetPONearlyExpiryApprovalService
       .rejectProject(this.editProject)
       .subscribe(

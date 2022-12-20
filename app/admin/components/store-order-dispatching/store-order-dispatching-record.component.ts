@@ -43,7 +43,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
   totalCancelledCount: number = 0;
   totalDispatchingRowCount: number = 0;
   totalPreparedOrdersCount: number = 0;
-  totalStoreOrderDispatching:number = 0;
+  totalStoreOrderDispatching: number = 0;
 
   viewingForm: FormGroup;
 
@@ -54,7 +54,7 @@ export class StoreOrderDispatchingRecordComponent implements OnInit {
     private preparedOrdersService: PreparedOrdersService,
     private dispatchingService: DispatchingService,
     private cancelledOrderService: CancelledOrderService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getDispatchOrderList();

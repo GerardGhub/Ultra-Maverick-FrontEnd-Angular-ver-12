@@ -1026,9 +1026,8 @@
           <div class="partition-div">Rejection Information</div><br>
           <div class="flex">
             <div class="box-1 reject{{ totalRejectMaterial }}">
-              <!-- Start of Validation Sample using animal -->
               <div class="form-group row" id="rejectionrow1">
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_one != '0'">
                   <mat-form-field appearance="fill">
                     <mat-label>Rejected Status</mat-label>
                     <mat-select (selectionChange)="validateRejectedStatus($event)"
@@ -1043,7 +1042,7 @@
                 </div>
               </div>
               <div class="form-group row" id="rejectionrow2">
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_two != '0'">
                   <mat-form-field appearance="fill">
                     <mat-label>Rejected Status</mat-label>
                     <mat-select [(ngModel)]="editProject.status_of_reject_two" name="status_of_reject_two"
@@ -1057,7 +1056,7 @@
                 </div>
               </div>
               <div class="form-group row" id="rejectionrow32" #rejectedStatusElementNo3>
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_three != '0'">
                   <mat-form-field appearance="fill">
                     <mat-label>Rejected Status</mat-label>
                     <mat-select [(ngModel)]="editProject.status_of_reject_three" name="status_of_reject_three"
@@ -1087,7 +1086,7 @@
 
             <div class="box-2 reject{{ totalRejectMaterial }}">
               <div class="form-group row" id="rejectionrow12">
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_one != '0'">
                   <mat-form-field floatLabel="auto" appearance="standard" color="primary">
                     <input type="text" name="count_of_reject_one" matInput #rejectNo1
                       (keyup)="onChangeEventReject1($event)" [(ngModel)]="editProject.count_of_reject_one" maxlength="9"
@@ -1104,7 +1103,7 @@
                               editForm.submitted)
                         }" id="rejectRow1" (keypress)="validateNumber($event)" disabled="disabled" />
                     <mat-label>No.of Reject</mat-label>
-                    <!-- <mat-hint align="end">Up to 30 characters</mat-hint> -->
+            
                     <mat-icon matPrefix>list<span class="material-icons-outlined"> </span></mat-icon>
                     <span class="text-danger" *ngIf="
                           editcount_of_reject_one.invalid &&
@@ -1118,7 +1117,7 @@
               </div>
 
               <div class="form-group row" id="rejectionrow22">
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_two != '0'">
                   <mat-form-field floatLabel="auto" appearance="standard" color="primary">
                     <input type="text" name="count_of_reject_two" matInput #rejectNo2
                       (keyup)="onChangeEventReject2($event)" [(ngModel)]="editProject.count_of_reject_two" maxlength="9"
@@ -1135,14 +1134,14 @@
                               editForm.submitted)
                         }" id="rejectRow2" (keypress)="validateNumber($event)" disabled="disabled" />
                     <mat-label>No.of Reject</mat-label>
-                    <!-- <mat-hint align="end">Up to 30 characters</mat-hint> -->
+
                     <mat-icon matPrefix>list<span class="material-icons-outlined"> </span></mat-icon>
                   </mat-form-field>
                 </div>
               </div>
 
               <div class="form-group row" id="rejectionrow3">
-                <div class="col-sm-8">
+                <div class="col-sm-8" *ngIf="editProject.count_of_reject_three != '0'">
                   <mat-form-field floatLabel="auto" appearance="standard" color="primary">
                     <input type="text" name="count_of_reject_three" matInput #rejectNo3
                       (keyup)="onChangeEventReject3($event)" [(ngModel)]="editProject.count_of_reject_three"
@@ -1159,7 +1158,6 @@
                               editForm.submitted)
                         }" id="rejectRow3" (keypress)="validateNumber($event)" disabled="disabled" />
                     <mat-label>No.of Reject</mat-label>
-                    <!-- <mat-hint align="end">Up to 30 characters</mat-hint> -->
                     <mat-icon matPrefix>list<span class="material-icons-outlined"> </span></mat-icon>
                   </mat-form-field>
                 </div>

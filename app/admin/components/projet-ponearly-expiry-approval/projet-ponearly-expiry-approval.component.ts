@@ -296,6 +296,9 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   showUpdatingSuccess() {
     this.toastr.success('Successfully Updated!', 'Notifications');
   }
+  showApprovedSuccess() {
+    this.toastr.success('Successfulyy Approved!', 'Notifications');
+  }
 
   FieldOutRequiredField() {
     this.toastr.warning('Field out the required fields!', 'Notifications');
@@ -793,12 +796,15 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
             this.editProject.projectID = null;
             //Approval
-            this.editProject.is_approved_XP = null;
-            this.editProject.is_approved_by = null;
+            this.editProject.is_approved_XP = "";
+            this.editProject.is_approved_by = "";
             this.editProject.is_approved_date = null;
-            this.showUpdatingSuccess();
-            this.ngOnInit();
-            $('#editFormCancel').trigger('click');
+            setTimeout(() => {
+             this.showApprovedSuccess();
+              this.ngOnInit();
+              $('#editFormCancel').trigger('click');
+            }, 400);
+
           },
           (error) => {
             console.log(error);
@@ -1433,8 +1439,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   ConfirmNoofReject(event: any) {
-
-
     if (this.confirmReject.nativeElement.value == '') {
       this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = '';
     } else {

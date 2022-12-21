@@ -244,9 +244,9 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       count_of_reject_one: item.count_of_reject_one,
       count_of_reject_two: item.count_of_reject_two,
       count_of_reject_three: item.count_of_reject_three,
-      status_of_reject_one : item.status_of_reject_one,
-      status_of_reject_two : item.status_of_reject_two,
-      status_of_reject_three : item.status_of_reject_three
+      status_of_reject_one: item.status_of_reject_one,
+      status_of_reject_two: item.status_of_reject_two,
+      status_of_reject_three: item.status_of_reject_three
     })
 
     this.partialPOService
@@ -684,7 +684,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
   }
 
   UpdateClickDetails() {
-
     this.projetPONearlyExpiryApprovalService
       .rejectProject(this.editProject)
       .subscribe(
@@ -713,9 +712,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           p.expected_delivery = response.expected_delivery;
           p.actual_delivery = response.actual_delivery;
           p.expected_delivery = response.expected_delivery;
-          // this.ActualRemaining = response.actual_remaining_receiving;
-          // p.received_by_QA = response.received_by_QA;
-          // // this.activeUser = response.received_by_QA;
           p.status_of_reject_one = response.status_of_reject_one;
           p.status_of_reject_two = response.status_of_reject_two;
           p.status_of_reject_three = response.status_of_reject_three;
@@ -723,14 +719,9 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           p.count_of_reject_two = response.count_of_reject_two;
           p.count_of_reject_three = response.count_of_reject_three;
           p.total_of_reject_mat = response.total_of_reject_mat;
-          //Section 1
-          //A
 
-
-          // this.received_by.nativeElement.value = this.loginService.currentUserName;
           this.projects[this.editIndex] = p;
           this.UpdateMasterTransactionsActualReceivingofCancel();
-          // this.InsertANewPartialReceiving();
           this.editProject.projectID = null;
           this.editProject.projectName = null;
           this.editProject.dateOfStart = null;
@@ -760,10 +751,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           this.editProject.count_of_reject_two = null;
           this.editProject.count_of_reject_three = null;
           this.editProject.total_of_reject_mat = null;
-          //Section A
-          //A
 
-          //Add
           this.editProject.cancelled_date = null;
           this.editProject.canceled_by = null;
           this.editProject.cancelled_reason = null;
@@ -771,6 +759,9 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
           // this.ngOnInit();
           $('#editFormCancel').trigger('click');
+          setTimeout(() => {
+            this.getList();
+          }, 400);
         },
         (error) => {
           console.log(error);
@@ -778,9 +769,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
       );
     // } sample Gerard
 
-    setTimeout(() => {
-      this.getList();
-    }, 300);
+
   }
 
   ApprovedClickDetails() {
@@ -852,10 +841,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
             p.expected_delivery = response.expected_delivery;
             p.actual_delivery = response.actual_delivery;
             p.expected_delivery = response.expected_delivery;
-            //  p.actual_remaining_receiving = response.actual_remaining_receiving;
-
-            // p.received_by_QA = response.received_by_QA;
-            // // this.activeUser = response.received_by_QA;
             p.status_of_reject_one = response.status_of_reject_one;
             p.status_of_reject_two = response.status_of_reject_two;
             p.status_of_reject_three = response.status_of_reject_three;
@@ -863,8 +848,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
             p.count_of_reject_two = response.count_of_reject_two;
             p.count_of_reject_three = response.count_of_reject_three;
             p.total_of_reject_mat = response.total_of_reject_mat;
-            //Section 1
-            //A
 
             this.projects.push(p);
           },
@@ -1056,7 +1039,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
   UpdateDeactivatedTransactions() {
     this.UpdateClickDetails();
-
   }
 
   UpdateMasterTransactionsActualReceivingofCancel() {
@@ -1101,8 +1083,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         p.actual_delivery = response.actual_delivery;
         p.expected_delivery = response.expected_delivery;
         p.actual_remaining_receiving = response.actual_remaining_receiving;
-        // p.received_by_QA = response.received_by_QA;
-        // // this.activeUser = response.received_by_QA;
         p.status_of_reject_one = response.status_of_reject_one;
         p.status_of_reject_two = response.status_of_reject_two;
         p.status_of_reject_three = response.status_of_reject_three;
@@ -1112,43 +1092,10 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
         p.total_of_reject_mat = response.total_of_reject_mat;
         //Section 1
 
-        // this.received_by.nativeElement.value = this.loginService.currentUserName;
         this.projects[this.editIndex] = p;
-
-        //   this.editProject.projectID = null;
-        //   this.editProject.projectName = null;
-        //   this.editProject.dateOfStart = null;
-        //   this.editProject.teamSize = null;
-        //   this.editProject.supplier = null;
-        //   this.editProject.active = false;
-        //   this.editProject.clientLocationID = null;
-        //   this.editProject.status = null;
-        //   this.editProject.item_code = null;
-        //   this.editProject.item_description = null;
-        //   this.editProject.po_number = null;
-        //   this.editProject.po_date = null;
-        //   this.editProject.pr_number = null;
-        //   this.editProject.pr_date = null;
-        //   this.editProject.qty_order = null;
-        //   this.editProject.qty_uom = null;
-        //   this.editProject.mfg_date = null;
-        //   this.editProject.expiration_date = null;
-        //   this.editProject.expected_delivery = null;
-        //   this.editProject.actual_delivery = null;
-        //   this.editProject.actual_remaining_receiving = null;
-        //   this.editProject.received_by_QA = null;
-        //   this.editProject.is_activated = null;
-        //   this.editProject.status_of_reject_one = null;
-        //   this.editProject.status_of_reject_two = null;
-        //   this.editProject.status_of_reject_three = null;
-        //   this.editProject.count_of_reject_one = null;
-        //   this.editProject.count_of_reject_two = null;
-        //   this.editProject.count_of_reject_three = null;
-        //   this.editProject.total_of_reject_mat = null;
-
-        //  this.showDeactivatedSuccess();
-        //  this.ngOnInit();
-        //   $("#editFormCancel").trigger("click");
+        this.editProject.projectID = 0;
+        this.editProject.projectName = "";
+        this.editProject.dateOfStart = "";
       },
       (error) => {
         console.log(error);
@@ -1405,9 +1352,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const summary = +a + +b + +c;
     console.log(summary);
     this.totalofReject.nativeElement.value = summary;
-
-
-    // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value() + 2;
     if (ActualDelivered > TotalReject) {
 
     } else {
@@ -1468,10 +1412,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     const ExpectedDelivery = this.ExpectedDeliveryActual.nativeElement.value;
     const ActivatedAllowablePercentage =
       this.ActiveAllowablePercentage.nativeElement.value;
-    // const TotalAllowablePercentage = this.TotalAllowablePercentage.nativeElement.value;
 
-    // const summary = ExpectedDelivery * ActivatedAllowablePercentage;
-    // console.log(summary);
     if (this.ActiveAllowablePercentage.nativeElement.value == '10') {
       const summary = ExpectedDelivery * 1.1;
       this.TotalAllowablePercentage.nativeElement.value = summary;

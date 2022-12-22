@@ -697,9 +697,7 @@
                   }" (keypress)="decimalFilter($event)" #ExpectedDeliveryActual
                     (keyup)="AllowablePercentageComputation($event)" disabled="disabled" />
                   <mat-label>Expected Delivery</mat-label>
-                  <!-- <mat-hint align="end">Up to 30 characters</mat-hint> -->
-                  <!-- <mat-icon matPrefix>list<span class="material-icons-outlined">
-                  </span></mat-icon> -->
+               
 
                   <span class="text-danger" *ngIf="
                     editexpected_delivery.invalid &&
@@ -1103,7 +1101,7 @@
                               editForm.submitted)
                         }" id="rejectRow1" (keypress)="validateNumber($event)" disabled="disabled" />
                     <mat-label>No.of Reject</mat-label>
-            
+
                     <mat-icon matPrefix>list<span class="material-icons-outlined"> </span></mat-icon>
                     <span class="text-danger" *ngIf="
                           editcount_of_reject_one.invalid &&
@@ -1238,7 +1236,7 @@
                                 <ng-container *ngIf="grandchild.is_manual === 'no'">
                                   <div>
                                     <!-- <div class="form-check form-check-inline" *ngIf="param.cp_status === true"> -->
-                                      <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" [checked]="true"
                                         name="{{param.cp_params_id}}" disabled>
                                       <label class="form-check-label" for="inlineRadio1">Yes</label>

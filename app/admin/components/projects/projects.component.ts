@@ -85,6 +85,9 @@ export class ProjectsComponent implements OnInit, OnChanges {
   actualqty: number = 0;
   expirable_material: string = '';
 
+  ParameterRealtimeCount: number = 0;
+  TotalParamaterCount1: number = 0;
+
   newProject: Project = new Project();
   editProject: Project = new Project();
   editIndex: number = 0;
@@ -290,8 +293,15 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   getChecklist() {
+    alert("hahaha");
     this.qcService.getQcChecklist().subscribe((response) => {
       this.qcchecklist = response;
+      console.warn(response);
+      console.warn(response[2].childCheckLists[0].grandChildCheckLists.length);
+      this.TotalParamaterCount1 = response[0].childCheckLists[0].grandChildCheckLists.length 
+      + response[1].childCheckLists[0].grandChildCheckLists[6].checkListParameters.length
+      + response[0].childCheckLists[0].grandChildCheckLists.length
+      + response[2].childCheckLists[0].grandChildCheckLists.length;
     });
   }
 
@@ -579,17 +589,11 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   onEditClick(event, index: Project) {
-    // onEditClick(event, index: number) {
-
-    if ($('#txtSearchText').val().length == 0) {
-
-
+    
+    if ($('#txtSearchText').val().length == 0) 
+    {
     }
     else {
-
-      // this.projectsService.getAllProjects().subscribe((response: Project[]) => {
-      //   this.projects = response;
-      // });
 
       if (this.searchBy == "po_number") {
         this.projectsService
@@ -669,19 +673,13 @@ export class ProjectsComponent implements OnInit, OnChanges {
       this.editProject.qty_order = index.qty_order;
       this.editProject.qty_uom = index.qty_uom;
       this.editProject.is_activated = this.Activator;
-
       this.editProject.unit_price = index.unit_price;
-
-      this.editProject.actual_remaining_receiving =
-        index.actual_remaining_receiving;
+      this.editProject.actual_remaining_receiving = index.actual_remaining_receiving;
       this.editProject.received_by_QA = this.activeUser;
-
       this.editProject.qcReceivingDate = this.ToDay;
-
       this.editProject.status_of_reject_one = this.StringNone;
       this.editProject.status_of_reject_two = this.StringNone;
       this.editProject.status_of_reject_three = this.StringNone;
-
       this.editProject.count_of_reject_one = this.Deactivator;
       this.editProject.count_of_reject_two = this.Deactivator;
       this.editProject.count_of_reject_three = this.Deactivator;
@@ -760,11 +758,22 @@ export class ProjectsComponent implements OnInit, OnChanges {
 
   // Inserting of checklist data
   onRecieveButtonClick(ProjectID: any) {
-
-    
-
     const ExpectedDeliveryValidate = this.ExpectedDeliveryActual.nativeElement.value;
     const ActualDeliveredValidate = this.ExpectedDeliveryActual.nativeElement.value;
+
+    if (this.ParameterRealtimeCount === 0)
+    {
+      this.errorMessage = 'Field up the required fields';
+      this.errorMessageToster();
+      return;
+    }
+
+    if (this.ParameterRealtimeCount != this.TotalParamaterCount1)
+    {
+      this.errorMessage = 'Field up the required fields';
+      this.errorMessageToster();
+      return;
+    }
 
     if (ExpectedDeliveryValidate == 0 && ActualDeliveredValidate) {
       this.errorMessage = 'Invalid Quantity';
@@ -1323,6 +1332,27 @@ export class ProjectsComponent implements OnInit, OnChanges {
         this.showDeletedSuccess();
       }
     });
+  }
+
+
+  ParameterNo1(paramsId: number, paramsStatus: boolean) {
+    alert(paramsId);
+    alert(paramsStatus);
+    if (paramsStatus == true || paramsStatus == false )
+    {}
+    else
+    {
+      this.ParameterRealtimeCount = this.ParameterRealtimeCount  + 1;
+      alert(this.ParameterRealtimeCount);
+    }
+
+  }
+
+  ParameterYes1(paramsId: number, paramsStatus: string) {
+    alert(paramsId);
+    alert(paramsStatus);
+    this.ParameterRealtimeCount = this.ParameterRealtimeCount  + 1;
+    alert(this.ParameterRealtimeCount);
   }
 
   CancelledPoDetails() {

@@ -8,21 +8,17 @@
           </a></li>
         <li class="breadcrumb-item dashboardActive" aria-current="page"> QC Receiving </li>
       </ol>
-
-
     </nav>
 
     <mat-tab-group mat-align-tabs="start" (selectedTabChange)="poRecievingTabforRefresh($event)">
-
       <ng-template [ngIf]="PoReceiving === 1">
         <mat-tab>
-
           <ng-template mat-tab-label>
             PO Receiving
             &nbsp; <span class="badge badge-danger zerobadge{{ totalPoRowCount | number}}">{{ totalPoRowCount }}</span>
           </ng-template>
 
-          <!-- filter -->
+
           <div class="col-sm-12" style="padding-top: 2em;">
             <div class="d-flex">
               <div class="p-2">
@@ -37,9 +33,7 @@
                   </select>
                 </div>
               </div>
-
               <div>
-
               </div>
 
               <div class="p-2">
@@ -1228,12 +1222,13 @@
                                   <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" [value]="true"
                                       name="{{param.cp_params_id}}" [(ngModel)]="param.cp_status"
-                                      [ngModelOptions]="{standalone: true}">
+                                      (change)="ParameterYes1(param.cp_params_id,param.cp_status)" [ngModelOptions]="{standalone: true}">
                                     <label class="form-check-label" for="inlineRadio1">Yes</label>
                                   </div>
                                   <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" [value]="false"
-                                      [(ngModel)]="param.cp_status" name="{{param.cp_params_id}}">
+                                      [(ngModel)]="param.cp_status" name="{{param.cp_params_id}}"
+                                      (change)="ParameterNo1(param.cp_params_id,param.cp_status)">
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                   </div>
                                 </ng-container>

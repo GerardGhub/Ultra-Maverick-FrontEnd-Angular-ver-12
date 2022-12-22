@@ -540,8 +540,6 @@ export class ProjectsComponent implements OnInit, OnChanges {
           p.count_of_reject_two = response.count_of_reject_two;
           p.count_of_reject_three = response.count_of_reject_three;
           p.total_of_reject_mat = response.total_of_reject_mat;
-          p.a_compliance = response.a_compliance;
-          p.a_remarks = response.a_remarks;
           this.projects.push(p);
 
           this.newProject.projectName = '';
@@ -572,10 +570,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
           this.newProject.count_of_reject_two = "";
           this.newProject.count_of_reject_three = "";
           this.newProject.total_of_reject_mat = "";
-          this.newProject.a_compliance = "";
-          this.newProject.a_remarks = "";
           $('#newFormCancel').trigger('click');
-          // this.ngOnInit();
           this.calculateNoOfPages();
         },
         (error) => {

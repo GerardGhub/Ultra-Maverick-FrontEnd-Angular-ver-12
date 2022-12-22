@@ -495,8 +495,7 @@ export class ProjectsPartialPoComponent implements OnInit {
           p.count_of_reject_two = response.count_of_reject_two;
           p.count_of_reject_three = response.count_of_reject_three;
           p.total_of_reject_mat = response.total_of_reject_mat;
-          p.a_compliance = response.a_compliance;
-          p.a_remarks = response.a_remarks;
+
           this.projects.push(p);
 
           //Clear New Project Dialog - TextBoxes
@@ -529,9 +528,6 @@ export class ProjectsPartialPoComponent implements OnInit {
           this.newProject.count_of_reject_two = "";
           this.newProject.count_of_reject_three = "";
           this.newProject.total_of_reject_mat = "";
-          this.newProject.a_compliance = "";
-          this.newProject.a_remarks = "";
-
           $('#newFormCancel').trigger('click');
 
           this.calculateNoOfPages();
@@ -776,9 +772,7 @@ export class ProjectsPartialPoComponent implements OnInit {
           p.projectName = response.projectName;
           p.dateOfStart = response.dateOfStart;
           p.teamSize = response.teamSize;
-          // p.clientLocation = response.clientLocation;
           p.active = response.active;
-          // p.clientLocationID = response.clientLocationID;
           p.status = response.status;
           p.supplier = response.supplier;
           p.item_code = response.item_code;
@@ -794,10 +788,6 @@ export class ProjectsPartialPoComponent implements OnInit {
           p.expected_delivery = response.expected_delivery;
           p.actual_delivery = response.actual_delivery;
           p.expected_delivery = response.expected_delivery;
-          //  p.actual_remaining_receiving = response.actual_remaining_receiving;
-
-          // p.received_by_QA = response.received_by_QA;
-          // // this.activeUser = response.received_by_QA;
           p.status_of_reject_one = response.status_of_reject_one;
           p.status_of_reject_two = response.status_of_reject_two;
           p.status_of_reject_three = response.status_of_reject_three;
@@ -805,135 +795,7 @@ export class ProjectsPartialPoComponent implements OnInit {
           p.count_of_reject_two = response.count_of_reject_two;
           p.count_of_reject_three = response.count_of_reject_three;
           p.total_of_reject_mat = response.total_of_reject_mat;
-          //Section 1
-          //A
-          p.a_delivery_van_desc = response.a_delivery_van_desc;
-          p.a_compliance = response.a_compliance;
-          p.a_remarks = response.a_remarks;
-          //B
-          p.b_cooling_system_desc = response.b_cooling_system_desc;
-          p.b_compliance = response.b_compliance;
-          p.b_remarks = response.b_remarks;
-          //C
-          p.c_inner_walls_desc = response.c_inner_walls_desc;
-          p.c_compliance = response.c_compliance;
-          p.c_remarks = response.c_remarks;
-          //D
-          p.d_plastic_curtains_desc = response.d_plastic_curtains_desc;
-          p.d_compliance = response.d_compliance;
-          p.d_remarks = response.d_remarks;
-          //E
-          p.e_thereno_pest_desc = response.e_thereno_pest_desc;
-          p.e_compliance = response.e_compliance;
-          p.e_remarks = response.e_remarks;
-          //Section 2
-          //A
-          p.a_clean_company_dos = response.a_clean_company_dos;
-          p.a_compliance_dos = response.a_compliance_dos;
-          p.a_remarks_dos = response.a_remarks_dos;
-          //B
-          p.b_delivery_staff_symptoms_dos =
-            response.b_delivery_staff_symptoms_dos;
-          p.b_compliance_dos = response.b_compliance_dos;
-          p.b_remarks_dos = response.b_remarks_dos;
-          //C
-          p.c_inner_walls_clean_dos = response.c_inner_walls_clean_dos;
-          p.c_compliance_dos = response.c_compliance_dos;
-          p.c_remarks_dos = response.c_remarks_dos;
-          //D
-          p.d_plastic_curtains_dos = response.d_plastic_curtains_dos;
-          p.d_compliance_dos = response.d_compliance_dos;
-          p.d_remarks_dos = response.d_remarks_dos;
-          //E
-          p.e_no_accessories_dos = response.e_no_accessories_dos;
-          p.e_compliance_dos = response.e_compliance_dos;
-          p.e_remarks_dos = response.e_remarks_dos;
-          //F
-          p.f_compliance_dos = response.f_compliance_dos;
-          p.f_no_pests_sightings_dos = response.f_no_pests_sightings_dos;
-          p.f_remarks_dos = response.f_remarks_dos;
-          //Section 3
-          //A
-          p.a_pallet_crates_tres = response.a_pallet_crates_tres;
-          p.a_compliance_tres = response.a_compliance_tres;
-          p.a_remarks_tres = response.a_remarks_tres;
-          //B
-          p.b_product_contamination_tres =
-            response.b_product_contamination_tres;
-          p.b_compliance_tres = response.b_compliance_tres;
-          p.b_remarks_tres = response.b_remarks_tres;
-          //C
-          p.c_uncessary_items_tres = response.c_uncessary_items_tres;
-          p.c_compliance_tres = response.c_compliance_tres;
-          p.c_remarks_tres = response.c_remarks_tres;
-          //D
-          p.d_products_cover_tres = response.d_products_cover_tres;
-          p.d_compliance_tres = response.d_compliance_tres;
-          p.d_remarks_tres = response.d_remarks_tres;
-          //Section 4
-          //A
-          p.a_certificate_coa_kwatro_desc =
-            response.a_certificate_coa_kwatro_desc;
-          p.a_compliance_kwatro = response.a_compliance_kwatro;
-          p.a_remarks_kwatro = response.a_remarks_kwatro;
-
-          //B
-          p.b_po_kwatro_desc = response.b_po_kwatro_desc;
-          p.b_compliance_kwatro = response.b_compliance_kwatro;
-          p.b_remarks_kwatro = response.b_remarks_kwatro;
-
-          //C
-          p.c_msds_kwatro_desc = response.c_msds_kwatro_desc;
-          p.c_compliance_kwatro = response.c_compliance_kwatro;
-          p.c_remarks_kwatro = response.c_remarks_kwatro;
-
-          //D
-          p.d_food_grade_desc = response.d_food_grade_desc;
-          p.d_compliance_kwatro = response.d_compliance_kwatro;
-          p.d_remarks_kwatro = response.d_remarks_kwatro;
-          //Section 5
-
-          //A
-          p.a_qty_received_singko_singko =
-            response.a_qty_received_singko_singko;
-          p.a_compliance_singko = response.a_compliance_singko;
-          p.a_remarks_singko = response.a_remarks_singko;
-
-          //B
-          p.b_mfg_date_desc_singko = response.b_mfg_date_desc_singko;
-          p.b_compliance_singko = response.b_compliance_singko;
-          p.b_remarks_singko = response.b_remarks_singko;
-
-          //C
-          p.c_expirydate_desc_singko = response.c_expirydate_desc_singko;
-          p.c_compliance_singko = response.c_compliance_singko;
-          p.c_remarks_singko = response.c_remarks_singko;
-
-          //D
-          p.d_packaging_desc_singko = response.d_packaging_desc_singko;
-          p.d_compliance_singko = response.d_compliance_singko;
-          p.d_remarks_singko = response.d_remarks_singko;
-          //E
-          p.e_no_contaminants_desc_singko =
-            response.e_no_contaminants_desc_singko;
-          p.e_compliance_singko = response.e_compliance_singko;
-          p.e_remarks_singko = response.e_remarks_singko;
-          //F
-          p.f_qtyrejected_desc_singko = response.f_qtyrejected_desc_singko;
-          p.f_compliance_singko = response.f_compliance_singko;
-          p.f_remarks_singko = response.f_remarks_singko;
-          //G
-          p.g_rejected_reason_desc_singko =
-            response.g_rejected_reason_desc_singko;
-          p.g_compliance_singko = response.g_compliance_singko;
-          p.g_remarks_singko = response.g_remarks_singko;
-          //H
-          p.h_lab_sample_desc_singko = response.h_lab_sample_desc_singko;
-          p.h_compliance_singko = response.h_compliance_singko;
-          p.h_remarks_singko = response.h_remarks_singko;
-
-          // this.received_by.nativeElement.value = this.loginService.currentUserName;
-          //  this.projects[this.editIndex] = p;
+     
           this.projects.push(p);
         },
         (error) => {
@@ -984,131 +846,7 @@ export class ProjectsPartialPoComponent implements OnInit {
       this.projects[index].count_of_reject_three;
     this.deleteProject.total_of_reject_mat =
       this.projects[index].total_of_reject_mat;
-    //SECTION 1
-    //A
-    this.deleteProject.a_delivery_van_desc =
-      this.projects[index].a_delivery_van_desc;
-    this.deleteProject.a_compliance = this.projects[index].a_compliance;
-    this.deleteProject.a_remarks = this.projects[index].a_remarks;
-    //B
-    this.deleteProject.b_cooling_system_desc =
-      this.projects[index].b_cooling_system_desc;
-    this.deleteProject.b_compliance = this.projects[index].b_compliance;
-    this.deleteProject.b_remarks = this.projects[index].b_remarks;
-    //C
-    this.deleteProject.c_inner_walls_desc =
-      this.projects[index].c_inner_walls_desc;
-    this.deleteProject.c_compliance = this.projects[index].c_compliance;
-    this.deleteProject.c_remarks = this.projects[index].c_remarks;
-    //D
-    this.deleteProject.d_plastic_curtains_desc =
-      this.projects[index].d_plastic_curtains_desc;
-    this.deleteProject.d_compliance = this.projects[index].d_compliance;
-    this.deleteProject.d_remarks = this.projects[index].d_remarks;
-    //E
-    this.deleteProject.e_thereno_pest_desc =
-      this.projects[index].e_thereno_pest_desc;
-    this.deleteProject.e_compliance = this.projects[index].e_compliance;
-    this.deleteProject.e_remarks = this.projects[index].e_remarks;
-    //Section2
-    //A
-    this.deleteProject.a_clean_company_dos =
-      this.projects[index].a_clean_company_dos;
-    this.deleteProject.a_compliance_dos = this.projects[index].a_compliance_dos;
-    this.deleteProject.a_remarks_dos = this.projects[index].a_remarks_dos;
-    //B
-    this.deleteProject.b_delivery_staff_symptoms_dos =
-      this.projects[index].b_delivery_staff_symptoms_dos;
-    this.deleteProject.b_compliance_dos = this.projects[index].b_compliance_dos;
-    this.deleteProject.b_remarks_dos = this.projects[index].b_remarks_dos;
-    //C
-    this.deleteProject.c_inner_walls_clean_dos =
-      this.projects[index].c_inner_walls_clean_dos;
-    this.deleteProject.c_compliance_dos = this.projects[index].c_compliance_dos;
-    this.deleteProject.c_remarks_dos = this.projects[index].c_remarks_dos;
-    //D
-    this.deleteProject.d_plastic_curtains_dos =
-      this.projects[index].d_plastic_curtains_dos;
-    this.deleteProject.d_compliance_dos = this.projects[index].d_compliance_dos;
-    this.deleteProject.d_remarks_dos = this.projects[index].d_remarks_dos;
-    //E
-    this.deleteProject.e_no_accessories_dos =
-      this.projects[index].e_no_accessories_dos;
-    this.deleteProject.e_compliance_dos = this.projects[index].e_compliance_dos;
-    this.deleteProject.e_remarks_dos = this.projects[index].e_remarks_dos;
-    //Section 4
-    //A
-    this.deleteProject.a_certificate_coa_kwatro_desc =
-      this.projects[index].a_certificate_coa_kwatro_desc;
-    this.deleteProject.a_compliance_kwatro =
-      this.projects[index].a_compliance_kwatro;
-    this.deleteProject.a_remarks_kwatro = this.projects[index].a_remarks_kwatro;
-    //B
-    this.deleteProject.b_po_kwatro_desc = this.projects[index].b_po_kwatro_desc;
-    this.deleteProject.b_compliance_kwatro =
-      this.projects[index].b_compliance_kwatro;
-    this.deleteProject.b_remarks_kwatro = this.projects[index].b_remarks_kwatro;
-    //C
-    this.deleteProject.c_msds_kwatro_desc =
-      this.projects[index].c_msds_kwatro_desc;
-    this.deleteProject.c_compliance_kwatro =
-      this.projects[index].c_compliance_kwatro;
-    this.deleteProject.c_remarks_kwatro = this.projects[index].c_remarks_kwatro;
-    //D
-    this.deleteProject.d_food_grade_desc =
-      this.projects[index].d_food_grade_desc;
-    this.deleteProject.d_compliance_kwatro =
-      this.projects[index].d_compliance_kwatro;
-    this.deleteProject.d_remarks_kwatro = this.projects[index].d_remarks_kwatro;
-    //Section 5
-    //A
-    this.deleteProject.a_qty_received_singko_singko =
-      this.projects[index].a_qty_received_singko_singko;
-    this.deleteProject.a_compliance_singko =
-      this.projects[index].a_compliance_singko;
-    this.deleteProject.a_remarks_singko = this.projects[index].a_remarks_singko;
-    //B
-    this.deleteProject.b_mfg_date_desc_singko =
-      this.projects[index].b_mfg_date_desc_singko;
-    this.deleteProject.b_compliance_singko =
-      this.projects[index].b_compliance_singko;
-    this.deleteProject.b_remarks_singko = this.projects[index].b_remarks_singko;
-    //C
-    this.deleteProject.c_expirydate_desc_singko =
-      this.projects[index].c_expirydate_desc_singko;
-    this.deleteProject.c_compliance_singko =
-      this.projects[index].c_compliance_singko;
-    this.deleteProject.c_remarks_singko = this.projects[index].c_remarks_singko;
-    //D
-    this.deleteProject.d_packaging_desc_singko =
-      this.projects[index].d_packaging_desc_singko;
-    this.deleteProject.d_compliance_singko =
-      this.projects[index].d_compliance_singko;
-    this.deleteProject.d_remarks_singko = this.projects[index].d_remarks_singko;
-    //E
-    this.deleteProject.e_no_contaminants_desc_singko =
-      this.projects[index].e_no_contaminants_desc_singko;
-    this.deleteProject.e_compliance_singko =
-      this.projects[index].e_compliance_singko;
-    this.deleteProject.e_remarks_singko = this.projects[index].e_remarks_singko;
-    //F
-    this.deleteProject.f_qtyrejected_desc_singko =
-      this.projects[index].f_qtyrejected_desc_singko;
-    this.deleteProject.f_compliance_singko =
-      this.projects[index].f_compliance_singko;
-    this.deleteProject.f_remarks_singko = this.projects[index].f_remarks_singko;
-    //G
-    this.deleteProject.g_rejected_reason_desc_singko =
-      this.projects[index].g_rejected_reason_desc_singko;
-    this.deleteProject.g_compliance_singko =
-      this.projects[index].g_compliance_singko;
-    this.deleteProject.g_remarks_singko = this.projects[index].g_remarks_singko;
-    //H
-    this.deleteProject.h_lab_sample_desc_singko =
-      this.projects[index].h_lab_sample_desc_singko;
-    this.deleteProject.h_compliance_singko =
-      this.projects[index].h_compliance_singko;
-    this.deleteProject.h_remarks_singko = this.projects[index].h_remarks_singko;
+
   }
 
   onDeleteConfirmClick() {
@@ -1312,19 +1050,6 @@ export class ProjectsPartialPoComponent implements OnInit {
         this.deleteProject.actual_delivery = null;
         this.deleteProject.actual_remaining_receiving = null;
         this.deleteProject.received_by_QA = null;
-        this.deleteProject.c_inner_walls_desc = null;
-        this.deleteProject.c_compliance = null;
-        this.deleteProject.c_remarks = null;
-        this.deleteProject.d_plastic_curtains_desc = null;
-        this.deleteProject.d_compliance = null;
-        this.deleteProject.d_remarks = null;
-        this.deleteProject.e_thereno_pest_desc = null;
-        this.deleteProject.e_compliance = null;
-        this.deleteProject.e_remarks = null;
-        //Section 2
-        //A
-
-
         this.calculateNoOfPages();
       },
       (error) => {

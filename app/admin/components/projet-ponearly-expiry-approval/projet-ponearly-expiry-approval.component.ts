@@ -427,8 +427,6 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           p.count_of_reject_two = response.count_of_reject_two;
           p.count_of_reject_three = response.count_of_reject_three;
           p.total_of_reject_mat = response.total_of_reject_mat;
-          p.a_compliance = response.a_compliance;
-          p.a_remarks = response.a_remarks;
           this.projects.push(p);
 
           //Clear New Project Dialog - TextBoxes
@@ -461,11 +459,7 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
           this.newProject.count_of_reject_two = null;
           this.newProject.count_of_reject_three = null;
           this.newProject.total_of_reject_mat = null;
-          this.newProject.a_compliance = null;
-          this.newProject.a_remarks = null;
-
           $('#newFormCancel').trigger('click');
-          // this.ngOnInit();
           this.calculateNoOfPages();
         },
         (error) => {
@@ -725,39 +719,8 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
 
           this.projects[this.editIndex] = p;
           this.UpdateMasterTransactionsActualReceivingofCancel();
-          this.editProject.projectID = null;
-          this.editProject.projectName = null;
-          this.editProject.dateOfStart = null;
-          this.editProject.teamSize = null;
-          this.editProject.supplier = null;
-          this.editProject.active = false;
-          this.editProject.clientLocationID = null;
-          this.editProject.status = null;
-          this.editProject.item_code = null;
-          this.editProject.item_description = null;
-          this.editProject.po_number = null;
-          this.editProject.po_date = null;
-          this.editProject.pr_number = null;
-          this.editProject.pr_date = null;
-          this.editProject.qty_order = null;
-          this.editProject.qty_uom = null;
-          this.editProject.mfg_date = null;
-          this.editProject.expiration_date = null;
-          this.editProject.expected_delivery = null;
-          this.editProject.actual_delivery = null;
-          this.editProject.actual_remaining_receiving = null;
-          this.editProject.received_by_QA = null;
-          this.editProject.status_of_reject_one = null;
-          this.editProject.status_of_reject_two = null;
-          this.editProject.status_of_reject_three = null;
-          this.editProject.count_of_reject_one = null;
-          this.editProject.count_of_reject_two = null;
-          this.editProject.count_of_reject_three = null;
-          this.editProject.total_of_reject_mat = null;
-
-          this.editProject.cancelled_date = null;
-          this.editProject.canceled_by = null;
-          this.editProject.cancelled_reason = null;
+          this.editProject.projectID = 0;
+  
           this.showUpdatingSuccess();
 
           // this.ngOnInit();
@@ -1113,34 +1076,8 @@ export class ProjetPONearlyExpiryApprovalComponent implements OnInit {
     this.projectsService.deleteProject(this.deleteProject.projectID).subscribe(
       (response) => {
         this.projects.splice(this.deleteIndex, 1);
-        this.deleteProject.projectID = null;
-        this.deleteProject.projectName = null;
-        this.deleteProject.teamSize = null;
-        this.deleteProject.dateOfStart = null;
-        this.deleteProject.supplier = null;
-        this.deleteProject.item_code = null;
-        this.deleteProject.item_description = null;
-        this.deleteProject.po_number = null;
-        this.deleteProject.po_date = null;
-        this.deleteProject.pr_number = null;
-        this.deleteProject.pr_date = null;
-        this.deleteProject.qty_order = null;
-        this.deleteProject.qty_uom = null;
-        this.deleteProject.mfg_date = null;
-        this.deleteProject.expiration_date = null;
-        this.deleteProject.expected_delivery = null;
-        this.deleteProject.actual_delivery = null;
-        this.deleteProject.actual_remaining_receiving = null;
-        this.deleteProject.received_by_QA = null;
-        this.deleteProject.c_inner_walls_desc = null;
-        this.deleteProject.c_compliance = null;
-        this.deleteProject.c_remarks = null;
-        this.deleteProject.d_plastic_curtains_desc = null;
-        this.deleteProject.d_compliance = null;
-        this.deleteProject.d_remarks = null;
-        this.deleteProject.e_thereno_pest_desc = null;
-        this.deleteProject.e_compliance = null;
-        this.deleteProject.e_remarks = null;
+        this.deleteProject.projectID = 0;
+
         //Section 2
         //A
 

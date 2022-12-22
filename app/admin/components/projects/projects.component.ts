@@ -78,6 +78,7 @@ export class ProjectsComponent implements OnInit, OnChanges {
   projects: Project[] = [];
   cancelledPOlist: Project[] = [];
   qcchecklist: any[] = [];
+  selectedNumber: any[] = []; 
   clientLocations: Observable<ClientLocation[]>;
   showLoading: boolean = true;
 
@@ -293,15 +294,22 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
   getChecklist() {
-    alert("hahaha");
+  
     this.qcService.getQcChecklist().subscribe((response) => {
       this.qcchecklist = response;
-      console.warn(response);
-      console.warn(response[2].childCheckLists[0].grandChildCheckLists.length);
-      this.TotalParamaterCount1 = response[0].childCheckLists[0].grandChildCheckLists.length 
-      + response[1].childCheckLists[0].grandChildCheckLists[6].checkListParameters.length
-      + response[0].childCheckLists[0].grandChildCheckLists.length
-      + response[2].childCheckLists[0].grandChildCheckLists.length;
+      //Array drilling
+      // console.warn(response);
+      // console.warn(response[1].childCheckLists[1].grandChildCheckLists.length);
+      this.TotalParamaterCount1 = 
+      response[0].childCheckLists[0].grandChildCheckLists.length //10
+      + response[1].childCheckLists[0].grandChildCheckLists[6].checkListParameters.length // 1
+      + response[1].childCheckLists[2].grandChildCheckLists.length //11
+      + response[2].childCheckLists[0].grandChildCheckLists.length//6
+      + response[3].childCheckLists[0].grandChildCheckLists.length // 7
+      + response[4].childCheckLists[0].grandChildCheckLists.length // 1
+      + response[5].childCheckLists[0].grandChildCheckLists.length // 10
+      + response[1].childCheckLists[1].grandChildCheckLists.length //7
+      console.log(this.TotalParamaterCount1);
     });
   }
 
@@ -1335,24 +1343,31 @@ export class ProjectsComponent implements OnInit, OnChanges {
   }
 
 
-  ParameterNo1(paramsId: number, paramsStatus: boolean) {
-    alert(paramsId);
-    alert(paramsStatus);
-    if (paramsStatus == true || paramsStatus == false )
-    {}
+  ParameterNo1(paramsId: number, paramsStatus: string) {
+
+    if (this.selectedNumber.includes(paramsId))
+    {
+
+    }
     else
     {
-      this.ParameterRealtimeCount = this.ParameterRealtimeCount  + 1;
-      alert(this.ParameterRealtimeCount);
+    this.ParameterRealtimeCount = this.ParameterRealtimeCount  + 1;
+    this.selectedNumber.push(paramsId);
+
     }
 
   }
 
   ParameterYes1(paramsId: number, paramsStatus: string) {
-    alert(paramsId);
-    alert(paramsStatus);
+    if (this.selectedNumber.includes(paramsId))
+    {
+ 
+    }
+    else
+    {
     this.ParameterRealtimeCount = this.ParameterRealtimeCount  + 1;
-    alert(this.ParameterRealtimeCount);
+    this.selectedNumber.push(paramsId);
+    }
   }
 
   CancelledPoDetails() {

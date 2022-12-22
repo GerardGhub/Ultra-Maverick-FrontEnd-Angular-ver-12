@@ -1200,7 +1200,9 @@
 
                                 <ng-container *ngIf="grandchild.is_manual === 'manual'">
                                   <div class="form-group col-md-12 manual-text">
-                                    <textarea type="text" class="form-control" [(ngModel)]="param.manual_description"
+                                    <textarea type="text" class="form-control" 
+                                    (change)="ParameterYes1(param.cp_params_id,param.cp_status)"
+                                    [(ngModel)]="param.manual_description"
                                       name="{{param.cp_params_id}}"></textarea>
                                   </div>
                                 </ng-container>

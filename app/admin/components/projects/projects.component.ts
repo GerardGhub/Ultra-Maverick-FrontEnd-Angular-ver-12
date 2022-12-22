@@ -298,8 +298,6 @@ export class ProjectsComponent implements OnInit, OnChanges {
     this.qcService.getQcChecklist().subscribe((response) => {
       this.qcchecklist = response;
       //Array drilling
-      // console.warn(response);
-      // console.warn(response[1].childCheckLists[1].grandChildCheckLists.length);
       this.TotalParamaterCount1 = 
       response[0].childCheckLists[0].grandChildCheckLists.length //10
       + response[1].childCheckLists[0].grandChildCheckLists[6].checkListParameters.length // 1

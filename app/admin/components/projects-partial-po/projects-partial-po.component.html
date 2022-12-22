@@ -1237,12 +1237,14 @@
 
                                 <ng-container *ngIf="grandchild.is_manual === 'no'">
                                   <div>
-                                    <div class="form-check form-check-inline" *ngIf="param.cp_status === true">
+                                    <!-- <div class="form-check form-check-inline" *ngIf="param.cp_status === true"> -->
+                                      <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" [checked]="true"
                                         name="{{param.cp_params_id}}" disabled>
                                       <label class="form-check-label" for="inlineRadio1">Yes</label>
                                     </div>
-                                    <div class="form-check form-check-inline" *ngIf="param.cp_status === false">
+                                    <!-- <div class="form-check form-check-inline" *ngIf="param.cp_status === false"> -->
+                                    <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="{{param.cp_params_id}}"
                                         [checked]="true" disabled>
                                       <label class="form-check-label" for="inlineRadio2">No</label>

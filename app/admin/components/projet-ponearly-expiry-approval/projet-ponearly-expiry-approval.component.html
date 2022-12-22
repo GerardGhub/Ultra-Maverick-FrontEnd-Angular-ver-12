@@ -549,12 +549,14 @@
 
                                   <ng-container *ngIf="grandchild.is_manual === 'no'">
                                     <div>
-                                      <div class="form-check form-check-inline" *ngIf="param.cp_status === true">
+                                      <!-- *ngIf="param.cp_status === true" -->
+                                      <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" [checked]="true"
                                           name="{{param.cp_params_id}}" disabled>
                                         <label class="form-check-label" for="inlineRadio1">Yes</label>
                                       </div>
-                                      <div class="form-check form-check-inline" *ngIf="param.cp_status === false">
+                                      <!-- *ngIf="param.cp_status === false" -->
+                                      <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="{{param.cp_params_id}}"
                                           [checked]="true" disabled>
                                         <label class="form-check-label" for="inlineRadio2">No</label>
@@ -1254,25 +1256,12 @@
             </div>
 
             <mat-card>REJECTION INFORMATION
-              <!-- <button mat-fab color="warn" id="AddRejectBtn" (click)="onAddAdditionalRejectRow($event)">Add</button>
-          <button mat-fab color="primary" class="ml-80 hideObject" id="remove-remarks-button" (click)="onRemoveAdditionalRejectRow($event)">Undo</button> -->
             </mat-card>
             <div class="flex">
               <div class="box-1">
 
-                <!-- Start of Validation Sample using animal -->
-
-
-
-
                 <div class="form-group row" id="rejectionrow1">
-                  <!-- <label for="drpEditClientLocationsOne" class="col-sm-4 col-form-label">Reject Status 1</label> -->
                   <div class="col-sm-8">
-
-
-
-
-
                     <mat-form-field appearance="fill">
                       <mat-label>Rejected Status</mat-label>
                       <mat-select (selectionChange)="validateRejectedStatus($event)"
@@ -1281,26 +1270,15 @@
                         <mat-option *ngFor="let status of RejectStatuses | async" [value]="status.reject_status_name"
                           #RejectedStatus1>
                           {{status.reject_status_name}}
-
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-
                   </div>
-
                 </div>
 
 
-
-
-
-
                 <div class="form-group row" id="rejectionrow2">
-
                   <div class="col-sm-8">
-
-
-
                     <mat-form-field appearance="fill">
                       <mat-label>Rejected Status</mat-label>
                       <mat-select [(ngModel)]="editProject.status_of_reject_two" name="status_of_reject_two"
@@ -1317,13 +1295,8 @@
 
 
 
-
-
                 <div class="form-group row" id="rejectionrow32" #rejectedStatusElementNo3>
-
                   <div class="col-sm-8">
-
-
                     <mat-form-field appearance="fill">
                       <mat-label>Rejected Status</mat-label>
                       <mat-select [(ngModel)]="editProject.status_of_reject_three" name="status_of_reject_three"
@@ -1335,16 +1308,11 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-
                   </div>
                 </div>
 
-
-
                 <div class="form-group row" id="total-reject">
-
                   <div class="col-sm-8">
-
                     <mat-form-field floatLabel="auto" appearance="standard" color="primary">
                       <input type="text" matInput name="total_of_reject_mat"
                         [(ngModel)]="editProject.total_of_reject_mat" (keypress)="validateNumber($event)" #totalofReject
@@ -1353,22 +1321,15 @@
                       <mat-hint align="end">Grand Total</mat-hint>
                       <mat-icon matPrefix>list<span class="material-icons-outlined">
                         </span></mat-icon>
-
                     </mat-form-field>
-
-
                   </div>
                 </div>
-                <!-- End of the Statement -->
               </div>
 
               <div class="box-2">
 
-
                 <div class="form-group row" id="rejectionrow12">
                   <div class="col-sm-8">
-
-
                     <mat-form-field floatLabel="auto" appearance="standard" color="primary">
                       <input type="text" name="count_of_reject_one" matInput #rejectNo1
                         (keyup)="onChangeEventReject1($event)" [(ngModel)]="editProject.count_of_reject_one"
@@ -1742,214 +1703,8 @@
                       </td>
 
                     </tr>
-                    <tr>
-                      <th scope="row">b.</th>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main2" matInput
-                          name="b_delivery_staff_symptoms_dos" [(ngModel)]="editProject.b_delivery_staff_symptoms_dos"
-                          #editb_delivery_staff_symptoms_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editb_delivery_staff_symptoms_dos.invalid && (editb_delivery_staff_symptoms_dos.dirty || editb_delivery_staff_symptoms_dos.touched || editForm.submitted), 'is-valid': editb_delivery_staff_symptoms_dos.valid && (editb_delivery_staff_symptoms_dos.dirty || editb_delivery_staff_symptoms_dos.touched || editForm.submitted) }"
-                          readonly>
-
-</textarea>
-                      </td>
-                      <td>
-
-                        <div class="form-group row">
-
-                          <div class="col-sm-8">
-
-                            <mat-radio-group id="rbEditCompliance" name="b_compliance_dos"
-                              [(ngModel)]="editProject.b_compliance_dos" required="required" #editCompliance="ngModel"
-                              disabled="disabled">
-                              <mat-radio-button value="Compliance">Compliance</mat-radio-button>
-                              <mat-radio-button value="Non-Compliance">Non-Compliance</mat-radio-button>
-                            </mat-radio-group>
-
-
-                            <span class="text-danger"
-                              *ngIf="editCompliance.invalid && (editCompliance.dirty || editCompliance.touched || editForm.submitted) && editCompliance.errors?.required">Please
-                              select compliance status</span>
-                          </div>
-                        </div>
-
-                      </td>
-
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main" matInput name="b_remarks_dos"
-                          [(ngModel)]="editProject.b_remarks_dos" #editb_remarks_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editb_remarks_dos.invalid && (editb_remarks_dos.dirty || editb_remarks_dos.touched || editForm.submitted), 'is-valid': editb_remarks_dos.valid && (editb_remarks_dos.dirty || editb_remarks_dos.touched || editForm.submitted) }"
-                          required disabled="disabled">
-
-</textarea>
-                      </td>
-
-                    </tr>
-
-                    <tr>
-                      <th scope="row">c.</th>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main3" matInput name="c_inner_walls_clean_dos"
-                          [(ngModel)]="editProject.c_inner_walls_clean_dos" #editc_inner_walls_clean_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editc_inner_walls_clean_dos.invalid && (editc_inner_walls_clean_dos.dirty || editc_inner_walls_clean_dos.touched || editForm.submitted), 'is-valid': editc_inner_walls_clean_dos.valid && (editc_inner_walls_clean_dos.dirty || editc_inner_walls_clean_dos.touched || editForm.submitted) }"
-                          readonly>
-
-</textarea>
-                      </td>
-
-
-                      <td>
-
-                        <div class="form-group row">
-
-                          <div class="col-sm-8">
-
-                            <mat-radio-group id="rbEditCompliance" name="c_compliance_dos"
-                              [(ngModel)]="editProject.c_compliance_dos" required="required" #editCompliance="ngModel"
-                              disabled="disabled">
-                              <mat-radio-button value="Compliance">Compliance</mat-radio-button>
-                              <mat-radio-button value="Non-Compliance">Non-Compliance</mat-radio-button>
-                            </mat-radio-group>
-
-
-                            <span class="text-danger"
-                              *ngIf="editCompliance.invalid && (editCompliance.dirty || editCompliance.touched || editForm.submitted) && editCompliance.errors?.required">Please
-                              select compliance status</span>
-                          </div>
-                        </div>
-
-                      </td>
-
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main" matInput name="c_remarks_dos"
-                          [(ngModel)]="editProject.c_remarks_dos" #editc_remarks_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editc_remarks_dos.invalid && (editc_remarks_dos.dirty || editc_remarks_dos.touched || editForm.submitted), 'is-valid': editc_remarks_dos.valid && (editc_remarks_dos.dirty || editc_remarks_dos.touched || editForm.submitted) }"
-                          required disabled="disabled">
-
-</textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">d.</th>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main4" matInput name="d_plastic_curtains_dos"
-                          [(ngModel)]="editProject.d_plastic_curtains_dos" #editd_plastic_curtains_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editd_plastic_curtains_dos.invalid && (editd_plastic_curtains_dos.dirty || editd_plastic_curtains_dos.touched || editForm.submitted), 'is-valid': editd_plastic_curtains_dos.valid && (editd_plastic_curtains_dos.dirty || editd_plastic_curtains_dos.touched || editForm.submitted) }"
-                          readonly>
-
-</textarea>
-
-                      </td>
-
-
-                      <td>
-                        <div class="form-group row">
-
-                          <div class="col-sm-8">
-
-                            <mat-radio-group id="rbEditCompliance" name="d_compliance_dos"
-                              [(ngModel)]="editProject.d_compliance_dos" required="required" #editCompliance="ngModel"
-                              disabled="disabled">
-                              <mat-radio-button value="Compliance">Compliance</mat-radio-button>
-                              <mat-radio-button value="Non-Compliance">Non-Compliance</mat-radio-button>
-                            </mat-radio-group>
-
-                            <span class="text-danger"
-                              *ngIf="editCompliance.invalid && (editCompliance.dirty || editCompliance.touched || editForm.submitted) && editCompliance.errors?.required">Please
-                              select compliance status</span>
-                          </div>
-                        </div>
-
-                      </td>
-
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main" matInput name="d_remarks_dos"
-                          [(ngModel)]="editProject.d_remarks_dos" #editd_remarks_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editd_remarks_dos.invalid && (editd_remarks_dos.dirty || editd_remarks_dos.touched || editForm.submitted), 'is-valid': editd_remarks_dos.valid && (editd_remarks_dos.dirty || editd_remarks_dos.touched || editForm.submitted) }"
-                          required disabled="disabled">
-
-</textarea>
-                      </td>
-
-                    </tr>
-
-                    <tr>
-                      <th scope="row">e.</th>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main5" matInput name="e_no_accessories_dos"
-                          [(ngModel)]="editProject.e_no_accessories_dos" #edite_no_accessories_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': edite_no_accessories_dos.invalid && (edite_no_accessories_dos.dirty || edite_no_accessories_dos.touched || editForm.submitted), 'is-valid': edite_no_accessories_dos.valid && (edite_no_accessories_dos.dirty || edite_no_accessories_dos.touched || editForm.submitted) }"
-                          readonly>
-
-</textarea>
-                      </td>
-
-                      <td>
-                        <div class="form-group row">
-
-                          <div class="col-sm-8">
-
-                            <mat-radio-group id="rbEditCompliance" name="e_compliance_dos"
-                              [(ngModel)]="editProject.e_compliance_dos" required="required" #editCompliance="ngModel"
-                              disabled="disabled">
-                              <mat-radio-button value="Compliance">Compliance</mat-radio-button>
-                              <mat-radio-button value="Non-Compliance">Non-Compliance</mat-radio-button>
-                            </mat-radio-group>
-
-                            <span class="text-danger"
-                              *ngIf="editCompliance.invalid && (editCompliance.dirty || editCompliance.touched || editForm.submitted) && editCompliance.errors?.required">Please
-                              select compliance status</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main" matInput name="e_remarks_dos"
-                          [(ngModel)]="editProject.e_remarks_dos" #edite_remarks_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': edite_remarks_dos.invalid && (edite_remarks_dos.dirty || edite_remarks_dos.touched || editForm.submitted), 'is-valid': edite_remarks_dos.valid && (edite_remarks_dos.dirty || edite_remarks_dos.touched || editForm.submitted) }"
-                          required disabled="disabled">
-
-</textarea>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row">f.</th>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main5" matInput name="f_no_pests_sightings_dos"
-                          [(ngModel)]="editProject.f_no_pests_sightings_dos" #editf_no_pests_sightings_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editf_no_pests_sightings_dos.invalid && (editf_no_pests_sightings_dos.dirty || editf_no_pests_sightings_dos.touched || editForm.submitted), 'is-valid': editf_no_pests_sightings_dos.valid && (editf_no_pests_sightings_dos.dirty || editf_no_pests_sightings_dos.touched || editForm.submitted) }"
-                          readonly>
-
-</textarea>
-                      </td>
-                      <td>
-                        <div class="form-group row">
-
-                          <div class="col-sm-8">
-
-                            <mat-radio-group id="rbEditCompliance" name="f_compliance_dos"
-                              [(ngModel)]="editProject.f_compliance_dos" required="required" #editCompliance="ngModel"
-                              disabled="disabled">
-                              <mat-radio-button value="Compliance">Compliance</mat-radio-button>
-                              <mat-radio-button value="Non-Compliance">Non-Compliance</mat-radio-button>
-                            </mat-radio-group>
-
-                            <span class="text-danger"
-                              *ngIf="editCompliance.invalid && (editCompliance.dirty || editCompliance.touched || editForm.submitted) && editCompliance.errors?.required">Please
-                              select compliance status</span>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <textarea cdkTextareaAutosize class="text-area-main" matInput name="f_remarks_dos"
-                          [(ngModel)]="editProject.f_remarks_dos" #editf_remarks_dos="ngModel"
-                          [ngClass]="{ 'is-invalid': editf_remarks_dos.invalid && (editf_remarks_dos.dirty || editf_remarks_dos.touched || editForm.submitted), 'is-valid': editf_remarks_dos.valid && (editf_remarks_dos.dirty || editf_remarks_dos.touched || editForm.submitted) }"
-                          required disabled="disabled">
-
-</textarea>
-                      </td>
-
-                    </tr>
+         
+      
                   </tbody>
                 </table>
 

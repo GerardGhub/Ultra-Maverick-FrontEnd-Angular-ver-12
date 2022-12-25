@@ -130,19 +130,13 @@
                       <span class="fa fa-check-circle"></span> Recieve
                     </button>
 
-                    <!-- <ng-container *ngIf="
-                    (loginService.currentUserName != null &&
-                      loginService.currentUserRoleSession == 'Admin') ||
-                    loginService.currentUserRoleSession == 'QASupervisor' ||
-                    loginService.currentUserRoleSession == 'QA MANAGER'
-                  "> -->
                     <button mat-stroked-button class="editbtnStyle" color="primary"
                       [hidden]="item.qa_approval_status !== '1'" (click)="onResultClick(item)" data-toggle="modal"
                       data-target="#proceedModal" data-backdrop="false" data-keyboard="false" title="For Lab Result">
                       <span class="fa fa-arrow-circle-right" aria-hidden="true"></span> Result
                     </button>
 
-                    <!-- </ng-container> -->
+
 
                     <button mat-stroked-button class="editbtnStyle" color="warn"
                       (click)="cancelLabtestClick($event, item)" data-toggle="modal" data-target="#cancelLabtestModal"
@@ -1025,12 +1019,12 @@
             <div class="col-sm lbltext">
               <label for="" class="">Expiry Date:</label>
               <input type="text" readonly autocomplete="off" id="txtbbd_actual" class="form-control" name="bbd"
-                formControlName="lab_exp_date_extension" maxlength="30" txtExpiryDateActual />
+                formControlName="lab_exp_date_extension" maxlength="30" txtExpiryDate />
             </div>
             <div class="col-sm lbltext">
-              <label for="" class="">Shelf Life Extension : {{ShelfLifeExtension}}</label>
+              <label for="" class="">Shelf Life Extension s: {{ShelfLifeExtension}}</label>
               <input type="date" [disabled]="true" value="{{ bbDate | date: 'yyyy-MM-dd'}}"
-                min="{{ bbDate | date: 'yyyy-MM-dd' }}" autocomplete="off" id="txtrshelf_ext"
+                min="{{ minDate | date: 'yyyy-MM-dd' }}" autocomplete="off" id="txtrshelf_ext"
                 class="form-control req-field" formControlName="lab_exp_date_extension" maxlength="30"
                 (change)="selectExpiryDate($event)" />
             </div>

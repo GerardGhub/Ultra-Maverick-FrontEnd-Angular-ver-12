@@ -129,6 +129,8 @@ export class ForLabtestComponent implements OnInit {
   lab_cancel_remarks: string = '';
   bbDate = moment(new Date()).format('MM/DD/YYYY');
 
+ minDate: string = '';
+
   department: string = '';
   _samples: string = '';
   source_samples: string = '';
@@ -158,7 +160,7 @@ export class ForLabtestComponent implements OnInit {
   @ViewChild('approved_by') approved_by: ElementRef;
   @ViewChild('approved_status') approved_status: ElementRef;
   @ViewChild('lab_status') lab_status: ElementRef;
-
+  @ViewChild('txtExpiryDate') txtExpiryDate: ElementRef;
   ngOnInit(): void {
     this.getLists();
     this.getLabRecordsLists();
@@ -173,6 +175,8 @@ export class ForLabtestComponent implements OnInit {
     this.LaboratoryTestRecords = this.appComponent.LaboratoryTestRecords;
     this.RecordsWithAccessCode = this.appComponent.RecordsWithAccessCode;
     this.getLabRecordsListWithCode();
+
+ 
   }
 
 
@@ -681,6 +685,7 @@ export class ForLabtestComponent implements OnInit {
 
   onResultClick(item: any) {
     this.resultForm.reset();
+  
     this.resultForm.patchValue(item);
 
     this.resultForm.patchValue({
@@ -695,6 +700,7 @@ export class ForLabtestComponent implements OnInit {
       po_date: moment(new Date(item.po_date)).format('MM/DD/YYYY'),
 
     });
+    this.minDate = moment(new Date(item.lab_exp_date_extension)).format('MM/DD/YYYY');  
   }
 
   OnAttachedImage(file: any) {

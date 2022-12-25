@@ -329,17 +329,7 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
 
     var Item = this.ItemDescription.nativeElement.value;
     var PoNumero = this.PONumber.nativeElement.value;
-    // var Reason = this.ReasonSelected.nativeElement.value;
-    // if(Reason != "")
-    // {
-    //   alert("Wala");
 
-    // }
-    // else
-    // {
-    //   alert("Meron");
-
-    // }
     Swal.fire({
       title: 'Are you sure you want to return the PO Number ' + PoNumero + '?',
       text: Item,
@@ -350,22 +340,14 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.isConfirmed) {
-
-
         this.UpdateDeactivatedTransactions();
-
-
-
       }
     })
-
-
   }
 
   UpdateDeactivatedTransactions() {
 
     this.projectsService.updateProject(this.editProject).subscribe((response: Project) => {
-
       var p: Project = new Project();
       p.projectID = response.projectID;
       p.projectName = response.projectName;
@@ -373,7 +355,6 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
       p.teamSize = response.teamSize;
       p.clientLocation = response.clientLocation;
       p.active = response.active;
-      // p.is_activated = response.is_activated;
       p.clientLocationID = response.clientLocationID;
       p.status = response.status;
       p.supplier = response.supplier;
@@ -391,8 +372,6 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
       p.actual_delivery = response.actual_delivery;
       p.expected_delivery = response.expected_delivery;
       p.actual_remaining_receiving = response.actual_remaining_receiving;
-      // p.received_by_QA = response.received_by_QA;
-      // // this.activeUser = response.received_by_QA;
       p.status_of_reject_one = response.status_of_reject_one;
       p.status_of_reject_two = response.status_of_reject_two;
       p.status_of_reject_three = response.status_of_reject_three;
@@ -400,11 +379,7 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
       p.count_of_reject_two = response.count_of_reject_two;
       p.count_of_reject_three = response.count_of_reject_three;
       p.total_of_reject_mat = response.total_of_reject_mat;
-      //Section 1
-
-      // this.received_by.nativeElement.value = this.loginService.currentUserName;
       this.projects[this.editIndex] = p;
-
       this.editProject.projectID = 0;
       this.editProject.projectName = "";
       this.editProject.dateOfStart = "";
@@ -743,7 +718,6 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
     else {
       if (this.totalofReject.nativeElement.value == this.confirmReject.nativeElement.value) {
         // this.rejectNo3.nativeElement.value="0";
-        // console.warn("Empty Quantity in the textInput! ")
         // this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = "Pexa Marian";
         this.rejectIsnotMactchSpanTag.nativeElement.innerHTML = "";
       }
@@ -759,10 +733,7 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
     // Allowable Percentage Computation
     const ExpectedDelivery = this.ExpectedDeliveryActual.nativeElement.value;
     const ActivatedAllowablePercentage = this.ActiveAllowablePercentage.nativeElement.value;
-    // const TotalAllowablePercentage = this.TotalAllowablePercentage.nativeElement.value;
 
-    // const summary = ExpectedDelivery * ActivatedAllowablePercentage;
-    // console.log(summary);
     if (this.ActiveAllowablePercentage.nativeElement.value == "10") {
       const summary = ExpectedDelivery * 1.10;
       this.TotalAllowablePercentage.nativeElement.value = summary;
@@ -794,30 +765,17 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
     // Allowable Percentage Computation
     const TotalAllowablePercentage = this.TotalAllowablePercentage.nativeElement.value;
     const ActualDelivered = this.ActualDeliveryChild.nativeElement.value;
-    // const TotalAllowablePercentage = this.TotalAllowablePercentage.nativeElement.value;
-
-    // const summary = ExpectedDelivery * ActivatedAllowablePercentage;
-    // console.log(summary);
-
-    // const summary = ExpectedDelivery * 1.10;
-    // this.TotalAllowablePercentage.nativeElement.value = summary;
 
     if (ActualDelivered > TotalAllowablePercentage) {
       this.AllowablePercentageExceed();
-    }
-    else {
-      // alert("FEMALE");
     }
   }
   onChangeEventReject1(event: any) {
 
     if (this.rejectNo1.nativeElement.value == "") {
       this.rejectNo1.nativeElement.value = "0";
-      // console.warn("Empty Quantity in the textInput! ")
     }
-
-    console.log(event.target.value);
-    // this.totalofReject.nativeElement.value = this.rejectNo1.nativeElement.value;
+    // console.log(event.target.value);
     const a = this.rejectNo1.nativeElement.value;
     const b = this.rejectNo2.nativeElement.value;
     const c = this.rejectNo3.nativeElement.value;
@@ -847,7 +805,6 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
     }
 
     console.log(event.target.value);
-    // this.totalofReject.nativeElement.value = this.rejectNo2.nativeElement.value + this.totalofReject.nativeElement.value;
     const a = this.rejectNo1.nativeElement.value;
     const b = this.rejectNo2.nativeElement.value;
     const c = this.rejectNo3.nativeElement.value;
@@ -868,19 +825,7 @@ export class ProjectsCancelledPoComponent implements OnInit, OnChanges {
 
   }
 
-  validateRejectedStatus(event: any) {
-
-    // const Reject1 = this.RejectedStatus1.nativeElement.value;
-    // const Reject2 = this.RejectedStatus2.nativeElement.value;
-    // const Reject3 = this.RejectedStatus3.nativeElement.value;
-    // if(Reject1 == Reject2)
-    // {
-
-    //   this.MultipleSelectionOfRejectionStatus();
-    // }
-
-
-  }
+  
   Alerto() {
     Swal.fire({
       title: 'Are you sure?',

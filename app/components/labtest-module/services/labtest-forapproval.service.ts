@@ -36,6 +36,10 @@ export class LabtestForApprovalService {
     return this.httpClient.put('/api/DryWareHouseReceivingForLabTest/CancelledQASupervisorReleasingLabResult', item, {responseType: 'json'})
   }
 
+  managerQAReject(item: any): Observable<any>{
+    return this.httpClient.put('/api/DryWareHouseReceivingForLabTest/CancelledManagerReleasingLabResult', item, {responseType: 'json'})
+  }
+
   setLabAccessCode(item: any): Observable<any> {
     return this.httpClient.put('api/DryWareHouseReceivingForLabTest/SettingLabAccessCode',
     item, {responseType: 'json'})

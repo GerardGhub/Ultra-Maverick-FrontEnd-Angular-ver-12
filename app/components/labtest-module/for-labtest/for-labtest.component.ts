@@ -671,13 +671,6 @@ export class ForLabtestComponent implements OnInit {
                 console.log(error);
               }
             );
-
-          // Swal.fire(
-          //   'Approved!',
-          //   'For Lab Test Approved successfully!',
-          //   'success'
-          // )
-
         }
       });
     }
@@ -709,7 +702,6 @@ export class ForLabtestComponent implements OnInit {
     // this.resultForm.patchValue({
     //   files: this.fileToUpload
     // });
-
   }
 
   cancelLabtestClick(event, forLabtestParam: ForLabtest) {
@@ -749,7 +741,6 @@ export class ForLabtestComponent implements OnInit {
 
   onQARejectDetailsClick(item: any) {
     this.superVisorRejectForm.reset();
-
     this.superVisorRejectForm.patchValue({
       id: item.fk_receiving_id,
     });
@@ -765,7 +756,6 @@ export class ForLabtestComponent implements OnInit {
     })
     this.FileName = item.filename;
     this.FilePath = item.filepath;
-
   }
 
   onManagerRejectDetailsClick(item: any) {
@@ -800,7 +790,6 @@ viewHistory(item: any)
     this.shelf_life_ext = item.lab_exp_date_extension;
     this.qa_approval_by = item.qa_approval_by;
     this.qa_supervisor = item.qa_supervisor_is_approve_by;
-
     this.printDirective.printSectionId = 'print-section';
     this.printDirective.useExistingCss = true;
     this.printDirective.print();
@@ -820,7 +809,6 @@ viewHistory(item: any)
     this.shelf_life_ext = item.lab_exp_date_extension;
     this.qa_approval_by = item.qa_approval_by;
     this.qa_supervisor = item.qa_supervisor_is_approve_by;
-
     this.printDirective.printSectionId = 'print-section';
     this.printDirective.useExistingCss = true;
   }
@@ -897,7 +885,6 @@ viewHistory(item: any)
                 console.log(error);
               }
             );
-
         }
       });
     }
@@ -982,7 +969,6 @@ viewHistory(item: any)
             .subscribe(
               (response) => {
                 //Reset the editForm
-                // this.onQARejectById();
                 setTimeout(() => {
                   this.getForApprovalList();
                   this.successRejectedToaster();
@@ -1004,7 +990,7 @@ viewHistory(item: any)
       .qaVisorRejectDetailsById(this.superVisorRejectForm.value.id)
       .subscribe(
         (response: ForLabtest) => {
-          console.log(response);
+          // console.log(response);
         },
         (error) => {
           console.log(error);
@@ -1060,11 +1046,10 @@ viewHistory(item: any)
         if (result.isConfirmed) {
           //Invoke the REST-API call
           this.labtestForApprovalService
-            .managerReject(this.managerRejectForm.value)
+            .managerQAReject(this.managerRejectForm.value)
             .subscribe(
               (response) => {
                 //Reset the editForm
-                // this.onQARejectById();
                 this.getForApprovalList();
                 this.successRejectedToaster();
 
@@ -1094,7 +1079,7 @@ viewHistory(item: any)
       this.forLabAccessCodeList.splice(index, 1);
     }
 
-    console.warn(this.forLabAccessCodeList);
+    // console.warn(this.forLabAccessCodeList);
 
     if (this.forLabAccessCodeList.length == 0) {
       this.isGenerate = true;
@@ -1114,9 +1099,6 @@ viewHistory(item: any)
 
   saveGeneratedItem() {
 
-
-
-
     if (this.internalMemoForm.valid) {
       // services here
       Swal.fire({
@@ -1134,8 +1116,6 @@ viewHistory(item: any)
             .setLabAccessCode(this.forLabAccessCodeList)
             .subscribe(
               (response) => {
-                //Reset the editForm
-                // this.onQARejectById();
                 this.successApprovalToaster();
                 $('#internalMemoFormCancelModal').trigger('click');
                 setTimeout(() => {

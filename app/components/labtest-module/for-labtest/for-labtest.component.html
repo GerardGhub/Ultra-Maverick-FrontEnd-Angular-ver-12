@@ -337,7 +337,7 @@
                     loginService.currentUserRoleSession == 'QA MANAGER'
                   ">
 
-                      <div [hidden]="item.tsqa_Approval_Date">
+                      <div [hidden]="!item.qa_supervisor_is_approve_date">
                         <button mat-stroked-button class="editbtnStyle" color="primary"
                           (click)="onManagerApproveDetailsClick(item)" data-toggle="modal"
                           data-target="#ManagerAapprovalModal" data-backdrop="false" data-keyboard="false"

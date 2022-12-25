@@ -541,7 +541,7 @@
                   <td>{{ item.days_to_expired }}</td>
                   <td>{{ item.lab_approval_aging_days }}</td>
                   <td>
-                    <button mat-stroked-button class="editbtnStyle" color="black" data-toggle="modal" data-target="#"
+                    <button [hidden]="true" mat-stroked-button class="editbtnStyle" color="black" data-toggle="modal" data-target="#"
                       data-backdrop="false" data-keyboard="false" title="To Print" (click)="print(item)">
                       <span class="fa fa-print"></span> Print
                     </button>

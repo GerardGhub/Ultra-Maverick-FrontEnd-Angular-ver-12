@@ -2178,7 +2178,7 @@
   <div class="d-flex justify-content-between">
     <div class="header-style">
       <div class="title-header">
-        <label>Technical Services and Quality Assurance </label><br>
+        <label>Technical Services and Quality Assurance ss Bujes</label><br>
         <label>Food Laboratory</label><br>
         <label class="color-red">Laboratory Results</label>
       </div>
@@ -2188,7 +2188,8 @@
   <div class="details">
     <div class="element-details">
       <div class="input-group mb-sm-0 sm-col-1">
-        <label for="staticEmail" class="col-sm-3 col-form-label">Clent/Department : </label>
+        <label for="staticEmail" class="col-sm-3 col-form-label">Client/Department :
+       <input type="text" class="bold-text" formControlName="department" style="border: none ;"></label>
         <div class="col-sm-3 ">
           <input type="text" class="form-control-plaintext input-border modal-txt-size" [(ngModel)]="department">
         </div>
@@ -2246,10 +2247,10 @@
         <th style="text-align: center;">Shelf Life Extension</th>
       </tr>
       <tbody>
-        <tr style="text-align: center;">
-          <td>{{ item_desc }}</td>
-          <td>{{ bbd_date }}</td>
-          <td>{{ shelf_life_ext }}</td>
+        <tr *ngFor="let item of labtestRecordsItemsWithCode"  style="text-align: center;">
+          <td>{{ item.item_desc }}</td>
+          <td>{{ item.bbd }}</td>
+          <td>{{ item.lab_exp_date_extension }}</td>
         </tr>
       </tbody>
     </table>

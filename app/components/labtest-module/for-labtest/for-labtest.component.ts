@@ -777,6 +777,8 @@ viewHistory(item: any)
   console.error(item);
 }
   print(item: any) {
+    alert("A");
+    console.log(item);
     this.department = item.client_requestor;
     this._samples = 'RAW MATS';
     this.source_samples = item.client_requestor;
@@ -1082,9 +1084,9 @@ viewHistory(item: any)
     // console.warn(this.forLabAccessCodeList);
 
     if (this.forLabAccessCodeList.length == 0) {
-      this.isGenerate = true;
-    } else {
       this.isGenerate = false;
+    } else {
+      this.isGenerate = true;
     }
   }
 

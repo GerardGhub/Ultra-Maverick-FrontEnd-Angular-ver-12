@@ -777,8 +777,7 @@ viewHistory(item: any)
   console.error(item);
 }
   print(item: any) {
-    alert("A");
-    console.log(item);
+
     this.department = item.client_requestor;
     this._samples = 'RAW MATS';
     this.source_samples = item.client_requestor;
@@ -792,9 +791,35 @@ viewHistory(item: any)
     this.shelf_life_ext = item.lab_exp_date_extension;
     this.qa_approval_by = item.qa_approval_by;
     this.qa_supervisor = item.qa_supervisor_is_approve_by;
+    this.viewItems(item);
     this.printDirective.printSectionId = 'print-section';
     this.printDirective.useExistingCss = true;
     this.printDirective.print();
+  }
+
+  printresult(item: any) {
+console.warn(item);
+    // this.department = item.client_requestor;
+    this._samples = 'RAW MATS';
+    // this.source_samples = item.client_requestor;
+    // this.lab_procedure = item.laboratory_procedure;
+    this.lab_access_code = item.lab_access_code;
+    // this.date_submitted = item.date_added;
+    // this.date_analyzed = item.qa_approval_date;
+    // this.date_released = item.lab_result_released_date;
+    // this.item_desc = item.item_desc;
+    // this.bbd_date = item.bbd;
+    // this.shelf_life_ext = item.lab_exp_date_extension;
+    // this.qa_approval_by = item.qa_approval_by;
+    // this.qa_supervisor = item.qa_supervisor_is_approve_by;
+    this.searchLabRecorditemsWithCode(item.lab_access_code);
+
+    setTimeout(() => {
+      this.printDirective.printSectionId = 'print-section';
+      this.printDirective.useExistingCss = true;
+      this.printDirective.print();
+    }, 100);
+
   }
 
   printpreview(item: any) {

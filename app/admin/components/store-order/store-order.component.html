@@ -62,15 +62,16 @@
                 <table class="table table-striped table-bordered nowrap table-responsive-sm">
                   <thead>
                     <tr class="text-light header-bg-color-um system-name">
-                      <th style="width:14%">
+                      <th style="width:12%">
                         Preparation Date
                       </th>
-                      <th style="width:14%">Category</th>
-                      <th style="width:14%">Store</th>
-                      <th style="width:14%">Route</th>
-                      <th style="width:14%">Area</th>
-                      <th style="width:14%">Total Item/s</th>
-                      <th style="width:14%">Prepared Item/s</th>
+                      <th style="width:12%">Category</th>
+                      <th style="width:12%">Fox</th>
+                      <th style="width:12%">Store</th>
+                      <th style="width:12%">Route</th>
+                      <th style="width:12%">Area</th>
+                      <th style="width:12%">Total Item/s</th>
+                      <th style="width:12%">Prepared Item/s</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -79,6 +80,7 @@
 
                       <td>{{item.is_approved_prepa_date | date: "MM/dd/yyyy" }}</td>
                       <td>{{item.category}}</td>
+                      <td>{{item.fox}}</td>
                       <td>{{item.store_name}}</td>
                       <td>{{item.route}}</td>
                       <td>{{item.area}}</td>

@@ -1109,9 +1109,9 @@ console.warn(item);
     // console.warn(this.forLabAccessCodeList);
 
     if (this.forLabAccessCodeList.length == 0) {
-      this.isGenerate = false;
-    } else {
       this.isGenerate = true;
+    } else {
+      this.isGenerate = false;
     }
   }
 

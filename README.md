@@ -376,7 +376,7 @@ ng g class NearlyExpiryItems
 
 ng g component NearlyExpiryItems
 
-
+update
 
 
 
